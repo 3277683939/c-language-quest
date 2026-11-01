@@ -47,6 +47,13 @@ jobs:
                   target = pathlib.Path("public") / patch.relative_to("overrides")
                   target.parent.mkdir(parents=True, exist_ok=True)
                   shutil.copyfile(patch, target)
+          import base64
+          documents = pathlib.Path("public/document-data")
+          documents.mkdir(exist_ok=True)
+          for pdf in pathlib.Path("public/materials").glob("*.pdf"):
+              packed = base64.b64encode(pdf.read_bytes()).decode("ascii")
+              js = "window.CQuestPDFData=window.CQuestPDFData||{};window.CQuestPDFData[" + json.dumps(pdf.stem) + "]=" + json.dumps(packed) + ";"
+              (documents / (pdf.stem + ".js")).write_text(js, encoding="ascii")
           print("Verified and unpacked", manifest["fileCount"], "website files")
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
