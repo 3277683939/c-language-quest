@@ -41,6 +41,9 @@ jobs:
               archive.extractall("public")
           assert pathlib.Path("public/index.html").is_file()
           assert pathlib.Path("public/bank.js").is_file()
+          import shutil
+          for patch in pathlib.Path("overrides").glob("*.js"):
+              shutil.copyfile(patch, pathlib.Path("public") / patch.name)
           print("Verified and unpacked", manifest["fileCount"], "website files")
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
