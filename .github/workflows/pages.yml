@@ -1,0 +1,53 @@
+name: Publish C language quest
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout complete site package
+        uses: actions/checkout@v6
+      - name: Verify and unpack site
+        shell: python
+        run: |
+          import hashlib, io, json, pathlib, zipfile
+          manifest = json.loads(pathlib.Path("site-package.json").read_text())
+          chunks = []
+          for name in manifest["parts"]:
+              path = pathlib.Path(name)
+              assert path.name == name, "Invalid package path"
+              chunks.append(path.read_bytes())
+          data = b"".join(chunks)
+          assert hashlib.sha256(data).hexdigest() == manifest["sha256"], "Site package checksum mismatch"
+          with zipfile.ZipFile(io.BytesIO(data)) as archive:
+              assert len(archive.infolist()) == manifest["fileCount"], "Site package file count mismatch"
+              assert archive.testzip() is None, "Corrupt site package"
+              for name in archive.namelist():
+                  path = pathlib.PurePosixPath(name)
+                  assert not path.is_absolute() and ".." not in path.parts, "Invalid archive path"
+              archive.extractall("public")
+          assert pathlib.Path("public/index.html").is_file()
+          assert pathlib.Path("public/bank.js").is_file()
+          print("Verified and unpacked", manifest["fileCount"], "website files")
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
