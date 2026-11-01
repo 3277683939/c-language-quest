@@ -1,0 +1,13 @@
+{
+  "parts": [
+    "payload.zip.part01",
+    "payload.zip.part02",
+    "payload.zip.part03",
+    "payload.zip.part04",
+    "payload.zip.part05",
+    "payload.zip.part06",
+    "payload.zip.part07"
+  ],
+  "sha256": "6be90049760f7cc25fc6baf2b9c5e01aab07e1254922b03c0abf31246c154934",
+  "fileCount": 1311
+}
