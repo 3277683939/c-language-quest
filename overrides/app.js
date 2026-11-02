@@ -27,7 +27,7 @@ const blank = () => ({
 let state = blank(), storageOK = true, selectedChapter = 1, mapSource = 'h', listLimit = 30, quiz = null, practiceQuiz = null, selected = [], view = 'map';
 
 try {
-  const raw = JSON.parse(localStorage.getItem(KEY) || 'null');
+  const raw = JSON.parse((window.CQuestAccount ? window.CQuestAccount.readLocalProgress() : localStorage.getItem(KEY)) || 'null');
   if (raw && raw.version === 1) state = { ...blank(), ...raw };
 } catch (e) {
   storageOK = false;
@@ -45,7 +45,8 @@ state.favorites = state.favorites.filter(retainedId);
 
 function save() {
   try {
-    localStorage.setItem(KEY, JSON.stringify(state));
+    if (window.CQuestAccount) window.CQuestAccount.saveLocalProgress(state);
+    else localStorage.setItem(KEY, JSON.stringify(state));
   } catch (e) {
     storageOK = false;
     toast('浏览器无法保存记录，可以在学习记录页导出备份。');
@@ -276,6 +277,7 @@ const names = {
   favorites: '收藏夹',
   library: '题库与资料',
   progress: '学习记录',
+  account: '账户与云存档',
   practice: '原题自练',
   coach: 'AI 教练',
   teach: 'Agent 教学'
@@ -305,6 +307,7 @@ function render() {
     favorites: renderList,
     library: renderLibrary,
     progress: renderProgress,
+    account: () => window.CQuestAccount ? window.CQuestAccount.render() : renderProgress(),
     practice: renderPractice,
     coach: renderCoach,
     teach: renderCoach
@@ -1567,3 +1570,24 @@ window.addEventListener('hashchange', () => {
 });
 
 render();
+
+function refreshAccountStatus() {
+  const label = document.querySelector('#account-status');
+  if (label) label.textContent = window.CQuestAccount ? window.CQuestAccount.statusLabel() : '本机存档';
+}
+window.addEventListener('cquest:account-status', refreshAccountStatus);
+if (window.CQuestAccount) {
+  window.CQuestAccount.attach({
+    getState: () => state,
+    replaceState: next => {
+      state = { ...blank(), ...next, version: 1 };
+      state.drafts ||= {};
+      state.selfChecks ||= {};
+      state.teaching ||= {};
+      render();
+    },
+    render: () => render(),
+    toast: message => toast(message)
+  });
+}
+refreshAccountStatus();

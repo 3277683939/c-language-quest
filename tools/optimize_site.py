@@ -20,6 +20,12 @@ def optimize(directory):
     html = html_path.read_text(encoding='utf-8')
     if 'quest-app.js' in html:
         return
+    # Keep account styles in the existing stylesheet request on mobile networks.
+    account_css = directory / 'account.css'
+    if account_css.exists() and re.search(r'<link[^>]+href="account\.css(?:\?[^"]*)?"[^>]*>', html):
+        ui_css = directory / 'ui.css'
+        ui_css.write_text(ui_css.read_text(encoding='utf-8-sig') + '\n/* Account */\n' + account_css.read_text(encoding='utf-8-sig'), encoding='utf-8')
+        html = re.sub(r'<link[^>]+href="account\.css(?:\?[^"]*)?"[^>]*>\s*', '', html)
     for name in ['bank.js', 'practice-units.js', 'imported-data.js']:
         path = directory / name
         prefix, data = assignment(path.read_text(encoding='utf-8-sig'))

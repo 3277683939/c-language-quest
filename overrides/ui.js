@@ -24,6 +24,7 @@ function refreshAppChrome(){
  const more=document.querySelector('.nav-more');if(more){more.classList.toggle('active',!['map','wrong','coach','teach'].includes(view));more.querySelector('span').innerHTML=uiIcon('more');}
  for(const el of document.querySelectorAll('[data-ui-icon]'))el.innerHTML=uiIcon(el.dataset.uiIcon);
  for(const el of document.querySelectorAll('.option.correct,.option.incorrect'))if(!el.querySelector('.answer-state')){const correct=el.classList.contains('correct');el.insertAdjacentHTML('beforeend',`<span class="answer-state" aria-label="${correct?'正确答案':'本次选错'}">${uiIcon(correct?'check':'close')}</span>`);}
+ if(view==='map'&&typeof window!=='undefined'&&window.innerWidth<=760){const activeChapter=document.querySelector('.chapter.active');if(activeChapter)activeChapter.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}
 }
 const renderBeforeUI=render;render=function(){renderBeforeUI();refreshAppChrome();};
 const renderQuizBeforeUI=renderQuiz;renderQuiz=function(){renderQuizBeforeUI();refreshAppChrome();};
