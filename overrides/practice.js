@@ -101,7 +101,10 @@ function renderPractice() {
     'n4': '程序改错专项精练138题',
     'n8': '全真模拟考试卷',
     'n9': '经典算法与程序设计16例',
-    'n10': '综合练习卷'
+    'n10': '综合练习卷',
+    'n7': '期末全真考卷（三）',
+    'n5': '程序阅读与设计精选详解',
+    'n2': '东华理工《C语言习题集》'
   };
   const availableSources = ['all', ...new Set(allUnits.map(u => u.source))];
 

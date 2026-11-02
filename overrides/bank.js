@@ -9785,7 +9785,7 @@ window.QUESTION_BANK={
       "number": 3,
       "page": 1,
       "endPage": 2,
-      "stem": "算 法 中 对 需 要 执 行 的 每 一 步 操 作,必 须 给 出 清 楚□严 格 的 规 定,这 属 于 算 法\n 1\n书书书\n C语言程序设计实训教程\n的 。",
+      "stem": "算 法 中 对 需 要 执 行 的 每 一 步 操 作,必 须 给 出 清 楚、严 格 的 规 定,这 属 于 算 法的 。",
       "image": "questions/x-1-3.webp",
       "options": [
         "正当性",
@@ -9851,7 +9851,7 @@ window.QUESTION_BANK={
       "stem": "下面叙述中错误的是 。",
       "image": "questions/x-1-6.webp",
       "options": [
-        "结构化程序由顺序□分支□循环3种基本结构组成",
+        "结构化程序由顺序、分支、循环3种基本结构组成",
         "结构化程序设计提倡模块化的设计方法",
         "使用3种基本结构构成的程序只能解决简单问题",
         "C语言是一种结构化程序设计语言"
@@ -9890,7 +9890,7 @@ window.QUESTION_BANK={
       "number": 8,
       "page": 2,
       "endPage": 2,
-      "stem": "C 语言源程序的3种基本结构是顺序结构□ 结构和循环结构。",
+      "stem": "C 语言源程序的3种基本结构是顺序结构、 结构和循环结构。",
       "image": "questions/x-1-8.webp",
       "options": [
         "分支",
@@ -10145,7 +10145,7 @@ window.QUESTION_BANK={
       "stem": "下面叙述中错误的是 。",
       "image": "questions/x-2-6.webp",
       "options": [
-        "结构化程序由顺序□分支□循环3种基本结构组成",
+        "结构化程序由顺序、分支、循环3种基本结构组成",
         "结构化程序设计提倡模块化的设计方法",
         "使用3种基本结构构成的程序只能解决简单问题",
         "C语言是一种结构化程序设计语言"
@@ -10463,7 +10463,7 @@ window.QUESTION_BANK={
         "a+=b;b-=a;a-=b;",
         "a+=b;b=a-b;a-=b;",
         "b-=a;a-=b;a-=b",
-        "b-=a;a=b-a;a+=b;\n6x□"
+        "b-=a;a=b-a;a+=b;"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -10478,7 +10478,7 @@ window.QUESTION_BANK={
       "number": 22,
       "page": 6,
       "endPage": 6,
-      "stem": "若有代数式 ,则不正确的C语言表达式是 。\n□□",
+      "stem": "若有代数式 ,则不正确的C语言表达式是 。\n、、",
       "image": "questions/x-2-22.webp",
       "options": [
         "x/b/c*y*6",
@@ -10499,7 +10499,7 @@ window.QUESTION_BANK={
       "number": 23,
       "page": 6,
       "endPage": 6,
-      "stem": "把x□y定义成float类型变量,并赋同一初值3.14。",
+      "stem": "把x、y定义成float类型变量,并赋同一初值3.14。",
       "image": "questions/x-2-23.webp",
       "options": [
         "floatx,y=3.14;",
@@ -11738,7 +11738,7 @@ window.QUESTION_BANK={
       "number": 6,
       "page": 14,
       "endPage": 14,
-      "stem": "逻辑“异或”运算可描述为当且仅当a□b两个操作数中只有一个为真时才为真,其他\n情况下均为假。下面能够正确表示逻辑“异或”运算的表达式是 。",
+      "stem": "逻辑“异或”运算可描述为当且仅当a、b两个操作数中只有一个为真时才为真,其他\n情况下均为假。下面能够正确表示逻辑“异或”运算的表达式是 。",
       "image": "questions/x-4-6.webp",
       "options": [
         "allb",
@@ -11780,7 +11780,7 @@ window.QUESTION_BANK={
       "number": 8,
       "page": 14,
       "endPage": 15,
-      "stem": "下列程序段中,能将变量x□y中值较大的数保存到变量a□值较小的数保存到变量b\n 14\n第I部分 习題及参考答案 \n的程序段是 。",
+      "stem": "下列程序段中,能将变量x、y中值较大的数保存到变量a、值较小的数保存到变量b\n 14\n第I部分 习題及参考答案 \n的程序段是 。",
       "image": "questions/x-4-8.webp",
       "options": [
         "if(x>y)a=x;b=y;elsea=y;b=x;",
@@ -11864,7 +11864,7 @@ window.QUESTION_BANK={
       "number": 12,
       "page": 15,
       "endPage": 15,
-      "stem": "一元二次方程ax +bx+c=0有两个相异实根的条件是□关0且b -4ac>0,下面\n选项中正确的表达式是 。",
+      "stem": "一元二次方程ax +bx+c=0有两个相异实根的条件是、关0且b -4ac>0,下面\n选项中正确的表达式是 。",
       "image": "questions/x-4-12.webp",
       "options": [
         "a！=0,b*b-4*a*c>0",
@@ -11885,13 +11885,13 @@ window.QUESTION_BANK={
       "number": 13,
       "page": 15,
       "endPage": 15,
-      "stem": "算术运算符□赋值运算符和关系运算符的运算优先级按从高到低的顺序依次\n为 。",
+      "stem": "算术运算符、赋值运算符和关系运算符的运算优先级按从高到低的顺序依次\n为 。",
       "image": "questions/x-4-13.webp",
       "options": [
-        "算术运算□赋值运算□关系运算",
-        "关系运算□赋值运算□算术运算",
-        "算术运算□关系运算□赋值运算",
-        "关系运算□算术运算□赋值运算"
+        "算术运算、赋值运算、关系运算",
+        "关系运算、赋值运算、算术运算",
+        "算术运算、关系运算、赋值运算",
+        "关系运算、算术运算、赋值运算"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -11990,7 +11990,7 @@ window.QUESTION_BANK={
       "number": 18,
       "page": 15,
       "endPage": 15,
-      "stem": "已知有声明“intx,a=3,b=2;”,则执行赋值语句“x=a>b++？ a++:b++;”\n后,变量x□a□b的值分别为 。",
+      "stem": "已知有声明“intx,a=3,b=2;”,则执行赋值语句“x=a>b++？ a++:b++;”\n后,变量x、a、b的值分别为 。",
       "image": "questions/x-4-18.webp",
       "options": [
         "3 4 3",
@@ -12137,7 +12137,7 @@ window.QUESTION_BANK={
       "number": 25,
       "page": 16,
       "endPage": 16,
-      "stem": "下 面 选 项 中,不 能 表 示 函 数、》□“(x)= □0 x=0 功 能 的 表 达 式\n□-1 x<0\n是 。",
+      "stem": "下 面 选 项 中,不 能 表 示 函 数、》、“(x)= 、0 x=0 功 能 的 表 达 式\n、-1 x<0\n是 。",
       "image": "questions/x-4-25.webp",
       "options": [
         "s=(x>0)？ 1:(x<0)？ -1:0",
@@ -12200,7 +12200,7 @@ window.QUESTION_BANK={
       "number": 2,
       "page": 19,
       "endPage": 20,
-      "stem": "下面关于循环语句for□while□do_while的叙述中正确的是 。",
+      "stem": "下面关于循环语句for、while、do_while的叙述中正确的是 。",
       "image": "questions/x-5-2.webp",
       "options": [
         "三种循环语句都可能出现无穷循环",
@@ -12248,7 +12248,7 @@ window.QUESTION_BANK={
         "do_while语句的循环体至少会被执行1次",
         "while语句的循环体至少会被执行1次",
         "for语句的循环体至少会被执行1次",
-        "在C语言中只能用for□do或do_while语句实现循环结构"
+        "在C语言中只能用for、do或do_while语句实现循环结构"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15707,7 +15707,7 @@ window.QUESTION_BANK={
       "number": 11,
       "page": 129,
       "endPage": 129,
-      "stem": "若 main()函数中有下面定义□声明和语句:\nstructtest{ intn;char*ch;};\nchars1C]=\"China\",s2C]=\"England\";\nstructtestxC2],*p=x;\nxC0].n=300;xC0].ch=s1;\nxC1].n=400;xC1].ch=s2;\n则不能输出字符串“England”的语句是 。",
+      "stem": "若 main()函数中有下面定义、声明和语句:\nstructtest{ intn;char*ch;};\nchars1C]=\"China\",s2C]=\"England\";\nstructtestxC2],*p=x;\nxC0].n=300;xC0].ch=s1;\nxC1].n=400;xC1].ch=s2;\n则不能输出字符串“England”的语句是 。",
       "image": "questions/x-9-11.webp",
       "options": [
         "puts(xC1].ch);",
@@ -16106,7 +16106,7 @@ window.QUESTION_BANK={
       "number": 30,
       "page": 132,
       "endPage": 132,
-      "stem": "程序中已构成如图所示的不带头结点的单向链表结构,指针变量s□p□q均已正确\n定义,并用于指向链表结点,指针变量s总是作为头指针指向链表的第一个结点。\n若有以下程序段:\nq=s;s=s->next;p=s;\nwhile(p->next)p=p->next;\np->next=q;\nq->next=NULL;\n该程序段实现的功能是: 。",
+      "stem": "程序中已构成如图所示的不带头结点的单向链表结构,指针变量s、p、q均已正确\n定义,并用于指向链表结点,指针变量s总是作为头指针指向链表的第一个结点。\n若有以下程序段:\nq=s;s=s->next;p=s;\nwhile(p->next)p=p->next;\np->next=q;\nq->next=NULL;\n该程序段实现的功能是: 。",
       "image": "questions/x-9-30.webp",
       "options": [
         "首结点成为尾结点",
@@ -16127,7 +16127,7 @@ window.QUESTION_BANK={
       "number": 31,
       "page": 132,
       "endPage": 132,
-      "stem": "现有以下结构说明和变量定义:\nstructnode{chardata;structnode*next;}*p,*q,*r;\n指针p□q□r分别指向一个链表中连续的三个结点,如下图所示:\n现将q和r所指结点交换前后位置,同时要保持链表的连续,以下不能完成此操作的语\n句是 。",
+      "stem": "现有以下结构说明和变量定义:\nstructnode{chardata;structnode*next;}*p,*q,*r;\n指针p、q、r分别指向一个链表中连续的三个结点,如下图所示:\n现将q和r所指结点交换前后位置,同时要保持链表的连续,以下不能完成此操作的语\n句是 。",
       "image": "questions/x-9-31.webp",
       "options": [
         "q->next=r->next;p->next=r;r->next=q;",
