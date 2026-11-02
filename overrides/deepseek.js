@@ -85,9 +85,7 @@
   if(!options.force&&cache.has(signature)){submitTeaching({...cache.get(signature),questionId:id});return;}
   const controller=new AbortController(),job={status:'working',controller,cancelled:false};jobs.set(id,job);updatePanels();const version=configVersion,timer=setTimeout(()=>controller.abort(),120000);
   try{
-   if(config.model!=='deepseek-flash'&&(q?.image||ctx.kind==='practice'))throw Error('这道题需要读取原题图片，请在 AI 设置中选择 DeepSeek Flash。');
-   const image=config.model==='deepseek-flash'?await questionImage(id,ctx,controller.signal):null;
-   if((q?.image||ctx.kind==='practice')&&!image)throw Error('无法读取这道题的原图，请打开原题加载成功后重试。');
+      const image=null;
    if(controller.signal.aborted)return;
    const review=q?{originalAnswer:q.originalAnswer||q.answer,correctedAnswer:q.answer,note:q.qualityNote||'',reviewedExplanation:q.hasReviewedExplanation?explanationFor(q).text:null}:null;
    const data=await apiFetch('/chat/completions',{method:'POST',body:JSON.stringify(payload(ctx,config,image,review))},controller.signal);
