@@ -546,3 +546,108 @@ body[data-view="coach"] .date-label,body[data-view="teach"] .date-label{display:
   color: #b91c1c;
   border: 1px solid #fecaca;
 }
+
+
+/* 闯关地图自练关卡与双轨关卡样式 */
+.level-section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0 12px;
+  border-bottom: 1px dashed var(--line);
+  margin-bottom: 16px;
+}
+.level-section-title h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.level-section-title span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.level.practice-level {
+  border-left: 4px solid #10b981;
+  background: #fafdfb;
+}
+.level.practice-level:hover:not(:disabled) {
+  border-color: #059669;
+  background: #f0fdf4;
+}
+.level.practice-level.current {
+  border-color: #059669;
+  box-shadow: 0 0 0 2px #d1fae5;
+  background: #f0fdf4;
+}
+.practice-icon {
+  color: #059669;
+  font-weight: bold;
+}
+.practice-badge {
+  color: #047857;
+  font-weight: 600;
+}
+.practice-quiz-body {
+  padding: 24px 28px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.ai-cached-explanation {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  border-radius: 8px;
+  text-align: left;
+}
+.ai-cached-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #7c3aed;
+  margin-bottom: 8px;
+  display: inline-block;
+  background: #ede9fe;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.ai-cached-explanation .ai-hint {
+  font-size: 13px;
+  color: #5b21b6;
+  margin: 4px 0 8px;
+}
+.ai-cached-explanation .ai-body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #2e1065;
+}
+.ai-cached-explanation .ai-takeaway {
+  font-size: 12px;
+  color: #6d28d9;
+  font-weight: 600;
+  margin-top: 8px;
+  border-top: 1px dashed #ddd6fe;
+  padding-top: 6px;
+}
+.ai-trigger-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+@media (max-width: 760px) {
+  .practice-quiz-body {
+    padding: 16px 12px;
+  }
+  .level-section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .level.practice-level {
+    min-height: 155px;
+  }
+}
