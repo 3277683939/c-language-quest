@@ -177,6 +177,14 @@ function renderPractice() {
           <span class="unit-chapter-badge">${escapeHTML(currentUnit.chapterName || ('第' + currentUnit.chapter + '章'))} ${escapeHTML(currentUnit.section || '')}</span>
           <span class="unit-kind-badge">${escapeHTML(currentUnit.kind)}</span>
           <span class="unit-num-badge">第 ${currentUnit.number} 题</span>
+          ${(currentUnit.ocrPending || (currentUnit.explanation && currentUnit.explanation.includes('[OCR'))) 
+            ? '<span class="unit-badge ocr-pending" title="本题来自图片扫描件OCR，存疑符号已保留待核对，禁止主观猜写">识别待核对</span>' 
+            : '<span class="unit-badge ocr-verified" title="文字版PDF直接提取">文本直提</span>'}
+          ${currentUnit.answer 
+            ? '<span class="unit-badge ans-matched" title="已成功匹配原资料参考答案">已匹配答案</span>' 
+            : ((currentUnit.answerOrigin && (currentUnit.answerOrigin.includes('未附') || currentUnit.answerOrigin.includes('未提供'))) 
+              ? '<span class="unit-badge ans-not-provided" title="经查阅原资料/答案册，原书未提供答案">原资料无答案</span>' 
+              : '<span class="unit-badge ans-pending" title="原资料有答案区，暂未可靠对齐">答案待核对</span>')}
         </div>
 
         <div class="practice-stem">${stemHTML}</div>
