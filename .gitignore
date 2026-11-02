@@ -1,0 +1,8 @@
+.question-import/
+题库收件箱/*
+!题库收件箱/放题目到这里.txt
+__pycache__/
+*.pyc
+.env
+.env.*
+*.local.json

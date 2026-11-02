@@ -38,8 +38,10 @@ if (!state.selfChecks) state.selfChecks = {};
 if (!state.teaching) state.teaching = {};
 
 const validIds = new Set([...Q.map(q => q.id), ...PU().map(u => u.id)]);
-state.wrong = state.wrong.filter(id => validIds.has(id));
-state.favorites = state.favorites.filter(id => validIds.has(id));
+// Keep records for rolled-back imports, so re-importing restores their history.
+const retainedId = id => validIds.has(id) || (typeof id === 'string' && /^import:u[0-9a-f]{12}:[0-9a-f]{20}$/.test(id));
+state.wrong = state.wrong.filter(retainedId);
+state.favorites = state.favorites.filter(retainedId);
 
 function save() {
   try {
@@ -103,7 +105,7 @@ function openQuestionSource(id) {
   const q = Q.find(x => x.id === id);
   if (!q) return;
   const m = material(q.source);
-  $('#reader-title').textContent = `${m.name} · 第 ${q.page} 页 · 原题 ${q.number}`;
+  $('#reader-title').textContent = `${m.name} · 第 ${q.page} 页 · 原题 ${esc(q.number)}`;
   $('#reader-link').href = m.url + '#page=' + q.page;
   const text = `<div class="source-text"><h3>${esc(q.stem)}</h3>${q.options.map((o, i) => `<p>${String.fromCharCode(65 + i)}. ${esc(o)}</p>`).join('')}</div>`;
   $('#reader-content').innerHTML = `
@@ -121,8 +123,8 @@ const KNOWN_CHAPTER_TITLES = {
   ],
   x: {
     1: "C语言概述", 2: "数据类型、运算符与表达式", 3: "简单的C程序设计", 4: "逻辑运算和判断选择",
-    5: "循环控制", 6: "数组", 7: "函数", 8: "指针", 9: "结构体与共用体", 10: "位运算",
-    11: "文件", 12: "常见错误分析与程序调试"
+    5: "循环控制", 6: "数组", 7: "函数", 8: "指针", 9: "结构体与共用体", 10: "文件",
+    11: "编译预处理", 12: "位运算"
   }
 };
 
@@ -327,7 +329,7 @@ function renderMap() {
   const passedCount = levels.filter(l => state.levels[l.id]?.passed).length;
   const sources = getAllSources();
 
-  $('#app').innerHTML = title('YOUR LEARNING JOURNEY', '把 C 语言，一关一关拿下。', '从基础语法到指针与文件，全量 3,140 道真题，每一关都有实在收获。') +
+  $('#app').innerHTML = title('YOUR LEARNING JOURNEY', '把 C 语言，一关一关拿下。', `选择题与自练题共 ${Q.length + PU().length} 道，按资料与章节练习。`) +
     `<section class="hero">
       <div class="hero-copy">
         <h2>${state.session ? '接着上一次，继续向前。' : '从第一行代码，\n开始你的闯关旅程。'}</h2>
@@ -349,8 +351,8 @@ function renderMap() {
         <h2>你的闯关地图 <small style="margin-left:10px">${allChaps.length} 个章节/单元 · 循序渐进</small></h2>
       </div>
       <div class="segmented">
-        <button class="${mapSource === 'h' ? 'active' : ''}" onclick="setMapSource('h')">主线闯关（好老师 612题）</button>
-        <button class="${mapSource !== 'h' ? 'active' : ''}" onclick="setMapSource(mapSource === 'h' ? 'x' : mapSource)">拓展挑战（12份资料）</button>
+        <button class="${mapSource === 'h' ? 'active' : ''}" onclick="setMapSource('h')">主线闯关（${getSourceTotalQuestions('h')}题）</button>
+        <button class="${mapSource !== 'h' ? 'active' : ''}" onclick="setMapSource(mapSource === 'h' ? 'x' : mapSource)">拓展挑战（${getAllSources().filter(s=>s!=='h').length}份资料）</button>
       </div>
     </div>
     ${mapSource !== 'h' ? `
@@ -588,7 +590,7 @@ function renderPracticeLevelQuiz() {
   const isNeedsReview = selfCheck && selfCheck.mastered === false;
 
   // 使用通用格式化排版
-  const stemHTML = typeof formatPracticeStem === 'function' ? formatPracticeStem(u.stem) : esc(u.stem).replace(/\n/g, '<br>');
+  const stemHTML = (typeof formatPracticeStem === 'function' ? formatPracticeStem(u.stem) : esc(u.stem).replace(/\n/g, '<br>')) + (u.options?.length ? '<div class="practice-options">'+u.options.map((o,i)=>'<p><strong>'+String.fromCharCode(65+i)+'.</strong> '+esc(o)+'</p>').join('')+'</div>' : '');
   const codeBlockHTML = (u.code && typeof renderCodeBlock === 'function') ? renderCodeBlock(u.code) : (u.code ? `<pre class="practice-code"><code>${esc(u.code)}</code></pre>` : '');
 
   // AI 题解展示
@@ -616,8 +618,9 @@ function renderPracticeLevelQuiz() {
   if (u.answer) {
     answerContent = `<div class="practice-answer-body"><div class="answer-badge">原书参考答案</div><pre class="answer-pre"><code>${esc(u.answer)}</code></pre></div>`;
   } else {
-    answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">原资料未附参考答案</div><p class="answer-tip">原题未附带单题独立标准答案，请参考教材对应章节或点击下方“DeepSeek 讲解”获取智能解析。</p></div>`;
+    answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">参考答案待补充</div><p class="answer-tip">${esc(u.answerOrigin || '参考答案尚未可靠匹配。')} 可使用 DeepSeek 获取AI参考答案与讲解。</p></div>`;
   }
+  answerContent += getImportedAIHTML(u);
   const answerOriginHTML = u.answerOrigin ? `<div class="answer-origin"><span>来源：${esc(u.answerOrigin)}</span></div>` : '';
 
   $('#quiz-content').innerHTML = `
@@ -639,7 +642,7 @@ function renderPracticeLevelQuiz() {
     <div class="quiz-body practice-quiz-body">
       <div class="quiz-meta">
         <span>${String(practiceQuiz.index + 1).padStart(2, '0')} / ${String(practiceQuiz.units.length).padStart(2, '0')}</span>
-        <span class="pill">${esc(u.kind)} · 第 ${u.number} 题</span>
+        <span class="pill">${esc(u.kind)} · 第 ${esc(u.number)} 题</span>
         ${(u.ocrPending || (u.explanation && u.explanation.includes('[OCR')))
           ? '<span class="unit-badge ocr-pending" title="本题来自图片扫描件OCR，存疑符号已保留待核对">识别待核对</span>'
           : '<span class="unit-badge ocr-verified" title="文字版PDF直接提取">文本直提</span>'}
@@ -651,7 +654,7 @@ function renderPracticeLevelQuiz() {
         <button class="text-button" onclick="toggleFavorite('${u.id}');renderPracticeLevelQuiz()" aria-label="${fav ? '取消收藏' : '收藏题目'}">${fav ? '★ 已收藏' : '☆ 收藏'}</button>
       </div>
 
-      <div class="practice-stem">${stemHTML}</div>
+      ${u.reviewPending ? `<p class="answer-tip">题面待核对：${esc((u.warnings||[]).join('；'))}</p>` : ''}<div class="practice-stem">${stemHTML}</div>
 
       ${codeBlockHTML}
 
@@ -696,7 +699,7 @@ function renderPracticeLevelQuiz() {
       <small>
         <span>作答后查看答案，自行评估并标记掌握情况</span>
       </small>
-      <div style="display:flex;gap:10px;">
+      <div class="quiz-step-actions">
         <button class="secondary" onclick="prevPracticeQuestion()" ${practiceQuiz.index === 0 ? 'disabled' : ''}>← 上一题</button>
         ${practiceQuiz.index === practiceQuiz.units.length - 1
           ? `<button class="primary" onclick="finishPracticeLevel()">完成关卡 ✓</button>`
@@ -748,6 +751,7 @@ function markPracticeQuizSelfCheck(isMastered) {
 function requestPracticeQuizAI() {
   const u = currentPracticeQ();
   if (!u) return;
+  if(u.aiExplanation){practiceQuiz.showAnswer=true;renderPracticeLevelQuiz();toast('已显示缓存的AI讲解，无需再次调用API。');return;}
   ensureTeaching();
   const draft = state.drafts ? (state.drafts[u.id] || '') : '';
   const context = {
@@ -1011,12 +1015,12 @@ function renderQuiz() {
           ` : '')}
 
           ${q.qualityNote ? `<p class="quality-note" style="margin-top:8px;"><b>题目勘误与提醒：</b>${esc(q.qualityNote)}${q.originalAnswer ? ` 资料原答案：${esc(q.originalAnswer)}。` : ""}</p>` : ""}
-          <small class="answer-origin">判分依据：${esc(q.answerOrigin)} · 旧版资料可能含特定编译环境约定</small>
+          <small class="answer-origin">判分依据：${esc(q.answerOrigin)} · 旧版资料可能含特定编译环境约定</small>${!teachingEntry?.lesson ? getImportedAIHTML(q) : ''}
         </div>
       ` : ''}
 
       <div class="quiz-source">
-        <span>来源：${esc(material(q.source)?.name)} · 第 ${q.page} 页 · 原题 ${q.number}</span>
+        <span>来源：${esc(material(q.source)?.name)} · 第 ${q.page} 页 · 原题 ${esc(q.number)}</span>
       </div>
     </div>
     <div class="quiz-foot">
@@ -1296,7 +1300,7 @@ function questionRow(id) {
       <article class="question-item">
         <div class="q-copy">
           <p>${esc(q.stem)}</p>
-          <small>${esc(material(q.source)?.name || q.source)} · 第 ${q.page} 页 · 原题 ${q.number} · 客观选择题</small>
+          <small>${esc(material(q.source)?.name || q.source)} · 第 ${q.page} 页 · 原题 ${esc(q.number)} · 客观选择题</small>
         </div>
         <div class="list-actions">
           <button class="secondary" onclick="practiceOne('${q.id}')">练习</button>
@@ -1367,9 +1371,9 @@ function practiceOneUnit(id) {
 }
 
 function renderLibrary() {
-  $('#app').innerHTML = title('THE QUESTION LIBRARY', '你的题库，都在这里。', `${Q.length} 道客观选择题 · ${PU().length} 道自练大题 · 13 份完整题库`) +
+  $('#app').innerHTML = title('THE QUESTION LIBRARY', '你的题库，都在这里。', `${Q.length} 道客观选择题 · ${PU().length} 道自练大题 · ${getAllSources().length} 份题库`) +
     `<div class="mini-note" style="margin:0 0 25px">
-      <strong>资料整理说明</strong>全资料 3,140 道题目均已结构化导入。选择题在闯关地图中自动判分；填空、阅读、改错和编程大题在地图提供专属自练关卡与原题自练区，可直接作答并核对原书标准答案。
+      <strong>资料整理说明</strong>当前题库共 ${Q.length + PU().length} 道题目；新增资料的完整性以导入核对报告为准。选择题在闯关地图中自动判分；填空、阅读、改错和编程大题在地图提供专属自练关卡与原题自练区，可直接作答并核对原书标准答案。
     </div>
     <div class="section-top">
       <h2>选择题检索</h2>
@@ -1389,7 +1393,7 @@ function renderLibrary() {
     </div>
     <div id="bank-results"></div>
     <div class="section-top" style="margin-top:36px">
-      <h2>原始资料库（13 份原资料）</h2>
+      <h2>资料来源（${BANK.materials.length} 份）</h2>
       <small>完整保留原书题型、代码与题序</small>
     </div>
     <div class="material-grid">
@@ -1402,7 +1406,7 @@ function renderLibrary() {
             <h3>${esc(m.name)}</h3>
             <p>${m.pages} 页 · ${qc} 道选择题 + ${pc} 道自练大题<br>${esc(m.note)}</p>
             <div class="material-actions">
-              <button class="secondary" onclick="openMaterial('${m.id}')">阅读原资料 ↗</button>
+              <button class="secondary" onclick="setMapSource('${m.id}');location.hash='map'">进入关卡 ↗</button>
               ${qc ? `<button class="quiet" onclick="practiceFromSource('${m.id}')">随机练习</button>` : ''}
             </div>
           </article>

@@ -1,0 +1,30 @@
+{
+  "title": "我的新增练习（格式示例，未导入网站）",
+  "questions": [
+    {
+      "key": "chapter1-choice1",
+      "chapter": 1,
+      "chapterName": "C语言基础",
+      "kind": "单项选择题",
+      "number": "1",
+      "stem": "C语言块注释以哪个符号开始？",
+      "options": ["//", "/*", "#", "<!--"],
+      "answer": "B",
+      "answerOrigin": "示例答案",
+      "explanation": "块注释从 /* 开始，到 */ 结束。",
+      "reviewed": true
+    },
+    {
+      "key": "chapter1-read1",
+      "chapter": 1,
+      "chapterName": "C语言基础",
+      "kind": "程序阅读题",
+      "number": "1",
+      "stem": "写出下面程序的输出。",
+      "code": "#include <stdio.h>\nint main(void) {\n    printf(\"%d\\n\", 2 + 3);\n    return 0;\n}",
+      "answer": "5",
+      "answerOrigin": "示例答案",
+      "reviewed": true
+    }
+  ]
+}

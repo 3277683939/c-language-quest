@@ -1,6 +1,7 @@
 /* 纯结构化自练题库模块：直接显示题干、代码、选项与精准答案，免去翻 PDF 与截图 */
 let practiceFilterKind = 'all';
 let practiceFilterSource = 'all';
+let practiceFilterChapter = 'all';
 let practiceSearchTerm = '';
 let currentPracticeIndex = 0;
 let showCurrentAnswer = false;
@@ -10,6 +11,7 @@ function getFilteredPracticeUnits() {
   return units.filter(u => {
     if (practiceFilterKind !== 'all' && u.kind !== practiceFilterKind) return false;
     if (practiceFilterSource !== 'all' && u.source !== practiceFilterSource) return false;
+    if (practiceFilterChapter !== 'all' && String(u.chapter) !== practiceFilterChapter) return false;
     if (practiceSearchTerm) {
       const term = practiceSearchTerm.toLowerCase();
       const matchStem = (u.stem || '').toLowerCase().includes(term);
@@ -110,13 +112,16 @@ function renderPractice() {
 
   const kindOptions = ['all', ...availableKinds].map(k => {
     const label = k === 'all' ? '全部题型' : k;
-    return `<option value="${escapeHTML(k)}" ${practiceFilterKind === k ? 'selected' : ''}>${label}</option>`;
+    return `<option value="${escapeHTML(k)}" ${practiceFilterKind === k ? 'selected' : ''}>${escapeHTML(label)}</option>`;
   }).join('');
 
   const sourceOptions = availableSources.map(s => {
-    const label = sourceNames[s] || s;
-    return `<option value="${escapeHTML(s)}" ${practiceFilterSource === s ? 'selected' : ''}>${label}</option>`;
+    const label = BANK.materials.find(m => m.id === s)?.name || sourceNames[s] || s;
+    return `<option value="${escapeHTML(s)}" ${practiceFilterSource === s ? 'selected' : ''}>${escapeHTML(label)}</option>`;
   }).join('');
+
+  const chapterRows = allUnits.filter(u => practiceFilterSource === 'all' || u.source === practiceFilterSource);
+  const chapterOptions = ['<option value="all">全部章节</option>', ...[...new Set(chapterRows.map(u => u.chapter))].sort((a,b) => a-b).map(c => `<option value="${Number(c)}" ${String(c) === practiceFilterChapter ? 'selected' : ''}>${escapeHTML(chapterRows.find(u => u.chapter === c)?.chapterName || ('第 '+c+' 章'))}</option>`)].join('');
 
   // Draft and self-check state
   const draftText = currentUnit ? (state.drafts[currentUnit.id] || '') : '';
@@ -135,7 +140,7 @@ function renderPractice() {
     `;
   } else {
     // Process stem: proper typography without crude newline breaking
-    const stemHTML = formatPracticeStem(currentUnit.stem);
+    const stemHTML = formatPracticeStem(currentUnit.stem) + (currentUnit.options?.length ? `<div class="practice-options">${currentUnit.options.map((o,i) => `<p><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHTML(o)}</p>`).join('')}</div>` : '');
 
     // Code block
     const codeBlockHTML = currentUnit.code ? renderCodeBlock(currentUnit.code) : '';
@@ -145,8 +150,9 @@ function renderPractice() {
     if (currentUnit.answer) {
       answerContent = `<div class="practice-answer-body"><div class="answer-badge">参考答案</div><pre class="answer-pre"><code>${escapeHTML(currentUnit.answer)}</code></pre></div>`;
     } else {
-      answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">待核对</div><p class="answer-tip">原题未附带单题独立标准答案，请参考教材对应章节或点击下方“DeepSeek 辅导”获取智能解析。</p></div>`;
+      answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">参考答案待补充</div><p class="answer-tip">${escapeHTML(currentUnit.answerOrigin || '参考答案尚未可靠匹配。')} 可使用 DeepSeek 获取AI参考答案与讲解。</p></div>`;
     }
+    answerContent += getImportedAIHTML(currentUnit);
 
     const answerOriginHTML = currentUnit.answerOrigin ? `<div class="answer-origin"><span>来源：${escapeHTML(currentUnit.answerOrigin)}</span></div>` : '';
 
@@ -176,7 +182,9 @@ function renderPractice() {
           <span class="unit-source-badge">${escapeHTML(currentUnit.sourceTitle || currentUnit.source)}</span>
           <span class="unit-chapter-badge">${escapeHTML(currentUnit.chapterName || ('第' + currentUnit.chapter + '章'))} ${escapeHTML(currentUnit.section || '')}</span>
           <span class="unit-kind-badge">${escapeHTML(currentUnit.kind)}</span>
-          <span class="unit-num-badge">第 ${currentUnit.number} 题</span>
+          <span class="unit-num-badge">第 ${escapeHTML(currentUnit.number)} 题</span>
+          ${currentUnit.reviewPending ? `<span class="unit-badge ans-pending">题面待核对</span><span class="answer-tip">${escapeHTML((currentUnit.warnings || []).join('；'))}</span>` : ''}
+          ${currentUnit.parentNumber ? `<span class="unit-num-badge">父题 ${escapeHTML(currentUnit.parentNumber)} · 小问 ${escapeHTML(currentUnit.childNumber || '')}</span>` : ''}
           ${(currentUnit.ocrPending || (currentUnit.explanation && currentUnit.explanation.includes('[OCR'))) 
             ? '<span class="unit-badge ocr-pending" title="本题来自图片扫描件OCR，存疑符号已保留待核对，禁止主观猜写">识别待核对</span>' 
             : '<span class="unit-badge ocr-verified" title="文字版PDF直接提取">文本直提</span>'}
@@ -244,6 +252,8 @@ function renderPractice() {
             </select>
           </label>
 
+          <label class="control-group"><span class="control-label">章节</span><select class="control-select" onchange="practiceFilterChapter=this.value;currentPracticeIndex=0;state.lastPracticeUnitId=null;showCurrentAnswer=false;renderPractice()">${chapterOptions}</select></label>
+
           <label class="control-group">
             <span class="control-label">题型</span>
             <select class="control-select" onchange="onPracticeKindChange(this.value)">
@@ -277,6 +287,8 @@ function renderPractice() {
 // Event Handlers
 function onPracticeSourceChange(val) {
   practiceFilterSource = val;
+  practiceFilterChapter = 'all';
+  state.lastPracticeUnitId = null;
   currentPracticeIndex = 0;
   showCurrentAnswer = false;
   renderPractice();
@@ -284,6 +296,7 @@ function onPracticeSourceChange(val) {
 
 function onPracticeKindChange(val) {
   practiceFilterKind = val;
+  state.lastPracticeUnitId = null;
   currentPracticeIndex = 0;
   showCurrentAnswer = false;
   renderPractice();
@@ -303,6 +316,8 @@ function onPracticeSearch(val) {
 function resetPracticeFilter() {
   practiceFilterKind = 'all';
   practiceFilterSource = 'all';
+  practiceFilterChapter = 'all';
+  state.lastPracticeUnitId = null;
   practiceSearchTerm = '';
   currentPracticeIndex = 0;
   showCurrentAnswer = false;
@@ -383,6 +398,13 @@ function requestPracticeUnitAI() {
   const filtered = getFilteredPracticeUnits();
   const currentUnit = filtered[currentPracticeIndex];
   if (!currentUnit) return;
+
+  if (currentUnit.aiExplanation) {
+    showCurrentAnswer = true;
+    renderPractice();
+    toast('已显示缓存的AI讲解，无需再次调用API。');
+    return;
+  }
 
   ensureTeaching();
   const draft = state.drafts ? (state.drafts[currentUnit.id] || '') : '';

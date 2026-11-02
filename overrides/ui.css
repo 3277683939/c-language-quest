@@ -596,6 +596,16 @@ body[data-view="coach"] .date-label,body[data-view="teach"] .date-label{display:
   max-width: 960px;
   margin: 0 auto;
 }
+.quiz-step-actions {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+}
+@media (max-width: 760px) {
+  .quiz-step-actions { width: 100%; }
+  .quiz-step-actions .secondary { flex: 0 0 auto; white-space: nowrap; min-width: 96px; }
+  .quiz-step-actions .primary { flex: 1; width: auto; min-width: 0; white-space: nowrap; }
+}
 .ai-cached-explanation {
   margin-top: 14px;
   padding: 14px 16px;

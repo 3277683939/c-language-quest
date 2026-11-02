@@ -55,6 +55,8 @@ jobs:
               js = "window.CQuestPDFData=window.CQuestPDFData||{};window.CQuestPDFData[" + json.dumps(pdf.stem) + "]=" + json.dumps(packed) + ";"
               (documents / (pdf.stem + ".js")).write_text(js, encoding="ascii")
           print("Verified and unpacked", manifest["fileCount"], "website files")
+      - name: Version script and stylesheet URLs by content
+        run: python tools/questionflow.py assets --directory public
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload website
