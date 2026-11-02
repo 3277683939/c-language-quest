@@ -9754,7 +9754,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-1.webp"
+      "sourceImage": "questions/x-1-1.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-2",
@@ -9775,7 +9776,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-2.webp"
+      "sourceImage": "questions/x-1-2.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-3",
@@ -9796,7 +9798,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-3.webp"
+      "sourceImage": "questions/x-1-3.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-4",
@@ -9817,7 +9820,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-4.webp"
+      "sourceImage": "questions/x-1-4.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-5",
@@ -9838,7 +9842,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-5.webp"
+      "sourceImage": "questions/x-1-5.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-6",
@@ -9859,7 +9864,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-6.webp"
+      "sourceImage": "questions/x-1-6.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-7",
@@ -9880,7 +9886,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-7.webp"
+      "sourceImage": "questions/x-1-7.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-8",
@@ -9901,7 +9908,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-8.webp"
+      "sourceImage": "questions/x-1-8.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-9",
@@ -9922,7 +9930,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-9.webp"
+      "sourceImage": "questions/x-1-9.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-10",
@@ -9943,7 +9952,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-10.webp"
+      "sourceImage": "questions/x-1-10.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-11",
@@ -9964,7 +9974,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-11.webp"
+      "sourceImage": "questions/x-1-11.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-12",
@@ -9985,7 +9996,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-12.webp"
+      "sourceImage": "questions/x-1-12.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-13",
@@ -10006,7 +10018,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-13.webp"
+      "sourceImage": "questions/x-1-13.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-1-14",
@@ -10027,7 +10040,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-1-14.webp"
+      "sourceImage": "questions/x-1-14.webp",
+      "chapterName": "第1章 程序设计与 C 语言"
     },
     {
       "id": "x-2-1",
@@ -10048,7 +10062,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-1.webp"
+      "sourceImage": "questions/x-2-1.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-2",
@@ -10069,7 +10084,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-2.webp"
+      "sourceImage": "questions/x-2-2.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-3",
@@ -10090,7 +10106,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-3.webp"
+      "sourceImage": "questions/x-2-3.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-4",
@@ -10111,7 +10128,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-4.webp"
+      "sourceImage": "questions/x-2-4.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-5",
@@ -10132,7 +10150,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-5.webp"
+      "sourceImage": "questions/x-2-5.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-6",
@@ -10153,7 +10172,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-6.webp"
+      "sourceImage": "questions/x-2-6.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-7",
@@ -10174,7 +10194,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-7.webp"
+      "sourceImage": "questions/x-2-7.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-8",
@@ -10195,7 +10216,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-8.webp"
+      "sourceImage": "questions/x-2-8.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-9",
@@ -10216,7 +10238,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-9.webp"
+      "sourceImage": "questions/x-2-9.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-10",
@@ -10237,7 +10260,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-10.webp"
+      "sourceImage": "questions/x-2-10.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-11",
@@ -10258,7 +10282,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-11.webp"
+      "sourceImage": "questions/x-2-11.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-12",
@@ -10279,7 +10304,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-12.webp"
+      "sourceImage": "questions/x-2-12.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-13",
@@ -10300,7 +10326,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-13.webp"
+      "sourceImage": "questions/x-2-13.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-14",
@@ -10321,7 +10348,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-14.webp"
+      "sourceImage": "questions/x-2-14.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-15",
@@ -10342,7 +10370,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-15.webp"
+      "sourceImage": "questions/x-2-15.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-16",
@@ -10363,7 +10392,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-16.webp"
+      "sourceImage": "questions/x-2-16.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-17",
@@ -10384,7 +10414,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-17.webp"
+      "sourceImage": "questions/x-2-17.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-18",
@@ -10405,7 +10436,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-18.webp"
+      "sourceImage": "questions/x-2-18.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-19",
@@ -10426,7 +10458,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-19.webp"
+      "sourceImage": "questions/x-2-19.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-20",
@@ -10447,7 +10480,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-20.webp"
+      "sourceImage": "questions/x-2-20.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-21",
@@ -10468,7 +10502,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-21.webp"
+      "sourceImage": "questions/x-2-21.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-22",
@@ -10489,7 +10524,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-22.webp"
+      "sourceImage": "questions/x-2-22.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-23",
@@ -10510,7 +10546,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-23.webp"
+      "sourceImage": "questions/x-2-23.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-24",
@@ -10531,7 +10568,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-24.webp"
+      "sourceImage": "questions/x-2-24.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-25",
@@ -10552,7 +10590,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-25.webp"
+      "sourceImage": "questions/x-2-25.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-26",
@@ -10573,7 +10612,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-26.webp"
+      "sourceImage": "questions/x-2-26.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-27",
@@ -10594,7 +10634,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-27.webp"
+      "sourceImage": "questions/x-2-27.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-28",
@@ -10615,7 +10656,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-28.webp"
+      "sourceImage": "questions/x-2-28.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-29",
@@ -10636,7 +10678,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-29.webp"
+      "sourceImage": "questions/x-2-29.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-30",
@@ -10657,7 +10700,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-30.webp"
+      "sourceImage": "questions/x-2-30.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-31",
@@ -10678,7 +10722,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-31.webp"
+      "sourceImage": "questions/x-2-31.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-32",
@@ -10699,7 +10744,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-32.webp"
+      "sourceImage": "questions/x-2-32.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-33",
@@ -10720,7 +10766,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-33.webp"
+      "sourceImage": "questions/x-2-33.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-34",
@@ -10741,7 +10788,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-34.webp"
+      "sourceImage": "questions/x-2-34.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-35",
@@ -10762,7 +10810,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-35.webp"
+      "sourceImage": "questions/x-2-35.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-36",
@@ -10783,7 +10832,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-36.webp"
+      "sourceImage": "questions/x-2-36.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-37",
@@ -10804,7 +10854,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-37.webp"
+      "sourceImage": "questions/x-2-37.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-38",
@@ -10825,7 +10876,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-38.webp"
+      "sourceImage": "questions/x-2-38.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-39",
@@ -10846,7 +10898,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-39.webp"
+      "sourceImage": "questions/x-2-39.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-40",
@@ -10867,7 +10920,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-40.webp"
+      "sourceImage": "questions/x-2-40.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-41",
@@ -10888,7 +10942,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-41.webp"
+      "sourceImage": "questions/x-2-41.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-42",
@@ -10909,7 +10964,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-42.webp"
+      "sourceImage": "questions/x-2-42.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-43",
@@ -10930,7 +10986,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-43.webp"
+      "sourceImage": "questions/x-2-43.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-44",
@@ -10951,7 +11008,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-44.webp"
+      "sourceImage": "questions/x-2-44.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-45",
@@ -10972,7 +11030,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-45.webp"
+      "sourceImage": "questions/x-2-45.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-46",
@@ -10993,7 +11052,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-46.webp"
+      "sourceImage": "questions/x-2-46.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-47",
@@ -11014,7 +11074,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-47.webp"
+      "sourceImage": "questions/x-2-47.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-48",
@@ -11035,7 +11096,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-48.webp"
+      "sourceImage": "questions/x-2-48.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-49",
@@ -11056,7 +11118,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-49.webp"
+      "sourceImage": "questions/x-2-49.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-50",
@@ -11077,7 +11140,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-50.webp"
+      "sourceImage": "questions/x-2-50.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-51",
@@ -11098,7 +11162,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-51.webp"
+      "sourceImage": "questions/x-2-51.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-52",
@@ -11119,7 +11184,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-52.webp"
+      "sourceImage": "questions/x-2-52.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-53",
@@ -11140,7 +11206,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-53.webp"
+      "sourceImage": "questions/x-2-53.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-54",
@@ -11161,7 +11228,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-54.webp"
+      "sourceImage": "questions/x-2-54.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-55",
@@ -11182,7 +11250,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-55.webp"
+      "sourceImage": "questions/x-2-55.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-56",
@@ -11203,7 +11272,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-56.webp"
+      "sourceImage": "questions/x-2-56.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-57",
@@ -11224,7 +11294,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-57.webp"
+      "sourceImage": "questions/x-2-57.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-2-58",
@@ -11245,7 +11316,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-2-58.webp"
+      "sourceImage": "questions/x-2-58.webp",
+      "chapterName": "第2章 数据类型、运算符和表达式"
     },
     {
       "id": "x-3-1",
@@ -11266,7 +11338,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-1.webp"
+      "sourceImage": "questions/x-3-1.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-2",
@@ -11287,7 +11360,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-2.webp"
+      "sourceImage": "questions/x-3-2.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-3",
@@ -11308,7 +11382,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-3.webp"
+      "sourceImage": "questions/x-3-3.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-4",
@@ -11329,7 +11404,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-4.webp"
+      "sourceImage": "questions/x-3-4.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-5",
@@ -11350,7 +11426,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-5.webp"
+      "sourceImage": "questions/x-3-5.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-6",
@@ -11371,7 +11448,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-6.webp"
+      "sourceImage": "questions/x-3-6.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-7",
@@ -11392,7 +11470,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-7.webp"
+      "sourceImage": "questions/x-3-7.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-8",
@@ -11413,7 +11492,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-8.webp"
+      "sourceImage": "questions/x-3-8.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-9",
@@ -11434,7 +11514,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-9.webp"
+      "sourceImage": "questions/x-3-9.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-10",
@@ -11455,7 +11536,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-10.webp"
+      "sourceImage": "questions/x-3-10.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-11",
@@ -11476,7 +11558,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-11.webp"
+      "sourceImage": "questions/x-3-11.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-12",
@@ -11497,7 +11580,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-12.webp"
+      "sourceImage": "questions/x-3-12.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-13",
@@ -11518,7 +11602,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-13.webp"
+      "sourceImage": "questions/x-3-13.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-14",
@@ -11539,7 +11624,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-14.webp"
+      "sourceImage": "questions/x-3-14.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-15",
@@ -11560,7 +11646,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-15.webp"
+      "sourceImage": "questions/x-3-15.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-16",
@@ -11581,7 +11668,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-16.webp"
+      "sourceImage": "questions/x-3-16.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-17",
@@ -11602,7 +11690,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-17.webp"
+      "sourceImage": "questions/x-3-17.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-3-18",
@@ -11623,7 +11712,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-3-18.webp"
+      "sourceImage": "questions/x-3-18.webp",
+      "chapterName": "第3章 顺序结构程序设计"
     },
     {
       "id": "x-4-1",
@@ -11644,7 +11734,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-1.webp"
+      "sourceImage": "questions/x-4-1.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-2",
@@ -11665,7 +11756,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-2.webp"
+      "sourceImage": "questions/x-4-2.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-3",
@@ -11686,7 +11778,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-3.webp"
+      "sourceImage": "questions/x-4-3.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-4",
@@ -11707,7 +11800,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-4.webp"
+      "sourceImage": "questions/x-4-4.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-5",
@@ -11728,7 +11822,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-5.webp"
+      "sourceImage": "questions/x-4-5.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-6",
@@ -11749,7 +11844,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-6.webp"
+      "sourceImage": "questions/x-4-6.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-7",
@@ -11770,7 +11866,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-7.webp"
+      "sourceImage": "questions/x-4-7.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-8",
@@ -11791,7 +11888,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-8.webp"
+      "sourceImage": "questions/x-4-8.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-9",
@@ -11812,7 +11910,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-9.webp"
+      "sourceImage": "questions/x-4-9.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-10",
@@ -11833,7 +11932,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-10.webp"
+      "sourceImage": "questions/x-4-10.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-11",
@@ -11854,7 +11954,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-11.webp"
+      "sourceImage": "questions/x-4-11.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-12",
@@ -11875,7 +11976,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-12.webp"
+      "sourceImage": "questions/x-4-12.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-13",
@@ -11896,7 +11998,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-13.webp"
+      "sourceImage": "questions/x-4-13.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-14",
@@ -11917,7 +12020,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-14.webp"
+      "sourceImage": "questions/x-4-14.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-15",
@@ -11938,7 +12042,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-15.webp"
+      "sourceImage": "questions/x-4-15.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-16",
@@ -11959,7 +12064,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-16.webp"
+      "sourceImage": "questions/x-4-16.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-17",
@@ -11980,7 +12086,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-17.webp"
+      "sourceImage": "questions/x-4-17.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-18",
@@ -12001,7 +12108,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-18.webp"
+      "sourceImage": "questions/x-4-18.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-19",
@@ -12022,7 +12130,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-19.webp"
+      "sourceImage": "questions/x-4-19.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-20",
@@ -12043,7 +12152,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-20.webp"
+      "sourceImage": "questions/x-4-20.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-21",
@@ -12064,7 +12174,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-21.webp"
+      "sourceImage": "questions/x-4-21.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-22",
@@ -12085,7 +12196,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-22.webp"
+      "sourceImage": "questions/x-4-22.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-23",
@@ -12106,7 +12218,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-23.webp"
+      "sourceImage": "questions/x-4-23.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-24",
@@ -12127,7 +12240,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-24.webp"
+      "sourceImage": "questions/x-4-24.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-25",
@@ -12148,7 +12262,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-25.webp"
+      "sourceImage": "questions/x-4-25.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-4-26",
@@ -12169,7 +12284,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-4-26.webp"
+      "sourceImage": "questions/x-4-26.webp",
+      "chapterName": "第4章 分支结构程序设计"
     },
     {
       "id": "x-5-1",
@@ -12190,7 +12306,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-1.webp"
+      "sourceImage": "questions/x-5-1.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-2",
@@ -12211,7 +12328,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-2.webp"
+      "sourceImage": "questions/x-5-2.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-3",
@@ -12232,7 +12350,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-3.webp"
+      "sourceImage": "questions/x-5-3.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-4",
@@ -12253,7 +12372,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-4.webp"
+      "sourceImage": "questions/x-5-4.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-5",
@@ -12274,7 +12394,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-5.webp"
+      "sourceImage": "questions/x-5-5.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-6",
@@ -12295,7 +12416,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-6.webp"
+      "sourceImage": "questions/x-5-6.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-7",
@@ -12316,7 +12438,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-7.webp"
+      "sourceImage": "questions/x-5-7.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-8",
@@ -12337,7 +12460,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-8.webp"
+      "sourceImage": "questions/x-5-8.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-9",
@@ -12358,7 +12482,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-9.webp"
+      "sourceImage": "questions/x-5-9.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-10",
@@ -12379,7 +12504,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-10.webp"
+      "sourceImage": "questions/x-5-10.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-11",
@@ -12400,7 +12526,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-11.webp"
+      "sourceImage": "questions/x-5-11.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-12",
@@ -12421,7 +12548,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-12.webp"
+      "sourceImage": "questions/x-5-12.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-13",
@@ -12442,7 +12570,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-13.webp"
+      "sourceImage": "questions/x-5-13.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-14",
@@ -12463,7 +12592,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-14.webp"
+      "sourceImage": "questions/x-5-14.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-5-15",
@@ -12484,7 +12614,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-5-15.webp"
+      "sourceImage": "questions/x-5-15.webp",
+      "chapterName": "第5章 循环结构程序设计"
     },
     {
       "id": "x-6-1",
@@ -12505,7 +12636,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-1.webp"
+      "sourceImage": "questions/x-6-1.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-2",
@@ -12526,7 +12658,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-2.webp"
+      "sourceImage": "questions/x-6-2.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-3",
@@ -12547,7 +12680,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-3.webp"
+      "sourceImage": "questions/x-6-3.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-4",
@@ -12568,7 +12702,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-4.webp"
+      "sourceImage": "questions/x-6-4.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-5",
@@ -12589,7 +12724,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-5.webp"
+      "sourceImage": "questions/x-6-5.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-6",
@@ -12610,7 +12746,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-6.webp"
+      "sourceImage": "questions/x-6-6.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-7",
@@ -12631,7 +12768,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-7.webp"
+      "sourceImage": "questions/x-6-7.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-8",
@@ -12652,7 +12790,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-8.webp"
+      "sourceImage": "questions/x-6-8.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-9",
@@ -12673,7 +12812,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-9.webp"
+      "sourceImage": "questions/x-6-9.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-10",
@@ -12694,7 +12834,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-10.webp"
+      "sourceImage": "questions/x-6-10.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-11",
@@ -12715,7 +12856,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-11.webp"
+      "sourceImage": "questions/x-6-11.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-12",
@@ -12736,7 +12878,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-12.webp"
+      "sourceImage": "questions/x-6-12.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-13",
@@ -12757,7 +12900,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-13.webp"
+      "sourceImage": "questions/x-6-13.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-14",
@@ -12778,7 +12922,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-14.webp"
+      "sourceImage": "questions/x-6-14.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-15",
@@ -12799,7 +12944,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-15.webp"
+      "sourceImage": "questions/x-6-15.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-16",
@@ -12820,7 +12966,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-16.webp"
+      "sourceImage": "questions/x-6-16.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-17",
@@ -12841,7 +12988,8 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-17.webp"
+      "sourceImage": "questions/x-6-17.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-18",
@@ -12862,7 +13010,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-18.webp"
+      "sourceImage": "questions/x-6-18.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-19",
@@ -12883,7 +13032,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-19.webp"
+      "sourceImage": "questions/x-6-19.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-20",
@@ -12904,7 +13054,8 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-20.webp"
+      "sourceImage": "questions/x-6-20.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-21",
@@ -12925,7 +13076,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-21.webp"
+      "sourceImage": "questions/x-6-21.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-22",
@@ -12946,7 +13098,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-22.webp"
+      "sourceImage": "questions/x-6-22.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-23",
@@ -12967,7 +13120,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-23.webp"
+      "sourceImage": "questions/x-6-23.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-24",
@@ -12988,7 +13142,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-24.webp"
+      "sourceImage": "questions/x-6-24.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-25",
@@ -13009,7 +13164,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-25.webp"
+      "sourceImage": "questions/x-6-25.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-26",
@@ -13030,7 +13186,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-26.webp"
+      "sourceImage": "questions/x-6-26.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-27",
@@ -13051,7 +13208,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-27.webp"
+      "sourceImage": "questions/x-6-27.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-28",
@@ -13072,7 +13230,8 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-28.webp"
+      "sourceImage": "questions/x-6-28.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-29",
@@ -13093,7 +13252,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-29.webp"
+      "sourceImage": "questions/x-6-29.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-6-30",
@@ -13114,12 +13274,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-6-30.webp"
+      "sourceImage": "questions/x-6-30.webp",
+      "chapterName": "第6章 数组"
     },
     {
       "id": "x-7-1",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 1,
       "page": 58,
@@ -13135,12 +13296,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-1.webp"
+      "sourceImage": "questions/x-7-1.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-2",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 2,
       "page": 58,
@@ -13156,12 +13318,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-2.webp"
+      "sourceImage": "questions/x-7-2.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-3",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 3,
       "page": 59,
@@ -13177,12 +13340,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-3.webp"
+      "sourceImage": "questions/x-7-3.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-4",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 4,
       "page": 59,
@@ -13198,12 +13362,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-4.webp"
+      "sourceImage": "questions/x-7-4.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-5",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 5,
       "page": 59,
@@ -13219,12 +13384,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-5.webp"
+      "sourceImage": "questions/x-7-5.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-6",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 6,
       "page": 59,
@@ -13240,12 +13406,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-6.webp"
+      "sourceImage": "questions/x-7-6.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-7",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 7,
       "page": 59,
@@ -13261,12 +13428,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-7.webp"
+      "sourceImage": "questions/x-7-7.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-8",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 8,
       "page": 59,
@@ -13282,12 +13450,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-8.webp"
+      "sourceImage": "questions/x-7-8.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-9",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 9,
       "page": 59,
@@ -13303,12 +13472,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-9.webp"
+      "sourceImage": "questions/x-7-9.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-10",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 10,
       "page": 59,
@@ -13324,12 +13494,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-10.webp"
+      "sourceImage": "questions/x-7-10.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-11",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 11,
       "page": 59,
@@ -13345,12 +13516,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-11.webp"
+      "sourceImage": "questions/x-7-11.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-12",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 12,
       "page": 59,
@@ -13366,12 +13538,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-12.webp"
+      "sourceImage": "questions/x-7-12.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-13",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 13,
       "page": 59,
@@ -13387,12 +13560,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-13.webp"
+      "sourceImage": "questions/x-7-13.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-14",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 14,
       "page": 60,
@@ -13408,12 +13582,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-14.webp"
+      "sourceImage": "questions/x-7-14.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-15",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 15,
       "page": 60,
@@ -13429,12 +13604,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-15.webp"
+      "sourceImage": "questions/x-7-15.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-16",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 16,
       "page": 60,
@@ -13450,12 +13626,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-16.webp"
+      "sourceImage": "questions/x-7-16.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-17",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 17,
       "page": 60,
@@ -13471,12 +13648,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-17.webp"
+      "sourceImage": "questions/x-7-17.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-18",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 18,
       "page": 60,
@@ -13492,12 +13670,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-18.webp"
+      "sourceImage": "questions/x-7-18.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-19",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 19,
       "page": 60,
@@ -13513,12 +13692,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-19.webp"
+      "sourceImage": "questions/x-7-19.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-20",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 20,
       "page": 60,
@@ -13534,12 +13714,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-20.webp"
+      "sourceImage": "questions/x-7-20.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-21",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 21,
       "page": 60,
@@ -13555,12 +13736,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-21.webp"
+      "sourceImage": "questions/x-7-21.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-22",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 22,
       "page": 60,
@@ -13576,12 +13758,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-22.webp"
+      "sourceImage": "questions/x-7-22.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-23",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 23,
       "page": 60,
@@ -13597,12 +13780,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-23.webp"
+      "sourceImage": "questions/x-7-23.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-24",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 24,
       "page": 61,
@@ -13618,12 +13802,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-24.webp"
+      "sourceImage": "questions/x-7-24.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-25",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 25,
       "page": 61,
@@ -13639,12 +13824,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-25.webp"
+      "sourceImage": "questions/x-7-25.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-26",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 26,
       "page": 61,
@@ -13660,12 +13846,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-26.webp"
+      "sourceImage": "questions/x-7-26.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-27",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 27,
       "page": 61,
@@ -13681,12 +13868,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-27.webp"
+      "sourceImage": "questions/x-7-27.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-28",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 28,
       "page": 61,
@@ -13702,12 +13890,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-28.webp"
+      "sourceImage": "questions/x-7-28.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-29",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 29,
       "page": 61,
@@ -13723,12 +13912,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-29.webp"
+      "sourceImage": "questions/x-7-29.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-30",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 30,
       "page": 61,
@@ -13744,12 +13934,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-30.webp"
+      "sourceImage": "questions/x-7-30.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-31",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 31,
       "page": 61,
@@ -13765,12 +13956,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-31.webp"
+      "sourceImage": "questions/x-7-31.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-32",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 32,
       "page": 61,
@@ -13786,12 +13978,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-32.webp"
+      "sourceImage": "questions/x-7-32.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-33",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 33,
       "page": 61,
@@ -13807,12 +14000,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-33.webp"
+      "sourceImage": "questions/x-7-33.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-34",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 34,
       "page": 62,
@@ -13828,12 +14022,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-34.webp"
+      "sourceImage": "questions/x-7-34.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-35",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 35,
       "page": 62,
@@ -13849,12 +14044,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-35.webp"
+      "sourceImage": "questions/x-7-35.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-36",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 36,
       "page": 62,
@@ -13870,12 +14066,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-36.webp"
+      "sourceImage": "questions/x-7-36.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-37",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 37,
       "page": 62,
@@ -13891,12 +14088,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-37.webp"
+      "sourceImage": "questions/x-7-37.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-38",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 38,
       "page": 62,
@@ -13912,12 +14110,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-38.webp"
+      "sourceImage": "questions/x-7-38.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-39",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 39,
       "page": 62,
@@ -13933,12 +14132,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-39.webp"
+      "sourceImage": "questions/x-7-39.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-40",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 40,
       "page": 62,
@@ -13954,12 +14154,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-40.webp"
+      "sourceImage": "questions/x-7-40.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-41",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 41,
       "page": 62,
@@ -13975,12 +14176,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-41.webp"
+      "sourceImage": "questions/x-7-41.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-42",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 42,
       "page": 63,
@@ -13996,12 +14198,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-42.webp"
+      "sourceImage": "questions/x-7-42.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-43",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 43,
       "page": 63,
@@ -14017,12 +14220,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-43.webp"
+      "sourceImage": "questions/x-7-43.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-44",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 44,
       "page": 63,
@@ -14038,12 +14242,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-44.webp"
+      "sourceImage": "questions/x-7-44.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-45",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 45,
       "page": 63,
@@ -14059,12 +14264,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-45.webp"
+      "sourceImage": "questions/x-7-45.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-7-46",
       "source": "x",
-      "chapter": 9,
+      "chapter": 7,
       "section": "原书第7章",
       "number": 46,
       "page": 64,
@@ -14080,12 +14286,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-7-46.webp"
+      "sourceImage": "questions/x-7-46.webp",
+      "chapterName": "第7章 函数"
     },
     {
       "id": "x-8-1",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 1,
       "page": 92,
@@ -14101,12 +14308,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-1.webp"
+      "sourceImage": "questions/x-8-1.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-2",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 2,
       "page": 92,
@@ -14122,12 +14330,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-2.webp"
+      "sourceImage": "questions/x-8-2.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-3",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 3,
       "page": 92,
@@ -14143,17 +14352,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-3.webp"
+      "sourceImage": "questions/x-8-3.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-4",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 4,
       "page": 92,
       "endPage": 92,
-      "stem": "已有定义“intc,*s,aC]={1,3,5};”,语法和语义都正确的赋值是 。",
+      "stem": "已有定义“int c,*s,a[]={1,3,5};”,语法和语义都正确的赋值是 。",
       "image": "questions/x-8-4.webp",
       "options": [
         "c=*s;",
@@ -14164,12 +14374,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-4.webp"
+      "sourceImage": "questions/x-8-4.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-5",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 5,
       "page": 92,
@@ -14185,12 +14396,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-5.webp"
+      "sourceImage": "questions/x-8-5.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-6",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 6,
       "page": 92,
@@ -14206,12 +14418,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-6.webp"
+      "sourceImage": "questions/x-8-6.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-7",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 7,
       "page": 92,
@@ -14227,17 +14440,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-7.webp"
+      "sourceImage": "questions/x-8-7.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-8",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 8,
       "page": 92,
       "endPage": 93,
-      "stem": "己有声明“inta=0,b=l,*p,*q;”,下列正确的语句是 。",
+      "stem": "己有声明“int a=0,b=1,*p,*q;”,下列正确的语句是 。",
       "image": "questions/x-8-8.webp",
       "options": [
         "a=p;",
@@ -14248,12 +14462,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-8.webp"
+      "sourceImage": "questions/x-8-8.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-9",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 9,
       "page": 93,
@@ -14269,17 +14484,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-9.webp"
+      "sourceImage": "questions/x-8-9.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-10",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 10,
       "page": 93,
       "endPage": 93,
-      "stem": "己有声明“intaC10]={0,1,2,3,4,5,6,7,8,9},*p=a;\",则不能表示数组a\n中元素的是 。",
+      "stem": "己有声明“int a[10]={0,1,2,3,4,5,6,7,8,9},*p=a;\",则不能表示数组a\n中元素的是 。",
       "image": "questions/x-8-10.webp",
       "options": [
         "*p",
@@ -14290,17 +14506,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-10.webp"
+      "sourceImage": "questions/x-8-10.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-11",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 11,
       "page": 93,
       "endPage": 93,
-      "stem": "己有声明“inta=0,b=l,*p=&a,*q=&b;”,下列错误的语句是 。",
+      "stem": "己有声明“int a=0,b=1,*p=&a,*q=&b;”,下列错误的语句是 。",
       "image": "questions/x-8-11.webp",
       "options": [
         "a=*q;",
@@ -14311,12 +14528,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-11.webp"
+      "sourceImage": "questions/x-8-11.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-12",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 12,
       "page": 93,
@@ -14332,17 +14550,18 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-12.webp"
+      "sourceImage": "questions/x-8-12.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-13",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 13,
       "page": 93,
       "endPage": 93,
-      "stem": "己有声明“intaC10]={1,2,3,4,5,6,7,8,9,10},*p=&aC3],b=pC5];”,b\n的值是 。",
+      "stem": "己有声明“int a[10]={1,2,3,4,5,6,7,8,9,10},*p=&aC3],b=pC5];”,b\n的值是 。",
       "image": "questions/x-8-13.webp",
       "options": [
         "5",
@@ -14353,17 +14572,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-13.webp"
+      "sourceImage": "questions/x-8-13.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-14",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 14,
       "page": 93,
       "endPage": 93,
-      "stem": "已有定义“charbC6],*p=b;”,则正确的赋值表达式语句是 。",
+      "stem": "已有定义“char b[6],*p=b;”,则正确的赋值表达式语句是 。",
       "image": "questions/x-8-14.webp",
       "options": [
         "b=\"China\";",
@@ -14374,12 +14594,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-14.webp"
+      "sourceImage": "questions/x-8-14.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-15",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 15,
       "page": 93,
@@ -14395,12 +14616,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-15.webp"
+      "sourceImage": "questions/x-8-15.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-16",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 16,
       "page": 93,
@@ -14416,12 +14638,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-16.webp"
+      "sourceImage": "questions/x-8-16.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-17",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 17,
       "page": 93,
@@ -14437,12 +14660,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-17.webp"
+      "sourceImage": "questions/x-8-17.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-18",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 18,
       "page": 93,
@@ -14458,12 +14682,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-18.webp"
+      "sourceImage": "questions/x-8-18.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-19",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 19,
       "page": 93,
@@ -14479,17 +14704,18 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-19.webp"
+      "sourceImage": "questions/x-8-19.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-20",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 20,
       "page": 94,
       "endPage": 94,
-      "stem": "已有定义“intaC]={l,2,3,4},*p,i;”,则下面程序段中不能输出 3 的\n是 。",
+      "stem": "已有定义“int a[]={1,2,3,4},*p,i;”,则下面程序段中不能输出 3 的\n是 。",
       "image": "questions/x-8-20.webp",
       "options": [
         "for(i=0;i<4;i+=2)printf(\"%d\",aCi]);",
@@ -14500,12 +14726,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-20.webp"
+      "sourceImage": "questions/x-8-20.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-21",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 21,
       "page": 94,
@@ -14521,17 +14748,18 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-21.webp"
+      "sourceImage": "questions/x-8-21.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-22",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 22,
       "page": 94,
       "endPage": 94,
-      "stem": "若有声明“charaC5]={'A','B','C','D','E'},*p=a,i;”,则以下语句中不能\n正确输出a数组全部元素值的是 。",
+      "stem": "若有声明“char a[5]={'A','B','C','D','E'},*p=a,i;”,则以下语句中不能\n正确输出a数组全部元素值的是 。",
       "image": "questions/x-8-22.webp",
       "options": [
         "for(i=0;i<5;i++)printf(\"%c\",aCi]);",
@@ -14542,17 +14770,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-22.webp"
+      "sourceImage": "questions/x-8-22.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-23",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 23,
       "page": 94,
       "endPage": 94,
-      "stem": "已有定义“intf(int*pa,intn,int*x);intaC4]={1,2,3,4},intb,c;”,则下面函\n数调用形式中正确的是 。",
+      "stem": "已有定义“int f(int *pa,int n,int *x);int a[4]={1,2,3,4},intb,c;”,则下面函\n数调用形式中正确的是 。",
       "image": "questions/x-8-23.webp",
       "options": [
         "c=f(a,4,b);",
@@ -14563,12 +14792,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-23.webp"
+      "sourceImage": "questions/x-8-23.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-24",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 24,
       "page": 94,
@@ -14584,12 +14814,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-24.webp"
+      "sourceImage": "questions/x-8-24.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-25",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 25,
       "page": 94,
@@ -14605,12 +14836,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-25.webp"
+      "sourceImage": "questions/x-8-25.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-26",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 26,
       "page": 94,
@@ -14626,17 +14858,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-26.webp"
+      "sourceImage": "questions/x-8-26.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-27",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 27,
       "page": 95,
       "endPage": 95,
-      "stem": "假定已有定义“charaC30],*p=a;”,则下列语句中能将字符串“ThisisaCpro-\ngram.”正确地保存到数组a中的语句是 。",
+      "stem": "假定已有定义“char a[30],*p=a;”,则下列语句中能将字符串“ThisisaCpro-\ngram.”正确地保存到数组a中的语句是 。",
       "image": "questions/x-8-27.webp",
       "options": [
         "aC30]=\"ThisisaCprogram.\";",
@@ -14647,12 +14880,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-27.webp"
+      "sourceImage": "questions/x-8-27.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-28",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 28,
       "page": 95,
@@ -14668,12 +14902,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-28.webp"
+      "sourceImage": "questions/x-8-28.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-29",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 29,
       "page": 95,
@@ -14689,17 +14924,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-29.webp"
+      "sourceImage": "questions/x-8-29.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-30",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 30,
       "page": 95,
       "endPage": 95,
-      "stem": "已有定义“intaC5]={1,2,3,4,5},*p,i;”,下面语句中不能正确输出a数组\n全部元素的值的是 。",
+      "stem": "已有已有定义“int a[5]={1,2,3,4,5},*p,i;”,下面语句中不能正确输出a数组\n全部元素的值的是 。",
       "image": "questions/x-8-30.webp",
       "options": [
         "for(p=a,i=0;i<5;i++)printf(\"%d\",*(p+i));",
@@ -14710,12 +14946,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-30.webp"
+      "sourceImage": "questions/x-8-30.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-31",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 31,
       "page": 95,
@@ -14731,17 +14968,18 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-31.webp"
+      "sourceImage": "questions/x-8-31.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-32",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 32,
       "page": 95,
       "endPage": 95,
-      "stem": "已有定义“intaC5];”,以下表达式中不能正确取得aC1]指针的是 。",
+      "stem": "已有定义“int a[5];”,以下表达式中不能正确取得 a[1] 指针的是 。",
       "image": "questions/x-8-32.webp",
       "options": [
         "&aC1]",
@@ -14752,17 +14990,18 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-32.webp"
+      "sourceImage": "questions/x-8-32.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-33",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 33,
       "page": 95,
       "endPage": 95,
-      "stem": "对应于“main(){intaC20],n;f(n,&aC9]);}”中的f函数调用语句,下面给出的\n四个f函数首部中,错误的是 。",
+      "stem": "对应于“main(){int a[20],n;f(n,&a[9]);}”中的f函数调用语句,下面给出的\n四个f函数首部中,错误的是 。",
       "image": "questions/x-8-33.webp",
       "options": [
         "voidf(intm,intaC])",
@@ -14773,12 +15012,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-33.webp"
+      "sourceImage": "questions/x-8-33.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-34",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 34,
       "page": 95,
@@ -14794,12 +15034,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-34.webp"
+      "sourceImage": "questions/x-8-34.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-35",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 35,
       "page": 95,
@@ -14815,12 +15056,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-35.webp"
+      "sourceImage": "questions/x-8-35.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-36",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 36,
       "page": 95,
@@ -14836,12 +15078,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-36.webp"
+      "sourceImage": "questions/x-8-36.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-37",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 37,
       "page": 95,
@@ -14857,12 +15100,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-37.webp"
+      "sourceImage": "questions/x-8-37.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-38",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 38,
       "page": 96,
@@ -14878,12 +15122,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-38.webp"
+      "sourceImage": "questions/x-8-38.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-39",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 39,
       "page": 96,
@@ -14899,12 +15144,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-39.webp"
+      "sourceImage": "questions/x-8-39.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-40",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 40,
       "page": 96,
@@ -14920,12 +15166,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-40.webp"
+      "sourceImage": "questions/x-8-40.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-41",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 41,
       "page": 96,
@@ -14941,12 +15188,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-41.webp"
+      "sourceImage": "questions/x-8-41.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-42",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 42,
       "page": 96,
@@ -14962,12 +15210,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-42.webp"
+      "sourceImage": "questions/x-8-42.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-43",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 43,
       "page": 96,
@@ -14983,12 +15232,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-43.webp"
+      "sourceImage": "questions/x-8-43.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-44",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 44,
       "page": 96,
@@ -15004,12 +15254,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-44.webp"
+      "sourceImage": "questions/x-8-44.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-45",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 45,
       "page": 96,
@@ -15025,12 +15276,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-45.webp"
+      "sourceImage": "questions/x-8-45.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-46",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 46,
       "page": 96,
@@ -15046,12 +15298,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-46.webp"
+      "sourceImage": "questions/x-8-46.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-47",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 47,
       "page": 97,
@@ -15067,12 +15320,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-47.webp"
+      "sourceImage": "questions/x-8-47.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-48",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 48,
       "page": 97,
@@ -15088,12 +15342,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-48.webp"
+      "sourceImage": "questions/x-8-48.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-49",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 49,
       "page": 97,
@@ -15109,12 +15364,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-49.webp"
+      "sourceImage": "questions/x-8-49.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-50",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 50,
       "page": 97,
@@ -15130,12 +15386,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-50.webp"
+      "sourceImage": "questions/x-8-50.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-51",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 51,
       "page": 97,
@@ -15151,12 +15408,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-51.webp"
+      "sourceImage": "questions/x-8-51.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-52",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 52,
       "page": 97,
@@ -15172,12 +15430,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-52.webp"
+      "sourceImage": "questions/x-8-52.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-53",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 53,
       "page": 97,
@@ -15193,12 +15452,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-53.webp"
+      "sourceImage": "questions/x-8-53.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-54",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 54,
       "page": 97,
@@ -15214,12 +15474,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-54.webp"
+      "sourceImage": "questions/x-8-54.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-55",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 55,
       "page": 97,
@@ -15235,12 +15496,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-55.webp"
+      "sourceImage": "questions/x-8-55.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-56",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 56,
       "page": 97,
@@ -15256,12 +15518,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-56.webp"
+      "sourceImage": "questions/x-8-56.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-57",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 57,
       "page": 97,
@@ -15277,12 +15540,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-57.webp"
+      "sourceImage": "questions/x-8-57.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-58",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 58,
       "page": 97,
@@ -15298,12 +15562,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-58.webp"
+      "sourceImage": "questions/x-8-58.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-59",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 59,
       "page": 98,
@@ -15319,12 +15584,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-59.webp"
+      "sourceImage": "questions/x-8-59.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-60",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 60,
       "page": 98,
@@ -15340,12 +15606,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-60.webp"
+      "sourceImage": "questions/x-8-60.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-61",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 61,
       "page": 98,
@@ -15361,12 +15628,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-61.webp"
+      "sourceImage": "questions/x-8-61.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-62",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 62,
       "page": 98,
@@ -15382,12 +15650,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-62.webp"
+      "sourceImage": "questions/x-8-62.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-63",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 63,
       "page": 98,
@@ -15403,12 +15672,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-63.webp"
+      "sourceImage": "questions/x-8-63.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-64",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 64,
       "page": 98,
@@ -15424,12 +15694,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-64.webp"
+      "sourceImage": "questions/x-8-64.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-65",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 65,
       "page": 98,
@@ -15445,12 +15716,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-65.webp"
+      "sourceImage": "questions/x-8-65.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-66",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 66,
       "page": 98,
@@ -15466,12 +15738,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-66.webp"
+      "sourceImage": "questions/x-8-66.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-8-67",
       "source": "x",
-      "chapter": 7,
+      "chapter": 8,
       "section": "原书第8章",
       "number": 67,
       "page": 98,
@@ -15487,12 +15760,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-8-67.webp"
+      "sourceImage": "questions/x-8-67.webp",
+      "chapterName": "第8章 指针"
     },
     {
       "id": "x-9-1",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 1,
       "page": 128,
@@ -15508,12 +15782,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-1.webp"
+      "sourceImage": "questions/x-9-1.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-2",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 2,
       "page": 128,
@@ -15529,12 +15804,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-2.webp"
+      "sourceImage": "questions/x-9-2.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-3",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 3,
       "page": 128,
@@ -15550,12 +15826,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-3.webp"
+      "sourceImage": "questions/x-9-3.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-4",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 4,
       "page": 128,
@@ -15571,12 +15848,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-4.webp"
+      "sourceImage": "questions/x-9-4.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-5",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 5,
       "page": 128,
@@ -15592,12 +15870,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-5.webp"
+      "sourceImage": "questions/x-9-5.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-6",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 6,
       "page": 129,
@@ -15613,12 +15892,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-6.webp"
+      "sourceImage": "questions/x-9-6.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-7",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 7,
       "page": 129,
@@ -15634,12 +15914,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-7.webp"
+      "sourceImage": "questions/x-9-7.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-8",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 8,
       "page": 129,
@@ -15655,12 +15936,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-8.webp"
+      "sourceImage": "questions/x-9-8.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-9",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 9,
       "page": 129,
@@ -15676,12 +15958,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-9.webp"
+      "sourceImage": "questions/x-9-9.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-10",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 10,
       "page": 129,
@@ -15697,12 +15980,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-10.webp"
+      "sourceImage": "questions/x-9-10.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-11",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 11,
       "page": 129,
@@ -15718,12 +16002,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-11.webp"
+      "sourceImage": "questions/x-9-11.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-12",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 12,
       "page": 129,
@@ -15739,12 +16024,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-12.webp"
+      "sourceImage": "questions/x-9-12.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-13",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 13,
       "page": 129,
@@ -15760,12 +16046,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-13.webp"
+      "sourceImage": "questions/x-9-13.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-14",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 14,
       "page": 130,
@@ -15781,12 +16068,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-14.webp"
+      "sourceImage": "questions/x-9-14.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-15",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 15,
       "page": 130,
@@ -15802,12 +16090,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-15.webp"
+      "sourceImage": "questions/x-9-15.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-16",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 16,
       "page": 130,
@@ -15823,12 +16112,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-16.webp"
+      "sourceImage": "questions/x-9-16.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-17",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 17,
       "page": 130,
@@ -15844,12 +16134,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-17.webp"
+      "sourceImage": "questions/x-9-17.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-18",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 18,
       "page": 130,
@@ -15865,12 +16156,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-18.webp"
+      "sourceImage": "questions/x-9-18.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-19",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 19,
       "page": 130,
@@ -15886,12 +16178,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-19.webp"
+      "sourceImage": "questions/x-9-19.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-20",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 20,
       "page": 130,
@@ -15907,12 +16200,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-20.webp"
+      "sourceImage": "questions/x-9-20.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-21",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 21,
       "page": 130,
@@ -15928,12 +16222,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-21.webp"
+      "sourceImage": "questions/x-9-21.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-22",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 22,
       "page": 130,
@@ -15949,12 +16244,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-22.webp"
+      "sourceImage": "questions/x-9-22.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-23",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 23,
       "page": 130,
@@ -15970,12 +16266,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-23.webp"
+      "sourceImage": "questions/x-9-23.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-24",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 24,
       "page": 130,
@@ -15991,12 +16288,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-24.webp"
+      "sourceImage": "questions/x-9-24.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-25",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 25,
       "page": 131,
@@ -16012,12 +16310,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-25.webp"
+      "sourceImage": "questions/x-9-25.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-26",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 26,
       "page": 131,
@@ -16033,12 +16332,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-26.webp"
+      "sourceImage": "questions/x-9-26.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-27",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 27,
       "page": 131,
@@ -16054,12 +16354,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-27.webp"
+      "sourceImage": "questions/x-9-27.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-28",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 28,
       "page": 131,
@@ -16075,12 +16376,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-28.webp"
+      "sourceImage": "questions/x-9-28.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-29",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 29,
       "page": 131,
@@ -16096,12 +16398,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-29.webp"
+      "sourceImage": "questions/x-9-29.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-30",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 30,
       "page": 132,
@@ -16117,12 +16420,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-30.webp"
+      "sourceImage": "questions/x-9-30.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-31",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 31,
       "page": 132,
@@ -16138,12 +16442,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-31.webp"
+      "sourceImage": "questions/x-9-31.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-32",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 32,
       "page": 132,
@@ -16159,12 +16464,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-32.webp"
+      "sourceImage": "questions/x-9-32.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-33",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 33,
       "page": 132,
@@ -16180,12 +16486,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-33.webp"
+      "sourceImage": "questions/x-9-33.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-34",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 34,
       "page": 133,
@@ -16201,12 +16508,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-34.webp"
+      "sourceImage": "questions/x-9-34.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-35",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 35,
       "page": 133,
@@ -16222,12 +16530,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-35.webp"
+      "sourceImage": "questions/x-9-35.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-36",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 36,
       "page": 133,
@@ -16243,12 +16552,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-36.webp"
+      "sourceImage": "questions/x-9-36.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-37",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 37,
       "page": 133,
@@ -16264,12 +16574,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-37.webp"
+      "sourceImage": "questions/x-9-37.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-38",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 38,
       "page": 133,
@@ -16285,12 +16596,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-38.webp"
+      "sourceImage": "questions/x-9-38.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-39",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 39,
       "page": 133,
@@ -16306,12 +16618,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-39.webp"
+      "sourceImage": "questions/x-9-39.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-40",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 40,
       "page": 133,
@@ -16327,12 +16640,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-40.webp"
+      "sourceImage": "questions/x-9-40.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-41",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 41,
       "page": 134,
@@ -16348,12 +16662,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-41.webp"
+      "sourceImage": "questions/x-9-41.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-42",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 42,
       "page": 134,
@@ -16369,12 +16684,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-42.webp"
+      "sourceImage": "questions/x-9-42.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-43",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 43,
       "page": 134,
@@ -16390,12 +16706,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-43.webp"
+      "sourceImage": "questions/x-9-43.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-44",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 44,
       "page": 134,
@@ -16411,12 +16728,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-44.webp"
+      "sourceImage": "questions/x-9-44.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-45",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 45,
       "page": 134,
@@ -16432,12 +16750,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-45.webp"
+      "sourceImage": "questions/x-9-45.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-46",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 46,
       "page": 134,
@@ -16453,12 +16772,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-46.webp"
+      "sourceImage": "questions/x-9-46.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-47",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 47,
       "page": 134,
@@ -16474,12 +16794,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-47.webp"
+      "sourceImage": "questions/x-9-47.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-48",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 48,
       "page": 134,
@@ -16495,12 +16816,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-48.webp"
+      "sourceImage": "questions/x-9-48.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-49",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 49,
       "page": 135,
@@ -16516,12 +16838,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-49.webp"
+      "sourceImage": "questions/x-9-49.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-50",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 50,
       "page": 135,
@@ -16537,12 +16860,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-50.webp"
+      "sourceImage": "questions/x-9-50.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-51",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 51,
       "page": 135,
@@ -16558,12 +16882,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-51.webp"
+      "sourceImage": "questions/x-9-51.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-52",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 52,
       "page": 135,
@@ -16579,12 +16904,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-52.webp"
+      "sourceImage": "questions/x-9-52.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-9-53",
       "source": "x",
-      "chapter": 10,
+      "chapter": 9,
       "section": "原书第9章",
       "number": 53,
       "page": 135,
@@ -16600,12 +16926,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-9-53.webp"
+      "sourceImage": "questions/x-9-53.webp",
+      "chapterName": "第9章 结构体与链表"
     },
     {
       "id": "x-10-1",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 1,
       "page": 160,
@@ -16621,12 +16948,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-1.webp"
+      "sourceImage": "questions/x-10-1.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-2",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 2,
       "page": 160,
@@ -16642,12 +16970,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-2.webp"
+      "sourceImage": "questions/x-10-2.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-3",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 3,
       "page": 160,
@@ -16663,12 +16992,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-3.webp"
+      "sourceImage": "questions/x-10-3.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-4",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 4,
       "page": 160,
@@ -16684,12 +17014,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-4.webp"
+      "sourceImage": "questions/x-10-4.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-5",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 5,
       "page": 160,
@@ -16705,12 +17036,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-5.webp"
+      "sourceImage": "questions/x-10-5.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-6",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 6,
       "page": 160,
@@ -16726,12 +17058,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-6.webp"
+      "sourceImage": "questions/x-10-6.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-7",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 7,
       "page": 160,
@@ -16747,12 +17080,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-7.webp"
+      "sourceImage": "questions/x-10-7.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-8",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 8,
       "page": 160,
@@ -16768,12 +17102,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-8.webp"
+      "sourceImage": "questions/x-10-8.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-9",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 9,
       "page": 160,
@@ -16789,12 +17124,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-9.webp"
+      "sourceImage": "questions/x-10-9.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-10",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 10,
       "page": 161,
@@ -16810,12 +17146,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-10.webp"
+      "sourceImage": "questions/x-10-10.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-11",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 11,
       "page": 161,
@@ -16831,12 +17168,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-11.webp"
+      "sourceImage": "questions/x-10-11.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-12",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 12,
       "page": 161,
@@ -16852,12 +17190,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-12.webp"
+      "sourceImage": "questions/x-10-12.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-13",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 13,
       "page": 161,
@@ -16873,12 +17212,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-13.webp"
+      "sourceImage": "questions/x-10-13.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-14",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 14,
       "page": 161,
@@ -16894,12 +17234,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-14.webp"
+      "sourceImage": "questions/x-10-14.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-15",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 15,
       "page": 161,
@@ -16915,12 +17256,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-15.webp"
+      "sourceImage": "questions/x-10-15.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-16",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 16,
       "page": 161,
@@ -16936,12 +17278,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-16.webp"
+      "sourceImage": "questions/x-10-16.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-17",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 17,
       "page": 161,
@@ -16957,12 +17300,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-17.webp"
+      "sourceImage": "questions/x-10-17.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-18",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 18,
       "page": 161,
@@ -16978,12 +17322,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-18.webp"
+      "sourceImage": "questions/x-10-18.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-19",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 19,
       "page": 161,
@@ -16999,12 +17344,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-19.webp"
+      "sourceImage": "questions/x-10-19.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-10-20",
       "source": "x",
-      "chapter": 11,
+      "chapter": 10,
       "section": "原书第10章",
       "number": 20,
       "page": 161,
@@ -17020,12 +17366,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-10-20.webp"
+      "sourceImage": "questions/x-10-20.webp",
+      "chapterName": "第10章 文件"
     },
     {
       "id": "x-11-1",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 1,
       "page": 167,
@@ -17041,12 +17388,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-1.webp"
+      "sourceImage": "questions/x-11-1.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-2",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 2,
       "page": 167,
@@ -17062,12 +17410,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-2.webp"
+      "sourceImage": "questions/x-11-2.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-3",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 3,
       "page": 167,
@@ -17083,12 +17432,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-3.webp"
+      "sourceImage": "questions/x-11-3.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-4",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 4,
       "page": 167,
@@ -17104,12 +17454,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-4.webp"
+      "sourceImage": "questions/x-11-4.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-5",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 5,
       "page": 167,
@@ -17125,12 +17476,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-5.webp"
+      "sourceImage": "questions/x-11-5.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-6",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 6,
       "page": 167,
@@ -17146,12 +17498,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-6.webp"
+      "sourceImage": "questions/x-11-6.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-7",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 7,
       "page": 167,
@@ -17167,12 +17520,13 @@ window.QUESTION_BANK = {
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-7.webp"
+      "sourceImage": "questions/x-11-7.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-8",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 8,
       "page": 167,
@@ -17188,12 +17542,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-8.webp"
+      "sourceImage": "questions/x-11-8.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-9",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 9,
       "page": 168,
@@ -17209,12 +17564,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-9.webp"
+      "sourceImage": "questions/x-11-9.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-10",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 10,
       "page": 168,
@@ -17230,12 +17586,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-10.webp"
+      "sourceImage": "questions/x-11-10.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-11",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 11,
       "page": 168,
@@ -17251,12 +17608,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-11.webp"
+      "sourceImage": "questions/x-11-11.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-12",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 12,
       "page": 168,
@@ -17272,12 +17630,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-12.webp"
+      "sourceImage": "questions/x-11-12.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-11-13",
       "source": "x",
-      "chapter": 2,
+      "chapter": 11,
       "section": "原书第11章",
       "number": 13,
       "page": 168,
@@ -17293,12 +17652,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-11-13.webp"
+      "sourceImage": "questions/x-11-13.webp",
+      "chapterName": "第11章 编译预处理"
     },
     {
       "id": "x-12-1",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 1,
       "page": 172,
@@ -17314,12 +17674,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-1.webp"
+      "sourceImage": "questions/x-12-1.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "x-12-2",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 2,
       "page": 172,
@@ -17335,12 +17696,13 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-2.webp"
+      "sourceImage": "questions/x-12-2.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "x-12-3",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 3,
       "page": 172,
@@ -17356,12 +17718,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-3.webp"
+      "sourceImage": "questions/x-12-3.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "x-12-4",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 4,
       "page": 172,
@@ -17377,12 +17740,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-4.webp"
+      "sourceImage": "questions/x-12-4.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "x-12-5",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 5,
       "page": 173,
@@ -17398,12 +17762,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-5.webp"
+      "sourceImage": "questions/x-12-5.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "x-12-6",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 6,
       "page": 173,
@@ -17419,12 +17784,13 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-6.webp"
+      "sourceImage": "questions/x-12-6.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "x-12-7",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 7,
       "page": 173,
@@ -17440,12 +17806,13 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-7.webp"
+      "sourceImage": "questions/x-12-7.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "x-12-8",
       "source": "x",
-      "chapter": 2,
+      "chapter": 12,
       "section": "原书第12章",
       "number": 8,
       "page": 173,
@@ -17461,7 +17828,8 @@ window.QUESTION_BANK = {
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
-      "sourceImage": "questions/x-12-8.webp"
+      "sourceImage": "questions/x-12-8.webp",
+      "chapterName": "第12章 位运算"
     },
     {
       "id": "n3-1-0-230",
