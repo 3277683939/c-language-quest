@@ -261,9 +261,10 @@ main {
 /* 重点 1：精炼数据条 (Stats Bar - Horizontal Compact) */
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin: 10px 0 16px;
+  min-width: 0;
 }
 .stat {
   padding: 8px 12px;
@@ -276,6 +277,7 @@ main {
   gap: 10px;
   box-shadow: 0 1px 3px rgba(28, 40, 38, 0.02);
   transition: border-color 0.15s;
+  min-width: 0;
 }
 .stat:hover {
   border-color: #cbd9ce;
@@ -363,6 +365,17 @@ main {
   grid-template-columns: 260px minmax(0, 1fr);
   gap: 18px;
   align-items: start;
+  min-width: 0;
+  width: 100%;
+}
+@media (min-width: 761px) and (max-width: 980px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .chapter-area {
+    grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+    gap: 14px;
+  }
 }
 .chapters {
   display: flex;
@@ -1409,6 +1422,9 @@ body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
   }
   .chapters {
     display: flex;
@@ -1424,6 +1440,14 @@ body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none
     scrollbar-width: none;
     position: static;
     max-height: none;
+    width: calc(100% + 24px);
+    max-width: calc(100% + 24px);
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .levels-pane {
+    min-width: 0;
+    width: 100%;
   }
   .chapters::-webkit-scrollbar { display: none; }
   .chapter {

@@ -14,6 +14,25 @@ const UI_ICONS={
 function uiIcon(name){return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${UI_ICONS[name]||UI_ICONS.more}</svg>`;}
 function openMoreNavigation(){const d=document.querySelector('#more-dialog');if(d&&!d.open){d.showModal();document.querySelector('.nav-more')?.setAttribute('aria-expanded','true');}}
 function closeMoreNavigation(){document.querySelector('#more-dialog')?.close();document.querySelector('.nav-more')?.setAttribute('aria-expanded','false');}
+function scrollActiveChapterIntoView(smooth){
+ if(view!=='map'||typeof window==='undefined')return;
+ const chaptersContainer=document.querySelector('.chapters');
+ const activeChapter=chaptersContainer?.querySelector('.chapter.active');
+ if(!chaptersContainer||!activeChapter)return;
+ const style=getComputedStyle(chaptersContainer);
+ if(style.flexDirection!=='row')return;
+ const containerRect=chaptersContainer.getBoundingClientRect();
+ const itemRect=activeChapter.getBoundingClientRect();
+ const currentScroll=chaptersContainer.scrollLeft;
+ const targetScroll=currentScroll+(itemRect.left-containerRect.left)-(containerRect.width/2)+(itemRect.width/2);
+ const maxScroll=Math.max(0,chaptersContainer.scrollWidth-chaptersContainer.clientWidth);
+ const clampedScroll=Math.max(0,Math.min(maxScroll,targetScroll));
+ if(smooth&&typeof chaptersContainer.scrollTo==='function'){
+  chaptersContainer.scrollTo({left:clampedScroll,behavior:'smooth'});
+ }else{
+  chaptersContainer.scrollLeft=clampedScroll;
+ }
+}
 function refreshAppChrome(){
  document.body.dataset.view=view;
  const count=document.querySelector('#wrong-count');if(count)count.hidden=state.wrong.length===0;
@@ -24,10 +43,26 @@ function refreshAppChrome(){
  const more=document.querySelector('.nav-more');if(more){more.classList.toggle('active',!['map','wrong','coach','teach'].includes(view));more.querySelector('span').innerHTML=uiIcon('more');}
  for(const el of document.querySelectorAll('[data-ui-icon]'))el.innerHTML=uiIcon(el.dataset.uiIcon);
  for(const el of document.querySelectorAll('.option.correct,.option.incorrect'))if(!el.querySelector('.answer-state')){const correct=el.classList.contains('correct');el.insertAdjacentHTML('beforeend',`<span class="answer-state" aria-label="${correct?'正确答案':'本次选错'}">${uiIcon(correct?'check':'close')}</span>`);}
- if(view==='map'&&typeof window!=='undefined'&&window.innerWidth<=760){const activeChapter=document.querySelector('.chapter.active');if(activeChapter)activeChapter.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}
+ if(view==='map'&&typeof window!=='undefined'&&window.innerWidth<=760){scrollActiveChapterIntoView(false);}
 }
 const renderBeforeUI=render;render=function(){renderBeforeUI();refreshAppChrome();};
 const renderQuizBeforeUI=renderQuiz;renderQuiz=function(){renderQuizBeforeUI();refreshAppChrome();};
+if(typeof selectChapter==='function'){
+ const origSelectChapter=selectChapter;
+ selectChapter=function(c){
+  origSelectChapter(c);
+  refreshAppChrome();
+  if(typeof window!=='undefined'&&window.innerWidth<=760){scrollActiveChapterIntoView(false);}
+ };
+}
+if(typeof setMapSource==='function'){
+ const origSetMapSource=setMapSource;
+ setMapSource=function(s){
+  origSetMapSource(s);
+  refreshAppChrome();
+  if(typeof window!=='undefined'&&window.innerWidth<=760){scrollActiveChapterIntoView(false);}
+ };
+}
 window.addEventListener('hashchange',closeMoreNavigation);
 document.querySelector('#more-dialog')?.addEventListener('click',e=>{if(e.target===e.currentTarget){const r=e.currentTarget.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeMoreNavigation();}});
 document.querySelector('#more-dialog')?.addEventListener('close',()=>document.querySelector('.nav-more')?.setAttribute('aria-expanded','false'));
