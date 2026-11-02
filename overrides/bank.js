@@ -1,4 +1,4 @@
-window.QUESTION_BANK={
+window.QUESTION_BANK = {
   "chapters": [
     "程序设计语言",
     "顺序结构程序设计",
@@ -22118,6 +22118,204 @@ window.QUESTION_BANK={
       "explanation": "按原题括号内标注的答案判分。",
       "answerOrigin": "原题内嵌答案",
       "sourceImage": "questions/source-n10-79.webp"
+    },
+    {
+      "id": "n7-1",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 1,
+      "stem": "执行下列程序段后，正确的结果是（ ）。\nint k, a[3][3] = {1,2,3,4,5,6,7,8,9};\nfor(k=0; k<3; k++)\n  printf(\"%2d\", a[k][k]);",
+      "options": [
+        "1 2 3",
+        "1 5 9",
+        "1 4 7",
+        "3 6 9"
+      ],
+      "answer": 1,
+      "explanation": "循环打印主对角线元素 a[0][0]=1, a[1][1]=5, a[2][2]=9。"
+    },
+    {
+      "id": "n7-2",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 2,
+      "stem": "若 a 是 int 类型变量，则计算表达式 a=25/3%3 的值是：（ ）。",
+      "options": [
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "整数除法 25/3=8，8%3=2，赋值给 a 结果为 2。"
+    },
+    {
+      "id": "n7-3",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 3,
+      "stem": "下面正确的字符常量是：（ ）。",
+      "options": [
+        "\"c\"",
+        "'\\\\''",
+        "'W'",
+        "''"
+      ],
+      "answer": 2,
+      "explanation": "'W' 是合法的普通字符常量。A是字符串，B转义不合法，D单引号内不能为空。"
+    },
+    {
+      "id": "n7-4",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 4,
+      "stem": "C 语言中，运算对象必须是整型的运算符是：（ ）。",
+      "options": [
+        "%",
+        "/",
+        "*",
+        "+"
+      ],
+      "answer": 0,
+      "explanation": "求余运算符 % 要求两侧的操作数都必须为整型。"
+    },
+    {
+      "id": "n7-5",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 5,
+      "stem": "数字字符 0 的 ASCII 值为 48，若有以下程序：\nmain()\n{\n  char a='1', b='2';\n  printf(\"%c,\", b++);\n  printf(\"%d\\n\", b-a);\n}\n程序运行后的输出结果是（ ）。",
+      "options": [
+        "3,2",
+        "2,2",
+        "50,2",
+        "2,50"
+      ],
+      "answer": 1,
+      "explanation": "b++ 先输出 b='2'，随后 b 自增变为 '3'；b-a='3'-'1'=2。输出 2,2。"
+    },
+    {
+      "id": "n7-6",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 6,
+      "stem": "以下语句或语句组中，能正确进行字符串赋值的是（ ）。",
+      "options": [
+        "char *sp; *sp=\"right!\";",
+        "char s[10]; s=\"right!\";",
+        "char s[10]; *s=\"right!\";",
+        "char *sp=\"right!\";"
+      ],
+      "answer": 3,
+      "explanation": "char *sp=\"right!\"; 定义字符指针并初始化指向字符串常量。"
+    },
+    {
+      "id": "n7-7",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 7,
+      "stem": "有语句：for(i=0; i<10; i++) if(i<=5) break; 则循环结束后 i 的值为（ ）。",
+      "options": [
+        "0",
+        "1",
+        "5",
+        "10"
+      ],
+      "answer": 0,
+      "explanation": "初始 i=0 满足 i<=5，执行 break 立即跳出循环，i 的值为 0。"
+    },
+    {
+      "id": "n7-8",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 8,
+      "stem": "执行下列程序段后，正确的结果是（ ）。\nchar x[8] = {8,7,6,5,0,0}, *s;\ns = x+1;\nprintf(\"%d\\n\", s[2]);",
+      "options": [
+        "8",
+        "7",
+        "5",
+        "6"
+      ],
+      "answer": 2,
+      "explanation": "s 指向 x[1]，s[2] 即 *(s+2)=x[1+2]=x[3]=5。"
+    },
+    {
+      "id": "n7-9",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 9,
+      "stem": "C 语言规定，简单变量作为实参时，它和对应形参之间的数据传递方式是（ ）。",
+      "options": [
+        "单向值传递",
+        "地址传递",
+        "相互传递",
+        "由用户指定方式"
+      ],
+      "answer": 0,
+      "explanation": "C语言普通变量参数传递方式为单向值传递。"
+    },
+    {
+      "id": "n7-10",
+      "source": "n7",
+      "sourceTitle": "C语言程序设计期末全真考卷（三）",
+      "chapter": 1,
+      "chapterName": "期末全真考卷三",
+      "section": "单项选择题",
+      "number": 10,
+      "stem": "设有数组定义：char str[]=\"China\"; 则下面的输出为（ ）。\nprintf(\"%d\", strlen(str));",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "answer": 1,
+      "explanation": "\"China\" 包含 5 个有效字符，strlen 结果为 5。"
+    },
+    {
+      "id": "x-12-9",
+      "source": "x",
+      "sourceTitle": "贤彬《C语言程序设计实训教程》",
+      "chapter": 12,
+      "chapterName": "第12章 位运算",
+      "section": "单项选择题",
+      "kind": "单项选择题",
+      "stem": "有以下程序\n#include<stdio.h>\nint main()\n{ int a=12,c;\n  c=(a<<2)>>1;\n  printf(\"%d\\n\",c);\n  return 0;\n}\n程序运行后的输出结果是___________。",
+      "options": [
+        "3",
+        "50",
+        "24",
+        "96"
+      ],
+      "answer": "C",
+      "explanation": "表达式 (a << 2) >> 1 先将 12 左移 2 位得到 48，再右移 1 位得到 24。输出结果为 24，选项 C 正确。"
     }
   ],
   "materials": [

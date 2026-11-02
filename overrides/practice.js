@@ -6,7 +6,7 @@ let currentPracticeIndex = 0;
 let showCurrentAnswer = false;
 
 function getFilteredPracticeUnits() {
-  const units = (window.PRACTICE_UNITS && window.PRACTICE_UNITS.units) || [];
+  const units = (window.PRACTICE_UNITS ? (Array.isArray(window.PRACTICE_UNITS) ? window.PRACTICE_UNITS : (window.PRACTICE_UNITS.units || [])) : []);
   return units.filter(u => {
     if (practiceFilterKind !== 'all' && u.kind !== practiceFilterKind) return false;
     if (practiceFilterSource !== 'all' && u.source !== practiceFilterSource) return false;
@@ -70,7 +70,7 @@ function renderPractice() {
   if (!state.drafts) state.drafts = {};
   if (!state.selfChecks) state.selfChecks = {};
 
-  const allUnits = (window.PRACTICE_UNITS && window.PRACTICE_UNITS.units) || [];
+  const allUnits = (window.PRACTICE_UNITS ? (Array.isArray(window.PRACTICE_UNITS) ? window.PRACTICE_UNITS : (window.PRACTICE_UNITS.units || [])) : []);
   const filtered = getFilteredPracticeUnits();
 
   // Restore last practiced unit if found
