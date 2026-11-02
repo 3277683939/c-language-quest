@@ -35,7 +35,7 @@ OVERLAY = Path('overrides/imported-data.js')
 LOCAL = Path('.question-import')
 INBOX = Path('题库收件箱')
 AI_VERSION = 'cquest-teacher-1'
-MANAGED = ['tools/questionflow.py', 'tools/question_extract.py', 'tools/windows_ocr.ps1', 'tools/verify_imports.cjs', 'tools/test_questionflow.py', '.github/workflows/pages.yml', '.gitignore', 'question-imports', '导入新题.cmd', '预览并发布.cmd', '生成AI讲解.cmd', '撤销上次导入.cmd', '使用说明.md', '题库收件箱/放题目到这里.txt', 'overrides/imported-data.js', 'overrides/imports.js', 'overrides/index.html', 'overrides/app.js', 'overrides/practice.js', 'overrides/agent.js', 'overrides/ui.css']
+MANAGED = ['tools/check_startup.py', 'tools/optimize_site.py', 'tools/test_startup.py', 'tools/questionflow.py', 'tools/question_extract.py', 'tools/windows_ocr.ps1', 'tools/verify_imports.cjs', 'tools/test_questionflow.py', '.github/workflows/pages.yml', '.gitignore', 'question-imports', '导入新题.cmd', '预览并发布.cmd', '生成AI讲解.cmd', '撤销上次导入.cmd', '使用说明.md', '题库收件箱/放题目到这里.txt', 'overrides/imported-data.js', 'overrides/imports.js', 'overrides/index.html', 'overrides/app.js', 'overrides/practice.js', 'overrides/agent.js', 'overrides/ui.css']
 
 
 def now():
@@ -501,6 +501,8 @@ def build_preview(root):
             destination = temporary / patch.relative_to(root / 'overrides')
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(patch, destination)
+    from optimize_site import optimize
+    optimize(temporary)
     version_assets(temporary)
     subprocess.run([shutil.which('node'), str(root / 'tools/verify_imports.cjs'), str(temporary)], check=True)
     # Persist selected build location, no destructive cleanup of previous previews.
