@@ -1259,7 +1259,7 @@
         <div class="account-card">
           <div class="account-card-title">
             <h3>云端连接与同步管理</h3>
-            <span class="account-card-status">已连接个人云存档</span>
+            <span class="account-card-status">${currentUser.app_metadata?.cquest_role === 'admin' ? '网站管理员 · ' : ''}已连接个人云存档</span>
           </div>
           <p class="account-info-text">
             您已成功登录 <strong>${esc(currentUser.email)}</strong>。系统会在答题或修改时自动同步；若网络波动，本地将自动暂存并在连通后合并。
