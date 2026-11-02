@@ -873,7 +873,10 @@
     const reqGen = generationToken;
     try {
       const cfg = getCloudConfig();
-      const signupUrl = `${cfg.url}/auth/v1/signup`;
+      // The site is hosted below a repository path, not at the domain root.
+      // Explicitly retain that path even if the project's default Site URL drifts.
+      const emailRedirect = 'https://3277683939.github.io/c-language-quest/';
+      const signupUrl = `${cfg.url}/auth/v1/signup?redirect_to=${encodeURIComponent(emailRedirect)}`;
       const res = await safeFetch(signupUrl, {
         method: 'POST',
         headers: {

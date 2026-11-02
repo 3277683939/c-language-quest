@@ -138,7 +138,9 @@ async function runAll() {
     accountModule._setInjectedDeps({
       fetch: async (url, opts) => {
         fetchCalled = true;
-        assert.ok(url.endsWith('/auth/v1/signup'));
+        const signupURL = new URL(url);
+        assert.equal(signupURL.pathname, '/auth/v1/signup');
+        assert.equal(signupURL.searchParams.get('redirect_to'), 'https://3277683939.github.io/c-language-quest/');
         assert.strictEqual(opts.method, 'POST');
         return {
           ok: true,
