@@ -32,6 +32,23 @@ function escapeHTML(str) {
     .replace(/'/g, '&#39;');
 }
 
+function formatPracticeStem(rawStem) {
+  if (!rawStem) return '';
+  let escaped = escapeHTML(rawStem);
+  // 渲染下划线为醒目的试卷填空槽位
+  escaped = escaped.replace(/(_{3,})/g, '<span class="practice-blank-slot" title="填空横线">______</span>');
+  
+  // 区分段落与题干换行
+  const paragraphs = escaped.split(/\n{2,}/);
+  const htmlParts = paragraphs.map(p => {
+    p = p.trim();
+    if (!p) return '';
+    const formattedP = p.replace(/\n(?=([（(]\d+[)）]|[①②③④⑤⑥⑦⑧⑨⑩]|【))/g, '<br>');
+    return `<p class="stem-paragraph">${formattedP}</p>`;
+  });
+  return htmlParts.join('');
+}
+
 function renderCodeBlock(code) {
   if (!code) return '';
   return `<div class="practice-code-wrapper"><div class="code-header"><span class="code-lang">C CODE</span><button type="button" class="copy-code-btn" onclick="copyPracticeCode(this)">复制</button></div><pre class="practice-code"><code>${escapeHTML(code)}</code></pre></div>`;
@@ -114,9 +131,8 @@ function renderPractice() {
       </div>
     `;
   } else {
-    // Process stem: if stem contains inline markdown code ```c ... ```
-    let stemContent = escapeHTML(currentUnit.stem);
-    stemContent = stemContent.replace(/\n/g, '<br>');
+    // Process stem: proper typography without crude newline breaking
+    const stemHTML = formatPracticeStem(currentUnit.stem);
 
     // Code block
     const codeBlockHTML = currentUnit.code ? renderCodeBlock(currentUnit.code) : '';
@@ -160,7 +176,7 @@ function renderPractice() {
           <span class="unit-num-badge">第 ${currentUnit.number} 题</span>
         </div>
 
-        <div class="practice-stem">${stemContent}</div>
+        <div class="practice-stem">${stemHTML}</div>
 
         ${codeBlockHTML}
 

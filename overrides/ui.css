@@ -189,6 +189,31 @@ body[data-view="coach"] .date-label,body[data-view="teach"] .date-label{display:
   word-break: break-word;
 }
 
+.practice-blank-slot {
+  display: inline-block;
+  min-width: 60px;
+  border-bottom: 2px solid #234b3e;
+  margin: 0 4px;
+  vertical-align: baseline;
+  color: #234b3e;
+  font-weight: 700;
+  text-align: center;
+  font-family: Consolas, Monaco, monospace;
+  background: rgba(35, 75, 62, 0.05);
+  padding: 0 4px;
+  border-radius: 2px 2px 0 0;
+  line-height: 1.4;
+}
+
+.stem-paragraph {
+  margin: 0 0 10px 0;
+  line-height: 1.85;
+}
+
+.stem-paragraph:last-child {
+  margin-bottom: 0;
+}
+
 /* 代码等宽容器 */
 .practice-code-wrapper {
   margin: 18px 0;
