@@ -1,5 +1,5 @@
 /**
- * C 语言闯关营 · 核心控制器与闯关地图
+ * C 题库 · 核心控制器与闯关地图
  * 支持客观选择题闯关与非选择题自练关卡双轨模式
  */
 'use strict';
@@ -1482,7 +1482,7 @@ function exportProgress() {
   const u = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' }));
   const a = document.createElement('a');
   a.href = u;
-  a.download = `C语言闯关营-学习记录-${day()}.json`;
+  a.download = `C题库-学习记录-${day()}.json`;
   a.click();
   setTimeout(() => URL.revokeObjectURL(u), 1000);
 }
