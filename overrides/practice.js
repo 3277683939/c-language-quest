@@ -34,26 +34,66 @@ function escapeHTML(str) {
     .replace(/'/g, '&#39;');
 }
 
+// Presentation only: retain every source character, including uncertain OCR glyphs.
 function formatPracticeStem(rawStem) {
   if (!rawStem) return '';
-  let escaped = escapeHTML(rawStem);
-  // 渲染下划线为醒目的试卷填空槽位
-  escaped = escaped.replace(/(_{3,})/g, '<span class="practice-blank-slot" title="填空横线">______</span>');
-  
-  // 区分段落与题干换行
-  const paragraphs = escaped.split(/\n{2,}/);
-  const htmlParts = paragraphs.map(p => {
-    p = p.trim();
-    if (!p) return '';
-    const formattedP = p.replace(/\n(?=([（(]\d+[)）]|[①②③④⑤⑥⑦⑧⑨⑩]|【))/g, '<br>');
-    return `<p class="stem-paragraph">${formattedP}</p>`;
-  });
-  return htmlParts.join('');
+  let text = String(rawStem);
+  // Split explicit list markers without eating punctuation or decimal numbers.
+  text = text.replace(/(^|[\s。！？；;:：])([（(]\d+[)）]|[①②③④⑤⑥⑦⑧⑨⑩])/g, '$1\n\n$2');
+  text = text.replace(/(^|\n)([ \t]*\d+(?:\)\.?|[.、](?!\d)))(?=\s|[^\d])/g, '$1\n$2');
+  text = text.replace(/(【(?:功能要求|修改提示|问题描述|输入形式|输出形式|样例输入|样例输出|样例说明|运行示例|说明|提示|实验目的|实验内容|算法思路)】)/g, '\n\n$1');
+  text = text.replace(/(^|\n)([ \t]*(?:说明|提示)[:：])/g, '$1\n$2');
+  const blocks = text.split(/\n{2,}/).map(b => b.trim()).filter(Boolean);
+  return blocks.map(block => {
+    const section = block.match(/^(【(?:功能要求|修改提示|问题描述|输入形式|输出形式|样例输入|样例输出|样例说明|运行示例|说明|提示|实验目的|实验内容|算法思路)】)([\s\S]*)/);
+    if (section) return `<section class="stem-section-block"><div class="stem-section-badge">${escapeHTML(section[1])}</div><div class="stem-section-body">${formatPracticeText(section[2])}</div></section>`;
+    const step = block.match(/^([（(]\d+[)）]|\d+\)\.?|\d+[.、](?!\d)|[①②③④⑤⑥⑦⑧⑨⑩])([\s\S]*)/);
+    if (step) return `<div class="stem-step-item"><span class="step-badge">${escapeHTML(step[1])}</span><span class="step-content">${formatPracticeText(step[2])}</span></div>`;
+    if (/^(说明|提示)[:：]/.test(block)) return `<div class="stem-callout-box"><div class="callout-text">${formatPracticeText(block)}</div></div>`;
+    return `<p class="stem-paragraph">${formatPracticeText(block)}</p>`;
+  }).join('');
+}
+
+function formatPracticeText(text) {
+  return escapeHTML(text).replace(/_{3,}/g, blank => `<span class="practice-blank-slot" title="填空横线">${blank}</span>`).replace(/\n/g, '<br>');
+}
+
+function highlightCCode(rawCode, title) {
+  if (!rawCode) return '';
+  const code = String(rawCode);
+  const keywords = new Set('auto break case char const continue default do double else enum extern float for goto if int long register return short signed sizeof static struct switch typedef union unsigned void volatile while'.split(' '));
+  const functions = new Set('main printf scanf getchar putchar gets puts strlen strcpy strcat strcmp malloc free abs sqrt pow exit system clrscr getch'.split(' '));
+  // One pass over the source: comments inside strings and literal placeholder
+  // names must never be reprocessed as highlighting markup.
+  const tokenPattern = /\/\*[\s\S]*?(?:\*\/|$)|\/\/[^\r\n]*|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|^[ \t]*#[^\r\n]*|\b[A-Za-z_]\w*\b|\b(?:0[xX][0-9a-fA-F]+|\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)[uUlLfF]*\b/gm;
+  let html = '';
+  let cursor = 0;
+  for (const match of code.matchAll(tokenPattern)) {
+    const token = match[0];
+    html += escapeHTML(code.slice(cursor, match.index));
+    let cls = '';
+    if (token.startsWith('/*') || token.startsWith('//')) cls = /^\/\*+\s*FOUND\s*\*+\/$/.test(token) ? 'c-error-marker' : 'c-comment';
+    else if (token[0] === '"' || token[0] === "'") cls = 'c-str';
+    else if (/^[ \t]*#/.test(token)) cls = 'c-preproc';
+    else if (keywords.has(token)) cls = 'c-kw';
+    else if (functions.has(token) && /^\s*\(/.test(code.slice(match.index + token.length))) cls = 'c-fn';
+    else if (/^\d/.test(token)) cls = 'c-num';
+    html += cls ? `<span class="${cls}">${escapeHTML(token)}</span>` : escapeHTML(token);
+    cursor = match.index + token.length;
+  }
+  html += escapeHTML(code.slice(cursor));
+  return `<div class="practice-code-wrapper"><div class="code-header"><span class="code-lang">${escapeHTML(title || 'C 源程序')}</span><button type="button" class="copy-code-btn" onclick="copyPracticeCode(this)">复制程序</button></div><pre class="practice-code"><code>${html}</code></pre></div>`;
 }
 
 function renderCodeBlock(code) {
-  if (!code) return '';
-  return `<div class="practice-code-wrapper"><div class="code-header"><span class="code-lang">C CODE</span><button type="button" class="copy-code-btn" onclick="copyPracticeCode(this)">复制</button></div><pre class="practice-code"><code>${escapeHTML(code)}</code></pre></div>`;
+  return highlightCCode(code, 'C 源程序');
+}
+
+function renderPracticeAnswer(answer) {
+  if (!answer) return '';
+  // Keep line breaks, numbered items and indentation as printed in the answer.
+  if (/^\s*#\s*include\b|^\s*(?:void|int)\s+main\s*\(/m.test(answer)) return highlightCCode(answer, '参考源程序');
+  return `<pre class="answer-pre"><code>${escapeHTML(answer)}</code></pre>`;
 }
 
 function copyPracticeCode(btn) {
@@ -148,7 +188,8 @@ function renderPractice() {
     // Answer block
     let answerContent = '';
     if (currentUnit.answer) {
-      answerContent = `<div class="practice-answer-body"><div class="answer-badge">参考答案</div><pre class="answer-pre"><code>${escapeHTML(currentUnit.answer)}</code></pre></div>`;
+      const ansBody = (typeof renderPracticeAnswer === 'function') ? renderPracticeAnswer(currentUnit.answer) : `<pre class="answer-pre"><code>${escapeHTML(currentUnit.answer)}</code></pre>`;
+      answerContent = `<div class="practice-answer-body"><div class="answer-badge">参考答案</div>${ansBody}</div>`;
     } else {
       answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">参考答案待补充</div><p class="answer-tip">${escapeHTML(currentUnit.answerOrigin || '参考答案尚未可靠匹配。')} 可使用 DeepSeek 获取AI参考答案与讲解。</p></div>`;
     }
@@ -422,3 +463,8 @@ function requestPracticeUnitAI() {
 // Backward compatibility export
 window.renderPractice = renderPractice;
 window.markPracticeSelfCheck = markPracticeSelfCheck;
+window.formatPracticeStem = formatPracticeStem;
+window.renderCodeBlock = renderCodeBlock;
+window.highlightCCode = highlightCCode;
+window.renderPracticeAnswer = renderPracticeAnswer;
+window.copyPracticeCode = copyPracticeCode;

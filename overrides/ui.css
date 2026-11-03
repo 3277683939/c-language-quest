@@ -584,12 +584,26 @@ main {
 /* 重点 3：做题弹窗稳定与排版规范 (#quiz-dialog) */
 #quiz-dialog {
   width: min(840px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
   border-radius: 14px;
   border: 1px solid var(--line);
   box-shadow: 0 10px 30px rgba(28, 40, 38, 0.12);
   padding: 0;
   overflow: hidden;
   background: #ffffff;
+}
+#quiz-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+#quiz-dialog:not([open]) { display: none; }
+#quiz-content {
+  min-height: 0;
+  flex: 1 1 auto;
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 .quiz-head {
   padding: 12px 20px;
@@ -598,6 +612,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
+}
+.quiz-progress {
+  flex-shrink: 0;
 }
 .quiz-head h2 { font-size: 16px; font-weight: 700; color: var(--ink); margin: 0; }
 .quiz-head small { font-size: 11.5px; color: var(--muted); }
@@ -605,9 +623,13 @@ main {
 .quiz-meta { font-size: 13px; margin-bottom: 18px; color: #62756c; }
 .quiz-body {
   padding: 20px 22px;
-  max-height: calc(85vh - 110px);
+  max-height: none;
   overflow-y: auto;
   box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 .question-stem {
   font: 500 17.5px/1.8 'Microsoft YaHei', sans-serif;
@@ -717,9 +739,11 @@ main {
   justify-content: space-between;
   gap: 12px;
   z-index: 4;
+  flex-shrink: 0;
 }
 .quiz-foot small { font-size: 11.5px; color: var(--muted); }
 .quiz-foot .primary { min-width: 130px; min-height: 38px; }
+.quiz-step-actions { display: flex; align-items: center; gap: 8px; }
 .desktop-quiz-hint { font-size: 12px; }
 .mobile-quiz-hint { display: none; }
 
@@ -892,57 +916,159 @@ main {
   margin-bottom: 0;
 }
 
-/* 代码容器 (Code Wrapper with Horizontal Scroll Safety) */
+/* 结构化程序题与实训排版 (Programming & Structured Practice Stem) */
+.stem-section-block {
+  margin: 12px 0 14px 0;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #059669;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.stem-section-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #065f46;
+  margin-bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.stem-section-body {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #1e293b;
+  word-break: break-word;
+}
+.stem-callout-box {
+  margin: 12px 0;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #1e3a8a;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.callout-icon {
+  font-size: 16px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.callout-text {
+  flex: 1;
+  word-break: break-word;
+}
+.stem-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.stem-step-item:hover {
+  border-color: #cbd5e1;
+  background: #fafcfb;
+}
+.step-badge {
+  flex-shrink: 0;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 2px 7px;
+  border-radius: 12px;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+.step-content {
+  flex: 1;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #1e293b;
+  word-break: break-word;
+}
+/* 可复制、保留源文本的代码卡片 */
 .practice-code-wrapper {
   margin: 14px 0;
   border-radius: 9px;
-  background: #1b2421;
+  background: #1e293b;
   overflow: hidden;
-  border: 1px solid #2d3d37;
+  border: 1px solid #334155;
   max-width: 100%;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1);
 }
 .code-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #151d1a;
-  padding: 5px 12px;
-  border-bottom: 1px solid #273630;
+  background: #0f172a;
+  padding: 7px 12px;
+  border-bottom: 1px solid #334155;
 }
 .code-lang {
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.8px;
-  color: #7ca896;
+  letter-spacing: 0.6px;
+  color: #94a3b8;
+  margin-left: 6px;
 }
 .copy-code-btn {
-  background: transparent;
-  border: 1px solid #364942;
-  color: #a4c2b5;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
   border-radius: 4px;
-  padding: 2px 7px;
+  padding: 2px 8px;
   font-size: 11px;
   cursor: pointer;
   transition: all 0.15s;
 }
 .copy-code-btn:hover {
-  background: #273630;
+  background: rgba(255, 255, 255, 0.18);
   color: #ffffff;
 }
 .practice-code {
   margin: 0;
   padding: 12px 14px;
-  font-family: var(--mono);
-  font-size: 14px;
+  font-family: Consolas, 'Fira Code', 'Courier New', monospace;
+  font-size: 13.5px;
   line-height: 1.65;
-  color: #e5ece8;
+  color: #e2e8f0;
   overflow-x: auto;
   white-space: pre;
   tab-size: 4;
+  -webkit-overflow-scrolling: touch;
 }
 .practice-code code {
   font-family: inherit;
   color: inherit;
+}
+
+/* C 语言语法高亮 (Syntax Highlighting) */
+.c-preproc { color: #f472b6; font-weight: 600; }
+.c-kw { color: #38bdf8; font-weight: 600; }
+.c-fn { color: #c084fc; font-weight: 600; }
+.c-str { color: #34d399; }
+.c-num { color: #fbbf24; }
+.c-comment { color: #94a3b8; font-style: italic; }
+.c-error-marker {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  margin: 2px 0;
 }
 
 /* 草稿区 (Draft Zone) */
@@ -1027,16 +1153,19 @@ main {
   color: #ffffff;
   border-color: var(--orange);
 }
+.toggle-answer-btn.active:hover { background: #c85639; }
 .mark-master-btn.active {
   background: #2b7a58;
   color: #ffffff;
   border-color: #2b7a58;
 }
+.mark-master-btn.active:hover { background: #206648; }
 .mark-review-btn.active {
   background: #b05c31;
   color: #ffffff;
   border-color: #b05c31;
 }
+.mark-review-btn.active:hover { background: #914921; }
 .ask-deepseek-btn {
   background: #213b34;
   color: #ffffff;
@@ -1494,7 +1623,7 @@ body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none
   .level p { font-size: 10px; }
   .level-bottom { font-size: 10px; padding-top: 5px; }
 
-  /* 手机端做题全屏弹窗 */
+  /* 手机端做题全屏弹窗稳定滚动 (Quiz Dialog Mobile Flex Layout) */
   #quiz-dialog {
     inset: 0;
     position: fixed;
@@ -1502,21 +1631,24 @@ body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none
     width: 100vw;
     max-width: none;
     height: 100dvh;
-    max-height: none;
+    max-height: 100dvh;
     border-radius: 0;
     overscroll-behavior: contain;
     border: 0;
+    overflow: hidden;
   }
   #quiz-content {
-    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
   .quiz-head {
     padding: 10px 14px;
     min-height: 52px;
-    position: sticky;
-    top: 0;
+    flex-shrink: 0;
+    position: relative;
     z-index: 5;
   }
   .quiz-head h2 { font-size: 15px; }
@@ -1532,10 +1664,17 @@ body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none
     padding: 4px 0;
     min-height: 36px;
   }
+  .quiz-progress {
+    flex-shrink: 0;
+  }
   .quiz-body {
     padding: 14px 14px 20px;
-    flex: 1;
+    flex: 1 1 auto;
+    min-height: 0;
     max-height: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
   }
   .question-stem {
     font-size: 16px;
@@ -1572,14 +1711,24 @@ body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none
     flex-direction: column-reverse;
     gap: 6px;
     flex-shrink: 0;
-    position: sticky;
-    bottom: 0;
+    position: relative;
+    bottom: auto;
   }
   .quiz-foot .primary {
     width: 100%;
     min-height: 42px;
     font-size: 15px;
   }
+  .quiz-step-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  .quiz-step-actions .primary, .quiz-step-actions .secondary {
+    min-width: 0;
+    min-height: 44px;
+  }
+  .copy-code-btn { min-height: 44px; }
   .mobile-quiz-hint { display: inline; font-size: 11px; }
   .desktop-quiz-hint { display: none; }
 

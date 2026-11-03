@@ -619,7 +619,8 @@ function renderPracticeLevelQuiz() {
   // 答案区域展示
   let answerContent = '';
   if (u.answer) {
-    answerContent = `<div class="practice-answer-body"><div class="answer-badge">原书参考答案</div><pre class="answer-pre"><code>${esc(u.answer)}</code></pre></div>`;
+    const ansBody = (typeof renderPracticeAnswer === 'function') ? renderPracticeAnswer(u.answer) : `<pre class="answer-pre"><code>${esc(u.answer)}</code></pre>`;
+    answerContent = `<div class="practice-answer-body"><div class="answer-badge">原书参考答案</div>${ansBody}</div>`;
   } else {
     answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">参考答案待补充</div><p class="answer-tip">${esc(u.answerOrigin || '参考答案尚未可靠匹配。')} 可使用 DeepSeek 获取AI参考答案与讲解。</p></div>`;
   }
