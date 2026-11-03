@@ -11,6 +11,17 @@
   box-sizing: border-box;
   width: 100%;
 }
+.account-auth-notice {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid #d5e3da;
+  border-radius: 10px;
+  background: #f1f7f3;
+  color: #274f40;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
 .account-entry {
   display: inline-flex;
   align-items: center;

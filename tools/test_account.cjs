@@ -146,8 +146,10 @@ async function runAll() {
           ok: true,
           status: 200,
           json: async () => ({
-            user: { id: 'user-pending-uuid', email: 'test@example.com' },
-            session: null
+            // GoTrue's direct REST API returns the User itself when email
+            // confirmation is required, not the SDK's {user, session} wrapper.
+            id: 'user-pending-uuid', email: 'test@example.com',
+            confirmation_sent_at: '2026-11-03T00:00:00Z'
           })
         };
       },
@@ -960,7 +962,56 @@ async function runAll() {
   });
 }
 
-runAll().then(() => {
+async function runSignupRegressionTests() {
+  await test('16. Signup accepts REST and SDK pending shapes; malformed success cannot create a session', async () => {
+    const fixtures = [
+      { body: { id: 'raw-user', email: 'test@example.com' }, pending: true },
+      { body: { user: { id: 'sdk-user', email: 'test@example.com' }, session: null }, pending: true },
+      { body: null, pending: false },
+      { body: {}, pending: false },
+      { body: { user: { id: 'partial-user', email: 'test@example.com' }, access_token: 'fake-incomplete-token' }, pending: false }
+    ];
+    for (const fixture of fixtures) {
+      accountModule._resetForTesting();
+      const local = createMockStorage(), session = createMockStorage(), el = { innerHTML: '' };
+      global.CQUEST_CLOUD_CONFIG = { provider: 'supabase', url: 'https://test.supabase.co', publishableKey: 'anon-key-123' };
+      accountModule._setInjectedDeps({ localStorage: local, sessionStorage: session, fetch: async () => ({ ok: true, status: 200, json: async () => fixture.body }) });
+      accountModule.attach({ getState: () => ({ version: 1 }), replaceState: () => { throw Error('must not replace guest'); }, render: () => {}, toast: () => {} });
+      await accountModule.handleSignup(createMockForm({ email: 'test@example.com', password: 'test-only-password' }));
+      assert.equal(accountModule._getState().status, fixture.pending ? 'signup_pending' : 'guest');
+      assert.equal(accountModule._getState().currentUser, null);
+      assert.equal(accountModule._getState().currentSession, null);
+      assert.equal(findSessionKey(local), null);
+      assert.equal(findSessionKey(session), null);
+      global.document = { getElementById: () => el };
+      try {
+        accountModule.render();
+        assert.ok(el.innerHTML.includes('account-auth-notice'), 'result remains visible after toast disappears');
+        assert.ok(el.innerHTML.includes(accountModule._getState().statusMessage));
+      } finally { delete global.document; }
+    }
+  });
+  await test('17. Signup distinguishes transport failure from response errors and mail limits', async () => {
+    const fixtures = [
+      { fetch: async () => { throw new TypeError('test offline'); }, contains: '无法连接注册服务' },
+      { fetch: async () => { const e = new Error('test timeout'); e.name = 'AbortError'; throw e; }, contains: '超时' },
+      { fetch: async () => ({ ok: true, json: async () => { throw new SyntaxError('test invalid JSON'); } }), contains: '处理异常' },
+      { fetch: async () => ({ ok: false, status: 429, json: async () => ({ error_code: 'over_email_send_rate_limit' }) }), contains: '发送次数已达限制' },
+      { fetch: async () => ({ ok: false, status: 400, json: async () => ({ code: 'email_address_not_authorized' }) }), contains: '邮件服务无法向此邮箱' }
+    ];
+    for (const fixture of fixtures) {
+      accountModule._resetForTesting();
+      global.CQUEST_CLOUD_CONFIG = { provider: 'supabase', url: 'https://test.supabase.co', publishableKey: 'anon-key-123' };
+      accountModule._setInjectedDeps({ localStorage: createMockStorage(), sessionStorage: createMockStorage(), fetch: fixture.fetch });
+      accountModule.attach({ getState: () => ({}), replaceState: () => {}, render: () => {}, toast: () => {} });
+      await accountModule.handleSignup(createMockForm({ email: 'test@example.com', password: 'test-only-password' }));
+      assert.ok(accountModule._getState().statusMessage.includes(fixture.contains));
+      assert.equal(accountModule._getState().currentSession, null);
+    }
+  });
+}
+
+runAll().then(runSignupRegressionTests).then(() => {
   console.log(`\nAll ${testCount} tests passed successfully in test_account.cjs!`);
   process.exit(0);
 }).catch(err => {

@@ -846,6 +846,7 @@
    * 表单与交互方法 2: 注册
    */
   async function handleSignup(formEl) {
+    if (status === 'authenticating') return;
     if (!isCloudConfigured()) {
       appBridge.toast('尚未配置云端服务。');
       return;
@@ -871,6 +872,7 @@
     appBridge.render();
 
     const reqGen = generationToken;
+    let responseReceived = false;
     try {
       const cfg = getCloudConfig();
       // The site is hosted below a repository path, not at the domain root.
@@ -885,13 +887,21 @@
         },
         body: JSON.stringify({ email, password })
       });
+      responseReceived = true;
 
       if (generationToken !== reqGen) return;
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         if (generationToken !== reqGen) return;
-        const errMsg = errData.msg || errData.message || '注册未能完成';
+        const messages = {
+          email_address_not_authorized: '当前邮件服务无法向此邮箱发送验证邮件，请联系网站管理员配置邮件服务。',
+          over_email_send_rate_limit: '验证邮件发送次数已达限制，请稍后再试，不要连续点击注册。',
+          over_request_rate_limit: '注册请求过于频繁，请稍后再试。',
+          user_already_exists: '此邮箱已注册，请改用登录。',
+          signup_disabled: '网站暂未开放新用户注册。'
+        };
+        const errMsg = messages[errData.error_code || errData.code] || errData.msg || errData.message || '注册未能完成';
         updateStatus('guest', errMsg);
         appBridge.toast('注册失败：' + errMsg);
         appBridge.render();
@@ -901,19 +911,33 @@
       const data = await res.json();
       if (generationToken !== reqGen) return;
 
-      // 有 user 无 session 表示需要邮箱确认
-      if (data.user && !data.session && !data.access_token) {
-        updateStatus('signup_pending', '请查收验证邮件，验证后登录');
+      // Direct GoTrue REST returns a bare User for pending confirmation. The
+      // SDK uses {user, session}; accept both without creating a fake session.
+      const user = data?.user || data?.session?.user || (data?.id ? data : null);
+      const accessToken = data?.access_token || data?.session?.access_token;
+      const refreshToken = data?.refresh_token || data?.session?.refresh_token;
+      if (!user || typeof user.id !== 'string' || !user.id || typeof user.email !== 'string') {
+        updateStatus('guest', '注册服务返回的数据无法识别。请先检查邮箱；如果已经注册过，可直接登录。');
+        appBridge.toast('注册结果未能识别，请查看账户页提示。');
+        appBridge.render();
+        return;
+      }
+      if (!accessToken && !refreshToken) {
+        updateStatus('signup_pending', '请查收验证邮件，验证后登录。若此前已注册，请直接登录。');
         appBridge.toast('请查收验证邮件，验证后登录。');
         appBridge.render();
         return;
       }
 
-      const user = data.user;
+      if (typeof accessToken !== 'string' || !accessToken || typeof refreshToken !== 'string' || !refreshToken) {
+        updateStatus('guest', '注册服务未返回完整登录凭据。请检查验证邮件，完成验证后登录。');
+        appBridge.render();
+        return;
+      }
       const session = {
-        access_token: data.access_token || data.session?.access_token,
-        refresh_token: data.refresh_token || data.session?.refresh_token,
-        expires_at: injected.now() + ((data.expires_in || 3600) * 1000),
+        access_token: accessToken,
+        refresh_token: refreshToken,
+        expires_at: injected.now() + ((data.expires_in || data.session?.expires_in || 3600) * 1000),
         user,
         remember
       };
@@ -947,8 +971,13 @@
 
     } catch (err) {
       if (generationToken === reqGen) {
-        updateStatus('guest', '网络请求失败');
-        appBridge.toast('注册遇到网络错误，请稍后重试。');
+        const message = responseReceived
+          ? '注册结果处理异常。请先检查邮箱；若已完成注册，可直接登录。'
+          : err?.name === 'AbortError'
+          ? '连接注册服务超时。可以先检查邮箱，稍后重试或切换网络后登录。'
+          : '无法连接注册服务。请切换网络，或在系统浏览器打开网站后再试。';
+        updateStatus('guest', message);
+        appBridge.toast(message);
         appBridge.render();
       }
     }
@@ -1188,6 +1217,9 @@
     `;
 
     // 1. 若检测到待处理的游客合并
+    if (!currentUser && statusMessage && statusMessage !== '未登录') {
+      html += `<p class="account-auth-notice" role="status">${esc(statusMessage)}</p>`;
+    }
     if (pendingMerge) {
       html += `
         <div class="account-card account-banner-card">
