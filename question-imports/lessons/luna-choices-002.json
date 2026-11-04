@@ -95,7 +95,7 @@
     },
     {
       "questionId": "h-3-基础篇-24",
-      "sourceHash": "e1a8c2144ef3fc4d07fa6b54c41773b9ae62a43bc27b97611deb296044c89287",
+      "sourceHash": "f720e64f665b7e51870e2ce2a7df054b3c221a02f556e8f3cb4c8fea7fa6cca5",
       "explanation": "%d 读10，紧随的%c会读取下一字符；格式串在%c前没有空白，因此输入的X须紧接数字。第二组同理，需让%c读到Y。",
       "steps": [
         "%c不会跳过空白。",
@@ -103,9 +103,9 @@
       ],
       "takeaway": "%c读取当前字符，空格也可能被读入。",
       "answerReview": {
-        "status": "ambiguous",
-        "answer": "题库答案D；按D项清晰部分应输入10X和20Y",
-        "reason": "D项含重复、错位文本，疑为OCR拼接；可辨认的预期形式是数字后紧跟字符X/Y。"
+        "status": "consistent",
+        "answer": "D",
+        "reason": "原图中D是两行10X、20Y；已恢复C、D各自的第二行。%c不跳过空白。"
       }
     },
     {

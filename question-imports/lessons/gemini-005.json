@@ -311,7 +311,7 @@
     },
     {
       "questionId": "x-1-12",
-      "sourceHash": "f9f8f61e53a9deacb8aa9a19bf860ce4cc8601148863730ba64f397ebc071f5c",
+      "sourceHash": "c344886038b7578b288bf9063f8033721aababefcee81150eeaee87ad6f9d82d",
       "explanation": "C 语言关键字是由语言规范硬性保留的专有词汇，而标准库函数名（如 printf, scanf, sqrt）属于外部库提供的函数标识符，并非语言核心关键字。在选项 A x=sqrt(2); 中，x 为变量名，sqrt 为数学库函数名，2 为整型常量，整条语句不包含任何 C 语言关键字。",
       "steps": [
         "A 项 x=sqrt(2); 中，sqrt 是定义在 math.h 中的数学库函数名，属于预定义函数标识符而非语言关键字，语句中无任何关键字。",
@@ -569,7 +569,7 @@
     },
     {
       "questionId": "x-2-13",
-      "sourceHash": "5e320ec3bf2db8c45d7936c293ea620c96b72bb402235a6fee4fc7bd82b68507",
+      "sourceHash": "41d6e161856720091da818c3f669fe1e4aa8bff5b46a4cc92acb690333a6747a",
       "explanation": "C 语言科学计数法浮点常量的语法规则严格规定：在字符 'e' 或 'E' 之前必须有数字（尾数部分），且 'e' 或 'E' 之后的指数部分必须是整数（可带正负号），绝对不允许包含小数点。选项 B 中的 1.2e0.5 指数部分为小数 0.5，属于非法浮点常量表达。",
       "steps": [
         "A 选项 int a=0xFF;：0x 前缀表示十六进制整型常量，FF 对应十进制 255，合法有效。",

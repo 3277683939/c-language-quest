@@ -141,7 +141,7 @@
     },
     {
       "questionId": "x-2-58",
-      "sourceHash": "b828ce4a1d44e17059ef458ac60fce7b76898ebd9f65ab5fb494122b7fd06616",
+      "sourceHash": "8227c5faacbf8dcbf716cdaf6742d7a5a8d367693ce042f8200253659a5d886b",
       "explanation": "本题考查宏定义与变量声明、语法的相互作用。原始真题选项因多行排版，在 OCR 提取时仅保留了首行宏定义。根据题库原图完整代码还原如下：\n- 选项A：#define double 2 \\n void main() { double b=0; } —— 关键字 double 被宏替换为 2，展开后变为 2 b=0;，类型位置出现数字，编译报错；\n- 选项B：#define b 2 \\n void main() { int b=0; } —— 标识符 b 被宏替换为 2，展开后变为 int 2=0;，变量名位置出现数字，编译报错；\n- 选项C：#define b 2 \\n void main() { b++; } —— b 被宏替换为 2，展开后变为 2++;，试图对字面量常量自增，编译报错；\n- 选项D：#define b 2 \\n int x=b; \\n void main() { x++; } —— 宏展开后全局变量定义变为 int x=2;，main 函数内对变量 x 进行自增运算 x++;，语法结构完全正确，编译时不会报错。\n因此编译时不报错的程序段是选项D。",
       "steps": [
         "还原真题选项完整代码：原题图示中每个选项均包含完整的宏定义与函数体代码，因排版换行OCR仅提取了首行。",
@@ -450,8 +450,8 @@
     },
     {
       "questionId": "x-3-18",
-      "sourceHash": "e85091c36c33eeb8f8c8833954d77b3cd91f602b49b005e05338cdc1d686c2af",
-      "explanation": "本题考查字符与整数混合格式化输出的紧密拼接特性。已知字符 'a' 的 ASCII 码为 97，则字母 'b' 的 ASCII 码为 98。\n语句为 printf(\"%c%d\", 'b', 'b'+1);：\n1. 第一个参数为字符常量 'b'，对应格式说明符 %c，输出字符 b；\n2. 第二个参数为表达式 'b'+1，字符发生整型提升，98 + 1 = 99，对应格式说明符 %d，以十进制整数形式输出 99；\n3. 格式字符串 \"%c%d\" 中两个转换说明符之间紧密相连，没有包含任何空格或标点符号，因此两个输出项紧邻拼接，最终屏幕打印结果为 b99。（注：原题选项D末尾因排版混杂了下一题的题干文字，属于 OCR 切割杂质，不影响正确选项A的唯一确定）。",
+      "sourceHash": "ea74ea35fce29f746aae87e6fd3e7d9a4979b43f81e35271c00739bca120b9cd",
+      "explanation": "本题考查字符与整数混合格式化输出的紧密拼接特性。已知字符 'a' 的 ASCII 码为 97，则字母 'b' 的 ASCII 码为 98。\n语句为 printf(\"%c%d\", 'b', 'b'+1);：\n1. 第一个参数为字符常量 'b'，对应格式说明符 %c，输出字符 b；\n2. 第二个参数为表达式 'b'+1，字符发生整型提升，98 + 1 = 99，对应格式说明符 %d，以十进制整数形式输出 99；\n3. 格式字符串 \"%c%d\" 中两个转换说明符之间紧密相连，没有包含任何空格或标点符号，因此两个输出项紧邻拼接，最终屏幕打印结果为 b99。（D选项已按原图恢复为bc）。",
       "steps": [
         "确定各参数的求值结果：'b' 为字符常量（ASCII 码 98），'b'+1 计算得到整数 99。",
         "匹配格式转换说明符：%c 输出字符 'b' 为 b，%d 输出整数 99 为 99。",
@@ -531,7 +531,7 @@
     },
     {
       "questionId": "x-4-5",
-      "sourceHash": "d0d056ad428ece052e707dc6dc18feed2fba639b4f93228affbe3bf012d627a5",
+      "sourceHash": "c019ca2766e34b8a97a4df3b41b6d03e531b6214765687bec662f5b95ae4d0be",
       "explanation": "本题考查 switch 语句及其 case 标号的语法规范。原题选项因排版双栏印刷，在 OCR 提取时发生横向文本串行。根据真题原图完整还原分析如下：\n- 选项A：switch(x) { case z: x--; break; case z+1: x++; break; } —— 变量 z（int z=1;）出现在 case 标号中。C语言标准严格规定 case 标号必须是编译期整型常量表达式，不能包含变量，故A语法错误；\n- 选项B：switch(x) { case N>0: x=1; break; case 1: x=0; break; } —— 预处理宏 #define N 8，常数表达式 N>0（即 8>0）求值结果为整数 1，这导致同一 switch 语句中出现了两个值为 1 的 case 标号（case 1: 与 case 1:），违反 case 值唯一性规则，编译报“duplicate case value”错误，故B错误；\n- 选项C：switch(x) { case 2: y++; break; case '0': y=3; } —— 控制表达式 x 为整型；case 2 是整型常量；case '0' 是字符常量（其值为 ASCII 码整数 48），两个标号互不相等且均为合法的整型常量，语法完全正确；\n- 选项D：switch(y) { case 1.0: y++; break; case 1.2: y=1; break; } —— y 为 double 类型变量，C标准规定 switch 表达式和 case 标号必须为整型或枚举型，严禁使用浮点数，故D语法错误。\n因此唯有选项C正确。",
       "steps": [
         "排查选项A（case标号含变量）：case 标号中出现变量 z，违反“case标号必须为常量表达式”规则。",

@@ -493,32 +493,32 @@
     },
     {
       "questionId": "h-5-基础篇-23",
-      "sourceHash": "3272a939a2b2d5af7964cffcbdc40dfda96bfade282a5197faa345f3c84e7bfb",
-      "explanation": "n从10开始，每轮先减再打印9、8、7；循环结束。当前选项文本没有清晰呈现987这一完整序列。",
+      "sourceHash": "8b11819178ee3aa2a54f320be0d79fe23eea3630eaf9dcd6d15a474d27098e2d",
+      "explanation": "n从10开始，每轮先减1再打印，因此依次输出三行9、8、7，对应已按原图恢复完整的B选项。",
       "steps": [
         "n=10时打印9。",
         "随后打印8、7。"
       ],
       "takeaway": "输出顺序取决于循环体内递减和打印的先后。",
       "answerReview": {
-        "status": "conflict",
-        "answer": "无完整匹配选项；题库答案B显示为9",
-        "reason": "程序应输出987，但导入的选项内容疑有OCR错位，B按当前文本不是完整结果。"
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B完整选项为三行9、8、7，与循环输出一致。"
       }
     },
     {
       "questionId": "h-5-基础篇-24",
-      "sourceHash": "36770869f9b9c553a721c2d0b09851ff0bd0412427b57c9f88c5c8b4c609f9d1",
-      "explanation": "num依次从0进入循环，先加一再打印，故三行分别是1、2、3。选项文字列被OCR合并，无法可靠按现有字母对应。",
+      "sourceHash": "cfc5c6c99dbc7a869b474da302ec5f799a9b7e1818e6ac69b8c0e5c6f0b0f4ab",
+      "explanation": "num从0开始，0、1、2均满足num<=2。每轮先加1再打印，依次输出三行1、2、3，对应已按原图恢复的C选项。",
       "steps": [
         "num=0、1、2均满足条件。",
         "打印1、2、3后num=3退出。"
       ],
       "takeaway": "先判断条件再执行循环体。",
       "answerReview": {
-        "status": "ambiguous",
-        "answer": "题库答案C；程序输出三行1、2、3",
-        "reason": "选项列文本疑似合并，按当前OCR无法确认字母；程序结果明确。"
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C完整选项为三行1、2、3。"
       }
     },
     {

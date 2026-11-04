@@ -65,6 +65,27 @@ async function checkBrowser() {
         await page.screenshot({ path: path.join(root, `.question-import/qa/option-spaces-${width}.png`) });
         assert.deepEqual(errors, []);
         console.log(`PASS ${width}px: visible space, accessible label, preserved source, grading and matching lesson`);
+        const auditFile = path.join(root, 'question-imports/audits/option-whitespace-2026-11-04.json');
+        if (fs.existsSync(auditFile)) {
+          const audit = JSON.parse(fs.readFileSync(auditFile, 'utf8'));
+          const failures = await page.evaluate(records => {
+            const failures = [];
+            for (const record of records) {
+              practiceOne(record.questionId);
+              const options = [...document.querySelectorAll('#quiz-dialog .option-text')];
+              if (JSON.stringify(options.map(el => el.textContent)) !== JSON.stringify(record.options)) failures.push(record.questionId);
+              if (options.some(el => getComputedStyle(el).whiteSpace !== 'pre-wrap')) failures.push(record.questionId + ': collapsed whitespace');
+            }
+            return failures;
+          }, audit.corrections);
+          assert.deepEqual(failures, [], 'all restored options reach the real quiz UI intact');
+          for (const id of ['h-5-基础篇-23', 'x-8-24']) {
+            await page.evaluate(id => practiceOne(id), id);
+            if (id === 'h-5-基础篇-23') assert.equal(await page.locator('.question-stem > .practice-code').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(30, 41, 59)', 'code must be readable on a dark background');
+            await page.screenshot({ path: path.join(root, `.question-import/qa/option-audit-${id === 'x-8-24' ? 'string' : 'multiline'}-${width}.png`) });
+          }
+          console.log(`PASS ${width}px: all ${audit.corrections.length} repaired questions preserve option spaces and line breaks`);
+        }
       } finally { await ctx.close(); }
     }
   } finally {

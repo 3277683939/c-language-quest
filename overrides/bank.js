@@ -311,7 +311,10 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "按配套《答案册》核对。可点击“查看原题”对照原始版面。",
       "answerOrigin": "配套 Word 答案册",
-      "sourceImage": "questions/source-h-1-_____-2.webp"
+      "sourceImage": "questions/source-h-1-_____-2.webp",
+      "optionSpaceMarkers": [
+        2
+      ]
     },
     {
       "source": "h",
@@ -2125,8 +2128,8 @@ window.QUESTION_BANK = {
       "options": [
         "10□X□20□Y<回车>",
         "10□X20□Y<回车>",
-        "10□X<回车>",
-        "10X<回车>\n\n      20□Y<回车>                     20Y<回车>"
+        "10□X<回车>\n20□Y<回车>",
+        "10X<回车>\n20Y<回车>"
       ],
       "answer": "D",
       "explanation": "按配套《答案册》核对。可点击“查看原题”对照原始版面。",
@@ -3443,10 +3446,10 @@ window.QUESTION_BANK = {
       "id": "h-5-基础篇-23",
       "stem": "以下循环的输出结果是（  ）。\n\n      int n=10;\n\n    while(n>7) {   n--; printf(\"%d\\n\", n);  }",
       "options": [
-        "10",
-        "9",
-        "10",
-        "9\n\n        9                  8                    9                  8\n\n        8                  7                    8                  7\n\n                                                 7                  6"
+        "10\n9\n8",
+        "9\n8\n7",
+        "10\n9\n8\n7",
+        "9\n8\n7\n6"
       ],
       "answer": "B",
       "explanation": "按配套《答案册》核对。可点击“查看原题”对照原始版面。",
@@ -3464,9 +3467,9 @@ window.QUESTION_BANK = {
       "stem": "以下程序的输出结果是（  ）。\n\n     void main()\n\n    {     int num=0;\n\n        while(num<=2)\n\n         {   num++;\n\n              printf(\"%d\\n\",num);\n\n        }\n\n    }",
       "options": [
         "1",
-        "1",
-        "1",
-        "1\n\n                            2                   2                   2\n\n                                                 3                   3"
+        "1\n2",
+        "1\n2\n3",
+        "1\n2\n3\n4"
       ],
       "answer": "C",
       "explanation": "按配套《答案册》核对。可点击“查看原题”对照原始版面。",
@@ -7091,7 +7094,10 @@ window.QUESTION_BANK = {
       "answer": "A",
       "explanation": "答案来自本资料末尾的分章参考答案。",
       "answerOrigin": "原 PDF 分章参考答案",
-      "sourceImage": "questions/source-n1-1-6.webp"
+      "sourceImage": "questions/source-n1-1-6.webp",
+      "optionSpaceMarkers": [
+        3
+      ]
     },
     {
       "source": "n1",
@@ -7303,10 +7309,10 @@ window.QUESTION_BANK = {
       "id": "n1-2-2",
       "stem": "若x,y,z 均为int 型变量,则执行以下语句后的输出为    。\nx=(y=(z=10)+5)-5;\n\n            printf(\"x=%d,y=%d,z=%d\\n\",x,y,z);\n\n            y=(z=x=0,x+10);\n\n            printf(\"x=%d,y=%d,z=%d\\n\",x,y,z);",
       "options": [
-        "X=10,Y=15,Z=10",
-        "X=10,Y=10,Z=10\n\n       X=0,Y=10,Z=0                        X=0,Y=10,Z=10",
-        "X=10,Y=15,Z=10",
-        "X=10,Y=10,Z=10\n\n       X=10,Y=10,Z=0                       X=0,Y=10,Z=0"
+        "X=10,Y=15,Z=10\nX=0,Y=10,Z=0",
+        "X=10,Y=10,Z=10\nX=0,Y=10,Z=10",
+        "X=10,Y=15,Z=10\nX=10,Y=10,Z=0",
+        "X=10,Y=10,Z=10\nX=0,Y=10,Z=0"
       ],
       "answer": "A",
       "explanation": "答案来自本资料末尾的分章参考答案。",
@@ -7463,10 +7469,10 @@ window.QUESTION_BANK = {
       "id": "n1-3-4",
       "stem": "若w,x,z 均为int 型变量,则执行以下语句后的输出为    。\n\n            w=3;z=7;x=10;\n\n            printf(\"%d\\n\",x>10?x+100:x-10);\n\n            printf(\"%d\\n\",w++||z++);\nprintf(\"%d\\n\",!w>z);\n\n        printf(\"%d\\n\",w&&z);",
       "options": [
-        "0",
-        "1",
-        "0",
-        "0\n\n   1         1        1         1\n\n   1         1        0         0\n\n   1         1        1         0"
+        "0\n1\n1\n1",
+        "1\n1\n1\n1",
+        "0\n1\n0\n1",
+        "0\n1\n0\n0"
       ],
       "answer": "C",
       "explanation": "答案来自本资料末尾的分章参考答案。",
@@ -8771,7 +8777,10 @@ window.QUESTION_BANK = {
       "answer": "C",
       "explanation": "考点：标识符的命名规则\n\n（1） 只能由字母、数字、下划线构成\n（2） 数字不能作为标识符的开头\n（3） 关键字不能作为标识符\n  选项A 中的“-” ，选项B 中“[”与“]”不满足（1）；选项D 中的int 为关键字，不满足（3）",
       "answerOrigin": "原题内嵌答案",
-      "sourceImage": "questions/source-n5-5.webp"
+      "sourceImage": "questions/source-n5-5.webp",
+      "optionSpaceMarkers": [
+        3
+      ]
     },
     {
       "id": "n5-6",
@@ -9992,9 +10001,9 @@ window.QUESTION_BANK = {
       "image": "questions/x-1-12.webp",
       "options": [
         "x=sqrt(2);",
-        "while(x！=0)x--;",
+        "while(x!=0)x--;",
         "if(x<0)x=-x;",
-        "returnx;"
+        "return x;"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -10321,10 +10330,10 @@ window.QUESTION_BANK = {
       "stem": "以下声明中,错误的是 。",
       "image": "questions/x-2-13.webp",
       "options": [
-        "inta=0xFF;",
-        "doublea=1.2e0.5;",
-        "longa=2L;",
-        "chara=''72';"
+        "int a=0xFF;",
+        "double a=1.2e0.5;",
+        "long a=2L;",
+        "char a='\\72';"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -10541,10 +10550,10 @@ window.QUESTION_BANK = {
       "stem": "把x、y定义成float类型变量,并赋同一初值3.14。",
       "image": "questions/x-2-23.webp",
       "options": [
-        "floatx,y=3.14;",
-        "floatx,y=2*3.14;",
-        "floatx=3.14,y=x;",
-        "floatx=y=3.14;"
+        "float x,y=3.14;",
+        "float x,y=2*3.14;",
+        "float x=3.14,y=x;",
+        "float x=y=3.14;"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -10651,7 +10660,7 @@ window.QUESTION_BANK = {
       "stem": "已有定义“inti;floatf;”,则下面正确的表达式是 。",
       "image": "questions/x-2-28.webp",
       "options": [
-        "(intf)%i",
+        "(int f)%i",
         "int(f)%i",
         "int(f%i)",
         "(int)f%i"
@@ -11025,10 +11034,10 @@ window.QUESTION_BANK = {
       "stem": "下面定义中错误的是 。",
       "image": "questions/x-2-45.webp",
       "options": [
-        "inta=0xFF;",
-        "doublea=1.2e0.5;",
-        "longa=2L;",
-        "chara=''72';"
+        "int a=0xFF;",
+        "double a=1.2e0.5;",
+        "long a=2L;",
+        "char a='\\72';"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -11311,10 +11320,10 @@ window.QUESTION_BANK = {
       "stem": "下面程序段在编译时不会报错的是 。",
       "image": "questions/x-2-58.webp",
       "options": [
-        "#definedouble2",
-        "#defineb",
-        "#defineb2",
-        "#defineb"
+        "#define double 2\nvoid main()\n{ double b=0; }",
+        "#define b 2\nvoid main()\n{ int b=0; }",
+        "#define b 2\nvoid main()\n{ b++; }",
+        "#define b 2\nint x=b;\nvoid main()\n{ x++; }"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -11710,7 +11719,7 @@ window.QUESTION_BANK = {
         "b99",
         "98c",
         "9899",
-        "bc\n3． 阅读程序题\n(1)下列程序运行时输出的结果是 。\n#include<stdio.h>\nintmain()"
+        "bc"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -11817,10 +11826,10 @@ window.QUESTION_BANK = {
       "stem": "已有预处理命令和定义如下:\n#defineN8\nintx=2,z=1;\ndoubley=1.2;\n下述程序段正确的是 。",
       "image": "questions/x-4-5.webp",
       "options": [
-        "switch(x)",
-        "switch(x)\n { casez:x--;break; { caseN>0:x=1;break;\n casez+1:x++;break; case1:x=0;break;\n } }",
-        "switch(x)",
-        "switch(y)\n { case2:y++;break; { case1.0:y++;break;\n case'0':y=3; case1.2:y=1;break;\n } }"
+        "switch(x)\n{ case z: x--; break;\n  case z+1: x++; break;\n}",
+        "switch(x)\n{ case N>0: x=1; break;\n  case 1: x=0; break;\n}",
+        "switch(x)\n{ case 2: y++; break;\n  case '0': y=3;\n}",
+        "switch(y)\n{ case 1.0: y++; break;\n  case 1.2: y=1; break;\n}"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -12612,7 +12621,7 @@ window.QUESTION_BANK = {
         "for(j=15;j>0;j-=2)a++;",
         "for(j=0;j<15;j+=2)a++;",
         "for(i=0;i<15;i+=2)a++;",
-        "for(i=15;i>0;i-=2)a++;\n3． 阅读程序题\n(1)下面程序运行时输出的结果是 。\n#include<stdio.h>\nintmain()\n{ inti;\n for(i=1;i<6;i++)\n { if(i%2)\n printf(\"*\");\n else\n printf(\"#\");\n }\n return0;\n}\n(2)下面程序运行时输出的结果是 。\n#include<stdio.h>\nintmain()\n{ intm=1,n,i;\n for(i=0;i<5;i++)\n { intm=1;\n m++;\n if(i==4)n=m;"
+        "for(i=15;i>0;i-=2)a++;"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -12653,10 +12662,10 @@ window.QUESTION_BANK = {
       "stem": "下面数组声明语句中正确的是 。\n 33\n C语言程序设计实训教程",
       "image": "questions/x-6-2.webp",
       "options": [
-        "intn,aCn];",
-        "intaC];",
-        "intaC2]C3]={{2},{1},{3}};",
-        "intaC]C3]={{2},{1},{3}};"
+        "int n,a[n];",
+        "int a[];",
+        "int a[2][3]={{2},{1},{3}};",
+        "int a[][3]={{2},{1},{3}};"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -12675,10 +12684,10 @@ window.QUESTION_BANK = {
       "stem": "下列一维数组的声明中正确的是 。",
       "image": "questions/x-6-3.webp",
       "options": [
-        "intaC];",
-        "intn=5,aCn];",
-        "intaC4+1]={0};",
-        "intaC3]={4,3,2,1};"
+        "int a[];",
+        "int n=5,a[n];",
+        "int a[4+1]={0};",
+        "int a[3]={4,3,2,1};"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -12939,10 +12948,10 @@ window.QUESTION_BANK = {
       "stem": "下面声明中错误的是 。",
       "image": "questions/x-6-15.webp",
       "options": [
-        "intbC2]",
-        "intbC]={0,1}",
-        "intbC3]=0",
-        "intbC3]C4]={0}"
+        "int b[2]",
+        "int b[]={0,1}",
+        "int b[3]=0",
+        "int b[3][4]={0}"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -13049,10 +13058,10 @@ window.QUESTION_BANK = {
       "stem": "下面对字符数组不正确的初始化方式是 。",
       "image": "questions/x-6-20.webp",
       "options": [
-        "charchC]=\"string\";",
-        "charchC7]={'s','t','r','i','n','g'};",
-        "charchC10];ch=\"string\";",
-        "charchC7]={'s','t','r','i','n','g',''0'};"
+        "char ch[]=\"string\";",
+        "char ch[7]={'s','t','r','i','n','g'};",
+        "char ch[10]; ch=\"string\";",
+        "char ch[7]={'s','t','r','i','n','g','\\0'};"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -13071,10 +13080,10 @@ window.QUESTION_BANK = {
       "stem": "下面定义数组的语句中正确的是 。",
       "image": "questions/x-6-21.webp",
       "options": [
-        "inta(10);",
-        "charstrC];",
-        "intn=5;",
-        "#defineSIZE"
+        "int a(10);",
+        "char str[];",
+        "int n=5;\nint a[4][n];",
+        "#define SIZE 10\nchar str1[SIZE],str2[SIZE+2];"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -13272,7 +13281,7 @@ window.QUESTION_BANK = {
         "NanJingChinaOlympic",
         "ChinaOlympic",
         "Olympic",
-        "NanJing\n3． 阅读程序题\n(1)下列程序的输出结果是 。\n#include<stdio.h>\nintmain()\n{ intk,j,m,n,aC6]C6],bC6];"
+        "NanJing"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -13335,10 +13344,10 @@ window.QUESTION_BANK = {
       "stem": "下面函数定义中正确的是 。",
       "image": "questions/x-7-3.webp",
       "options": [
-        "doublefun(doublef1,doublef2){}",
-        "doublefun(doublef1;doublef2){}",
-        "doublefun(doublef1,doublef2);{}",
-        "doublefun(doublef1,f2){}"
+        "double fun(double f1,double f2){}",
+        "double fun(double f1;double f2){}",
+        "double fun(double f1,double f2);{}",
+        "double fun(double f1,f2){}"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -13885,10 +13894,10 @@ window.QUESTION_BANK = {
       "stem": "下面关于函数形参的声明中正确的是 。",
       "image": "questions/x-7-28.webp",
       "options": [
-        "intaC]",
-        "intaC]C]",
-        "intaC]={0}",
-        "intaC2]C]"
+        "int a[]",
+        "int a[][]",
+        "int a[]={0}",
+        "int a[2][]"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14017,10 +14026,10 @@ window.QUESTION_BANK = {
       "stem": "下面全局变量声明中正确的是 。",
       "image": "questions/x-7-34.webp",
       "options": [
-        "autointi=1;",
-        "floata=1,b=0.5,c=a+b;",
-        "charfor=1;",
-        "staticcharch;"
+        "auto int i=1;",
+        "float a=1,b=0.5,c=a+b;",
+        "char for=1;",
+        "static char ch;"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14039,10 +14048,10 @@ window.QUESTION_BANK = {
       "stem": "下面函数定义中正确的是 。",
       "image": "questions/x-7-35.webp",
       "options": [
-        "intfun(inta,b){}",
-        "intfun(intaC]C]){}",
-        "intfun(void){}",
-        "intfun(staticinta,intb){}"
+        "int fun(int a,b){}",
+        "int fun(int a[][]){}",
+        "int fun(void){}",
+        "int fun(static int a,int b){}"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14061,10 +14070,10 @@ window.QUESTION_BANK = {
       "stem": "下面函数定义的头部正确的是 。",
       "image": "questions/x-7-36.webp",
       "options": [
-        "intfun(intaC],b)",
-        "intfun(intaC],inta)",
-        "intfun(inta,intb)",
-        "intfun(charaC]C],intb)"
+        "int fun(int a[],b)",
+        "int fun(int a[],int a)",
+        "int fun(int a,int b)",
+        "int fun(char a[][],int b)"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14083,10 +14092,10 @@ window.QUESTION_BANK = {
       "stem": "以下关于函数形式参数的声明中正确的是 。",
       "image": "questions/x-7-37.webp",
       "options": [
-        "intaC]",
-        "intaC]C]",
-        "intaC]={0}",
-        "intaC2]C]"
+        "int a[]",
+        "int a[][]",
+        "int a[]={0}",
+        "int a[2][]"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14281,10 +14290,10 @@ window.QUESTION_BANK = {
       "stem": "下面函数中能正确计算n！(n<17)的是 。",
       "image": "questions/x-7-46.webp",
       "options": [
-        "longf(longn)",
-        "longf(longn)\n { { if(n<=1)return1;\n returnn*f(n-1); elsereturnn*f(n);\n } }",
-        "longf(longn)",
-        "longf(longn)\n { staticlongs,i; { longs=1,i;\n for(i=1;i<=n;i++)s=s*i; for(i=1;i<=n;i++)s=s*i;\n returns; returns;\n } }\n3． 阅读程序题\n(1)下面程序运行时输出结果是 。\n#include<stdio.h>\nvoidfun(intk)\n{ staticinta;\n printf(\"%2d\",a);\n a+=k;\n}\nintmain()\n{ intk;\n for(k=1;k<=3;k++)\n fun(k);\n return0;\n}\n(2)下面程序运行时输出结果是 。"
+        "long f(long n)\n{ return n*f(n-1); }",
+        "long f(long n)\n{ if(n<=1)return 1;\n  else return n*f(n);\n}",
+        "long f(long n)\n{ static long s,i;\n  for(i=1;i<=n;i++)s=s*i;\n  return s;\n}",
+        "long f(long n)\n{ long s=1,i;\n  for(i=1;i<=n;i++)s=s*i;\n  return s;\n}"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14413,10 +14422,10 @@ window.QUESTION_BANK = {
       "stem": "若需要通过调用fun函数得到一个数的平方值,下面fun函数定义中不能实现该功\n能的是 。",
       "image": "questions/x-8-6.webp",
       "options": [
-        "voidfun(double*x){*x=(*x)*(*x);}",
-        "voidfun(doublex,double*y){*y=x*x;}",
-        "voidfun(doublex,doubley){y=x*x;}",
-        "doublefun(doublex){returnx*x;}"
+        "void fun(double *x){*x=(*x)*(*x);}",
+        "void fun(double x,double *y){*y=x*x;}",
+        "void fun(double x,double y){y=x*x;}",
+        "double fun(double x){return x*x;}"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14699,10 +14708,10 @@ window.QUESTION_BANK = {
       "stem": "下面不正确的赋值或赋初值的方式是 。",
       "image": "questions/x-8-19.webp",
       "options": [
-        "charstrC]=\"string\";",
-        "charstrC10];str=\"string\";",
-        "char*p=\"string\";",
-        "char*p;p=\"string\";"
+        "char str[]=\"string\";",
+        "char str[10];str=\"string\";",
+        "char *p=\"string\";",
+        "char *p;p=\"string\";"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14809,10 +14818,10 @@ window.QUESTION_BANK = {
       "stem": "下面叙述中正确的是 。",
       "image": "questions/x-8-24.webp",
       "options": [
-        "char*p=\"CLanguage\";等价于char*p;p=\"CLanguage\";",
-        "charpC11]=\"CLanguage\";等价于charpC11];pC11]=\"CLanguage\";",
-        "charpC11]=\"CLanguage\";等价于charpC11];p=\"CLanguage\";",
-        "char*p=\"CLanguage\";等价于char*p;*p=\"CLanguage\";"
+        "char *p=\"C Language\"; 等价于 char *p;p=\"C Language\";",
+        "char p[11]=\"C Language\"; 等价于 char p[11];p[11]=\"C Language\";",
+        "char p[11]=\"C Language\"; 等价于 char p[11];p=\"C Language\";",
+        "char *p=\"C Language\"; 等价于 char *p;*p=\"C Language\";"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14919,10 +14928,10 @@ window.QUESTION_BANK = {
       "stem": "下列语句定义pf为指向float类型变量f的指针, 是正确的。",
       "image": "questions/x-8-29.webp",
       "options": [
-        "floatf,*pf=f;",
-        "floatf,*pf=&f;",
-        "float*pf=&f,f;",
-        "floatf,pf=f;"
+        "float f,*pf=f;",
+        "float f,*pf=&f;",
+        "float *pf=&f,f;",
+        "float f,pf=f;"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -14963,10 +14972,10 @@ window.QUESTION_BANK = {
       "stem": "下面选项中,有语法错误的是 。",
       "image": "questions/x-8-31.webp",
       "options": [
-        "f(charaC10]){while(*a)printf(\"%c\",*a++);}",
-        "f(char*a){while(aC0])printf(\"%c\",*a++);}",
-        "main(){char*a=\"first\";while(*a)printf(\"%c\",*a++);}",
-        "main(){charaC10]=\"Hello！\";while(*a)printf(\"%c\",*a++);}"
+        "f(char a[10]){while(*a)printf(\"%c\",*a++);}",
+        "f(char *a){while(a[0])printf(\"%c\",*a++);}",
+        "main(){char *a=\"first\";while(*a)printf(\"%c\",*a++);}",
+        "main(){char a[10]=\"Hello!\";while(*a)printf(\"%c\",*a++);}"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15007,10 +15016,10 @@ window.QUESTION_BANK = {
       "stem": "对应于“main(){int a[20],n;f(n,&a[9]);}”中的f函数调用语句,下面给出的\n四个f函数首部中,错误的是 。",
       "image": "questions/x-8-33.webp",
       "options": [
-        "voidf(intm,intaC])",
-        "voidf(intm,intaC11])",
-        "voidf(intn,int*p)",
-        "voidf(intn,inta)"
+        "void f(int m,int a[])",
+        "void f(int m,int a[11])",
+        "void f(int n,int *p)",
+        "void f(int n,int a)"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15051,10 +15060,10 @@ window.QUESTION_BANK = {
       "stem": "下面选项均为fun函数定义的头部,其中错误的是 。",
       "image": "questions/x-8-35.webp",
       "options": [
-        "intfun(intm,intnC])",
-        "intfun(intm,intnCm])",
-        "intfun(intm,intnC3])",
-        "intfun(intm,int*n)"
+        "int fun(int m,int n[])",
+        "int fun(int m,int n[m])",
+        "int fun(int m,int n[3])",
+        "int fun(int m,int *n)"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15117,10 +15126,10 @@ window.QUESTION_BANK = {
       "stem": "已有定义“intok=1;”,若要使得表达式“p=\"ok\"+ok”无语法错误(包括警告错\n误),p应当声明为 。",
       "image": "questions/x-8-38.webp",
       "options": [
-        "charp;",
-        "char*p;",
-        "intp;",
-        "int*p;"
+        "char p;",
+        "char *p;",
+        "int p;",
+        "int *p;"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15161,10 +15170,10 @@ window.QUESTION_BANK = {
       "stem": "若有函数定义为“intf(intx,int*y){returnx/*y;}”,下面声明该函数的正确形\n式是 。",
       "image": "questions/x-8-40.webp",
       "options": [
-        "intf(int,int*);",
-        "int*f(int,int*);",
-        "intf(int*,int*);",
-        "voidf(int,int);"
+        "int f(int,int *);",
+        "int *f(int,int *);",
+        "int f(int *,int *);",
+        "void f(int,int);"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15249,10 +15258,10 @@ window.QUESTION_BANK = {
       "stem": "若有定义“intaC4],j;”及语句“for(j=0;j<4;j++)pCj]=a+j;”,则定义标识符p\n的正确形式应为 。",
       "image": "questions/x-8-44.webp",
       "options": [
-        "intpC4];",
-        "int**pC4];",
-        "int*pC4];",
-        "int(*p)C4];"
+        "int p[4];",
+        "int **p[4];",
+        "int *p[4];",
+        "int (*p)[4];"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15315,10 +15324,10 @@ window.QUESTION_BANK = {
       "stem": "以下定义正确的是 。",
       "image": "questions/x-8-47.webp",
       "options": [
-        "intn=2,*aCn];",
-        "intn=10,*aC2]=&n;",
-        "intn=10,*aC2]={n};",
-        "intbC2]C2]={10},*aC2]={0};"
+        "int n=2,*a[n];",
+        "int n=10,*a[2]=&n;",
+        "int n=10,*a[2]={n};",
+        "int b[2][2]={10},*a[2]={0};"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -15579,10 +15588,10 @@ window.QUESTION_BANK = {
       "stem": "main(argc,argv)中形参argv的正确声明形式应当为 。",
       "image": "questions/x-8-59.webp",
       "options": [
-        "char*argvC]",
-        "charargvC]",
-        "charargvC]C]",
-        "char*argv"
+        "char *argv[]",
+        "char argv[]",
+        "char argv[][]",
+        "char *argv"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16085,10 +16094,10 @@ window.QUESTION_BANK = {
       "stem": "若要使表达式“x++”无语法错误,则变量a不能声明为 。",
       "image": "questions/x-9-15.webp",
       "options": [
-        "floatx;",
-        "longx;",
-        "int*x;",
-        "struct{inty;}x;"
+        "float x;",
+        "long x;",
+        "int *x;",
+        "struct{int y;}x;"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16173,10 +16182,10 @@ window.QUESTION_BANK = {
       "stem": "下列定义和声明中,语法均有错误的是 。\n0int_f(intn){} 0intf(intf){} Oint2n=1; Ostructfor{intn};",
       "image": "questions/x-9-19.webp",
       "options": [
-        "0O",
-        "OO",
-        "0O",
-        "00OO"
+        "②③",
+        "③④",
+        "①④",
+        "①②③④"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16217,10 +16226,10 @@ window.QUESTION_BANK = {
       "stem": "若已经定义了结构 structList,在下面语句中,定义结构指针 p 的 正 确 选 项\n是 。",
       "image": "questions/x-9-21.webp",
       "options": [
-        "List*p;",
-        "struct*p;",
-        "structList*p;",
-        "staticList*p;"
+        "List *p;",
+        "struct *p;",
+        "struct List *p;",
+        "static List *p;"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16283,10 +16292,10 @@ window.QUESTION_BANK = {
       "stem": "下面是关于结构类型与变量的定义语句,错误的是 。",
       "image": "questions/x-9-24.webp",
       "options": [
-        "structtest{inta;intb;intc;};structtesty;\n1",
-        "structtest{inta;intb;intc;}structtesty;",
-        "structtest{inta;intb;intc;}y;",
-        "struct{inta;intb;intc;}y;"
+        "struct test{int a;int b;int c;};struct test y;",
+        "struct test{int a;int b;int c;}struct test y;",
+        "struct test{int a;int b;int c;}y;",
+        "struct{int a;int b;int c;}y;"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16525,10 +16534,10 @@ window.QUESTION_BANK = {
       "stem": "已知有结构类型定义:\ntypedefstructex{longintnum;charsex;structex*next;}student;\n下列叙述错误的是 。",
       "image": "questions/x-9-35.webp",
       "options": [
-        "structex是结构类型",
-        "student是结构类型的变量名",
-        "ex可缺省",
-        "student不可缺省"
+        "struct ex 是结构类型",
+        "student 是结构类型的变量名",
+        "ex 可缺省",
+        "student 不可缺省"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16591,10 +16600,10 @@ window.QUESTION_BANK = {
       "stem": "下面对结构类型变量xy的声明中,错误的是 。",
       "image": "questions/x-9-38.webp",
       "options": [
-        "typedefstructaa",
-        "#defineBBstructaa\n { intn;floatm;}BB; BB{intn;floatm;}xy;\n BBxy;",
-        "struct",
-        "struct\n { intn;floatm;}aa; {intn;floatm;}xy;\n structaaxy;"
+        "typedef struct aa\n{ int n;float m; }BB;\nBB xy;",
+        "#define BB struct aa\nBB{ int n;float m; }xy;",
+        "struct\n{ int n;float m; }aa;\nstruct aa xy;",
+        "struct\n{ int n;float m; }xy;"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16657,10 +16666,10 @@ window.QUESTION_BANK = {
       "stem": "下面结构体类型说明和变量定义正确的是 。",
       "image": "questions/x-9-41.webp",
       "options": [
-        "typedefstruct",
-        "structABC;\n {intn;charch;}ABC; {intn;charch;};\n ABCa1,a2; ABCa1,a2;",
-        "typedefstructABC;",
-        "struct\n {intn=0;charch='A';}a1,a2; {intn;charch;}ABCa1,a2;"
+        "typedef struct\n{ int n;char ch; }ABC;\nABC a1,a2;",
+        "struct ABC;\n{ int n;char ch; };\nABC a1,a2;",
+        "typedef struct ABC;\n{ int n=0;char ch='A'; }a1,a2;",
+        "struct\n{ int n;char ch; }ABC a1,a2;"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16789,10 +16798,10 @@ window.QUESTION_BANK = {
       "stem": "与定义“typedefintMC2]C3];Ma;”等价的是 。",
       "image": "questions/x-9-47.webp",
       "options": [
-        "inta;",
+        "int a;",
         "a",
-        "intM;",
-        "intaC2]C3];"
+        "int M;",
+        "int a[2][3];"
       ],
       "answer": "D",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16833,10 +16842,10 @@ window.QUESTION_BANK = {
       "stem": "已有定义语句“typedefstruct{intn;charch;doublex;}STD;”,则下面选项中,能\n正确定义结构数组并赋初值的语句是 。",
       "image": "questions/x-9-49.webp",
       "options": [
-        "STDaC2]={{1,'A',56},{2,'B',63}};",
-        "STDaC2]={1,'A',56},{2,'B',63};",
-        "structaC2]={{1,'A'},{2,'B'}};",
-        "structaC2]= {{1,'A',56.3},{2,'B',63.2}};"
+        "STD a[2]={{1,'A',56},{2,'B',63}};",
+        "STD a[2]={1,'A',56},{2,'B',63};",
+        "struct a[2]={{1,'A'},{2,'B'}};",
+        "struct a[2]={{1,'A',56.3},{2,'B',63.2}};"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16855,10 +16864,10 @@ window.QUESTION_BANK = {
       "stem": "下面选项均欲声明变量p,其中错误的是 。",
       "image": "questions/x-9-50.webp",
       "options": [
-        "typedefstructPer",
-        "structPer\n { charnameC20]; { charnameC20];\n intage; intage;\n }Person; };\n Personp; structPerp;",
-        "struct",
-        "struct\n { charnameC20]; { charnameC20];\n intage; intage;\n }Person; }p;\n Personp;"
+        "typedef struct Per\n{ char name[20];\n  int age;\n}Person;\nPerson p;",
+        "struct Per\n{ char name[20];\n  int age;\n};\nstruct Per p;",
+        "struct\n{ char name[20];\n  int age;\n}Person;\nPerson p;",
+        "struct\n{ char name[20];\n  int age;\n}p;"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -16921,10 +16930,10 @@ window.QUESTION_BANK = {
       "stem": "若有结构类型定义“typedefstructabc{intx,yC2];}ABC;”,则下面声明中正确是\n。",
       "image": "questions/x-9-53.webp",
       "options": [
-        "abcx;",
-        "structx;",
-        "structabcx;",
-        "structABCx;\n3． 阅读程序题\n(1)下列程序的输出结果是 。\n#include<stdio.h>\nintmain()\n{ structst{intx,y;}aC4]={{10,20},{30,40},{50,60},{70,80}};\n structst*p=a;\n1"
+        "abc x;",
+        "struct x;",
+        "struct abc x;",
+        "struct ABC x;"
       ],
       "answer": "C",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -17361,10 +17370,10 @@ window.QUESTION_BANK = {
       "stem": "如果要打开e盘上user文件夹下名为abc.txt的文本文件进行读写操作,则下面\n符合此要求的函数调用是 。\n1 61\n C语言程序设计实训教程",
       "image": "questions/x-10-20.webp",
       "options": [
-        "fopen(\"e:'user'abc.txt\",\"r\")",
-        "fopen(\"e:''user''abc.txt\",\"r+\")",
-        "fopen(\"e:'user'abc.txt\",\"rb\")",
-        "fopen(\"e:'user'abc.txt\",\"w\")\n3． 阅读程序题\n(1)下面程序运行时输出结果的第1行是 ,第2行是 。\n#include<stdio.h>\nintmain()\n{ FILE *fp;\n intm,n,aC6]={1,2,3,4,5,6};\n fp=fopen(\"d:''abc.dat\",\"w\");\n fprintf(fp,\"%d%d%d'n\",aC0],aC1],aC2]);\n fprintf(fp,\"%d%d%d'n\",aC3],aC4],aC5]);\n fclose(fp);\n fp=fopen(\"d:''abc.dat\",\"r\");\n fscanf(fp,\"%d%d\",&m,&n);\n printf(\"%d'n%d\",m,n);\n fclose(fp);\n return0;\n}\n(2)下面程序运行时输出结果是 。\n#include<stdio.h>\nintmain()"
+        "fopen(\"e:\\user\\abc.txt\",\"r\")",
+        "fopen(\"e:\\\\user\\\\abc.txt\",\"r+\")",
+        "fopen(\"e:\\user\\abc.txt\",\"rb\")",
+        "fopen(\"e:\\user\\abc.txt\",\"w\")"
       ],
       "answer": "B",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
@@ -19143,10 +19152,10 @@ window.QUESTION_BANK = {
       "id": "n2-2-5",
       "stem": "以下程序运行后的输出结果是＿＿＿。\n\n      main()\n      {  int x,y,z;\n         x=y=2;  z=3;\n         y=x++-1;  printf(\"%d %d \",x,y);\n         y=++x-1;  printf(\"%d %d\\n\",x,y);\n         y=z---1;  printf(\"%d %d \",z,x);\n         y=--z-1;  printf(\"%d %d\\n\",z,x);\n      }",
       "options": [
-        "3 1 4 3",
-        "3 1 3 3",
-        "3 1 4 3",
-        "2 1 3 2"
+        "3 1 4 3\n2 4 1 4",
+        "3 1 3 3\n2 4 2 2",
+        "3 1 4 3\n2 4 1 2",
+        "2 1 3 2\n1 3 1 2"
       ],
       "answer": "A",
       "explanation": "答案按本资料末尾的分章答题表核对。",
@@ -19523,10 +19532,10 @@ window.QUESTION_BANK = {
       "id": "n2-3-5",
       "stem": "以下程序的执行结果是＿＿＿。\n      main()\n      {  int a,y;\n         a=10;    y=0;\n         do{  a+=2;  y+=a;\n              printf(\"a=%d  y=%d\\n\",a,y);\n              if(y>20) break;\n           }while(a=14);\n      }",
       "options": [
+        "a=12  y=12\na=14  y=16\na=16  y=20\na=18  y=24",
+        "a=12  y=12\na=16  y=28",
         "a=12  y=12",
-        "a=12  y=12\na=14  y=16                            a=16  y=28\n      a=16  y=20\n      a=18  y=24",
-        "a=12  y=12",
-        "a=12  y=12\n                                            a=14  y=26\n                                            a=14  y=44"
+        "a=12  y=12\na=14  y=26\na=14  y=44"
       ],
       "answer": "B",
       "explanation": "答案按本资料末尾的分章答题表核对。",
@@ -20423,10 +20432,10 @@ window.QUESTION_BANK = {
       "id": "n2-5-13",
       "stem": "下列程序运行后的输出结果是＿＿＿。\n\n      int c=1;\n      main()\n      {  static int a=5;int b=6;\n         printf(\"a=%d,b=%d,c=%d\\n\",a,b,c);\n         func();\n         printf(\"a=%d,b=%d,c=%d\\n\",a,b,c);\n         func();\n      }\n      func()\n      {  static int a=4;int b=10;\n         a+=2;c+=10;b+=c;\n         printf(\"a=%d,b=%d,c=%d\\n\",a,b,c);\n      }",
       "options": [
-        "a=5,b=6,c=1",
-        "a=5,b=6,c=11",
-        "a=5,b=6,c=1",
-        "a=5,b=6,c=1\n      a=6,b=21,c=11      a=5,b=21,c=11      a=5,b=21,c=11      a=6,b=21,c=11\n      a=5,b=6,c=11       a=5,b=6,c=11       a=5,b=6,c=11       a=5,b=6,c=11\n      a=8,b=31,c=21      a=8,b=31,c=21      a=8,b=31,c=21      a=5,b=31,c=21"
+        "a=5,b=6,c=1\na=6,b=21,c=11\na=5,b=6,c=11\na=8,b=31,c=21",
+        "a=5,b=6,c=11\na=5,b=21,c=11\na=5,b=6,c=11\na=8,b=31,c=21",
+        "a=5,b=6,c=1\na=5,b=21,c=11\na=5,b=6,c=11\na=8,b=31,c=21",
+        "a=5,b=6,c=1\na=6,b=21,c=11\na=5,b=6,c=11\na=5,b=31,c=21"
       ],
       "answer": "A",
       "explanation": "答案按本资料末尾的分章答题表核对。",
@@ -20523,10 +20532,10 @@ window.QUESTION_BANK = {
       "id": "n2-5-18",
       "stem": "下列程序运行后的输出结果是＿＿＿。\nvoid  main()\n      {  int  m=4,n=2,k;\n         k=fun(m,n);  printf(\"%d\\n\",k);\n         k=fun(m,n);  printf(\"%d\\n\",k);\n      }\n      int fun(int x,int y)\n      {  static int n=3,i=2;\n         i+=n+1;  n=i+x+y;\n         return(n);\n      }",
       "options": [
-        "12",
-        "12",
-        "12",
-        "12"
+        "12\n12",
+        "12\n23",
+        "12\n25",
+        "12\n16"
       ],
       "answer": "C",
       "explanation": "答案按本资料末尾的分章答题表核对。",
@@ -20543,10 +20552,10 @@ window.QUESTION_BANK = {
       "id": "n2-5-19",
       "stem": "下列程序运行后的输出结果是＿＿＿。\n\n      int x=1;\n      main()\n      {  int i=5;\n         fun(i);\n         printf(\"%d,%d\\n\",i,x);\n      }\n      fun(m)\n      int m;\n      {  m+=x;\n         x+=m;\n         {  char x='A';  printf(\"%d\\n\",x);  }\n         printf(\"%d,%d\\n\",m,x);\n      }",
       "options": [
-        "65",
-        "A",
-        "A",
-        "65\n      6,1                6,1                6,7                6,7\n      6,1                6,1                6,7                5,7"
+        "65\n6,1\n6,1",
+        "A\n6,1\n6,1",
+        "A\n6,7\n6,7",
+        "65\n6,7\n5,7"
       ],
       "answer": "D",
       "explanation": "答案按本资料末尾的分章答题表核对。",
@@ -21042,10 +21051,10 @@ window.QUESTION_BANK = {
       "id": "n2-7-7",
       "stem": "下列程序运行后的输出结果是＿＿＿。\n\n                       struct s {  int n; char *c;  }*p;\n                       char d[]={'a','b','c','d','e'};                  llthin\n                       struct s a[]={10,&d[0],20,&d[1],30,&d[2],40,&d[3],50,&d[4]};\n                       #include <stdio.h>\n                       main()       ndA                       {  p=a;\n                          printf(\"%d\\n\",++p->n);\n                          printf(\"%d\\n\",(++p)->n);     ea\n                          printf(\"%c\\n\",++(*p->c));\n                       }",
       "options": [
-        "11",
-        "11",
-        "10",
-        "10"
+        "11\n20\nc",
+        "11\n20\nb",
+        "10\n20\nc",
+        "10\n20\nb"
       ],
       "answer": "A",
       "explanation": "答案按本资料末尾的分章答题表核对。",
@@ -21202,10 +21211,10 @@ window.QUESTION_BANK = {
       "id": "n2-7-15",
       "stem": "运行下面程序，其输出结果是＿＿＿。\n                       #include <stdio.h>\n                       struct  sample\n                       {  int a,b; char *ch;  };\n                       main()\n                       {  struct sample arg;\n                          arg.a=1000;arg.b=100;arg.ch=\"abcd\";\n                          f1(arg);\n                       }\n                       f1(struct sample param)\n                       {  param.a+=param.b;\n                            param.ch[2]='x';                          beingaregoodf\n                          printf(\"%d\\n\",param.a);\n                          printf(\"%s\\n\",param.ch);\n                       }",
       "options": [
-        "1000",
-        "1100",
-        "1100",
-        "100\n                       abcd               abcd               abxd               abcd                             their"
+        "1000\nabcd",
+        "1100\nabcd",
+        "1100\nabxd",
+        "100\nabcd"
       ],
       "answer": "C",
       "explanation": "答案按本资料末尾的分章答题表核对。",

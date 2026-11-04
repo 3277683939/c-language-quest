@@ -1,0 +1,1274 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "choicesScanned": 1096,
+    "practiceScanned": 2044,
+    "semanticChoiceCandidates": 44,
+    "structuralChoiceCandidates": 69,
+    "practiceCandidates": 40
+  },
+  "corrections": [
+    {
+      "questionId": "h-3-基础篇-24",
+      "source": "h",
+      "page": 20,
+      "sourceImage": "questions/source-h-3-___-24.webp",
+      "beforeOptions": [
+        "10□X□20□Y<回车>",
+        "10□X20□Y<回车>",
+        "10□X<回车>",
+        "10X<回车>\n\n      20□Y<回车>                     20Y<回车>"
+      ],
+      "options": [
+        "10□X□20□Y<回车>",
+        "10□X20□Y<回车>",
+        "10□X<回车>\n20□Y<回车>",
+        "10X<回车>\n20Y<回车>"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "h-5-基础篇-23",
+      "source": "h",
+      "page": 53,
+      "sourceImage": "questions/source-h-5-___-23.webp",
+      "beforeOptions": [
+        "10",
+        "9",
+        "10",
+        "9\n\n        9                  8                    9                  8\n\n        8                  7                    8                  7\n\n                                                 7                  6"
+      ],
+      "options": [
+        "10\n9\n8",
+        "9\n8\n7",
+        "10\n9\n8\n7",
+        "9\n8\n7\n6"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "h-5-基础篇-24",
+      "source": "h",
+      "page": 54,
+      "sourceImage": "questions/source-h-5-___-24.webp",
+      "beforeOptions": [
+        "1",
+        "1",
+        "1",
+        "1\n\n                            2                   2                   2\n\n                                                 3                   3"
+      ],
+      "options": [
+        "1",
+        "1\n2",
+        "1\n2\n3",
+        "1\n2\n3\n4"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "n1-2-2",
+      "source": "n1",
+      "page": 3,
+      "sourceImage": "questions/source-n1-2-2.webp",
+      "beforeOptions": [
+        "X=10,Y=15,Z=10",
+        "X=10,Y=10,Z=10\n\n       X=0,Y=10,Z=0                        X=0,Y=10,Z=10",
+        "X=10,Y=15,Z=10",
+        "X=10,Y=10,Z=10\n\n       X=10,Y=10,Z=0                       X=0,Y=10,Z=0"
+      ],
+      "options": [
+        "X=10,Y=15,Z=10\nX=0,Y=10,Z=0",
+        "X=10,Y=10,Z=10\nX=0,Y=10,Z=10",
+        "X=10,Y=15,Z=10\nX=10,Y=10,Z=0",
+        "X=10,Y=10,Z=10\nX=0,Y=10,Z=0"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "n1-3-4",
+      "source": "n1",
+      "page": 7,
+      "sourceImage": "questions/source-n1-3-4.webp",
+      "beforeOptions": [
+        "0",
+        "1",
+        "0",
+        "0\n\n   1         1        1         1\n\n   1         1        0         0\n\n   1         1        1         0"
+      ],
+      "options": [
+        "0\n1\n1\n1",
+        "1\n1\n1\n1",
+        "0\n1\n0\n1",
+        "0\n1\n0\n0"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-1-12",
+      "source": "x",
+      "page": 2,
+      "sourceImage": "questions/x-1-12.webp",
+      "beforeOptions": [
+        "x=sqrt(2);",
+        "while(x！=0)x--;",
+        "if(x<0)x=-x;",
+        "returnx;"
+      ],
+      "options": [
+        "x=sqrt(2);",
+        "while(x!=0)x--;",
+        "if(x<0)x=-x;",
+        "return x;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-2-13",
+      "source": "x",
+      "page": 5,
+      "sourceImage": "questions/x-2-13.webp",
+      "beforeOptions": [
+        "inta=0xFF;",
+        "doublea=1.2e0.5;",
+        "longa=2L;",
+        "chara=''72';"
+      ],
+      "options": [
+        "int a=0xFF;",
+        "double a=1.2e0.5;",
+        "long a=2L;",
+        "char a='\\72';"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-2-23",
+      "source": "x",
+      "page": 6,
+      "sourceImage": "questions/x-2-23.webp",
+      "beforeOptions": [
+        "floatx,y=3.14;",
+        "floatx,y=2*3.14;",
+        "floatx=3.14,y=x;",
+        "floatx=y=3.14;"
+      ],
+      "options": [
+        "float x,y=3.14;",
+        "float x,y=2*3.14;",
+        "float x=3.14,y=x;",
+        "float x=y=3.14;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-2-28",
+      "source": "x",
+      "page": 6,
+      "sourceImage": "questions/x-2-28.webp",
+      "beforeOptions": [
+        "(intf)%i",
+        "int(f)%i",
+        "int(f%i)",
+        "(int)f%i"
+      ],
+      "options": [
+        "(int f)%i",
+        "int(f)%i",
+        "int(f%i)",
+        "(int)f%i"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-2-45",
+      "source": "x",
+      "page": 7,
+      "sourceImage": "questions/x-2-45.webp",
+      "beforeOptions": [
+        "inta=0xFF;",
+        "doublea=1.2e0.5;",
+        "longa=2L;",
+        "chara=''72';"
+      ],
+      "options": [
+        "int a=0xFF;",
+        "double a=1.2e0.5;",
+        "long a=2L;",
+        "char a='\\72';"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-2-58",
+      "source": "x",
+      "page": 8,
+      "sourceImage": "questions/x-2-58.webp",
+      "beforeOptions": [
+        "#definedouble2",
+        "#defineb",
+        "#defineb2",
+        "#defineb"
+      ],
+      "options": [
+        "#define double 2\nvoid main()\n{ double b=0; }",
+        "#define b 2\nvoid main()\n{ int b=0; }",
+        "#define b 2\nvoid main()\n{ b++; }",
+        "#define b 2\nint x=b;\nvoid main()\n{ x++; }"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-3-18",
+      "source": "x",
+      "page": 11,
+      "sourceImage": "questions/x-3-18.webp",
+      "beforeOptions": [
+        "b99",
+        "98c",
+        "9899",
+        "bc\n3． 阅读程序题\n(1)下列程序运行时输出的结果是 。\n#include<stdio.h>\nintmain()"
+      ],
+      "options": [
+        "b99",
+        "98c",
+        "9899",
+        "bc"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-4-5",
+      "source": "x",
+      "page": 14,
+      "sourceImage": "questions/x-4-5.webp",
+      "beforeOptions": [
+        "switch(x)",
+        "switch(x)\n { casez:x--;break; { caseN>0:x=1;break;\n casez+1:x++;break; case1:x=0;break;\n } }",
+        "switch(x)",
+        "switch(y)\n { case2:y++;break; { case1.0:y++;break;\n case'0':y=3; case1.2:y=1;break;\n } }"
+      ],
+      "options": [
+        "switch(x)\n{ case z: x--; break;\n  case z+1: x++; break;\n}",
+        "switch(x)\n{ case N>0: x=1; break;\n  case 1: x=0; break;\n}",
+        "switch(x)\n{ case 2: y++; break;\n  case '0': y=3;\n}",
+        "switch(y)\n{ case 1.0: y++; break;\n  case 1.2: y=1; break;\n}"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-5-15",
+      "source": "x",
+      "page": 21,
+      "sourceImage": "questions/x-5-15.webp",
+      "beforeOptions": [
+        "for(j=15;j>0;j-=2)a++;",
+        "for(j=0;j<15;j+=2)a++;",
+        "for(i=0;i<15;i+=2)a++;",
+        "for(i=15;i>0;i-=2)a++;\n3． 阅读程序题\n(1)下面程序运行时输出的结果是 。\n#include<stdio.h>\nintmain()\n{ inti;\n for(i=1;i<6;i++)\n { if(i%2)\n printf(\"*\");\n else\n printf(\"#\");\n }\n return0;\n}\n(2)下面程序运行时输出的结果是 。\n#include<stdio.h>\nintmain()\n{ intm=1,n,i;\n for(i=0;i<5;i++)\n { intm=1;\n m++;\n if(i==4)n=m;"
+      ],
+      "options": [
+        "for(j=15;j>0;j-=2)a++;",
+        "for(j=0;j<15;j+=2)a++;",
+        "for(i=0;i<15;i+=2)a++;",
+        "for(i=15;i>0;i-=2)a++;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-6-2",
+      "source": "x",
+      "page": 33,
+      "sourceImage": "questions/x-6-2.webp",
+      "beforeOptions": [
+        "intn,aCn];",
+        "intaC];",
+        "intaC2]C3]={{2},{1},{3}};",
+        "intaC]C3]={{2},{1},{3}};"
+      ],
+      "options": [
+        "int n,a[n];",
+        "int a[];",
+        "int a[2][3]={{2},{1},{3}};",
+        "int a[][3]={{2},{1},{3}};"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-6-3",
+      "source": "x",
+      "page": 34,
+      "sourceImage": "questions/x-6-3.webp",
+      "beforeOptions": [
+        "intaC];",
+        "intn=5,aCn];",
+        "intaC4+1]={0};",
+        "intaC3]={4,3,2,1};"
+      ],
+      "options": [
+        "int a[];",
+        "int n=5,a[n];",
+        "int a[4+1]={0};",
+        "int a[3]={4,3,2,1};"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-6-15",
+      "source": "x",
+      "page": 35,
+      "sourceImage": "questions/x-6-15.webp",
+      "beforeOptions": [
+        "intbC2]",
+        "intbC]={0,1}",
+        "intbC3]=0",
+        "intbC3]C4]={0}"
+      ],
+      "options": [
+        "int b[2]",
+        "int b[]={0,1}",
+        "int b[3]=0",
+        "int b[3][4]={0}"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-6-20",
+      "source": "x",
+      "page": 35,
+      "sourceImage": "questions/x-6-20.webp",
+      "beforeOptions": [
+        "charchC]=\"string\";",
+        "charchC7]={'s','t','r','i','n','g'};",
+        "charchC10];ch=\"string\";",
+        "charchC7]={'s','t','r','i','n','g',''0'};"
+      ],
+      "options": [
+        "char ch[]=\"string\";",
+        "char ch[7]={'s','t','r','i','n','g'};",
+        "char ch[10]; ch=\"string\";",
+        "char ch[7]={'s','t','r','i','n','g','\\0'};"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-6-21",
+      "source": "x",
+      "page": 35,
+      "sourceImage": "questions/x-6-21.webp",
+      "beforeOptions": [
+        "inta(10);",
+        "charstrC];",
+        "intn=5;",
+        "#defineSIZE"
+      ],
+      "options": [
+        "int a(10);",
+        "char str[];",
+        "int n=5;\nint a[4][n];",
+        "#define SIZE 10\nchar str1[SIZE],str2[SIZE+2];"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-6-30",
+      "source": "x",
+      "page": 36,
+      "sourceImage": "questions/x-6-30.webp",
+      "beforeOptions": [
+        "NanJingChinaOlympic",
+        "ChinaOlympic",
+        "Olympic",
+        "NanJing\n3． 阅读程序题\n(1)下列程序的输出结果是 。\n#include<stdio.h>\nintmain()\n{ intk,j,m,n,aC6]C6],bC6];"
+      ],
+      "options": [
+        "NanJingChinaOlympic",
+        "ChinaOlympic",
+        "Olympic",
+        "NanJing"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-7-3",
+      "source": "x",
+      "page": 59,
+      "sourceImage": "questions/x-7-3.webp",
+      "beforeOptions": [
+        "doublefun(doublef1,doublef2){}",
+        "doublefun(doublef1;doublef2){}",
+        "doublefun(doublef1,doublef2);{}",
+        "doublefun(doublef1,f2){}"
+      ],
+      "options": [
+        "double fun(double f1,double f2){}",
+        "double fun(double f1;double f2){}",
+        "double fun(double f1,double f2);{}",
+        "double fun(double f1,f2){}"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-7-28",
+      "source": "x",
+      "page": 61,
+      "sourceImage": "questions/x-7-28.webp",
+      "beforeOptions": [
+        "intaC]",
+        "intaC]C]",
+        "intaC]={0}",
+        "intaC2]C]"
+      ],
+      "options": [
+        "int a[]",
+        "int a[][]",
+        "int a[]={0}",
+        "int a[2][]"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-7-34",
+      "source": "x",
+      "page": 62,
+      "sourceImage": "questions/x-7-34.webp",
+      "beforeOptions": [
+        "autointi=1;",
+        "floata=1,b=0.5,c=a+b;",
+        "charfor=1;",
+        "staticcharch;"
+      ],
+      "options": [
+        "auto int i=1;",
+        "float a=1,b=0.5,c=a+b;",
+        "char for=1;",
+        "static char ch;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-7-35",
+      "source": "x",
+      "page": 62,
+      "sourceImage": "questions/x-7-35.webp",
+      "beforeOptions": [
+        "intfun(inta,b){}",
+        "intfun(intaC]C]){}",
+        "intfun(void){}",
+        "intfun(staticinta,intb){}"
+      ],
+      "options": [
+        "int fun(int a,b){}",
+        "int fun(int a[][]){}",
+        "int fun(void){}",
+        "int fun(static int a,int b){}"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-7-36",
+      "source": "x",
+      "page": 62,
+      "sourceImage": "questions/x-7-36.webp",
+      "beforeOptions": [
+        "intfun(intaC],b)",
+        "intfun(intaC],inta)",
+        "intfun(inta,intb)",
+        "intfun(charaC]C],intb)"
+      ],
+      "options": [
+        "int fun(int a[],b)",
+        "int fun(int a[],int a)",
+        "int fun(int a,int b)",
+        "int fun(char a[][],int b)"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-7-37",
+      "source": "x",
+      "page": 62,
+      "sourceImage": "questions/x-7-37.webp",
+      "beforeOptions": [
+        "intaC]",
+        "intaC]C]",
+        "intaC]={0}",
+        "intaC2]C]"
+      ],
+      "options": [
+        "int a[]",
+        "int a[][]",
+        "int a[]={0}",
+        "int a[2][]"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-7-46",
+      "source": "x",
+      "page": 64,
+      "sourceImage": "questions/x-7-46.webp",
+      "beforeOptions": [
+        "longf(longn)",
+        "longf(longn)\n { { if(n<=1)return1;\n returnn*f(n-1); elsereturnn*f(n);\n } }",
+        "longf(longn)",
+        "longf(longn)\n { staticlongs,i; { longs=1,i;\n for(i=1;i<=n;i++)s=s*i; for(i=1;i<=n;i++)s=s*i;\n returns; returns;\n } }\n3． 阅读程序题\n(1)下面程序运行时输出结果是 。\n#include<stdio.h>\nvoidfun(intk)\n{ staticinta;\n printf(\"%2d\",a);\n a+=k;\n}\nintmain()\n{ intk;\n for(k=1;k<=3;k++)\n fun(k);\n return0;\n}\n(2)下面程序运行时输出结果是 。"
+      ],
+      "options": [
+        "long f(long n)\n{ return n*f(n-1); }",
+        "long f(long n)\n{ if(n<=1)return 1;\n  else return n*f(n);\n}",
+        "long f(long n)\n{ static long s,i;\n  for(i=1;i<=n;i++)s=s*i;\n  return s;\n}",
+        "long f(long n)\n{ long s=1,i;\n  for(i=1;i<=n;i++)s=s*i;\n  return s;\n}"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-8-6",
+      "source": "x",
+      "page": 92,
+      "sourceImage": "questions/x-8-6.webp",
+      "beforeOptions": [
+        "voidfun(double*x){*x=(*x)*(*x);}",
+        "voidfun(doublex,double*y){*y=x*x;}",
+        "voidfun(doublex,doubley){y=x*x;}",
+        "doublefun(doublex){returnx*x;}"
+      ],
+      "options": [
+        "void fun(double *x){*x=(*x)*(*x);}",
+        "void fun(double x,double *y){*y=x*x;}",
+        "void fun(double x,double y){y=x*x;}",
+        "double fun(double x){return x*x;}"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-8-19",
+      "source": "x",
+      "page": 93,
+      "sourceImage": "questions/x-8-19.webp",
+      "beforeOptions": [
+        "charstrC]=\"string\";",
+        "charstrC10];str=\"string\";",
+        "char*p=\"string\";",
+        "char*p;p=\"string\";"
+      ],
+      "options": [
+        "char str[]=\"string\";",
+        "char str[10];str=\"string\";",
+        "char *p=\"string\";",
+        "char *p;p=\"string\";"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-8-24",
+      "source": "x",
+      "page": 94,
+      "sourceImage": "questions/x-8-24.webp",
+      "beforeOptions": [
+        "char*p=\"CLanguage\";等价于char*p;p=\"CLanguage\";",
+        "charpC11]=\"CLanguage\";等价于charpC11];pC11]=\"CLanguage\";",
+        "charpC11]=\"CLanguage\";等价于charpC11];p=\"CLanguage\";",
+        "char*p=\"CLanguage\";等价于char*p;*p=\"CLanguage\";"
+      ],
+      "options": [
+        "char *p=\"C Language\"; 等价于 char *p;p=\"C Language\";",
+        "char p[11]=\"C Language\"; 等价于 char p[11];p[11]=\"C Language\";",
+        "char p[11]=\"C Language\"; 等价于 char p[11];p=\"C Language\";",
+        "char *p=\"C Language\"; 等价于 char *p;*p=\"C Language\";"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-8-29",
+      "source": "x",
+      "page": 95,
+      "sourceImage": "questions/x-8-29.webp",
+      "beforeOptions": [
+        "floatf,*pf=f;",
+        "floatf,*pf=&f;",
+        "float*pf=&f,f;",
+        "floatf,pf=f;"
+      ],
+      "options": [
+        "float f,*pf=f;",
+        "float f,*pf=&f;",
+        "float *pf=&f,f;",
+        "float f,pf=f;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-8-31",
+      "source": "x",
+      "page": 95,
+      "sourceImage": "questions/x-8-31.webp",
+      "beforeOptions": [
+        "f(charaC10]){while(*a)printf(\"%c\",*a++);}",
+        "f(char*a){while(aC0])printf(\"%c\",*a++);}",
+        "main(){char*a=\"first\";while(*a)printf(\"%c\",*a++);}",
+        "main(){charaC10]=\"Hello！\";while(*a)printf(\"%c\",*a++);}"
+      ],
+      "options": [
+        "f(char a[10]){while(*a)printf(\"%c\",*a++);}",
+        "f(char *a){while(a[0])printf(\"%c\",*a++);}",
+        "main(){char *a=\"first\";while(*a)printf(\"%c\",*a++);}",
+        "main(){char a[10]=\"Hello!\";while(*a)printf(\"%c\",*a++);}"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-8-33",
+      "source": "x",
+      "page": 95,
+      "sourceImage": "questions/x-8-33.webp",
+      "beforeOptions": [
+        "voidf(intm,intaC])",
+        "voidf(intm,intaC11])",
+        "voidf(intn,int*p)",
+        "voidf(intn,inta)"
+      ],
+      "options": [
+        "void f(int m,int a[])",
+        "void f(int m,int a[11])",
+        "void f(int n,int *p)",
+        "void f(int n,int a)"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-8-35",
+      "source": "x",
+      "page": 95,
+      "sourceImage": "questions/x-8-35.webp",
+      "beforeOptions": [
+        "intfun(intm,intnC])",
+        "intfun(intm,intnCm])",
+        "intfun(intm,intnC3])",
+        "intfun(intm,int*n)"
+      ],
+      "options": [
+        "int fun(int m,int n[])",
+        "int fun(int m,int n[m])",
+        "int fun(int m,int n[3])",
+        "int fun(int m,int *n)"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-8-38",
+      "source": "x",
+      "page": 96,
+      "sourceImage": "questions/x-8-38.webp",
+      "beforeOptions": [
+        "charp;",
+        "char*p;",
+        "intp;",
+        "int*p;"
+      ],
+      "options": [
+        "char p;",
+        "char *p;",
+        "int p;",
+        "int *p;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-8-40",
+      "source": "x",
+      "page": 96,
+      "sourceImage": "questions/x-8-40.webp",
+      "beforeOptions": [
+        "intf(int,int*);",
+        "int*f(int,int*);",
+        "intf(int*,int*);",
+        "voidf(int,int);"
+      ],
+      "options": [
+        "int f(int,int *);",
+        "int *f(int,int *);",
+        "int f(int *,int *);",
+        "void f(int,int);"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-8-44",
+      "source": "x",
+      "page": 96,
+      "sourceImage": "questions/x-8-44.webp",
+      "beforeOptions": [
+        "intpC4];",
+        "int**pC4];",
+        "int*pC4];",
+        "int(*p)C4];"
+      ],
+      "options": [
+        "int p[4];",
+        "int **p[4];",
+        "int *p[4];",
+        "int (*p)[4];"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-8-47",
+      "source": "x",
+      "page": 97,
+      "sourceImage": "questions/x-8-47.webp",
+      "beforeOptions": [
+        "intn=2,*aCn];",
+        "intn=10,*aC2]=&n;",
+        "intn=10,*aC2]={n};",
+        "intbC2]C2]={10},*aC2]={0};"
+      ],
+      "options": [
+        "int n=2,*a[n];",
+        "int n=10,*a[2]=&n;",
+        "int n=10,*a[2]={n};",
+        "int b[2][2]={10},*a[2]={0};"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-8-59",
+      "source": "x",
+      "page": 98,
+      "sourceImage": "questions/x-8-59.webp",
+      "beforeOptions": [
+        "char*argvC]",
+        "charargvC]",
+        "charargvC]C]",
+        "char*argv"
+      ],
+      "options": [
+        "char *argv[]",
+        "char argv[]",
+        "char argv[][]",
+        "char *argv"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-9-15",
+      "source": "x",
+      "page": 130,
+      "sourceImage": "questions/x-9-15.webp",
+      "beforeOptions": [
+        "floatx;",
+        "longx;",
+        "int*x;",
+        "struct{inty;}x;"
+      ],
+      "options": [
+        "float x;",
+        "long x;",
+        "int *x;",
+        "struct{int y;}x;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-9-19",
+      "source": "x",
+      "page": 130,
+      "sourceImage": "questions/x-9-19.webp",
+      "beforeOptions": [
+        "0O",
+        "OO",
+        "0O",
+        "00OO"
+      ],
+      "options": [
+        "②③",
+        "③④",
+        "①④",
+        "①②③④"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-9-21",
+      "source": "x",
+      "page": 130,
+      "sourceImage": "questions/x-9-21.webp",
+      "beforeOptions": [
+        "List*p;",
+        "struct*p;",
+        "structList*p;",
+        "staticList*p;"
+      ],
+      "options": [
+        "List *p;",
+        "struct *p;",
+        "struct List *p;",
+        "static List *p;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-9-24",
+      "source": "x",
+      "page": 130,
+      "sourceImage": "questions/x-9-24.webp",
+      "beforeOptions": [
+        "structtest{inta;intb;intc;};structtesty;\n1",
+        "structtest{inta;intb;intc;}structtesty;",
+        "structtest{inta;intb;intc;}y;",
+        "struct{inta;intb;intc;}y;"
+      ],
+      "options": [
+        "struct test{int a;int b;int c;};struct test y;",
+        "struct test{int a;int b;int c;}struct test y;",
+        "struct test{int a;int b;int c;}y;",
+        "struct{int a;int b;int c;}y;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-9-35",
+      "source": "x",
+      "page": 133,
+      "sourceImage": "questions/x-9-35.webp",
+      "beforeOptions": [
+        "structex是结构类型",
+        "student是结构类型的变量名",
+        "ex可缺省",
+        "student不可缺省"
+      ],
+      "options": [
+        "struct ex 是结构类型",
+        "student 是结构类型的变量名",
+        "ex 可缺省",
+        "student 不可缺省"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "x-9-38",
+      "source": "x",
+      "page": 133,
+      "sourceImage": "questions/x-9-38.webp",
+      "beforeOptions": [
+        "typedefstructaa",
+        "#defineBBstructaa\n { intn;floatm;}BB; BB{intn;floatm;}xy;\n BBxy;",
+        "struct",
+        "struct\n { intn;floatm;}aa; {intn;floatm;}xy;\n structaaxy;"
+      ],
+      "options": [
+        "typedef struct aa\n{ int n;float m; }BB;\nBB xy;",
+        "#define BB struct aa\nBB{ int n;float m; }xy;",
+        "struct\n{ int n;float m; }aa;\nstruct aa xy;",
+        "struct\n{ int n;float m; }xy;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-9-41",
+      "source": "x",
+      "page": 134,
+      "sourceImage": "questions/x-9-41.webp",
+      "beforeOptions": [
+        "typedefstruct",
+        "structABC;\n {intn;charch;}ABC; {intn;charch;};\n ABCa1,a2; ABCa1,a2;",
+        "typedefstructABC;",
+        "struct\n {intn=0;charch='A';}a1,a2; {intn;charch;}ABCa1,a2;"
+      ],
+      "options": [
+        "typedef struct\n{ int n;char ch; }ABC;\nABC a1,a2;",
+        "struct ABC;\n{ int n;char ch; };\nABC a1,a2;",
+        "typedef struct ABC;\n{ int n=0;char ch='A'; }a1,a2;",
+        "struct\n{ int n;char ch; }ABC a1,a2;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-9-47",
+      "source": "x",
+      "page": 134,
+      "sourceImage": "questions/x-9-47.webp",
+      "beforeOptions": [
+        "inta;",
+        "a",
+        "intM;",
+        "intaC2]C3];"
+      ],
+      "options": [
+        "int a;",
+        "a",
+        "int M;",
+        "int a[2][3];"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "x-9-49",
+      "source": "x",
+      "page": 135,
+      "sourceImage": "questions/x-9-49.webp",
+      "beforeOptions": [
+        "STDaC2]={{1,'A',56},{2,'B',63}};",
+        "STDaC2]={1,'A',56},{2,'B',63};",
+        "structaC2]={{1,'A'},{2,'B'}};",
+        "structaC2]= {{1,'A',56.3},{2,'B',63.2}};"
+      ],
+      "options": [
+        "STD a[2]={{1,'A',56},{2,'B',63}};",
+        "STD a[2]={1,'A',56},{2,'B',63};",
+        "struct a[2]={{1,'A'},{2,'B'}};",
+        "struct a[2]={{1,'A',56.3},{2,'B',63.2}};"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "x-9-50",
+      "source": "x",
+      "page": 135,
+      "sourceImage": "questions/x-9-50.webp",
+      "beforeOptions": [
+        "typedefstructPer",
+        "structPer\n { charnameC20]; { charnameC20];\n intage; intage;\n }Person; };\n Personp; structPerp;",
+        "struct",
+        "struct\n { charnameC20]; { charnameC20];\n intage; intage;\n }Person; }p;\n Personp;"
+      ],
+      "options": [
+        "typedef struct Per\n{ char name[20];\n  int age;\n}Person;\nPerson p;",
+        "struct Per\n{ char name[20];\n  int age;\n};\nstruct Per p;",
+        "struct\n{ char name[20];\n  int age;\n}Person;\nPerson p;",
+        "struct\n{ char name[20];\n  int age;\n}p;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-9-53",
+      "source": "x",
+      "page": 135,
+      "sourceImage": "questions/x-9-53.webp",
+      "beforeOptions": [
+        "abcx;",
+        "structx;",
+        "structabcx;",
+        "structABCx;\n3． 阅读程序题\n(1)下列程序的输出结果是 。\n#include<stdio.h>\nintmain()\n{ structst{intx,y;}aC4]={{10,20},{30,40},{50,60},{70,80}};\n structst*p=a;\n1"
+      ],
+      "options": [
+        "abc x;",
+        "struct x;",
+        "struct abc x;",
+        "struct ABC x;"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "x-10-20",
+      "source": "x",
+      "page": 161,
+      "sourceImage": "questions/x-10-20.webp",
+      "beforeOptions": [
+        "fopen(\"e:'user'abc.txt\",\"r\")",
+        "fopen(\"e:''user''abc.txt\",\"r+\")",
+        "fopen(\"e:'user'abc.txt\",\"rb\")",
+        "fopen(\"e:'user'abc.txt\",\"w\")\n3． 阅读程序题\n(1)下面程序运行时输出结果的第1行是 ,第2行是 。\n#include<stdio.h>\nintmain()\n{ FILE *fp;\n intm,n,aC6]={1,2,3,4,5,6};\n fp=fopen(\"d:''abc.dat\",\"w\");\n fprintf(fp,\"%d%d%d'n\",aC0],aC1],aC2]);\n fprintf(fp,\"%d%d%d'n\",aC3],aC4],aC5]);\n fclose(fp);\n fp=fopen(\"d:''abc.dat\",\"r\");\n fscanf(fp,\"%d%d\",&m,&n);\n printf(\"%d'n%d\",m,n);\n fclose(fp);\n return0;\n}\n(2)下面程序运行时输出结果是 。\n#include<stdio.h>\nintmain()"
+      ],
+      "options": [
+        "fopen(\"e:\\user\\abc.txt\",\"r\")",
+        "fopen(\"e:\\\\user\\\\abc.txt\",\"r+\")",
+        "fopen(\"e:\\user\\abc.txt\",\"rb\")",
+        "fopen(\"e:\\user\\abc.txt\",\"w\")"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "n2-2-5",
+      "source": "n2",
+      "page": 6,
+      "sourceImage": "questions/source-n2-2-5.webp",
+      "beforeOptions": [
+        "3 1 4 3",
+        "3 1 3 3",
+        "3 1 4 3",
+        "2 1 3 2"
+      ],
+      "options": [
+        "3 1 4 3\n2 4 1 4",
+        "3 1 3 3\n2 4 2 2",
+        "3 1 4 3\n2 4 1 2",
+        "2 1 3 2\n1 3 1 2"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "n2-3-5",
+      "source": "n2",
+      "page": 11,
+      "sourceImage": "questions/source-n2-3-5.webp",
+      "beforeOptions": [
+        "a=12  y=12",
+        "a=12  y=12\na=14  y=16                            a=16  y=28\n      a=16  y=20\n      a=18  y=24",
+        "a=12  y=12",
+        "a=12  y=12\n                                            a=14  y=26\n                                            a=14  y=44"
+      ],
+      "options": [
+        "a=12  y=12\na=14  y=16\na=16  y=20\na=18  y=24",
+        "a=12  y=12\na=16  y=28",
+        "a=12  y=12",
+        "a=12  y=12\na=14  y=26\na=14  y=44"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "B"
+    },
+    {
+      "questionId": "n2-5-13",
+      "source": "n2",
+      "page": 23,
+      "sourceImage": "questions/source-n2-5-13.webp",
+      "beforeOptions": [
+        "a=5,b=6,c=1",
+        "a=5,b=6,c=11",
+        "a=5,b=6,c=1",
+        "a=5,b=6,c=1\n      a=6,b=21,c=11      a=5,b=21,c=11      a=5,b=21,c=11      a=6,b=21,c=11\n      a=5,b=6,c=11       a=5,b=6,c=11       a=5,b=6,c=11       a=5,b=6,c=11\n      a=8,b=31,c=21      a=8,b=31,c=21      a=8,b=31,c=21      a=5,b=31,c=21"
+      ],
+      "options": [
+        "a=5,b=6,c=1\na=6,b=21,c=11\na=5,b=6,c=11\na=8,b=31,c=21",
+        "a=5,b=6,c=11\na=5,b=21,c=11\na=5,b=6,c=11\na=8,b=31,c=21",
+        "a=5,b=6,c=1\na=5,b=21,c=11\na=5,b=6,c=11\na=8,b=31,c=21",
+        "a=5,b=6,c=1\na=6,b=21,c=11\na=5,b=6,c=11\na=5,b=31,c=21"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "n2-5-18",
+      "source": "n2",
+      "page": 24,
+      "sourceImage": "questions/source-n2-5-18.webp",
+      "beforeOptions": [
+        "12",
+        "12",
+        "12",
+        "12"
+      ],
+      "options": [
+        "12\n12",
+        "12\n23",
+        "12\n25",
+        "12\n16"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    },
+    {
+      "questionId": "n2-5-19",
+      "source": "n2",
+      "page": 25,
+      "sourceImage": "questions/source-n2-5-19.webp",
+      "beforeOptions": [
+        "65",
+        "A",
+        "A",
+        "65\n      6,1                6,1                6,7                6,7\n      6,1                6,1                6,7                5,7"
+      ],
+      "options": [
+        "65\n6,1\n6,1",
+        "A\n6,1\n6,1",
+        "A\n6,7\n6,7",
+        "65\n6,7\n5,7"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "D"
+    },
+    {
+      "questionId": "n2-7-7",
+      "source": "n2",
+      "page": 34,
+      "sourceImage": "questions/source-n2-7-7.webp",
+      "beforeOptions": [
+        "11",
+        "11",
+        "10",
+        "10"
+      ],
+      "options": [
+        "11\n20\nc",
+        "11\n20\nb",
+        "10\n20\nc",
+        "10\n20\nb"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "A"
+    },
+    {
+      "questionId": "n2-7-15",
+      "source": "n2",
+      "page": 36,
+      "sourceImage": "questions/source-n2-7-15.webp",
+      "beforeOptions": [
+        "1000",
+        "1100",
+        "1100",
+        "100\n                       abcd               abcd               abxd               abcd                             their"
+      ],
+      "options": [
+        "1000\nabcd",
+        "1100\nabcd",
+        "1100\nabxd",
+        "100\nabcd"
+      ],
+      "review": "对照原题图片人工恢复；不改变资料判分答案。",
+      "answer": "C"
+    }
+  ],
+  "pending": [
+    {
+      "questionId": "h-8-综合拓展篇-5",
+      "reason": "原卷 C 选项本身疑似缺引号，不能仅按程序意图猜补；其他字符常量空格数需单独处理。"
+    },
+    {
+      "questionId": "n1-2-1",
+      "reason": "配图与题干不对应，原PDF跨行选项精确对齐需进一步核对。"
+    },
+    {
+      "questionId": "n1-5-5",
+      "reason": "B选项前导空格的精确数量不能仅凭等比例缩略图推定。"
+    },
+    {
+      "questionId": "n3-7-1-1415",
+      "reason": "选项 B/C 与原卷词语不一致，属于内容核查而非空格修复。"
+    },
+    {
+      "questionId": "n3-10-1-1118",
+      "reason": "导入的整段程序与原卷不一致，且原卷函数名及输出空格存在印刷疑点。"
+    },
+    {
+      "questionId": "n3-16-1-804",
+      "reason": "整段代码与选项和原卷不一致，需独立核对整题。"
+    },
+    {
+      "questionId": "n3-23-0-812",
+      "reason": "C选项与原卷不同，属数字内容识别错误。"
+    },
+    {
+      "questionId": "x-9-51",
+      "reason": "源图中右花括号形状疑似右圆括号，需放大对照原PDF，不能猜改。"
+    }
+  ],
+  "limitations": "全量文本筛查不等于所有原图逐字校验；40道自练候选尚未逐题人工复核，其他未命中筛查的题目不宣称无错。",
+  "lessonRechecks": [
+    {
+      "questionId": "n1-2-2",
+      "file": "question-imports/lessons/gemini-001.json"
+    },
+    {
+      "questionId": "n1-3-4",
+      "file": "question-imports/lessons/gemini-001.json"
+    },
+    {
+      "questionId": "x-1-12",
+      "file": "question-imports/lessons/gemini-005.json"
+    },
+    {
+      "questionId": "x-2-13",
+      "file": "question-imports/lessons/gemini-005.json"
+    },
+    {
+      "questionId": "x-2-23",
+      "file": "question-imports/lessons/gemini-006.json"
+    },
+    {
+      "questionId": "x-2-28",
+      "file": "question-imports/lessons/gemini-006.json"
+    },
+    {
+      "questionId": "x-2-45",
+      "file": "question-imports/lessons/gemini-006.json"
+    },
+    {
+      "questionId": "x-2-58",
+      "file": "question-imports/lessons/gemini-007.json"
+    },
+    {
+      "questionId": "x-3-18",
+      "file": "question-imports/lessons/gemini-007.json"
+    },
+    {
+      "questionId": "x-4-5",
+      "file": "question-imports/lessons/gemini-007.json"
+    },
+    {
+      "questionId": "x-5-15",
+      "file": "question-imports/lessons/gemini-008.json"
+    },
+    {
+      "questionId": "x-6-2",
+      "file": "question-imports/lessons/gemini-008.json"
+    },
+    {
+      "questionId": "h-3-基础篇-24",
+      "file": "question-imports/lessons/luna-choices-002.json"
+    },
+    {
+      "questionId": "h-5-基础篇-23",
+      "file": "question-imports/lessons/luna-choices-003.json"
+    },
+    {
+      "questionId": "h-5-基础篇-24",
+      "file": "question-imports/lessons/luna-choices-003.json"
+    }
+  ],
+  "spaceMarkersAdded": [
+    "h-1-综合拓展篇-2",
+    "n1-1-6",
+    "n5-5"
+  ]
+}

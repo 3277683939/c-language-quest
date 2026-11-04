@@ -423,7 +423,7 @@
     },
     {
       "questionId": "n1-2-2",
-      "sourceHash": "8df1bf005aeec011a42a03831273afb7bf69a53ef2757084d70f8263f5d5883a",
+      "sourceHash": "b7b68c3f8ef3615b190dc419c21bd44d781decfe8c253947b5169e6ae3263a8d",
       "explanation": "第一条连续赋值先算括号内 z=10, y=15 再算 x=10；第二条逗号表达式从左向右计算，最终取 x+10 赋值给 y。",
       "steps": [
         "第一段语句 x = (y = (z = 10) + 5) - 5：",
@@ -560,7 +560,7 @@
     },
     {
       "questionId": "n1-3-4",
-      "sourceHash": "74bd9f895a57d5026482ac0e7038b4178e60cd8bea67e3d6015ac0c88046bdf3",
+      "sourceHash": "3c69d57fd0b700490ea82a380c5d1e02a8085d3474073d03fe37cb6064a4b230",
       "explanation": "依次分析四个 printf：10>10 为假输出 0；w++||z++ 逻辑或短路输出 1；!w>z 为 0>7 输出 0；w&&z 为 4&&7 输出 1。",
       "steps": [
         "1. x>10 ? x+100 : x-10：x=10，10>10 为假，取 x-10 = 0，首行输出 0。",
