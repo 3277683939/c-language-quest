@@ -625,6 +625,7 @@ function renderPracticeLevelQuiz() {
     answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">参考答案待补充</div><p class="answer-tip">${esc(u.answerOrigin || '参考答案尚未可靠匹配。')} 可使用 DeepSeek 获取AI参考答案与讲解。</p></div>`;
   }
   answerContent += getImportedAIHTML(u);
+  if (window.CQuestLessons) answerContent += CQuestLessons.html(u.id);
   const answerOriginHTML = u.answerOrigin ? `<div class="answer-origin"><span>来源：${esc(u.answerOrigin)}</span></div>` : '';
 
   $('#quiz-content').innerHTML = `
@@ -711,6 +712,7 @@ function renderPracticeLevelQuiz() {
       </div>
     </div>
   `;
+  if (window.CQuestLessons) CQuestLessons.mount();
 }
 
 function onPracticeQuizDraftInput(val) {
@@ -736,6 +738,7 @@ function togglePracticeQuizAnswer() {
     btn.textContent = practiceQuiz.showAnswer ? '收起参考答案' : '查看参考答案';
     btn.classList.toggle('active', practiceQuiz.showAnswer);
   }
+  if (window.CQuestLessons) CQuestLessons.mount();
 }
 
 function markPracticeQuizSelfCheck(isMastered) {
@@ -1020,6 +1023,7 @@ function renderQuiz() {
 
           ${q.qualityNote ? `<p class="quality-note" style="margin-top:8px;"><b>题目勘误与提醒：</b>${esc(q.qualityNote)}${q.originalAnswer ? ` 资料原答案：${esc(q.originalAnswer)}。` : ""}</p>` : ""}
           <small class="answer-origin">判分依据：${esc(q.answerOrigin)} · 旧版资料可能含特定编译环境约定</small>${!teachingEntry?.lesson ? getImportedAIHTML(q) : ''}
+          ${window.CQuestLessons ? CQuestLessons.html(q.id) : ''}
         </div>
       ` : ''}
 
@@ -1036,6 +1040,7 @@ function renderQuiz() {
     </div>
   `;
   if (typeof renderTeachingPanel === 'function') renderTeachingPanel();
+  if (window.CQuestLessons) CQuestLessons.mount();
 }
 
 function requestAIForCurrentQuestion() {
@@ -1376,6 +1381,7 @@ function practiceOneUnit(id) {
 
 function renderLibrary() {
   $('#app').innerHTML = title('THE QUESTION LIBRARY', '你的题库，都在这里。', `${Q.length} 道客观选择题 · ${PU().length} 道自练大题 · ${getAllSources().length} 份题库`) +
+    (window.CQuestLessons ? `<p class="save-note" style="margin-bottom:16px">预写逐题讲解：${CQuestLessons.coverage.covered} / ${CQuestLessons.coverage.total} 题，所有用户均可直接查看，无需填写 API Key。</p>` : '') +
     `<div class="mini-note" style="margin:0 0 25px">
       <strong>资料整理说明</strong>当前题库共 ${Q.length + PU().length} 道题目；新增资料的完整性以导入核对报告为准。选择题在闯关地图中自动判分；填空、阅读、改错和编程大题在地图提供专属自练关卡与原题自练区，可直接作答并核对原书标准答案。
     </div>

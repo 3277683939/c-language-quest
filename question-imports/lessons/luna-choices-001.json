@@ -1,0 +1,638 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "h-1-综合拓展篇-1",
+      "sourceHash": "5be90effaaeb1e68c9912ecc7cb13136d30a621be42dcf5d96892858772e7f74",
+      "explanation": "标识符由字母、数字和下划线组成，且不能以数字开头；& 是运算符/地址符号，不能嵌入名字中。",
+      "steps": [
+        "print、FOR、_00 均可作为名字：普通单词可用，大写 FOR 不是保留关键字，下划线开头也允许。",
+        "&a 中的 & 不是标识符字符，所以 C 项不能作标识符。"
+      ],
+      "takeaway": "先检查字符集合，再看首字符；C 标识符区分大小写。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "& 不在标识符允许字符中，其余三项均符合命名规则。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-2",
+      "sourceHash": "a99a18663670813c8a542d0c2731aa58ae92689405acbe6152d2bba5dce9754e",
+      "explanation": "IF 由字母组成且不是小写关键字 if；C 标识符区分大小写，因此 IF 合法。",
+      "steps": [
+        "-12 以减号开头，不是一个标识符。",
+        "a b 含空格，会被分成两个记号。",
+        "int 是保留关键字，不能当普通名字。"
+      ],
+      "takeaway": "关键字是区分大小写的完整单词；标识符不能含空格或标点。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "IF 与小写关键字 if 不同；其余项分别含非法字符、空格或关键字。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-3",
+      "sourceHash": "83ea09331ca3e83bcde03ab314ff35898463190b10c1b078f08f4ecf117ea2a8",
+      "explanation": "“每一步操作都必须有清楚、严格的规定”强调同一条件下步骤含义明确，不会因理解不同而产生不同执行方式，这叫确定性。",
+      "steps": [
+        "正当性讨论算法是否能正确解决问题。",
+        "可行性要求每步能由人或机器实际执行。",
+        "有穷性要求经过有限步骤终止。"
+      ],
+      "takeaway": "题干抓“规定清楚、严格”，对应确定性。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "题干定义的是步骤含义明确的确定性。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-4",
+      "sourceHash": "fb2452ec622575034cb9465ff9d6367e423399cfd3bbadaabdf53b523a5816e8",
+      "explanation": "按本题的算法性质口径，程序应产生所求结果；A 说“可以没有输出”不符合输出性，因此是错误项。",
+      "steps": [
+        "B 对应有穷性：算法执行应在有限步内结束。",
+        "C 可以成立：某些程序可用固定数据处理，不必读取外部输入。",
+        "D 对应确定的算法对相同输入给出相同结果。"
+      ],
+      "takeaway": "算法常见性质包括输入、输出、确定性、有穷性和可行性。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "A 否认了算法应给出输出这一基本性质；其余描述符合常见算法性质。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-5",
+      "sourceHash": "a78b9d32b01f93d96383951015fae320081c5c7882e6210d485145ec0fd48452",
+      "explanation": "编译程序把高级语言源程序翻译成目标程序（通常为目标代码/目标文件），对应 D。",
+      "steps": [
+        "汇编程序主要翻译汇编语言。",
+        "解释程序逐句解释执行，通常不生成题目所说的目标程序。",
+        "编辑程序负责编写或修改文本，不负责翻译。"
+      ],
+      "takeaway": "“源程序变目标程序”对应编译器。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "只有编译程序承担高级语言到目标程序的翻译。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-6",
+      "sourceHash": "600a6486852f54b240aeae8d172ddec7c1758bda56e9a5444c75f4234ea3ae82",
+      "explanation": "顺序、分支、循环可以组合和嵌套，复杂程序也能由这些控制结构构成；所以“只能解决简单问题”错误。",
+      "steps": [
+        "A 是结构化程序的三种基本控制结构。",
+        "B 模块化是结构化设计常用的组织方法。",
+        "D C 支持结构化控制语句和函数，教材将其归为结构化程序设计语言。"
+      ],
+      "takeaway": "基本结构简单，组合起来能表达复杂流程。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "三种基本结构可组合求解复杂问题，不限于简单问题。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-7",
+      "sourceHash": "b76d1270b938f889f351c037c42336ddbb008c1fcfbaf30778f8b80a0474ce6a",
+      "explanation": "教材入门题通常把以分号结束的简单语句作为考点，故题库答案选 B；但严格按 C 语法，复合语句和 if/while 等控制语句并不都以分号结尾，B 的“必须”并非普遍成立。",
+      "steps": [
+        "A 若“基本组成单位”指程序结构，函数定义比语句更合适；表述也容易混淆。",
+        "C 一行可以写多条语句，也可跨行书写一条语句。",
+        "D C 源程序可由多行组成。"
+      ],
+      "takeaway": "遇到“必须/每一条”这类绝对表述，要核对复合语句等例外。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案为B；严格 C 语法下该项不成立",
+        "reason": "B 是教材常见简化说法，但复合语句、选择/循环语句等不以分号收尾，题目未限定“简单语句”，故严格阅读有歧义。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-8",
+      "sourceHash": "cb1ba6e1d0ea997964d8b9c5c889ee6ccd0f7babf75b1a10dc33c5cb4f3d91cf",
+      "explanation": "三种基本控制结构是顺序、分支和循环。题干已有顺序与循环，空格应填“分支”。",
+      "steps": [
+        "递归是函数调用自身的方式，不是这组三种基本结构之一。",
+        "转移不是标准的第三种基本结构名称。",
+        "嵌套表示结构之间的包含关系，也不是基本结构类别。"
+      ],
+      "takeaway": "记住顺序、分支、循环三项。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "三种基本结构中缺少的是分支结构。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-9",
+      "sourceHash": "c4a415780e02c983dfbee175664a10ca5e02fa188551c9e4f9559dfd2ec49353",
+      "explanation": "通常的编译流程先生成目标文件，再经链接形成可执行文件；目标文件 .obj 通常不能直接运行，故“二者都能直接运行”错误。",
+      "steps": [
+        "A 源代码需经过编译/链接等步骤，处理器不能直接执行 C 源文本。",
+        "B .obj 是目标文件，属于二进制目标代码。",
+        "C 在题目所述工具链中，链接可生成 .exe 可执行文件。"
+      ],
+      "takeaway": "目标文件与可执行文件用途不同：目标文件还需链接。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": ".obj 通常不是可直接运行的完整程序，D 把它与 .exe 等同了。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-10",
+      "sourceHash": "3102d1bd5dd8067bda36aee28d84988ef6ca1e72361e865d7126270ce6277813",
+      "explanation": "经典三种控制结构为顺序、分支、循环；“逆转结构”不属于其中。",
+      "steps": [
+        "顺序结构按语句顺序执行。",
+        "分支结构按条件选择路径。",
+        "循环结构重复执行语句块。"
+      ],
+      "takeaway": "顺序、分支、循环；“逆转”不是控制结构名称。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "逆转结构不在程序设计三种基本结构之列。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-11",
+      "sourceHash": "4c743c462fb937c829e8476ce2a18d033547f427d337fe9fad8e72113003117f",
+      "explanation": "static、if、case 都是 C 关键字；then 不是 C 语言关键字，常见于其他语言的条件语法。",
+      "steps": [
+        "static 用于存储类别/内部链接等语境。",
+        "if 是选择语句关键字。",
+        "case 用于 switch 分支标号。"
+      ],
+      "takeaway": "C 关键字不能直接用作普通标识符；then 不是 C 关键字。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "then 不属于 C 关键字，其余三项属于。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-12",
+      "sourceHash": "4c9f37ad932dd7026dd5f422a04af0816e7e87f13f123c4cdb0eceace8d25b70",
+      "explanation": "sqrt 是标准数学库函数名，不是 C 关键字；调用它本身不包含关键字。使用时通常还需声明数学库接口。",
+      "steps": [
+        "whi1e 中含数字 1，是普通标识符拼写，不是 while；但条件中的 != 和语句并不含关键字。题目按预期可能想写 while。",
+        "if 是关键字。",
+        "return 是关键字。"
+      ],
+      "takeaway": "区分库函数名与关键字；sqrt 不是关键字。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案为A；按字面 A、B 都不含关键字",
+        "reason": "B 写的是 whi1e（数字1），并非 while，因此字面上也没有关键字；若原意是 while，才只有 A 符合。原题无质量注记，不能擅自把数字改成字母。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-13",
+      "sourceHash": "dbf0d740a78c7f5161e46b7bbb4202dae7296fff7ec842bca470973dce81e838",
+      "explanation": "题库给 C，但选项实际写成 doub1e，其中字符是数字 1，不是 double 中的小写字母 l；按当前题面，四项都不是 C 关键字。",
+      "steps": [
+        "F1oat 中有数字 1，且大小写也不匹配 float。",
+        "sing1e 不是 C 关键字。",
+        "doub1e 拼写错误，不能因相似而当作 double。",
+        "rea1 中有数字 1，real 本身也不是标准 C 关键字。"
+      ],
+      "takeaway": "逐字符核对拼写，数字 1 与字母 l 不同。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "无正确选项；题库答案C按当前拼写不成立",
+        "reason": "C 项是 doub1e（数字1），不是关键字 double；题面没有可选的合法关键字。"
+      }
+    },
+    {
+      "questionId": "h-1-综合拓展篇-14",
+      "sourceHash": "bef84b37c2b9d5a5bc5fe387489fe01bdecb36ca8e1c34ac282960a90508bec2",
+      "explanation": "C 的关键字是 default，但题面 D 写成 defau1t（数字 1），不是该关键字。按字面其余项也都不是关键字，因此本题没有正确选项。",
+      "steps": [
+        "printf 是标准库函数名，不是关键字。",
+        "inc1ude 含数字 1，也不是预处理指令 #include 的拼写。",
+        "fun 只是普通标识符。"
+      ],
+      "takeaway": "关键字必须拼写完全一致；预处理指令也不等同于关键字。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "无正确选项；题库答案D按当前拼写不成立",
+        "reason": "D 项 defau1t 含数字1，按题面不是 default；A、B、C 也不是关键字。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-1",
+      "sourceHash": "df17ae35d57f96f16b6746ee2c4dbfe6643a90dd73355f24a786464e4b637166",
+      "explanation": "程序启动后从 main 函数进入执行；因此 A 正确。",
+      "steps": [
+        "main 是程序入口函数，不是系统库函数。",
+        "函数体内可以在一行写多条语句，语句也可以跨行。",
+        "main 不必排在所有其他函数定义之前，只要声明/定义安排正确即可。"
+      ],
+      "takeaway": "从 main 进入程序；函数定义的书写顺序不等于执行顺序。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "程序执行入口是 main；其余选项都把书写位置或语句排版说成了限制。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-2",
+      "sourceHash": "eea48a048c905a109b727cd50ed2df41279482cb5a5fb4f2ab2ff18ac156d59b",
+      "explanation": "C 的块注释以 /* 开始、以 */ 结束；选项 C 正好给出这一对界定符。",
+      "steps": [
+        "花括号用于复合语句，不是注释界定符。",
+        "方括号常用于数组下标，不是注释界定符。",
+        "*/ 是结束标记，不能放在开头；*/和/*顺序反了。"
+      ],
+      "takeaway": "注释形式是 /* 注释内容 */。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C 项给出正确的块注释起止符号。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-3",
+      "sourceHash": "86c91aae12c3ce91473f4fe68d2438bec83ffdb7916addc8c9b04a9d56aeb632",
+      "explanation": "按题目设想把 a 乘以 10 后加 0.5，再赋给整数 b：1.23456×10+0.5=12.8456，转成 int 截去小数得 12；再用 12/10.0 得 1.2。",
+      "steps": [
+        "A 借助 int b 完成正数四舍五入后截取整数位。",
+        "B 没有先截为整数，结果约为 1.28456。",
+        "C 先把 a 截为 1，再计算，得到 1.0，丢掉原小数信息。",
+        "D 先除以 10，量级变错，不能保留一位小数。"
+      ],
+      "takeaway": "正数保留一位小数可先算 int(a*10+0.5)，再除以 10.0。题面把 float 写成 f1oat，按字面声明无效。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案A（按 float 的预期题意）；题面原样 f1oat 不是类型名",
+        "reason": "A 的舍入算法正确，但 stem 中声明写作 f1oat（数字1），若逐字编译该声明无效；说明按题目显然的 float 意图解释，未改写原题。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-4",
+      "sourceHash": "31b20d62840c4e1a5ed7d9c1a20fff2b9f195e809f833fe964b0ace1b8fdbfe6",
+      "explanation": "C 语句通常用空白字符分隔，换行不是语法边界；一条语句可以排在多行上，所以 B 正确。",
+      "steps": [
+        "注释不局限于程序开头或语句后，允许出现在语法允许的空白位置。",
+        "一行可包含多条语句，语句也可跨行。",
+        "一个 C 程序可以由多个源文件组成，再一起编译链接。"
+      ],
+      "takeaway": "换行和缩进主要影响可读性，不决定 C 语句边界。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "C 格式自由，语句可跨行；另外三项都对注释、行数或文件数作了错误限制。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-5",
+      "sourceHash": "52ba3cba8bda0061d2b8f2540d94544e1b7568b08d97d0fda217007ed8c67e26",
+      "explanation": "C 可执行程序需要定义 main 函数作为入口；即使没有任何标准头文件、变量声明或注释，仍可构成最小程序。",
+      "steps": [
+        "#include<stdio.h> 仅在需要相应声明时才需要，并非每个程序必需。",
+        "变量定义取决于程序需要，不能说所有程序必有。",
+        "注释完全可省略。"
+      ],
+      "takeaway": "必需的是程序入口定义，不是某个头文件或注释。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "main 函数定义是题目所说 C 可执行程序的必要部分。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-9",
+      "sourceHash": "7c258e2ca59221a4b11fa09ba1d6e5017122ed6b1dd0ebdfffd8fcc93f88bc06",
+      "explanation": "C 程序可以包含一个或多个函数，包含 main 及所需辅助函数，因此 B 正确。",
+      "steps": [
+        "注释被预处理阶段删除，不会因其中的拼写内容而报普通标识符错误。",
+        "main 不要求位于源文件开头。",
+        "一行可以写多个语句，格式主要由语法分隔符决定。"
+      ],
+      "takeaway": "函数多少和源代码行数不是固定为一。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "一个 C 程序可由多个函数组成。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-11",
+      "sourceHash": "d6427a3f1240ec17343a274b5544dbe76a16c9ed4d32ecdb757c599bf1861e67",
+      "explanation": "执行从 main 函数的第一条可执行语句开始；因此 C 是本组选项中正确说法。",
+      "steps": [
+        "main 不必写在其他函数之前。",
+        "main 可以为空函数体，不要求至少有一条语句。",
+        "若 main 正常返回，程序结束；但“总是在最后一条语句后结束”忽略了 return、异常终止等情况。"
+      ],
+      "takeaway": "入口是 main 的函数体；不要求其定义最先出现或非空。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C 准确描述了程序从 main 函数体开始执行。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-14",
+      "sourceHash": "6079692c4ff54f20a849edde32adf8a88256a1e9273519a938e408a5e2b4b321",
+      "explanation": "OUL 以字母 O 开头，是标识符形式而不是数字常量；它不能作为 C 常量。",
+      "steps": [
+        "(1ong)123 中的 1ong 以数字 1 开头，按原样不是合法类型名，故该项写法也有问题。",
+        "1e0 是合法浮点常量，等于 1×10^0。",
+        "字符常量 '\\x2a' 使用十六进制转义，表示对应字符。"
+      ],
+      "takeaway": "按原样检查字符，不能把大写 O 猜成数字 0，也不能把 1 猜成字母 l。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案A；但B按当前字面拼写也不是合法常量表达式",
+        "reason": "A 的 OUL 明显不是数字常量；同时 B 写作 1ong（首字符为数字），不是 long，故也不合法。题面/选项字符使单选不唯一。"
+      }
+    },
+    {
+      "questionId": "h-2-综合拓展篇-17",
+      "sourceHash": "fe942b155a558a49ffe0f8dd956e3694e601477da0210eedb0e9a1533e155c93",
+      "explanation": "题库按常见 ASCII 编码预期 C：'5'=53，减十进制49得4；减'0'或48则得5。但题干未说明字符集，C 标准不保证字符'5'编码为53，因此严格可移植地看，B、C、D 都依赖编码，答案并非对所有实现唯一。",
+      "steps": [
+        "常见 ASCII 下：'5'=53，'0'=48。",
+        "减'0'、0x30 或 '\\060'（ASCII 48）得到5；减49得到4，所以教材预期选C。",
+        "C标准保证数字字符连续，但不保证'0'的编码就是48；若按标准而不假设ASCII，题目没有给足信息。"
+      ],
+      "takeaway": "字符字面量和数值编码不是同一概念；字符常量的具体编码由执行字符集决定。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "常见ASCII下选C；严格按C标准未指定字符集时不能唯一判断",
+        "reason": "题目未说明采用ASCII；只有在该假设下字符'5'=53且减49得4。B、C、D的数值减法可能随执行字符集不同而改变。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-1",
+      "sourceHash": "bc42b413b9868efb0c57dcc55d6dd9e5fb3de7eac3788f0c443a4d012319f7aa",
+      "explanation": "x-- 是后置自减：表达式先取旧值 10 给 printf，再把 x 变为 9。--y 是前置自减，先将 y 从 3 变为 2 再传入，所以打印 10,2。",
+      "steps": [
+        "A 忽略了两次自减前后时机。",
+        "B 把 x-- 的旧值误看成 9。",
+        "C 把 x-- 当成前置自减。"
+      ],
+      "takeaway": "后置先用旧值，前置先改变量；这里两个参数改的是不同变量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出参数值为 x-- 的10和 --y 的2。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-2",
+      "sourceHash": "a6bf9924a5b1e6014e3949e98fefc6c26dec8cbedd37f8cd2f8a4031d65c57cd",
+      "explanation": "x、y 都是 int，10/3 做整数除法，商为 3、余数舍去。赋值表达式 y=x/y 的值也是 3，因此输出 3。",
+      "steps": [
+        "0 和 1 都不是 10/3 的整数商。",
+        "“不确定的值”不适用；整数除法结果确定。"
+      ],
+      "takeaway": "两个整数相除会截去小数部分。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "整数除法 10/3 得3，赋给 y 后作为 printf 参数输出。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-3",
+      "sourceHash": "590264115010610a5694fe7e4f31773648a638b06e13a01e817ae6ab30bf2026",
+      "explanation": "scanf 要把读入结果存入变量，因此对应参数应给变量地址；D 的 &f 与 %f 匹配。",
+      "steps": [
+        "常量 3.1415 不是可写入的地址，不能作为 scanf 的目标。",
+        "没有输入项地址，无法把转换结果存到变量。",
+        "scanf 的浮点输入格式可指定字段宽度，但不能用 printf 式的“精度”写法；%4.2f 不是合法的 scanf 浮点转换格式。"
+      ],
+      "takeaway": "scanf 写变量需要地址；scanf 的字段宽度不是小数位精度。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "%f 需要 float*，&f 是目标地址；其余选项错误地省略地址或写了不适用格式。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-4",
+      "sourceHash": "e679c39cb4bd13a9713f5296c9429b77c9ecdbe998f3d77b629b7a196cf32763",
+      "explanation": "格式串中的 a=、逗号和 b=、c= 都是要逐字匹配的普通字符；输入必须按 a=1,b=3,c=2 的字符次序提供，D 正好符合。",
+      "steps": [
+        "132 缺少 a=、逗号和其余标签。",
+        "1,3,2 缺少 a=、b=、c= 标签。",
+        "空格不能替代格式串要求的逗号和等号。"
+      ],
+      "takeaway": "scanf 格式串里的标点通常要求输入中出现相同字面字符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "只有D与 scanf 中的字面前缀、等号和逗号顺序相同。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-5",
+      "sourceHash": "d6f50b797bd1cb6ad348cbdda1a15bceaaa196c26ddfc98b6e68af74b40c1a0d",
+      "explanation": "printf 的 %d 输出 12；%8.6f 输出六位小数，3.141593 恰有 8 个字符，宽度 8 不额外补空格。两个转换之间没有空格或标点，所以连在一起是 123.141593。",
+      "steps": [
+        "A、B、C 擅自插入了分隔符或空格。",
+        "D 保留格式串中相邻输出项直接连接的形式。"
+      ],
+      "takeaway": "printf 只输出格式串明确要求的分隔符；字段宽度是最小宽度。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "格式串没有分隔符，两个输出字段直接相连。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-6",
+      "sourceHash": "21b3162c203bc1b7f054cc2bbd79a91098b37dd6acab3441124f18594e95dabe",
+      "explanation": "第一个 printf 有两个转换：%c 输出 a，%d 输出其 ASCII 码 97；第三个参数 k 多余，会被忽略。第二个 printf 再输出 k=12 和换行，合起来是 a,97k=12。",
+      "steps": [
+        "A 不会因字符与 %d 配对就自动成为未定义输出；字符会经默认提升作为整数参数。",
+        "B 多出的实参不会导致输出零或不定值。",
+        "C 错把多余实参 12 也打印在第一行。"
+      ],
+      "takeaway": "printf 的转换说明比实参少时，多余实参不输出；本例两次调用之间也没有换行。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "第一句只打印 a,97，第二句紧接着打印 k=12。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-7",
+      "sourceHash": "8c2f68296ae509f735a47927abecd1d0b89c1ce3860120c00fc84efc0f3e3858",
+      "explanation": "三个 %f 转换依次读取三个浮点数，空白可分隔相邻输入项。B 用逗号分隔：格式串中没有逗号，第二个 %f 在逗号处无法匹配，因此不能按要求读完三值。",
+      "steps": [
+        "A 只有一个数，不足以给 a、b、c 都赋值。",
+        "C 同样只给出一个数。",
+        "D 按当前排版文字读取时，空白后出现的数值序列不清楚且不是明确的 10、22、33 三个值。"
+      ],
+      "takeaway": "scanf 的 %f 可跨空白读取；逗号不是自动接受的分隔符。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案B（逗号会使第二次转换失败）；按现有选项排版A、C也不完整",
+        "reason": "A、C 各只显示一个数，也无法给三个变量赋值；D 的 OCR/空白内容重复且不清晰。若题意强调逗号分隔的输入形式，B 是明显错误项，但单选数据本身有缺陷。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-8",
+      "sourceHash": "df0febd2713cc1b5d962f947e1d7238fd41a06030529cfa5362dddd631cf7102",
+      "explanation": "a、b、c 都是整数且非零，所以 !a=0、!b=0、!c=1。逻辑优先级使表达式为 (!a&&!b)||!c，即 0&&0||1=1。",
+      "steps": [
+        "0 不对，因为最后的 !c 为真。",
+        "非0 的数和 -1 都不是该表达式实际返回的整数值。",
+        "逻辑运算结果为 0 或 1，本例为 1。"
+      ],
+      "takeaway": "逻辑非把0变1、非0变0；逻辑与优先于逻辑或。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "表达式化简为 0&&0||1，结果是1。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-9",
+      "sourceHash": "415134fe4063e5efff79cd0a05dc5a2887078cdba7cf889e98bfb767814de754",
+      "explanation": "复合赋值从右向左结合：i*=k 先算，i=2、k=2，所以 i 变成4；再执行 k+=4，k 变成6。赋值表达式结果为6，故 m=6，i=4。",
+      "steps": [
+        "A、B 的 k 或 i 中至少一个更新结果不符。",
+        "D 把 k+=4 的结果误算成7。"
+      ],
+      "takeaway": "按右结合先算 i*=k，再把新 i 加到 k。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "最终 i=4，k=6，m取复合赋值表达式结果6。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-10",
+      "sourceHash": "bedfcd6b486d402a9209bdea8154ad9d88c07aa2b1a64e2d35378e3e88344285",
+      "explanation": "m 是十进制短整型值 32767。前导 0 使 n=032767 按八进制解释；用 %o 输出同一数值的八进制表示，前导 0 不会自动打印，所以显示 32767。",
+      "steps": [
+        "B 把八进制常量的源码写法当成输出形式。",
+        "C、D 多算了一位八进制数字。"
+      ],
+      "takeaway": "前导0影响整数字面量的解释；%o 输出八进制数位但不加前缀。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "%o 打印 032767 对应的八进制数位32767，不打印开头0。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-11",
+      "sourceHash": "d19cba6e7d23ec59f17cf73dd73d411c9f302fe5d7fb44e7aea282887fd6f270",
+      "explanation": "m 与 n 都是十六进制常量 0xabc，m-=n 就是 m=m-n=0。%x 输出十六进制数位，零打印为 0。",
+      "steps": [
+        "0X0、0x0 把前缀也写进了输出；%x 不会自动添加 0x。",
+        "0XABC 是把原值误当成相减后的值。"
+      ],
+      "takeaway": "printf 的 %x 只输出数位，不包含十六进制前缀。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "相等的数相减得0，%x 输出字符0。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-12",
+      "sourceHash": "05ccd66151da1f7c4f933edaa820a84be2f6ebd07c81080b2021ef684c9ac3a0",
+      "explanation": "x=102 是十进制，y=012 因前导0按八进制解释，即十进制 10。%2d 的 2 是最小字段宽度；102 已有三位，不截断，10 正好两位，输出 102,10。",
+      "steps": [
+        "A、B 把字段宽度当成最大位数，或把源码中的八进制前缀当输出字符。",
+        "D 将 x 的值错误地截成两位。"
+      ],
+      "takeaway": "printf 字段宽度不足时不会截断数值；前导0常量按八进制解释。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "值分别是102与10，%2d不会截掉102的百位。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-13",
+      "sourceHash": "f646692a7e9e0fa3bf17b0dbad4a7570408a3841cab5f486cf798bbf2fa8c4b1",
+      "explanation": "前两次 %c 把输入字符 6 和 5 读入 a、b。之后的 %d 要求参数是 int*，但题目把 char*（&c、&d）传给它；类型不匹配导致未定义行为，不能据此确定输出。",
+      "steps": [
+        "A 是常见的出题意图：把十进制 65、66 当作字符码得到 A、B，但 %d 写入 char 对象并不合法可靠。",
+        "B、C、D 都假设程序有确定结果；实际程序不满足 %d 对应的指针类型要求。"
+      ],
+      "takeaway": "scanf 的 %d 必须配 int*；变量是 char 时不能直接用 %d 写入。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "无法确定输出；题目程序含未定义行为",
+        "reason": "scanf 中两个 %d 对应的实参是 char* 而非 int*；按 C 规则行为未定义，答案A只是把意图当成了有效程序结果。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-14",
+      "sourceHash": "928d0b71f22d5af28c6e76ef1e2a671e260037d20a1eadf3826c636611c40614",
+      "explanation": "11 的八进制表示是 13，十六进制表示是 b；%o、%x 默认不打印前缀，所以结果为 k=11,k=13,k=b。",
+      "steps": [
+        "A 把八进制数位算成12，十六进制数位也不对。",
+        "B 把十六进制 b 错写为十进制式的13。",
+        "C 给八进制和十六进制输出擅自加了前缀。"
+      ],
+      "takeaway": "格式符决定进制输出；%o、%x 不自动附加前缀。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "11十进制等于13八进制、b十六进制，故D完全匹配。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-15",
+      "sourceHash": "7447fe7ca0a2fd0b240859ac552b75c79200d3ac7ef218b3b578e3ae051e1e24",
+      "explanation": "逗号运算符先执行左边 a=3*5，使 a=15，再计算右边 a*4 得60；printf 的 %d 打印60。调用结束后变量 a 仍为15。",
+      "steps": [
+        "A 是题目询问的 a 的值，不是打印出的数值。",
+        "B、C、D 都把另一个表达式或 printf 输出当成 a 的最终值。",
+        "第二个参数 a+5 没有对应转换说明，不会被输出。"
+      ],
+      "takeaway": "逗号表达式的值取最后一项，但左边的赋值副作用保留。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出语句后 a=15；表达式值60仅作为第一个 printf 参数。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-16",
+      "sourceHash": "58ca377a82f5157f925728dce7a9e691a585ed3e33dedf924c5f9501d1579836",
+      "explanation": "十进制 11 转八进制为 13（8+3），转十六进制为 b；%x 用小写字母输出，也不补前缀。",
+      "steps": [
+        "A、B 的八进制结果12或格式错误。",
+        "C 把前导0和0x前缀误认为格式符会自动输出的内容。"
+      ],
+      "takeaway": "手算进制：11=1×8+3=13₈；11= b₁₆。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "%d、%o、%x 分别输出11、13、b。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-17",
+      "sourceHash": "75a4d294d2cda3a11ed6128c2f82aa1a4cfbe6fe6548eee0477a9a79d8afe7fc",
+      "explanation": "scanf 格式串中的 m=、n=、p= 是必须原样匹配的字符，且三个数字之间没有空格或逗号。输入 m=123n=456p=789 后可依次匹配三个整数。",
+      "steps": [
+        "B、C 在标签间插入空格或逗号，而格式串没有这些字面字符，匹配会失败。",
+        "D 缺少三个标签，不能匹配格式串开头的 m=。"
+      ],
+      "takeaway": "scanf 中不属于转换说明的字符要求输入中出现相同字符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "A 与格式串中的所有字面字符及转换顺序吻合。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,631 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "h-3-基础篇-18",
+      "sourceHash": "01c7a3708b141f2cd248e21359de76b855083cdb357caf31b82966b68785a5e8",
+      "explanation": "25/10 的整数商是2，再算2%9仍为2。(-1)非零，a&&(-1)为真，逻辑结果为1。",
+      "steps": [
+        "25/10=2，a=2。",
+        "a与-1均非零，所以逻辑与为1。"
+      ],
+      "takeaway": "逻辑运算结果是0或1，不是原操作数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "a为2，且两边都为真，故输出2,1。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-19",
+      "sourceHash": "6178ac99ee09e5f7da32cf7f6900ceb3f2fbf2c6990e6431f7cadcdb9d5c58f8",
+      "explanation": "逗号表达式先求 a1，再求 a2，整个表达式取最后一项的值。a2 是小写 m，因此输出 m。",
+      "steps": [
+        "逗号表达式从左到右求值。",
+        "最终值是a2，不是a1。"
+      ],
+      "takeaway": "逗号表达式的值是最右侧表达式的值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "(a1,a2)的值为小写字母m。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-20",
+      "sourceHash": "daad97695df16ea4425f1ca1ca5d1dc6958c0990c4a1c497a1a64cd9f4809fce",
+      "explanation": "printf 只有一个 %d，只输出第一个参数 a=666；第二个参数 b=888 没有格式说明符对应，不会显示。",
+      "steps": [
+        "多出的实参不会自动打印。",
+        "换行符只换行，不会输出第二个数。"
+      ],
+      "takeaway": "printf 按格式串决定输出项数量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "唯一的%d对应666。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-21",
+      "sourceHash": "62966bfae6379d93dda0caa33513b6ff347c943b0938e0d78e653de9e9514965",
+      "explanation": "逗号运算符先求 x 再求 y，整个表达式的值取最后一项 y，即2003。",
+      "steps": [
+        "x=2002不是整体结果。",
+        "一个%d接收逗号表达式最终的一个值。"
+      ],
+      "takeaway": "逗号表达式整体值取最后一项。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "(x,y)的最终值是y=2003。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-22",
+      "sourceHash": "599dbec1629ee7edf7fb52e57a575d979821bc680d7070e28cec5268211b59f4",
+      "explanation": "%2d 的2是最小字段宽度，不是最大位数。1234超过宽度仍完整输出。",
+      "steps": [
+        "不会截成12或34。",
+        "宽度不足只会扩展，不会报错。"
+      ],
+      "takeaway": "printf 字段宽度不会截断数值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "1234仍完整打印。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-23",
+      "sourceHash": "3001a7538d757224bd952efb0c2e7ee5b994680577b40b65ad3e0370771aa005",
+      "explanation": "scanf 按宽度依次消耗输入：%2d 读98，%3f 读765，%4f 读4321。printf 的 %f 默认显示六位小数。",
+      "steps": [
+        "a=98。",
+        "b=765.0，c=4321.0。",
+        "%f输出为765.000000和4321.000000。"
+      ],
+      "takeaway": "scanf 字段宽度逐项消耗；printf %f 默认六位小数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "数值分别为98、765、4321，格式输出含六位小数。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-24",
+      "sourceHash": "e1a8c2144ef3fc4d07fa6b54c41773b9ae62a43bc27b97611deb296044c89287",
+      "explanation": "%d 读10，紧随的%c会读取下一字符；格式串在%c前没有空白，因此输入的X须紧接数字。第二组同理，需让%c读到Y。",
+      "steps": [
+        "%c不会跳过空白。",
+        "其余选项插入空白或缺少第二组字符。"
+      ],
+      "takeaway": "%c读取当前字符，空格也可能被读入。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案D；按D项清晰部分应输入10X和20Y",
+        "reason": "D项含重复、错位文本，疑为OCR拼接；可辨认的预期形式是数字后紧跟字符X/Y。"
+      }
+    },
+    {
+      "questionId": "h-3-基础篇-25",
+      "sourceHash": "7e1fc4884ba4e8bd30008e3b7a541db0681d372dbbc7ddf3fa29a9cd489fa031",
+      "explanation": "格式串的逗号是要匹配的普通字符，所以输入3,5才能让两个%d分别读入3和5。",
+      "steps": [
+        "空格不能代替逗号。",
+        "分号也不匹配。",
+        "35会被当成一个整数。"
+      ],
+      "takeaway": "scanf 格式串中的标点要按原样匹配。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "3,5匹配%d,%d中的逗号。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-1",
+      "sourceHash": "4a445eb627845b39063f00347d386dec0f79961575c642828a6d094ec465d69c",
+      "explanation": "在条件中单独写 a，a 非零时为真、为零时为假，正好表达 a 不等于0。",
+      "steps": [
+        "a<>0不是C的不等运算符。",
+        "!0恒为1，与a无关。",
+        "a=0是赋值。"
+      ],
+      "takeaway": "C用非零代表真；不等写作!=。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "a作为条件等价于a!=0。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-2",
+      "sourceHash": "5dd0f0bbd53acad0ddbc5e430855016866824b460b6fc2526176fe54218068b4",
+      "explanation": "++a先把-1变成0，0<0为假；&&短路，右边不会执行，b仍为4。k=0。",
+      "steps": [
+        "a更新为0。",
+        "右边b--未求值。",
+        "逻辑结果k为0。"
+      ],
+      "takeaway": "&&左侧为假会跳过右侧副作用。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出0 0 4。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-3",
+      "sourceHash": "964a3f53f0ca65edfd5c9daa02604ce46be7b727c4291f1c1715f839f69dc383",
+      "explanation": "if要求括号中是合法表达式，其值按0/非0判断真假；不限定为逻辑或关系表达式。",
+      "steps": [
+        "关系式和逻辑式只是常见条件。",
+        "其他可作为条件的合法表达式也可以。"
+      ],
+      "takeaway": "if检查表达式值，不限定运算种类。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "任意合法条件表达式均可使用。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-4",
+      "sourceHash": "de1aefeeb6766f1ecbfde2c862ed4288c8edba06fd293d5887285752c0801d19",
+      "explanation": "x++先用旧值5比较，5>5为假；比较后x变6。进入else，x--把旧值6用于打印，再将x减为5。",
+      "steps": [
+        "比较用旧值5。",
+        "else开始时x为6。",
+        "打印x--的旧值6。"
+      ],
+      "takeaway": "后置自增/自减先产生旧值，再更新变量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出6。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-5",
+      "sourceHash": "fcef0b74e98aa36296a0bdfd6d0c7e732a2312b4c53b4d62a6753348a3635da3",
+      "explanation": "a=b+c是赋值，右边为0，赋值后条件值为0，所以执行else输出$$$。",
+      "steps": [
+        "单等号是赋值。",
+        "0作为if条件是假。",
+        "程序语法成立。"
+      ],
+      "takeaway": "条件中的赋值结果也会参与真值判断。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "a变为0，条件假，输出$$$。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-6",
+      "sourceHash": "772ec3128edbb22eed40556dfb0b849a3b4c95306c9ddc4212726fbec46a6e05",
+      "explanation": "a=1把1赋给a，赋值表达式值为1，条件为真。执行b=1、c=2；d不变仍为0。",
+      "steps": [
+        "进入if分支。",
+        "else不执行。",
+        "最终为1,1,2,0。"
+      ],
+      "takeaway": "赋值表达式结果可作为if条件。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出1,1,2,0。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-7",
+      "sourceHash": "8b822eaab9afe5123f46655e5738812eee702c08f9456f709b6d54d5f54b3406",
+      "explanation": "C项没有花括号，if只控制 c=a 这一条；后面的 a=b、b=c 无条件执行。其他项把三次赋值一起放在if控制范围内。",
+      "steps": [
+        "A的逗号表达式是单条表达式语句。",
+        "B、D用复合语句包住三次赋值。",
+        "C中的分号结束受控语句。"
+      ],
+      "takeaway": "无花括号时，if只控制下一条语句。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C后两次赋值不受if控制。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-8",
+      "sourceHash": "b9c6adcc1818bd02628abe941f83d89a34387b921920e5db3d82cbc8260ae616",
+      "explanation": "A、B、C均在a非零时输出x、a为0时输出y；D恰好把两种情况下的输出对调。",
+      "steps": [
+        "if(a)与if(a!=0)等价。",
+        "if(a==0)是其反条件。",
+        "D零时输出x，非零时输出y。"
+      ],
+      "takeaway": "比较条件真值时，也要核对两支的动作。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "只有D输出映射反过来。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-9",
+      "sourceHash": "25453838829381a0a90bff31549b9a374e9f6db4e1cbe4ba4e83c16fcdedb9a4",
+      "explanation": "D被分号分成两条语句：if只控制m=1，n=2独立执行，因此不能看作一条语句。",
+      "steps": [
+        "{;}是复合语句。",
+        "逗号表达式末尾一个分号构成表达式语句。",
+        "if(a>0);的受控体为空语句。"
+      ],
+      "takeaway": "分号划分语句边界；if只控制紧随的一条语句。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D含if语句和独立的n=2语句。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-10",
+      "sourceHash": "f0b0363d8449ba3d941438d1841ff906f7dc2a258f5bea1b396249032e7af260",
+      "explanation": "条件运算符从外层判断：k<a即4<3为假，取右边 c<b?c:a。1<2为真，最终取c=1。",
+      "steps": [
+        "外层条件为假。",
+        "内层c<b为真。",
+        "结果为1。"
+      ],
+      "takeaway": "嵌套三目表达式只计算所选分支。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "最终选择c，即1。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-11",
+      "sourceHash": "a273b3973140ba51cad3af0f57be7258d37b21d963455247bfed323c6b6b3ed2",
+      "explanation": "原三目表达式仅在 a>b 且 b>c 同时成立时令 k=1，否则为0。A以&&组合这两个条件，逻辑等价。",
+      "steps": [
+        "B把b<=c时设为1。",
+        "C在a>b且b<=c时错误设1。",
+        "D可能在a<=b但b>c时错误设1。"
+      ],
+      "takeaway": "展开嵌套判断时不能丢掉外层条件。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "A正好要求两次比较都为真。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-12",
+      "sourceHash": "bcc3a2ce1b0dc961e6dd231570f48a25f630a84a16182b67cf0cf3da334e8365",
+      "explanation": "外层x>y即1>2为假，整个嵌套if跳过。之后x++打印旧值1，再令x变2。",
+      "steps": [
+        "内层条件不执行。",
+        "x++的表达式值为1。"
+      ],
+      "takeaway": "先判外层条件，失败就不进入内层。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出1。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-13",
+      "sourceHash": "a8b5e9394f763671d9d3c99f72374bb5170441c21184c24eed1ecce4f0d27a3e",
+      "explanation": "a=3、b=4，a<b成立，原意是令s=b=4，再算s*s=16。",
+      "steps": [
+        "先选较大值4。",
+        "平方得到16。"
+      ],
+      "takeaway": "先追踪条件赋值，再执行后续计算。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "题目代码无法按原样执行；若补int s则预期16",
+        "reason": "代码使用了未声明的s，严格编译会报错；题库答案B只对应补上s声明后的意图。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-14",
+      "sourceHash": "bd61918ea1546fb8ff3767f159ec0aa726a2d04d70feb4107856bb7a1a2b55f2",
+      "explanation": "x=2不小于0且小于10，故y=1.0/2.0=0.5；%f默认输出六位小数。",
+      "steps": [
+        "第一个条件假。",
+        "第二个条件真。",
+        "结果为0.500000。"
+      ],
+      "takeaway": "if/else if按顺序执行第一个成立的分支。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出0.500000。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-15",
+      "sourceHash": "4447fa8f3e52a9f3b1c390d8b631f9a9242fce414a6f46ee049ddb2537c08bee",
+      "explanation": "a<b即2<-1为假，外层if不进入，内层判断也不执行，c保持初值2。",
+      "steps": [
+        "外层为假。",
+        "c未被修改。"
+      ],
+      "takeaway": "外层条件不成立时，内层分支不会执行。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出2。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-16",
+      "sourceHash": "8323eab8527a36b51742b1c9b5a72bca4977d909e1134442f5237c3ee928ea38",
+      "explanation": "x--用旧值5判断5<5为假，但随后x变4。else中的x++返回旧值4用于打印，再使x恢复为5。",
+      "steps": [
+        "比较结果是假。",
+        "else开始x为4。",
+        "打印旧值4。"
+      ],
+      "takeaway": "后置运算返回旧值，副作用仍会发生。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出4。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-17",
+      "sourceHash": "f810685aef7c94ec48bc0e229ddd0e2f96f39213837b04a5c6d43ffd8edb3367",
+      "explanation": "外层 a>c 即5>6为假，直接选 b=4；内层 a>c? 不求值。",
+      "steps": [
+        "外层假分支是b。",
+        "d得到4并输出。"
+      ],
+      "takeaway": "条件运算符只计算选中的分支。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出4。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-18",
+      "sourceHash": "8aa27bb0798226e95cc6b44b785e6ffaa2832d2f7f4e28febe4a1076a9e376c9",
+      "explanation": "15%3为0，匹配case 0后m加一并遇break退出，故输出1。",
+      "steps": [
+        "进入case 0。",
+        "m从0变1后break。",
+        "case1标签拼写不规范，但该分支不执行。"
+      ],
+      "takeaway": "switch匹配case后会顺序执行，直到break或结束。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "m为1。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-19",
+      "sourceHash": "43ac52fed82b6b632e23f19c86bf5db2440764614612d0c95b5d1134a53d7965",
+      "explanation": "j++||k++中j旧值1为真，k++因短路不执行；随后&&继续计算i++，i变2且结果真，于是打印2,2,2。",
+      "steps": [
+        "j变2。",
+        "k仍为2。",
+        "i变2，条件成立。"
+      ],
+      "takeaway": "||和&&按短路规则跳过未必要求值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出2,2,2。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-20",
+      "sourceHash": "695dc13bcd9ebc5699b64cc61168fc3485bddedd6dfbbf50a40dd9100852f7fd",
+      "explanation": "a>b>c按左结合为(a>b)>c：5>4得到1，再判断1>3为假。接着(c-1>=d)==1为真，打印d+1=3。",
+      "steps": [
+        "不能把链式比较当数学不等式。",
+        "第一条件假。",
+        "第二条件真，输出3。"
+      ],
+      "takeaway": "C链式比较会先得到0或1，再进行下一次比较。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出3。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-21",
+      "sourceHash": "ee38085f7358e1a4ef9a496a802a22cadf00bd743e2349521961de2c1ffaded3",
+      "explanation": "A路径的c<a为假，所以x未赋值；读取未初始化x不能保证数值，更不能保证“不为3”。其余项都会把x赋为3。",
+      "steps": [
+        "B、C因a<3而赋3。",
+        "D依次赋2、2、3，最后仍为3。",
+        "A读取未初始化变量，结果不确定。"
+      ],
+      "takeaway": "读取未初始化变量不产生可依赖的确定值。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案A；严格C下未初始化值无法保证不为3",
+        "reason": "A没有给x赋值，题干不能断言该路径的值一定不等于3。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-22",
+      "sourceHash": "e74302f6008da417459c6d2a1160d45ebdb49fdfe8194d46148a7f46710a7085",
+      "explanation": "++a把-1变成0，0<0为假，&&短路使b--不执行。else输出b=1、a=0。",
+      "steps": [
+        "a更新为0。",
+        "b仍为1。",
+        "输出1 0。"
+      ],
+      "takeaway": "&&左侧为假时右侧副作用不会发生。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出1 0。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-23",
+      "sourceHash": "57d287742ff08457e2f85b5f7179bb1c05376cb05a450a26e9f52fd32a5478a4",
+      "explanation": "switch匹配case 1后无break，先a++再落入case 2执行a++、b++，最终a=2、b=1。",
+      "steps": [
+        "case0不匹配。",
+        "case1使a变1。",
+        "落入case2使a变2、b变1。"
+      ],
+      "takeaway": "缺少break会贯穿执行后续case。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "a=2,b=1。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-24",
+      "sourceHash": "14f497e7314978cfbadb4786821f4896cff0185b497619e92d7dbedeeb4570ef",
+      "explanation": "i++先用旧值1比较并把i变2；++j使j变3且比较成立，||短路不执行k++。整体if为真，打印2 3 3。",
+      "steps": [
+        "i=2，左项真。",
+        "j=3，或表达式已真。",
+        "k保持3。"
+      ],
+      "takeaway": "短路运算会跳过后续自增。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出2 3 3。"
+      }
+    },
+    {
+      "questionId": "h-4-基础篇-25",
+      "sourceHash": "e1ad09dd7d813f7bb7ebdb4b0afa5156cae741ef56c811ef30d855666c0e025b",
+      "explanation": "n++用旧值9比较，9<10成立，比较后n变10；第一支打印当前值10。",
+      "steps": [
+        "条件真。",
+        "n已增加到10。"
+      ],
+      "takeaway": "后置递增比较旧值，语句后变量已更新。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出10。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-1",
+      "sourceHash": "182ee09d247cbd5a22f377b6ab4dcd4188e4a2ad9260f2fd51f599cc755a4484",
+      "explanation": "3<=4成立；C的关系运算真值用整数1表示。",
+      "steps": [
+        "a<=b为真。",
+        "%d输出该整数结果1。"
+      ],
+      "takeaway": "关系运算结果是0或1。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "结果1。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-2",
+      "sourceHash": "31a644f44964726b8f6c0137cf78c836f996bdeba96ee79dad3c386498c25fab",
+      "explanation": "10与9不相等，所以10!=9为真，C中真值为1。",
+      "steps": [
+        "0代表假。",
+        "True/False不是这里的整数输出结果。"
+      ],
+      "takeaway": "C用1和0表示真与假。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "表达式值1。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-3",
+      "sourceHash": "e95bfb6489adee61879c0a3258e3b899a27d1ad70b95fa1f4eae0d4b90268b4e",
+      "explanation": "逗号优先级低于&&，先依次赋i=1、j=2、k=3，再求i&&j&&k。三个值均非零，逻辑结果为1。",
+      "steps": [
+        "赋值按逗号顺序完成。",
+        "最后逻辑与为真。"
+      ],
+      "takeaway": "逗号表达式取最后一项；逻辑运算返回0或1。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "最终逻辑与为1。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-4",
+      "sourceHash": "7063fc10b6989cfea656be9554c47902dd5c218c724e596cf7ff40f90705f37a",
+      "explanation": "x--先返回1并把x改为0，左项为真，继续执行++y，把y从-1改为0。逻辑与的结果为假，打印0。",
+      "steps": [
+        "x变0。",
+        "y变0。",
+        "&&结果0。"
+      ],
+      "takeaway": "表达式结果与自增/自减后的变量值要分别追踪。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出0。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-5",
+      "sourceHash": "012b022eb20f589dc5ba1a1d69e7b692cfc15276763cd5feba910c87743807e2",
+      "explanation": "关系链应拆成(x>=y)&&(y>=z)，表示两段关系同时成立。",
+      "steps": [
+        "AND不是C运算符。",
+        "&是按位与。",
+        "x>=y>=z会先比较x和y，再拿0/1与z比较。"
+      ],
+      "takeaway": "数学链式关系需写成两次比较并以&&连接。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "A表达两个条件同时成立。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-6",
+      "sourceHash": "e66c088b6b269e9f17e056702b987e22fb267402c5253305ea65bf5007126c88",
+      "explanation": "逻辑“或”在C中写作||；该表达式表示a至少满足一个范围条件。",
+      "steps": [
+        "or不是C运算符。",
+        "单|是按位或。",
+        "&&表示同时成立。"
+      ],
+      "takeaway": "逻辑或||，逻辑与&&。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "用||连接两种情况。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-8",
+      "sourceHash": "7a0ad6784f9e33b47b95f686b62a1c7c70849bba77c34d13ec9c2dad06dc21d1",
+      "explanation": "用字符常量'0'和'9'作边界，并要求两条件同时成立：ch>='0'&&ch<='9'。",
+      "steps": [
+        "A用单个&做按位运算。",
+        "C双引号表示字符串，不是单个字符常量。",
+        "D比较数值0至9，而非数字字符。"
+      ],
+      "takeaway": "字符用单引号；范围检查需下界和上界同时满足。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B正确检查字符数字范围。"
+      }
+    }
+  ]
+}

@@ -1268,6 +1268,14 @@ main {
 }
 
 /* AI Coach settings styles */
+.static-lesson { margin-top: 18px; padding: 16px; border: 1px solid #cfe0d7; border-radius: 10px; background: #f4f9f6; color: var(--ink); }
+.static-lesson h3 { font-size: 16px; margin-bottom: 6px; }
+.static-lesson-prose, .static-lesson-steps li { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; line-height: 1.85; }
+.static-lesson-steps { padding-left: 22px; margin: 12px 0; }
+.static-lesson-steps li { margin-bottom: 8px; }
+.static-lesson-review { padding: 12px; background: #fff4e8; border-radius: 8px; margin: 12px 0; font-size: 13px; line-height: 1.8; }
+.static-lesson-review p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.static-lesson .takeaway { margin-top: 12px; line-height: 1.7; }
 body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none; }
 .coach-layout {
   display: grid;

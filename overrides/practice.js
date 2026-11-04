@@ -194,6 +194,7 @@ function renderPractice() {
       answerContent = `<div class="practice-answer-body pending"><div class="answer-badge pending">参考答案待补充</div><p class="answer-tip">${escapeHTML(currentUnit.answerOrigin || '参考答案尚未可靠匹配。')} 可使用 DeepSeek 获取AI参考答案与讲解。</p></div>`;
     }
     answerContent += getImportedAIHTML(currentUnit);
+    if (window.CQuestLessons) answerContent += CQuestLessons.html(currentUnit.id);
 
     const answerOriginHTML = currentUnit.answerOrigin ? `<div class="answer-origin"><span>来源：${escapeHTML(currentUnit.answerOrigin)}</span></div>` : '';
 
@@ -323,6 +324,7 @@ function renderPractice() {
       </div>
     </div>
   `;
+  if (window.CQuestLessons) CQuestLessons.mount();
 }
 
 // Event Handlers
@@ -413,6 +415,7 @@ function togglePracticeAnswer() {
     btn.textContent = showCurrentAnswer ? '收起参考答案' : '查看参考答案';
     btn.classList.toggle('active', showCurrentAnswer);
   }
+  if (window.CQuestLessons) CQuestLessons.mount();
 }
 
 function markPracticeSelfCheck(ok) {

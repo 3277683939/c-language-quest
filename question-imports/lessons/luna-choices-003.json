@@ -1,0 +1,617 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "h-4-综合拓展篇-9",
+      "sourceHash": "ecedf92381326878f1ff190d0dfe1d5ebd64981e14ee5fd363e624c0be0925de",
+      "explanation": "a>b为假，赋值后m=0；&&短路，n=c>d不执行，n保留初值2。",
+      "steps": [
+        "m=0。",
+        "&&左侧假，右侧不求值。"
+      ],
+      "takeaway": "短路会跳过右侧赋值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "n仍为2。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-10",
+      "sourceHash": "54556477423414826c9cdc7e35db67af419f0820b9b33aeac486d78bbfbc557c",
+      "explanation": "n=b>a将真值1赋给n；||左边为真，跳过m=a<b，故m仍0，k为1。",
+      "steps": [
+        "n=1。",
+        "||短路。"
+      ],
+      "takeaway": "||左侧真时跳过右侧。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出1,0。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-11",
+      "sourceHash": "52d343ca9a3f282021e86d9a535df2dd18d12e986edc2c9a0f438be3961941e4",
+      "explanation": "x=y=3后，++x使x变4且为真；||短路，不执行++y，因此y为3。",
+      "steps": [
+        "++x为真。",
+        "跳过++y。"
+      ],
+      "takeaway": "||左侧真会短路。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "y保持3。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-14",
+      "sourceHash": "8ec880643cb1a30b9d3ce3d557be647c2d9f6513540455a15cdb763ae68e5c35",
+      "explanation": "++a把-1变0，比较0<0为假，&&短路；括号结果0，取反为1。a=0、b=4，连续%d输出104。",
+      "steps": [
+        "与表达式结果0。",
+        "!0为1。",
+        "printf无分隔符。"
+      ],
+      "takeaway": "逻辑非把0变1。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出104。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-15",
+      "sourceHash": "fc225d11ecbc2f135fd35ed0c1ccf2724a69279d626934d04cdb7f105dccc1ee",
+      "explanation": "a<b为真，条件运算符直接取a=1，右侧条件分支不执行。",
+      "steps": [
+        "a<b成立。",
+        "取冒号前的a。"
+      ],
+      "takeaway": "只计算条件运算符选中的分支。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "结果1。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-16",
+      "sourceHash": "34219f3ee98af8df1af013039155db8816a9678de0d133c8a57b7df49b8482bf",
+      "explanation": "先在w、x中取小值1，再与y=3、z=4依次比较，最小值始终是1。",
+      "steps": [
+        "第一次m=1。",
+        "1<3，保留1。",
+        "1<4，仍为1。"
+      ],
+      "takeaway": "连续取较小值等价于求最小值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "m为1。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-17",
+      "sourceHash": "44329194381b90ebf32e1b94eef24c3a359601898969dfd0d66ef428cc6ed028",
+      "explanation": "条件运算符按exp是否非零判断真假；只有exp!=0能完整等价于该条件。",
+      "steps": [
+        "非零为真。",
+        "exp==1漏掉其他非零值。",
+        "exp!=1会把0当真。"
+      ],
+      "takeaway": "C条件不是只检查是否等于1。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "exp!=0。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-18",
+      "sourceHash": "1759872a975d3972c0f8cd567b1ec9f66bb31a1924ee578648cb84c1870cabba",
+      "explanation": "else与它前面最近的、尚未配对的if配对。缩进或同一行位置不决定配对。",
+      "steps": [
+        "已经配对的if不再候选。",
+        "语法按最近未配对规则确定。"
+      ],
+      "takeaway": "else绑定最近未配对if。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "最近未配对的if。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-19",
+      "sourceHash": "eec3e9b3b79c9f644b53c36e13a8f2ee567003a13208f651ba6a28c33deb2c50",
+      "explanation": "else绑定内层if，但外层a<b即2<-1为假，整个受控语句跳过，c保持2。",
+      "steps": [
+        "先判断外层。",
+        "外层假，内层不执行。"
+      ],
+      "takeaway": "先看外层条件是否允许进入。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "c为2。"
+      }
+    },
+    {
+      "questionId": "h-4-综合拓展篇-20",
+      "sourceHash": "78609c4f1d72fee9b0975946a6e55d0a05fd5eca3a3bc82aced8648c9f20d7e2",
+      "explanation": "a>b为假，内层if整体跳过；其后的printf不在外层if内，打印未改变的d=2。",
+      "steps": [
+        "受控分支不执行。",
+        "末尾printf仍执行。"
+      ],
+      "takeaway": "核清if控制范围与后续语句。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出2。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-1",
+      "sourceHash": "ca1abe896b7fc879f8b101f776c3b27b643b93ce71e833eadeee833e230184dc",
+      "explanation": "for循环不只用于次数已知的情况；先检查条件，也可用break退出。多条循环体语句可用花括号组合。",
+      "steps": [
+        "A、B、C均陈述错误。",
+        "D描述复合循环体。"
+      ],
+      "takeaway": "for先判断，break可退出，多语句体用花括号。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D正确。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-2",
+      "sourceHash": "786a868a73f5fcfc5c44d01b3662c7c610b7526082c39b686f66b16be3fcf2d3",
+      "explanation": "do体先运行：b=9、a=2；条件b--<0用旧值9比较为假，但b仍减为8后退出。",
+      "steps": [
+        "do至少执行一次。",
+        "9<0为假。",
+        "后置自减后b=8。"
+      ],
+      "takeaway": "条件比较为假也会执行后置自减。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "b为8。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-3",
+      "sourceHash": "b8c952b94b26e7a69e5372264412a63d7481e4379a5c1c48223d57a3fd179edd",
+      "explanation": "第一轮x-=2打印1，x变1；条件! --x将x减到0后取反为真，继续。第二轮打印-2，x变-2；条件令x=-3，取反为假退出。",
+      "steps": [
+        "首轮输出1。",
+        "次轮输出-2。",
+        "最后条件为假。"
+      ],
+      "takeaway": "do先执行；前置自减先改变变量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出1和-2。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-4",
+      "sourceHash": "9c0275b5bbb717b4b43b3051b14dba4d1761669a8cf137c0fe709e29cfa86fb9",
+      "explanation": "while(k=0)是赋值，把k设为0，表达式值为0，首次判断即假，循环体不执行。",
+      "steps": [
+        "单等号赋值。",
+        "赋值结果为假。"
+      ],
+      "takeaway": "while条件使用表达式结果判断真假。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "执行0次。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-5",
+      "sourceHash": "1ddde827b4cef935478819b991f9947868e1d3b3794764efb786ff7d17bee365",
+      "explanation": "条件j=1每次都把j重置为1并得到真；更新式虽递增j，下次判断又重置为1，所以循环不结束。",
+      "steps": [
+        "条件非零。",
+        "每轮更新后再赋回1。"
+      ],
+      "takeaway": "赋值表达式可让循环条件持续为真。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "无限循环。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-6",
+      "sourceHash": "eee0ef57d97fddc8dec23fc7ad918f1fa6c585766687ed63a134ad615b8f3ca9",
+      "explanation": "for的条件省略，视为真；没有break，所以持续循环。其他选项有会变假的条件或把k减至0。",
+      "steps": [
+        "A只迭代一次。",
+        "B最终达到循环上限。",
+        "D下一次while条件为假。"
+      ],
+      "takeaway": "省略for条件即没有自然退出条件。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C死循环。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-7",
+      "sourceHash": "38d52d617f0b1e682f6e0753aa5426743f80185a896a5434dcb19f5584dae9c9",
+      "explanation": "外层i取0、2两轮，每轮执行内层空for；printf在外层循环之后，只执行一次。",
+      "steps": [
+        "内层循环体是分号空语句。",
+        "外层结束后才打印。"
+      ],
+      "takeaway": "分号可作循环空体，注意循环控制的紧邻语句。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "打印一个星号。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-8",
+      "sourceHash": "26626aeb954183ee1c8d068fe3ae6572a7029f5211de8aa5583bac6cda65ae15",
+      "explanation": "D只在初始化时给ch读一次字符，更新式不再读取；如果首字符不是换行，ch永不变，循环不能逐字符统计。",
+      "steps": [
+        "A、B、C每轮均调用getchar。",
+        "D每轮只增n。"
+      ],
+      "takeaway": "每轮都要读取下一个字符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D不能正确统计。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-9",
+      "sourceHash": "5e7064cc28aa79c4d533de852797e3663422e964c2278c90b23659f7ef44b3ed",
+      "explanation": "按轮追踪a：1→6→3→8→5→10→7→12；奇数分支加5后continue，偶数分支减3。a=12后下一轮a>10触发break。",
+      "steps": [
+        "continue仍执行for更新b++。",
+        "a到12。",
+        "下一轮break。"
+      ],
+      "takeaway": "continue跳过余下语句但不跳过for更新。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "最终a=12。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-10",
+      "sourceHash": "b1bee9a1f0720fc499da961b38c4f7859ea214f03cd9630868af0e8ee5ea11ce",
+      "explanation": "初始z=3.6/2.4=1.5。第一轮后y=1.5、z=1.6；第二轮后y=1.6、z=0.9375，条件失败，输出y=1.600000。",
+      "steps": [
+        "第一次迭代z=1.6。",
+        "第二次迭代z=0.9375。"
+      ],
+      "takeaway": "退出时核对打印的是y而非z。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出1.600000。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-11",
+      "sourceHash": "ccd138fcd12626e8521167b41a6226ae22829aa32707f8e4517a9e1a522a7159",
+      "explanation": "首轮打印x=10,y=10，x变9；更新i=1并令y=1。第二轮打印9,1后x变8；更新后条件8>8为假。",
+      "steps": [
+        "循环体后执行更新式。",
+        "输出10 10 9 1。"
+      ],
+      "takeaway": "for更新在每轮循环体之后。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出10 10 9 1。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-12",
+      "sourceHash": "293d98ad148468d97b759488ed186d20c0deadaff63a6aacabefcdded7071454",
+      "explanation": "循环体为空，y始终0，条件y!=123一直真；x=0到3时满足x<4，共四轮，x变4后退出。",
+      "steps": [
+        "逻辑与两条件都需真。",
+        "x<4限定四轮。"
+      ],
+      "takeaway": "空循环也会执行更新式。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "执行4次。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-13",
+      "sourceHash": "8680891344b04fc3d36f47788eb76fb7d6189cc43e57423ab0b1e68a42432372",
+      "explanation": "每轮先递减再输出：9变8、8变7、7变6；此后n=6，不再满足n>6。",
+      "steps": [
+        "输出8。",
+        "再输出7、6。"
+      ],
+      "takeaway": "按语句顺序先减后打印。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出876。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-14",
+      "sourceHash": "3315c1684580518a7f7d715d0275f5d09c2b3245e994866ed8b5088e3c39f1ed",
+      "explanation": "while(k=1)每次赋k=1且条件为真；循环体让k递增，但下一轮又被设回1。",
+      "steps": [
+        "赋值而非相等比较。",
+        "结果1为真。"
+      ],
+      "takeaway": "循环条件每次都被赋成真值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "无限执行。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-15",
+      "sourceHash": "c91e1f2c715cd9ab3250f4f6c8270ecb56eaff6b1e1ab9c5fbe94f79bb4c141b",
+      "explanation": "t=1是赋值表达式，值为1，故while控制表达式合法且为真。",
+      "steps": [
+        "初始t=0会被覆盖。",
+        "赋值表达式的值是1。"
+      ],
+      "takeaway": "赋值表达式可以出现在条件中。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "控制表达式值为1。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-16",
+      "sourceHash": "f1be887df71e1573ed2737375eedabf9d8f5e572dae33aa154ac3095b8821dfb",
+      "explanation": "b从1开始依次变4、7、10，每次都满足b%3==1而continue；下一轮先检查b>=10成立并break，此时a=4。",
+      "steps": [
+        "第一次加3：b=4。",
+        "第二次加3：b=7。",
+        "第三次加3：b=10；更新a至4后break。"
+      ],
+      "takeaway": "continue仍执行for更新式。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出a=4。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-17",
+      "sourceHash": "6060a2c3e570ead789edaa91a3c51def75128897da0d07a6a956367f7ed1e716",
+      "explanation": "i初值0，if(i<1)立即continue，跳过i++；回到条件后i仍0，所以永久循环。",
+      "steps": [
+        "continue跳过本轮后续i++。",
+        "i<1一直成立。"
+      ],
+      "takeaway": "确认continue前是否更新了循环变量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "死循环。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-18",
+      "sourceHash": "1f5267896edddc6f53048c149009e28a551ed2faa7bb4590714a3a5690dab94f",
+      "explanation": "sum只在所有学生循环前清零，导致第二位开始把前一位成绩也累计进去。应在每位学生开始时重置sum。",
+      "steps": [
+        "内层累加四科分数正确。",
+        "平均及输出位于每人课程输入之后。"
+      ],
+      "takeaway": "独立统计每人前要清空累计量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "sum=0.0的位置不对。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-19",
+      "sourceHash": "2805919892c313b626eb0619275c97bc518b7a600de3909d259125aabb053cbd",
+      "explanation": "继续条件是p!=12345且n<3；结束是其否定，即p==12345或n>=3。",
+      "steps": [
+        "德摩根律：非(A且B)=非A或非B。",
+        "任一结束条件成立即可退出。"
+      ],
+      "takeaway": "结束条件为循环继续条件的逻辑反。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "p等于12345或n至少3。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-20",
+      "sourceHash": "a20aa96ae6f78c91bcfa6e327ea4ab290b62ebec9a24e3cf6d26205653dafd52",
+      "explanation": "i=0落入default打印0；i=1命中case1后贯穿case2和default打印111；i=2从case2贯穿default打印22。",
+      "steps": [
+        "case1输出1三次。",
+        "case2输出2两次。"
+      ],
+      "takeaway": "无break会贯穿switch后续标签。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "合并为011122。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-21",
+      "sourceHash": "ff6fc4ed1d04e026a8a9f0fc93b23bebdffd7f96b515bc83ac4f4f1ee33a120c",
+      "explanation": "只把偶数轮递增后的奇数加入s：依次加1、3、5、7，总和16。奇数轮的continue跳过累加。",
+      "steps": [
+        "i=0加入1。",
+        "i=2、4、6分别加入3、5、7。"
+      ],
+      "takeaway": "continue会跳过后面的累加语句。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出16。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-22",
+      "sourceHash": "76c493353626cb077487ae3281f690d7729b73b935a26c0422bff9a1fb24b6c9",
+      "explanation": "do体首轮令s=1、a=-1；第二轮令s=2、a=-3。要在第二轮后退出，需n=-3。",
+      "steps": [
+        "第一次后a=-1。",
+        "第二次后a=-3。",
+        "a==n结束。"
+      ],
+      "takeaway": "do-while先运行循环体再检查条件。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输入-3。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-23",
+      "sourceHash": "3272a939a2b2d5af7964cffcbdc40dfda96bfade282a5197faa345f3c84e7bfb",
+      "explanation": "n从10开始，每轮先减再打印9、8、7；循环结束。当前选项文本没有清晰呈现987这一完整序列。",
+      "steps": [
+        "n=10时打印9。",
+        "随后打印8、7。"
+      ],
+      "takeaway": "输出顺序取决于循环体内递减和打印的先后。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "无完整匹配选项；题库答案B显示为9",
+        "reason": "程序应输出987，但导入的选项内容疑有OCR错位，B按当前文本不是完整结果。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-24",
+      "sourceHash": "36770869f9b9c553a721c2d0b09851ff0bd0412427b57c9f88c5c8b4c609f9d1",
+      "explanation": "num依次从0进入循环，先加一再打印，故三行分别是1、2、3。选项文字列被OCR合并，无法可靠按现有字母对应。",
+      "steps": [
+        "num=0、1、2均满足条件。",
+        "打印1、2、3后num=3退出。"
+      ],
+      "takeaway": "先判断条件再执行循环体。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案C；程序输出三行1、2、3",
+        "reason": "选项列文本疑似合并，按当前OCR无法确认字母；程序结果明确。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-25",
+      "sourceHash": "cbb9dde15e9d707b1abe04f2aed97a3bc761aa3473dd02eaab3cd06a60b26d3b",
+      "explanation": "k初值10，k==0为假，所以循环体执行0次。",
+      "steps": [
+        "比较运算不是赋值。",
+        "条件首次即失败。"
+      ],
+      "takeaway": "while首次条件假则循环体不执行。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "执行0次。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-26",
+      "sourceHash": "8b6a9cb680624b709193172382540d381b30e94975efa7640d0afb5e8cfa6f9b",
+      "explanation": "k=0是赋值表达式，将k设为0，表达式值为假，循环体不执行。",
+      "steps": [
+        "条件语法合法。",
+        "第一次判断为0。"
+      ],
+      "takeaway": "单等号赋值结果参与条件真假判断。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "执行0次。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-27",
+      "sourceHash": "58806361759c5a4ca676298626293989720111139a14fbfd3204acf9cbe557b2",
+      "explanation": "a>b>c按左结合为(a>b)>c。首轮0>-2真，交换并令c=-1；第二轮1>-1真，再交换回并令c=0；下一轮0>0假退出。",
+      "steps": [
+        "两轮都进入循环。",
+        "交换两次恢复a=2,b=3。",
+        "c增至0。"
+      ],
+      "takeaway": "C不支持数学意义的链式比较。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出2,3,0。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-28",
+      "sourceHash": "bbe99f492440d47e5aa50bd8bc7903b9a0a7b0a29c6883afa86a4dd98d503027",
+      "explanation": "do体先把x=-1平方为1；条件!1为假，结束。",
+      "steps": [
+        "至少执行一次。",
+        "平方结果1。"
+      ],
+      "takeaway": "do-while在循环体后检查条件。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "循环体执行一次。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-29",
+      "sourceHash": "11849bcf1d6ff20160dc81d26b7779d0f21eccdf01c7f499e7f518970f1a8459",
+      "explanation": "若把题面减号按意图理解为ASCII运算符-：一轮后b=9、a=2；判断9<0为假，但b--随后变8，输出a=2,b=8。",
+      "steps": [
+        "do体执行一轮。",
+        "后置比较后b从9变8。"
+      ],
+      "takeaway": "条件中后置自减仍会修改变量。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "按运算符意图为B；题面含Unicode减号",
+        "reason": "源码中使用U+2212而非C减号字符，按原样不能作为合法运算符；按普通减号意图才得a=2,b=8。"
+      }
+    },
+    {
+      "questionId": "h-5-基础篇-30",
+      "sourceHash": "a061d45ad5c4c735b0930e5f8b9b8bc5dfe030418861743273505f93436e9b7c",
+      "explanation": "!优先于==，条件是(!a)==b。首轮0==0真，交换后a=0,b=3，更新为a=-1,b=4；再判断0==4为假退出。",
+      "steps": [
+        "首轮条件真。",
+        "循环更新后为-1,4。",
+        "第二次条件假。"
+      ],
+      "takeaway": "逻辑非优先级高于相等运算。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "最终-1,4。"
+      }
+    }
+  ]
+}

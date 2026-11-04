@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "h-9-基础篇-21",
+      "sourceHash": "34a6973300ff34e34f6b2b49040764274f343b873edead7f5495b0f8fb667d5a",
+      "explanation": "fun1将平方结果作为int返回：1.1²=1.21转换为1，2.0²=4；两者相加返回5，赋给double w后值为5.0。",
+      "steps": [
+        "fun1(1.1)返回int 1。",
+        "fun1(2.0)返回4。",
+        "和5转成double为5.0。"
+      ],
+      "takeaway": "函数返回类型会转换return表达式的值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "w为5.0。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-22",
+      "sourceHash": "aa15800c3ceb721bd31f07e7ec621441b66559af56ea9a4ddd533cd0d9316dcf",
+      "explanation": "函数可在有声明和定义的前提下单独编译成目标文件；但单独编译不等于可独立运行，函数内部也不能嵌套定义。",
+      "steps": [
+        "函数无需main也可单独编译。",
+        "程序入口仍需main。"
+      ],
+      "takeaway": "编译一个函数和运行整个程序是不同概念。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B正确。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-23",
+      "sourceHash": "e04ad015c10f5a8c0070fe7cc3a8aebdc42c63c796e83e5bf40325819d08e379",
+      "explanation": "C语句是完成程序操作的基本执行单位；主函数不需排在最前，一行可放多条语句，程序结构由函数等组成而非行。",
+      "steps": [
+        "A错误：定义顺序不决定入口。",
+        "B错误：一行可多条语句。",
+        "C错误：行只是排版。"
+      ],
+      "takeaway": "语句是执行单位，换行只是格式。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D正确。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-24",
+      "sourceHash": "22e3e93df4e962015736f79bca9950cc15cdf0b41d854315db3e09d1bd99709e",
+      "explanation": "main的定义可以放在源程序中任意适当位置；程序启动时仍从main进入，不由它在文件中的行序决定。",
+      "steps": [
+        "不必位于开头或最后。",
+        "与库函数调用位置无关。"
+      ],
+      "takeaway": "源代码顺序和程序入口是两回事。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "位置可以任意。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-25",
+      "sourceHash": "d15f31233a32488687d7910df83f6ba72a143a8d84f84af473d055e4c464a86a",
+      "explanation": "C程序由函数组成，通常至少包含main以及需要的其他函数。",
+      "steps": [
+        "过程、子程序、程序段不是C的基本组织单位名称。"
+      ],
+      "takeaway": "把函数定义作为C程序的主要组成单位。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "若干函数组成。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-26",
+      "sourceHash": "3d36d4800d3199da623bfb1df662f13865222812a9828aae0762ad95749f567a",
+      "explanation": "函数是C程序组织和调用的基本单位；函数不能在另一函数内部嵌套定义，main也不需排在前面。被调用函数可先声明再定义。",
+      "steps": [
+        "B不允许嵌套定义。",
+        "C没有定义顺序限制。",
+        "D可用原型提前声明。"
+      ],
+      "takeaway": "声明可以先于定义，函数定义可放在后面。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "A正确。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-27",
+      "sourceHash": "56040af66f96fa698472dc513cf59eb6816ec18f08293cc48ba71263a0a2328a",
+      "explanation": "程序执行入口是main函数，而不是源文件中排在第一的函数。",
+      "steps": [
+        "函数定义顺序不决定运行顺序。",
+        "被调用函数要定义或先声明，但不用在main内定义。",
+        "main不要求排在文件开头。"
+      ],
+      "takeaway": "程序入口与函数书写位置无关。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "从main开始执行。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-28",
+      "sourceHash": "3942fb093a8bbfd335cb8dc897546a997a8bde67990d5121e803853fe7aa0614",
+      "explanation": "函数能否从其他源文件访问取决于链接属性；static函数具有内部链接，普通文件作用域函数通常具有外部链接。",
+      "steps": [
+        "C函数不能嵌套定义。",
+        "C没有独立的过程子程序类别。",
+        "编译器会检查语法约束。"
+      ],
+      "takeaway": "内部/外部函数对应链接属性。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D正确。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-29",
+      "sourceHash": "97c25f87de2968871d6976c7047c11a6503b444692e254d21fe04c955ab79540",
+      "explanation": "形参与实参是不同对象：调用时把实参值传给形参，函数内修改形参不会改变原实参变量。",
+      "steps": [
+        "不是共享一个存储单元。",
+        "变量是否同名不改变这一点。",
+        "形参是实际存在的函数参数对象。"
+      ],
+      "takeaway": "C普通参数按值传递。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "形参与实参各自独立。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-30",
+      "sourceHash": "89bb961dffe64332ef2598cc3255d3964cfb5acd8a9daf6f801a7fd8dbc1a2a7",
+      "explanation": "形参是函数定义中的参数声明，不能写成常量、变量值或任意表达式；它应是合法参数名及类型。",
+      "steps": [
+        "A实参可为常量、变量或表达式。",
+        "C“任意类型”过宽。",
+        "D类型不匹配不能一概说以形参类型为准，原型调用需满足兼容约束并发生规定转换。"
+      ],
+      "takeaway": "区分实参表达式和形参声明。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案B；C、D也有过度绝对的表述",
+        "reason": "B显然错误；但C的“任意类型”和D对类型不匹配的概括也不符合原型调用规则，题目单选措辞不严。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-31",
+      "sourceHash": "f263660b70f5ed50d76ef3963942fe99dfab85070f4ad112745dd83c948b2c9b",
+      "explanation": "简单变量作实参时传递的是其值的副本，函数接收形参后独立使用；要改调用者变量需传地址。",
+      "steps": [
+        "调用时复制实参值。",
+        "形参修改不自动传回。"
+      ],
+      "takeaway": "普通C参数是值传递。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "值传递。"
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-32",
+      "sourceHash": "f8b887b3bd372b6fd0d9e94220c960aa9409c2d5d97d96872004a748e57ac0bf",
+      "explanation": "旧式C允许省略函数返回类型并隐含int，但这是旧标准规则；C99及之后不再允许隐式int。",
+      "steps": [
+        "题目答案沿用C90教材规则。",
+        "现代标准需显式写返回类型。"
+      ],
+      "takeaway": "隐式int仅适用于旧版C规则。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "旧版C为int；C99及以后不允许省略返回类型",
+        "reason": "题干未指定C标准版本，因此结论依版本而变。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-1",
+      "sourceHash": "e652cba108e650919fc1a3f517b01d15a394a56e09c9925fcca26765e654bab2",
+      "explanation": "按题目假设int为4字节，name数组20字节、score数组16字节，long在常见VC6环境为4字节，合计40；但结构体可能有填充，且标准不规定long大小。",
+      "steps": [
+        "成员原始大小20+4+16=40。",
+        "题面只给int大小，没有给long大小与对齐规则。"
+      ],
+      "takeaway": "结构体sizeof受成员大小和填充影响。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案D按long=4且无额外填充",
+        "reason": "仅给出int为4不能从C标准推出long大小或结构体填充；在相应教学平台假设下才是40。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-2",
+      "sourceHash": "195f45256a0c3c85ea18faee7b2b7911a9219c6a01f7d506e1d3726224c993c9",
+      "explanation": "s[0].a为1，s[1].b为5，相加得到6。题面include文件名含全角点，严格按原样可能无法找到标准头文件。",
+      "steps": [
+        "取第一项的a=1。",
+        "取第二项的b=5。",
+        "和为6。"
+      ],
+      "takeaway": "数组下标先选结构体，再用点号访问成员。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "按结构体运算为6（B）；原样头文件名有全角点",
+        "reason": "输入中的stdio．h使用全角句点而非ASCII点，按字面不保证能包含stdio.h。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-3",
+      "sourceHash": "5172a79f7e14723035a8c70f186645f567e89e3581a9b86361f74253713df1d5",
+      "explanation": "Mary是第三个结构体元素，数组下标为2；姓名字段中M位于下标0。可是声明变量拼作calss，选项却引用class，按当前文本未声明该数组名。",
+      "steps": [
+        "M是Mary的首字符。",
+        "如果数组名为class，class[2].name[0]才正确。",
+        "源题标识符calss与选项class不一致。"
+      ],
+      "takeaway": "变量名大小写和拼写必须完全一致。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "意图为D；按原文class未声明",
+        "reason": "数组声明名是calss，选项使用class；字面程序不能按选项引用。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-4",
+      "sourceHash": "871e83bfad22093a0fd656b2328b3db77a4df4c1589f679c5a32b46ecd5c6a9a",
+      "explanation": "p初始指向aa。++p->x递增aa[0].x为51；(++p)->x先把p移到aa[1]再取x=60；++(*p->y)递增dt[1]从20到21。输出无分隔符为516021。",
+      "steps": [
+        "第一项51。",
+        "第二项60。",
+        "dt[1]递增后21。"
+      ],
+      "takeaway": "->优先绑定成员访问；括号改变先递增对象还是指针。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "结果依次51、60、21。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-5",
+      "sourceHash": "b09cba4396c3d5832aae99c481553206891327c6ca6433812626bdc7abf0cca8",
+      "explanation": "h[0].p指向h[1]，所以(h[0].p)->x=3；h[1].p指向h[0]，所以(h[1].p)->y=2。直接拼接输出32。",
+      "steps": [
+        "第一项3。",
+        "第二项2。"
+      ],
+      "takeaway": "沿着结构体指针逐层追踪目标对象。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出32。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-6",
+      "sourceHash": "d198c404e70bfe4421d4b8f59e057eb0222a1c5214fca8c9fe0a8bf856368326",
+      "explanation": "cnum[0]初始化为{x=1,y=3}，cnum[1]为{x=2,y=7}。整数除法3/1=3，再乘2得6；但选项C对应-3，题库答案与算式不符。",
+      "steps": [
+        "3/1先得3。",
+        "3*2得6。"
+      ],
+      "takeaway": "按运算符优先级先除再乘；同优先级从左到右。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "实际结果为6（选项D），题库答案C错误",
+        "reason": "代码计算为3/1*2=6，而题库答案C标记-3。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-7",
+      "sourceHash": "73fc69b2a6a38c99dcd0a91e6acdfa01620677b6bf25ad22d3c09fedf87d9a43",
+      "explanation": "p=&std，所以(*p).age通过解引用p访问std的age成员。",
+      "steps": [
+        "std->age错误，std不是指针。",
+        "*std->age优先级也不对。",
+        "p.age错误，p是指针需->或(*p).。"
+      ],
+      "takeaway": "结构体对象用点号，结构体指针用箭头或解引用后点号。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "(*p).age正确。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-8",
+      "sourceHash": "db1cbc2e511a519d9613d24e1ec60f248ae35941fb91833c58b05cffa3e00181",
+      "explanation": "d[0].y/d[0].x*d[1].x=3/1*2=6，整型运算按从左到右计算。",
+      "steps": [
+        "3除以1得3。",
+        "再乘2得6。"
+      ],
+      "takeaway": "同级乘除从左到右。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出6。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-9",
+      "sourceHash": "23afaaf9d5c6df008338cee33b431a47d1f9fd1562b505da56cc79945722411e",
+      "explanation": "p指向data，访问其a成员可写(*p).a；p->a也等价，但选项中只有B符合。",
+      "steps": [
+        "A、C多写不存在的data成员。",
+        "D对指针用了点号。"
+      ],
+      "takeaway": "(*p).a与p->a等价。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B是合法成员引用。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-10",
+      "sourceHash": "2f9840ec84234a8b34d9eedaa9170461f99cef13779255cc8e95601d68d59cde",
+      "explanation": "union大小至少覆盖最大成员char[6]与float；结构体另有float[5]共20字节和double 8字节，且成员对齐会插入填充。没有给出ABI和对齐规则，不能唯一得到选项中的34。",
+      "steps": [
+        "union的大小不等于各成员大小之和。",
+        "struct成员顺序及对齐影响总尺寸。",
+        "标准不固定float、double和填充布局。"
+      ],
+      "takeaway": "union取能容纳最大成员的空间，struct还可能有填充。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库B按6+20+8直接相加；此结果未考虑平台布局",
+        "reason": "没有指定数据模型、对齐和填充，C标准不能推出固定字节数；常见布局下union本身也可能为8字节。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-11",
+      "sourceHash": "cb72761540f1c1c9b4b4e0792b05e86702b9a719083a9707f2dedcae142d6c68",
+      "explanation": "union U至少要容纳long成员；struct A包含int和union，具体大小取决于long大小及对齐填充。D=8只在特定平台布局下成立。",
+      "steps": [
+        "union不是成员长度相加。",
+        "结构体各成员按实现规则对齐。"
+      ],
+      "takeaway": "结构体和联合体sizeof取决于实现布局。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库D按long/int均4字节且无额外填充",
+        "reason": "未给long大小和对齐规则，不能由标准唯一推出8字节。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-12",
+      "sourceHash": "4efe41aed5ceebc9b9fa60302a36224cbc9426badd8cd2092b990dd64a987fcd",
+      "explanation": "union的大小由最大成员决定并按对齐补足。VC6常见模型下long为4，long[2]和int[4]都是16字节，故sizeof为16；但printf用%d接收size_t本身不匹配。",
+      "steps": [
+        "每个成员数组分别占16、16、8字节（按该模型）。",
+        "联合体取最大成员而非求和。",
+        "sizeof返回size_t。"
+      ],
+      "takeaway": "union按最大成员分配空间；%zu才匹配size_t。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "VC6常见布局预期16（B）；%d格式不匹配",
+        "reason": "联合体大小依平台，且代码用%d输出sizeof结果，严格按C格式规则行为未定义。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-13",
+      "sourceHash": "7049987e8dc85e26b5dda20ec25c0b7fd90853dd9be8160d40550eae9203a1e8",
+      "explanation": "p是结构体指针，引用成员要用p->name或(*p).name；p.name把指针当结构体对象使用，错误。",
+      "steps": [
+        "A是解引用后点号。",
+        "C用对象a点成员。",
+        "D用箭头。"
+      ],
+      "takeaway": "结构体指针用->访问成员。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "p.name非法。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-14",
+      "sourceHash": "b136fc9c3627c3ec3b47690088a3051d5db01f0cabd2bf13b5a295e93935a9fa",
+      "explanation": "p是指向a的指针；p.next把指针当结构体变量访问成员，语法/类型错误。a.next=q和p->next=&b、(*p).next=q均可把b接到a后。",
+      "steps": [
+        "点号用于对象a。",
+        "箭头或解引用后点号用于p。"
+      ],
+      "takeaway": "指针成员访问需用->。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "p.next错误。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-15",
+      "sourceHash": "2ed6aa90f9b4f079594516bb237b2e045cec35f92c3dec331f83a56cc2961afe",
+      "explanation": "struct ex是结构体标签形成的类型名；example是该类型的变量名。",
+      "steps": [
+        "struct是关键字。",
+        "x、y、z是成员。"
+      ],
+      "takeaway": "区分标签类型名和对象变量名。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "example不是类型名。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-16",
+      "sourceHash": "973bb76332e57ad4ae12477d33943de6c95feaf71c4a5e8b5cfb81b514b95b4a",
+      "explanation": "typedef给该结构体类型起别名PER；struct data是带标签的类型，data不是变量。",
+      "steps": [
+        "PER可直接用于声明该结构体类型变量。",
+        "struct是关键字。"
+      ],
+      "takeaway": "typedef引入类型别名。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "PER是类型别名。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-17",
+      "sourceHash": "d359e2cefba1b421beffff89182fa0767a97a70145995131e876b94dfc347c3f",
+      "explanation": "成员原始字节数为int 4、char 1、double 8，总和13；但结构体可能有对齐填充，VC6具体结果依编译目标和对齐设置，不能仅凭成员大小确定。",
+      "steps": [
+        "双精度成员常要求对齐。",
+        "成员间及末尾可能填充。"
+      ],
+      "takeaway": "sizeof(struct)可大于成员尺寸总和。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库A按4+1+8直接相加",
+        "reason": "结构体布局依实现及packing设置；题干指定VC6但未指定目标/对齐选项，无法保证13。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-18",
+      "sourceHash": "8b5f1eab35a9d8e38c82e612298446494e348239db6719498394025c0f76d3f6",
+      "explanation": "结构体含三个int；按题目常见VC6模型且int为4字节，sizeof为12。若int大小或packing设置不同，结果可变。",
+      "steps": [
+        "year、month、day各为int。",
+        "默认对齐下总长通常12。",
+        "该值取决于实现。"
+      ],
+      "takeaway": "sizeof结构体要考虑平台对齐。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "VC6常见配置下预期12（D）",
+        "reason": "题目依赖VC6具体目标与结构体对齐设置，C标准本身不固定大小。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-19",
+      "sourceHash": "59394bf1720e2c7ea45f5c543ac986280de5d65415e9cec1cb9170c4a6900a91",
+      "explanation": "p指向data，使用(*p).a访问成员a；p->a等价，但选项B是匹配给定选项的正确写法。",
+      "steps": [
+        "A、C不存在data这个成员。",
+        "D用点号访问指针。"
+      ],
+      "takeaway": "(*p).a等价于p->a。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B正确。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-20",
+      "sourceHash": "ce8b070af30ccd82954873d9b7d5cb1ce93e431b4650c9294a5fbfcfe9d79909",
+      "explanation": "stu1是结构体对象，student是类型标签，不是变量。student.age因此非法；对象用点号，指针用箭头或解引用点号。",
+      "steps": [
+        "stu1.age合法。",
+        "p->age、(*p).age合法。"
+      ],
+      "takeaway": "成员访问左侧必须是对应对象或指针。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "student.age引用了类型名。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-21",
+      "sourceHash": "1ffb7ebe28b8a700661f7f9904138bf68dac8c64548a3973c33e4e35e4e41d50",
+      "explanation": "work是结构体对象，不是指针，不能写work->no；应写work.no。p才是指针，使用->或(*p).访问。",
+      "steps": [
+        "A对象点号正确。",
+        "B、C指针成员形式正确。"
+      ],
+      "takeaway": "->左侧必须是结构体指针。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "work->no非法。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-22",
+      "sourceHash": "c929110e6524508e48f461d653919384c3d0655f619190983d4c131a5bbb5a52",
+      "explanation": "t指向data，(*t).x是对指针解引用后用点号访问x；也可写t->x。",
+      "steps": [
+        "A、C引用不存在的data成员。",
+        "D使用错误大小写且点号链不匹配。"
+      ],
+      "takeaway": "结构体指针成员访问可写(*t).x或t->x。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B正确。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-23",
+      "sourceHash": "11e4d5a9dbb62f32a9d77d82162871b8208394f680663d3c1c8c1d2f132a521f",
+      "explanation": "若结构体声明正确，取成员地址应写&data.a，类型为int*，可赋给p。但题面把struct误写成struck，因此data声明本身不合法。",
+      "steps": [
+        "&a缺少结构体对象。",
+        "data.a是int值不是地址。",
+        "*p=...是写入而非指针赋值。"
+      ],
+      "takeaway": "取结构体成员地址用&对象.成员。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "意图为C；按原文struck不是C关键字",
+        "reason": "题面写struck sk，导致data未被合法声明；C只在把该处修正为struct后才成立。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-24",
+      "sourceHash": "df5f83b3b241c21e011a1aed749d21d9116b492d547b75f94a61424552a95b16",
+      "explanation": "s[0].a=1，s[1].b=5，两者相加得到6。",
+      "steps": [
+        "取第一行a=1。",
+        "取第二行b=5。"
+      ],
+      "takeaway": "二维结构体数组用下标后再点成员。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出6。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-25",
+      "sourceHash": "011603add9b20a7be455a26e17085ac46edbb8a53a187b0814f15db26b367397",
+      "explanation": "cnum[0]为{x=1,y=3}，cnum[1]为{x=2,y=7}；3/1*2=6。",
+      "steps": [
+        "整数除法3/1=3。",
+        "再乘2得到6。"
+      ],
+      "takeaway": "乘除同级按从左到右。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出6。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-26",
+      "sourceHash": "1780199613857e478169bda56585f2103fc77d978796a23957facc64b381e2ce",
+      "explanation": "Mary位于class[2]，M是name[0]；但初始化缺少Mary与18之间的逗号，按当前题面整个定义不合法。",
+      "steps": [
+        "若补逗号，目标成员是class[2].name[0]。",
+        "当前写作\"Mary\"18，缺少分隔符。"
+      ],
+      "takeaway": "初始化项之间必须用逗号分隔。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "意图D；原始结构体数组初始化有语法错误",
+        "reason": "题面在\"Mary\"和18之间漏逗号，不能按原样编译。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-27",
+      "sourceHash": "e6a008bbfc35573eda4a79cc847f204424a155543d55136c37b47d2813098f8a",
+      "explanation": "work是结构体对象，应用work.sno；箭头运算符要求指针。另A把变量名写成大写Work，C语言区分大小写，因此A也按字面错误。",
+      "steps": [
+        "B、C通过p访问成员。",
+        "A的Work未声明。",
+        "D对象work不能用->。"
+      ],
+      "takeaway": "标识符区分大小写；对象用点号、指针用箭头。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "D为题库意图；按字面A和D都不正确",
+        "reason": "A使用未声明的Work，D对对象work使用箭头，因此当前题面有两个错误项。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-28",
+      "sourceHash": "6219bf01245128c03504a98b451348a6968aef3461254c57b41db17e1b2b3e13",
+      "explanation": "sizeof(ps)是指针大小；题目指定VC6常见32位环境时为4。结构体数组成员大小与填充有关，student的sizeof需依目标布局确定。",
+      "steps": [
+        "ps是指针而非结构体对象。",
+        "在指定的32位VC6目标上指针常为4字节。",
+        "sizeof返回size_t，代码却用%d，严格按C格式规则不匹配。"
+      ],
+      "takeaway": "指针大小与其指向类型无关，但随目标平台改变。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库B假设结构体15字节、指针4字节",
+        "reason": "结构体padding会影响15的假设；且sizeof结果用%d打印不符合格式要求。"
+      }
+    }
+  ]
+}

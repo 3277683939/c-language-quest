@@ -20,6 +20,10 @@ def optimize(directory):
     html = html_path.read_text(encoding='utf-8')
     if 'quest-app.js' in html:
         return
+    if (directory / 'static-lessons.js').exists():
+        from lessonbank import build
+        report = build(directory)
+        print('Prewritten lessons:', report)
     # Keep account styles in the existing stylesheet request on mobile networks.
     account_css = directory / 'account.css'
     if account_css.exists() and re.search(r'<link[^>]+href="account\.css(?:\?[^"]*)?"[^>]*>', html):

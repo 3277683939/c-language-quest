@@ -1,0 +1,633 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "h-5-基础篇-31",
+      "sourceHash": "75b70ead77c9b2c9066a582edc25e0d221be87b8fd5e5c2ec93dd6dc172c10eb",
+      "explanation": "条件i++<4比较的是旧值，依次用1、2、3、4比较；最后一次4<4为假，但i仍后置增为5，循环退出。",
+      "steps": [
+        "末次判断旧i=4。",
+        "4<4为假。",
+        "后置递增后i=5。"
+      ],
+      "takeaway": "后置递增即使条件失败也会更新变量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "i最终为5。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-1",
+      "sourceHash": "4a534af6fa9ba633f89f0f71bc2a389abdc3efaf3f1627d725160cb7bf9b93fb",
+      "explanation": "数组长度需由方括号中的整数常量表达式给出；宏SIZE替换为10后得到合法的int a[10]。",
+      "steps": [
+        "圆括号不是数组长度语法。",
+        "运行时变量长度属于VLA，且n需先有确定值。",
+        "宏常量形式适合传统C数组声明。"
+      ],
+      "takeaway": "数组声明用方括号；常量宏可用于长度。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案D（按传统C题意）；若D真在同一物理行则宏指令有误",
+        "reason": "选项D把宏定义和声明排在同一行；预处理指令会吞并该行余文。另C99允许合适作用域中的VLA，因此未说明标准版本时也有歧义。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-2",
+      "sourceHash": "baffb060a774c0827a976aeb3cfe64d0bfe4c6fa139fd3bc8ef1201d71a44536",
+      "explanation": "数组下标需要整数类型的值，可以是整数常量，也可以是计算结果为整数的表达式。",
+      "steps": [
+        "整型常量是合法下标。",
+        "如i+1这样的整型表达式也合法。",
+        "非整型表达式不能直接作下标。"
+      ],
+      "takeaway": "下标表达式须为整数类型。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "整型常量或整型表达式均可。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-3",
+      "sourceHash": "7574c96e1ee6e143835d9d738d8237a184177b0ecf463a5e63e4ba1b35850b34",
+      "explanation": "二维数组声明要用方括号分别给出两个维度；double a[1][4]符合该形式。",
+      "steps": [
+        "a[3][]缺少后续维度。",
+        "float a(3,4)使用了函数式括号。",
+        "float a(3)(4)也不是数组声明。"
+      ],
+      "takeaway": "二维数组声明形如类型名 a[行数][列数]。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C项为合法二维数组声明。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-4",
+      "sourceHash": "5f46e6488bb3371cffa33243b4c4011668a48d8759c0877f67104db13c8ae145",
+      "explanation": "int a[2][3]只容纳两行共6个元素，但C项提供三行初始化值，超过数组大小。",
+      "steps": [
+        "A用0初始化其余元素。",
+        "B列数已知，缺省行数可由初始化推得。",
+        "D列数3且提供6个值，可推得2行。"
+      ],
+      "takeaway": "初始化项不能超过数组可容纳的元素数量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C给出三行而数组仅声明两行。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-5",
+      "sourceHash": "b065728a17fa3c233f7d980119ec6dc3526734a71f0416d742e2fe47f274c591",
+      "explanation": "C二维数组按行优先连续存放，每行6个元素。第10个元素从a[0][0]开始数，第10个是一基计数，线性下标9；9=1×6+3，所以是a[1][3]。",
+      "steps": [
+        "前6个在第0行。",
+        "第7至12个在第1行。",
+        "第10个对应列下标3。"
+      ],
+      "takeaway": "二维数组的行优先下标从0开始。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "第10个元素是a[1][3]。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-6",
+      "sourceHash": "d1caa0f7e1bbbc8d8a62a5e61aec659b399f0108661b2279d15a6defc779575a",
+      "explanation": "数组a元素类型为float，但scanf格式%d要求int*；传入&a[i]是float*，类型不匹配，造成未定义行为。",
+      "steps": [
+        "第2行初始化列表合法。",
+        "第3行格式符和目标指针类型不匹配，应使用%f读float。",
+        "printf的%f与float参数匹配。"
+      ],
+      "takeaway": "scanf转换说明必须匹配目标指针类型。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "C",
+        "reason": "第3行的%d与float*不匹配，程序行为未定义。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-7",
+      "sourceHash": "ba1008b527486302b06c5e85595d7af9cb49982bdb240ef59bf3777afc3babcf",
+      "explanation": "二维数组按行填入1到9。表达式x[i][2-i]依次取x[0][2]=3、x[1][1]=5、x[2][0]=7。",
+      "steps": [
+        "i=0取3。",
+        "i=1取5。",
+        "i=2取7。"
+      ],
+      "takeaway": "先按行优先填表，再代入两个下标。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出357，对应选项C列出的3、5、7。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-8",
+      "sourceHash": "7f19cf69222889a85b5997dbde2765ec2f71de2a63ed9facffc21687c90506f0",
+      "explanation": "%d需要int*，&b是int*；%s需要字符数组首地址，数组名c在实参中转换为char*。",
+      "steps": [
+        "&c类型是指向整个数组的指针，不是char*。",
+        "b本身不是地址，C、D均不匹配%d。"
+      ],
+      "takeaway": "字符串数组作为%s实参传数组名，不加&。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "scanf实参应为&b和c。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-9",
+      "sourceHash": "a0e58150ad01cf6a2d62fc007416abe776f9b674ebec8994a180bf7033562ebd",
+      "explanation": "m[0]=5，所以m[m[0]]等于m[5]；数组只有下标0至4，越界。",
+      "steps": [
+        "m[--i]使i由4变3，合法。",
+        "m[2*2]是m[4]，合法。",
+        "m[m[2]]=m[3]=2，最终引用m[2]，合法。"
+      ],
+      "takeaway": "检查下标最终值是否位于0至长度减1。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "m[5]越界。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-10",
+      "sourceHash": "62a8f44640c0d048cabe993841d309254c7864eb693c9efd484cd3f8c20e192d",
+      "explanation": "传统数组声明用整数常量表达式作长度；在支持VLA的标准中，自动存储期数组也可使用运行时整数表达式，因此此选项概括了两类常见写法。",
+      "steps": [
+        "常量表达式是固定长度数组的常见形式。",
+        "C99及以后允许特定作用域的VLA。"
+      ],
+      "takeaway": "区分固定长度数组和VLA。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案C（传统教材分类）；标准版本影响选项措辞",
+        "reason": "选项C把常量与整型表达式并列，作为概括是可接受的，但VLA受C标准版本和作用域限制，题目未说明版本。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-11",
+      "sourceHash": "fb2233958182d14ad5ed2b3ca3dcdb87f756e8a4f9db9e2bd49f7dfd1da73a4d",
+      "explanation": "数组长度必须是整数常量表达式（或相应语境下的整型VLA边界）；3.2是浮点常量，不能作普通数组长度。",
+      "steps": [
+        "A、B、C均为整型常量表达式。",
+        "D含小数部分，类型为浮点。"
+      ],
+      "takeaway": "数组长度需要整数边界。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "3.2不是合法数组长度。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-12",
+      "sourceHash": "3c5f7114abf2a0ee079bd6d3b83bd11a15e7db33ce9109cf0afefb76b72887ce",
+      "explanation": "按传统固定长度数组声明，宏N定义为10后，a[N]展开为a[10]，是合法定义。",
+      "steps": [
+        "a[n]在C99可作VLA，但标准版本未说明。",
+        "1..10不是C数组长度语法。",
+        "3.2是浮点边界。"
+      ],
+      "takeaway": "宏常量可形成固定数组长度；VLA依赖标准版本。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案D（传统C固定数组）；若按C99，A也可能合法",
+        "reason": "A是C99局部VLA形式，D是传统固定长度形式；题目未限定C版本，且D的宏与声明在同一行展示，按字面预处理也有问题。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-13",
+      "sourceHash": "71eff6586cfcba2e4e1aaefd5e1e86b25271ac964997d7f7e7cebb633026cbc6",
+      "explanation": "传统写法用宏SIZE表示固定长度10，随后声明int a[SIZE]。但导入选项将多种写法拼接到D项，不能可靠确认原选项边界。",
+      "steps": [
+        "A将圆括号当作下标。",
+        "B依赖VLA且长度声明值得核对。",
+        "当前D文字同时出现scanf、a[n]和a[SIZE]，疑似OCR合并。"
+      ],
+      "takeaway": "数组长度声明要结合标准版本和原始排版核对。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案D；当前选项D疑似合并了C、D两项",
+        "reason": "输入文本把scanf与a[n]和宏a[SIZE]粘在同一选项，无法据此确认原题唯一正确项。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-14",
+      "sourceHash": "77db5913e7516184c14169dafc5d2b16e3483c199f56ed469a78080c4da70748",
+      "explanation": "D用花括号初始化数组首元素为10；未显式给出的其余元素会自动置零。",
+      "steps": [
+        "数组初始化用花括号。",
+        "10*1是整数常量表达式。",
+        "其他项使用圆括号或空初始化列表，不符合常规C初始化规则。"
+      ],
+      "takeaway": "数组聚合初始化使用花括号；省略元素清零。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D是合法初始化语句。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-15",
+      "sourceHash": "dc13d47f99a3083f53d95a1c297412f9a02b468b1a0619a9ca4e409dc9f65594",
+      "explanation": "循环赋值a[i]=10-i：a[2]=8、a[5]=5、a[8]=2；printf无分隔符，连成852。",
+      "steps": [
+        "i从9递减填充。",
+        "代入三个下标得到8、5、2。"
+      ],
+      "takeaway": "把下标代入赋值式，再按格式串拼接。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出852。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-16",
+      "sourceHash": "5cb4bca5a4a0d2693e7edec800628dbe48be633544b87e60c3979033a1ce3e7e",
+      "explanation": "a[i]=i。循环取i=0、1、2时，p分别取a[0]=0、a[2]=2、a[6]=6；k=5+2(0+2+6)=21。",
+      "steps": [
+        "p为0、2、6。",
+        "总增量为16。"
+      ],
+      "takeaway": "按表达式i*(i+1)求数组位置。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出21。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-17",
+      "sourceHash": "1b7c55235db2909e8eaa8d4961d196eada9d2d64b4d5a9be1748527a896db1aa",
+      "explanation": "while在首个偶数处停止累加。11、13为奇数，和为24；到14时14%2为0，条件失败，输出24。",
+      "steps": [
+        "i=0加11。",
+        "i=1加13，累计24。",
+        "i=2遇到14为偶数，退出。"
+      ],
+      "takeaway": "&&左侧限制下标，右侧判断元素奇偶。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出24。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-18",
+      "sourceHash": "03c8fc23f5ce4d54c2a38442100d64cf85cc8e617980dc7306f8e252de3f36c6",
+      "explanation": "原式有5个初始化值，列数3，按行排成第一行0,3,8，第二行0,9,0；显式补一个0即B，等价。",
+      "steps": [
+        "第一行填满3项。",
+        "第二行剩余位置补零。",
+        "总共推得2行。"
+      ],
+      "takeaway": "省略的数组元素自动初始化为0。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B等价于原始五个初值。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-19",
+      "sourceHash": "56c39e88b753cffb8b173677623e399006171b782797a2200b8a4d697ab65fd0",
+      "explanation": "A列数3明确，行数可由8个值推得3行，最后一行剩余元素补0。",
+      "steps": [
+        "B省略了两个维度，非法。",
+        "C给定两行却提供三行初始化。",
+        "D省略第二维列数，无法确定每行宽度。"
+      ],
+      "takeaway": "二维数组可省略首维，但必须给出列数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "A合法。"
+      }
+    },
+    {
+      "questionId": "h-6-基础篇-20",
+      "sourceHash": "26315b9f20ba70b107a0329859c08bad2bb901d9072e7b4da7234592e117fe53",
+      "explanation": "省略首维时必须有初始化列表来推断行数。B有列数3和一个初值，可推得一行三列数组。",
+      "steps": [
+        "A无初始化，首维无法推断。",
+        "C为空初始化列表，不提供推断所需元素。",
+        "D声明两行却列出三行初始化。"
+      ],
+      "takeaway": "省略二维数组首维时用初始化推导。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "B的首维由初始化列表推断。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-1",
+      "sourceHash": "0abc7e0b8a440ce0f66aa4aa2d351601bc98f4bcf450b54522e96dddaea3a119",
+      "explanation": "t共有6个元素，下标0至5；2*3等于6，故t[6]越界。",
+      "steps": [
+        "t[--i]为t[3]。",
+        "t[0]合法。",
+        "t[t[2]]=t[5]，合法。"
+      ],
+      "takeaway": "长度6的数组下标范围是0至5。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "t[6]越界。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-2",
+      "sourceHash": "b97f5530f8a5420dcf40f54608fbafe1a2ebf2467b37f069eb8e8e42e44084d6",
+      "explanation": "省略首维且提供初始化列表时，行数可推得为3；每行3列，D的三行初始化都合法。",
+      "steps": [
+        "A首维省略却无初始化，不完整。",
+        "B同样缺少可推断首维的初始化。",
+        "C的第二维范围写成3但只声明两行，却初始化三行。"
+      ],
+      "takeaway": "二维数组省略首维需有初始化推断行数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D可推导3行。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-3",
+      "sourceHash": "2f66e9e84fa64c881a5d88d9487adf30ceae54ab11f172eed9e8424d7570e63e",
+      "explanation": "4+1是整数常量表达式，可作为长度；初始化一个0后，其余元素自动为0。",
+      "steps": [
+        "A缺少长度及初始化。",
+        "B是VLA，但传统标准版本可能不支持。",
+        "D给长度2的数组却初始化3项。"
+      ],
+      "takeaway": "整数常量表达式可用于固定数组长度。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案C；在C99局部作用域B也可能合法",
+        "reason": "题目未限定标准版本；若b为块作用域局部数组，C99允许n初始化为5后声明VLA。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-4",
+      "sourceHash": "138470d2fcf2574be6881fc7fd64f648f244b67c879f055ebf7f9f424855ec74",
+      "explanation": "列数为3，7个初值按行填充；首维为ceil(7/3)=3行。",
+      "steps": [
+        "前3个填第0行。",
+        "第4至6个填第1行。",
+        "第7个开启第2行。"
+      ],
+      "takeaway": "省略首维时按列数和初始化元素数推断。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "第一维大小为3。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-5",
+      "sourceHash": "f53be1b4feb58643191188a2e02e8cd8cec468fdf9144c184b3954aef16a0a04",
+      "explanation": "a的下标0至9，b的两维下标各为0至2。a[-1]、a[10]、b[3][0]均越界；b[0][2]合法。",
+      "steps": [
+        "检查a长度10的范围。",
+        "检查b的行列范围均为0至2。"
+      ],
+      "takeaway": "C数组下标从0开始，最大下标是长度减1。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "只有b[0][2]不越界。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-6",
+      "sourceHash": "166fb53a920557d81e7850a6b62dbfd85286975d816ad49e386aa2d9f7bfb4d5",
+      "explanation": "数组名遵循标识符命名规则，下标用方括号，元素下标可由整型常量或整型表达式产生，并从0开始。",
+      "steps": [
+        "A错误：数组名就是标识符。",
+        "B错误：用中括号。",
+        "D错误：首下标为0。"
+      ],
+      "takeaway": "数组下标从0开始。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C对下标类型的描述正确。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-7",
+      "sourceHash": "784fcace9675da770d407e4d60f483bac53cc8ab3e53cc2d944ba98c316fdd9f",
+      "explanation": "a[2][3]的有效下标是行0至1、列0至2。1>2结果0，!1结果0，所以A引用a[0][0]。",
+      "steps": [
+        "A两个下标计算后均为0。",
+        "a[2][0]行越界。",
+        "a[1]是整行，不是基本int元素；a是整个数组。"
+      ],
+      "takeaway": "下标表达式会先求值再检查范围。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "A最终引用a[0][0]。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-8",
+      "sourceHash": "c0d090ff7d084afd590e8ac4c065d4234db38ad43d783fa9eb1e0c6c5101f1ca",
+      "explanation": "a+=a-=(b=3)*(a=2)在同一完整表达式中多次修改a且求值顺序没有保证；此表达式有未定义行为，不能称为正确表达式。",
+      "steps": [
+        "x%(-3)对double使用取余，类型不合法。",
+        "x=y[5]把标量y当数组。",
+        "&a+&b不是合法的指针加指针运算。"
+      ],
+      "takeaway": "同一表达式中未排序的重复修改可能导致未定义行为。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "无正确项；题库答案D不符合C表达式规则",
+        "reason": "D对a进行嵌套复合赋值且修改顺序未定；其余项也分别有类型或运算错误。"
+      }
+    },
+    {
+      "questionId": "h-6-综合拓展篇-9",
+      "sourceHash": "544f20e99c05e3a6959a283d54071298640d787e7fe1f15f1c8894cb81d66796",
+      "explanation": "{0}为数组首元素提供初值0，其余未显式列出的元素也会自动初始化为0。",
+      "steps": [
+        "数组声明含3×4个元素。",
+        "静态/自动聚合初始化的省略元素按规则清零。"
+      ],
+      "takeaway": "部分聚合初始化会把未指定元素置零。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "所有元素均得到初值0。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-1",
+      "sourceHash": "100f52ff52b56b4b53d19798c710773e8972ca5636d607021b2b94abacaf19ba",
+      "explanation": "double变量应通过double*传给scanf；p是指向a的double*，但格式说明必须是%lf。选项D的%1e仍是float*转换，不匹配double*。",
+      "steps": [
+        "A、C把double值a而非地址传入。",
+        "B使用地址p但%f要求float*。",
+        "D类型同样不匹配。"
+      ],
+      "takeaway": "scanf读取double用%lf；float才用%f。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "无正确项；题库答案D格式类型不匹配",
+        "reason": "所有选项都没有用%lf配double*；D的%e也要求float*，按原样无正确答案。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-2",
+      "sourceHash": "d58f28c816993cc1c8fdac91b1597fc3e0f53da7a1d13142b33017ce2a5fa442",
+      "explanation": "f(p)把a设成10；printf中的(*p)++先取旧值10输出，然后才把a增至11。",
+      "steps": [
+        "p仍指向a。",
+        "解引用自增表达式提供旧值。"
+      ],
+      "takeaway": "后置++先使用旧值再递增。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出10。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-3",
+      "sourceHash": "5e8b39e7dd5fee25dbcf2e6244fa037fbc89f2d8ae654e4a1e7cab7aa81d22e2",
+      "explanation": "循环i取0、2、4、6、8，*(t+i)即t[0]+t[2]+t[4]+t[6]+t[8]=1+3+5+7+9=25。",
+      "steps": [
+        "指针加i指向第i个元素。",
+        "只累加偶数下标。"
+      ],
+      "takeaway": "*(t+i)等价于t[i]。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出25。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-4",
+      "sourceHash": "32cc3caa75c5f6065a4a1077d9c8ae73bd30ff1c4c789d932eb76b26ab37db95",
+      "explanation": "fun通过指针把和写入c、差写入d：30+50=80，30-50=-20。",
+      "steps": [
+        "&c、&d把结果地址传入。",
+        "函数内*cp和*dp修改调用方变量。"
+      ],
+      "takeaway": "指针形参可把多个结果写回调用方。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出80,-20。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-5",
+      "sourceHash": "9c16bc3a1a54a9ad71faf6b29c0d418fbf03efe1f7332d5dc33a5ef19eed6b1a",
+      "explanation": "要让调用者的X、Y真的交换，函数需接收两者地址，并借助临时变量交换指向的值。A是唯一指针形参形式；但导入文本未显示A对应函数体，需核对原选项。",
+      "steps": [
+        "按值传递只交换局部副本。",
+        "指针形参能改调用方对象。",
+        "交换要先保存旧值，避免覆盖。"
+      ],
+      "takeaway": "按地址传参并使用临时变量完成交换。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案A；当前导入未展示A对应函数体",
+        "reason": "A只有签名，缺失实现；B、D展示的代码有明显按值/指针问题，无法从现有选项完整核验A的函数实现。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-6",
+      "sourceHash": "c3a284ff3c4fae3db0c919b96de08eba19d3a1198e8f127078b5a362fbeb1305",
+      "explanation": "字符串Hello占6个char位置：5个字母加结尾空字符。ptr+5指向最后的\u0000，解引用得到空字符。",
+      "steps": [
+        "下标0到4分别为H到o。",
+        "下标5存终止符\u0000。"
+      ],
+      "takeaway": "C字符串末尾有一个\u0000。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "*(ptr+5)是\u0000。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-7",
+      "sourceHash": "f29233b492f1fe19f967cb2818a9e65f190b30e140f6ee585814b6e11fd097a5",
+      "explanation": "数组名a不能整体赋值；字符串初始化时可写初值，但声明完成后不能用a=\"SUSE\"替换整个数组内容。",
+      "steps": [
+        "A是数组初始化。",
+        "B、D令指针指向字符串字面量。",
+        "C对数组名赋值，违反约束。"
+      ],
+      "takeaway": "数组对象不能像指针变量那样整体重新赋值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "a=\"SUSE\"非法。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-8",
+      "sourceHash": "74b9a0efae6be08078f2372b6d03f253be83259e4f3dbbf60b5f7e1fa3193936",
+      "explanation": "s[1]是字符串English，s[1][0]、**(s+1)、*s[1]都取其首字符E。*(s+1)表达式衰变为指向该行首元素的指针，不是字符值本身。",
+      "steps": [
+        "s+1指向第二行数组。",
+        "解引用得到整行数组，再转成指针。"
+      ],
+      "takeaway": "数组行表达式常衰变为首元素指针。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "*(s+1)是指针，不是字符E。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-9",
+      "sourceHash": "4ce9e3fb1ca87d82f65a4949dcbcef2842feb70dabbb54b02977c139b3ca379a",
+      "explanation": "pp指向指针变量p。先执行p=&a，再执行p=&b，因此p最终指向b；*p与**pp都读到20。",
+      "steps": [
+        "pp=&p固定。",
+        "p最后被改为指向b。",
+        "两次解引用路径都到b。"
+      ],
+      "takeaway": "追踪指针变量最终保存的地址。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出20,20。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-10",
+      "sourceHash": "af3c2003ea0c3e8422f42de18b09c94ce205a25bb6d300fae7e3fb62c4ea4682",
+      "explanation": "若p是与max函数类型相匹配的函数指针，赋值时直接用函数名max；函数名在表达式中转换为函数指针。",
+      "steps": [
+        "p=max(a,b)是调用函数，不是保存地址。",
+        "给*p赋值错误地把指针当返回值对象。"
+      ],
+      "takeaway": "函数指针可由兼容函数名赋值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "p=max。"
+      }
+    }
+  ]
+}

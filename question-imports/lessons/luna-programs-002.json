@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "self:h:4:综合拓展篇:程序设计题:2",
+      "sourceHash": "cecfd44c0826fcb3d723a786c94cc76b17f83ab76c6adb33bec5b01f7d03c176",
+      "explanation": "用 scanf 的 %c 读入一个字符，再检查它是否处于大写字母范围。若是，转换成对应小写字母；否则原样输出。题目没说明字符集，直接用 ch+32 仅适用于 ASCII 码等大小写差 32 的环境。为了遵循 C 标准库的字符转换约定，可使用 <ctype.h> 的 tolower，并先转成 unsigned char，避免负的 char 值传给字符分类函数。C89 程序如下：\n#include <stdio.h>\n#include <ctype.h>\nint main(void)\n{\n    char ch;\n    scanf(\"%c\", &ch);\n    if (ch >= 'A' && ch <= 'Z')\n        ch = (char)tolower((unsigned char)ch);\n    printf(\"%c\\n\", ch);\n    return 0;\n}\n",
+      "steps": ["%c 读取一个字符。", "只有字符在 'A' 到 'Z' 范围内才调用 tolower；其他字符不改动。", "%c 按字符形式输出最终值。"],
+      "takeaway": "字符大小写转换要先限制输入范围；不要在未说明编码时假定大小写码值相差固定数字。",
+      "answerReview": {"status": "consistent", "answer": "判断字符为大写字母时转换为小写，否则保持不变并输出。", "reason": "题目未提供参考程序；所给实现满足大写转换、其他字符不变的要求，并避免依赖 ASCII 的固定码差。"}
+    },
+    {
+      "questionId": "self:h:4:综合拓展篇:程序设计题:3",
+      "sourceHash": "872e45f4d651d9cbd44d99b1efcf15a7b04914acd546402df6afbfc6a7e6a359",
+      "explanation": "前 8 张合计收费 10 元，少洗也仍收 10 元；超过 8 张的部分每张加收 1.5 元。因此若张数 n 不大于 8，费用为 10；若 n 大于 8，费用为 10+(n-8)×1.5。假设输入为非负张数，并用 double 输出金额。这里按题目字面收费规则计算，不做任何折扣或按组向上取整。\n#include <stdio.h>\nint main(void)\n{\n    int n;\n    double fee;\n    scanf(\"%d\", &n);\n    if (n <= 8)\n        fee = 10.0;\n    else\n        fee = 10.0 + (n - 8) * 1.5;\n    printf(\"%.2f\\n\", fee);\n    return 0;\n}\n例如洗 10 张，费用为 10+2×1.5=13.00 元。",
+      "steps": ["先判断 n 是否超过 8。", "n≤8 时使用最低收费 10 元。", "n>8 时只对超出的 n-8 张各加 1.5 元。", "用 %.2f 显示金额到分。"],
+      "takeaway": "分段收费先确定所在区间，再只对超过起点的部分计算增量。",
+      "answerReview": {"status": "consistent", "answer": "n≤8 收 10 元；n>8 收 10+(n-8)×1.5 元。", "reason": "题目未提供参考答案；分段公式直接对应最低收费和超出部分的单张费用。"}
+    },
+    {
+      "questionId": "self:h:4:综合拓展篇:程序设计题:4",
+      "sourceHash": "3d9bb961c5bfe931c63568ee0caa3aa2d9ed045518de2bc63a2ce01ff94546ec",
+      "explanation": "题面给出的阶梯单价可以读出：每月前 6 立方米每立方米 2 元；超过 6 且不超过 10 的部分每立方米 4 元；超过 10 的部分每立方米 8 元。假设用水量 x 非负且按连续立方米计费，水费分段为：x≤6 时 2x；6<x≤10 时 12+4(x-6)；x>10 时 28+8(x-10)。累进计价不能把全部用量直接乘最高档单价。\n#include <stdio.h>\nint main(void)\n{\n    double x, fee;\n    scanf(\"%lf\", &x);\n    if (x <= 6.0)\n        fee = 2.0 * x;\n    else if (x <= 10.0)\n        fee = 12.0 + 4.0 * (x - 6.0);\n    else\n        fee = 28.0 + 8.0 * (x - 10.0);\n    printf(\"%.2f\\n\", fee);\n    return 0;\n}\n题表的文字排版有错位，但三个档位及单价能辨认；若原表另有未显示的起征费或舍入规定，题目没有给出，程序未擅自添加。",
+      "steps": ["前 6 立方米费用固定按 2 元/立方米，累计为 12 元。", "若用量落在 6 至 10 之间，只对 x-6 部分按 4 元计费。", "超过 10 时，前两档累计 12+4×4=28 元，再对 x-10 部分按 8 元计费。"],
+      "takeaway": "阶梯水费是逐段累加；进入更高档时，先保留前面各档的累计费用。",
+      "answerReview": {"status": "ambiguous", "answer": "按可辨认的表格，水费为 2x（x≤6）、12+4(x-6)（6<x≤10）、28+8(x-10)（x>10）。", "reason": "题干表格在文本提取中有错位；三档边界和单价可读，但是否存在额外舍入或其他收费说明无法从当前题面确认。"}
+    },
+    {
+      "questionId": "self:h:4:综合拓展篇:程序设计题:5",
+      "sourceHash": "cee16d6fa7184d01596a91efde6d87285b581e164215144e57ba5a52306db28d",
+      "explanation": "题干只写“现有分段函数”，却没有提供函数表达式、分段条件或各段的计算公式，代码字段也为空。没有这些信息就无法判断 x 落入哪个区间时应计算什么值，不能据常见例题猜函数。实现至少需要完整的分段定义，例如每个区间的边界以及对应的 f(x)。",
+      "steps": ["需要知道每段的区间边界。", "需要知道每个区间对应的函数表达式。", "当前题面两项都缺失，因此无法构造正确的 if/else 分支或给出唯一输出。"],
+      "takeaway": "分段函数程序必须先有完整的区间与公式；缺少数学定义时不能靠猜测补题。",
+      "answerReview": {"status": "unresolved", "answer": "无法确定。", "reason": "原题提到的分段函数公式未出现在题干或代码中，决定算法的关键信息缺失。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:1",
+      "sourceHash": "728681b018bf6a1da9a3a8f6fba8361ca0aed34113fa996f43a9a2baec466993",
+      "explanation": "循环从 count=1 开始，只要 count<=4 就执行一次。每轮先把 n 乘以 2，再把新的 n 加入 s：各轮 n 依次为 2、4、8、16，s 累加为 2+4+8+16=30。随后 count 每轮加 1，经历 1、2、3、4 四次后成为 5，条件失败退出。printf 带有 s= 前缀，因此输出 s=30。",
+      "steps": ["初值 s=0、n=1。", "第 1 至 4 轮分别得到 n=2、4、8、16。", "每轮把 n 加入 s，最后 s=30。", "循环退出后打印 s=30。"],
+      "takeaway": "while 的边界 count<=4 包含 4；每轮先更新 n 再累加，所以求和项是 2 的 1 至 4 次幂。",
+      "answerReview": {"status": "consistent", "answer": "s=30", "reason": "四轮累加 2、4、8、16，和为 30。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:2",
+      "sourceHash": "e5d45805ae8fea82e7587c1eb134cd6d17d0a83818fd43b4cdc037a324cf6fdf",
+      "explanation": "do...while 至少执行一次。第一轮先执行 b-=a：b 从 10 变成 9；再执行 a++，a 变成 2。条件 b--<0 使用后缀递减的旧值 9 与 0 比较，9<0 为假，但无论真假，b 都在比较后减为 8。循环结束，输出 a=2,b=8。容易漏掉的是条件中的 b-- 即使比较为假也已经改变 b。",
+      "steps": ["do 的循环体执行：b=9，a=2。", "条件比较旧 b=9 是否小于 0，结果为假。", "后缀 -- 仍使 b 从 9 变成 8。", "输出 a=2,b=8。"],
+      "takeaway": "后缀递减先用旧值判断条件，再更新变量；条件为假也不会撤销这次递减。",
+      "answerReview": {"status": "consistent", "answer": "a=2,b=8", "reason": "首轮循环后条件读取 b 的旧值 9 并将 b 减到 8，a 已增至 2。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:3",
+      "sourceHash": "4c5f259d5e8b665bdb9851b88f3cdb14cb1d23c4da49e57289e9e341ca4098b8",
+      "explanation": "do...while 每轮先把当前 i 加进 j，再把 i 减 1，最后检查 i>2。依次加入 10、9、8、7、6、5、4、3；加入 3 后 i 减为 2，条件 2>2 为假，退出。因此 j=10+9+8+7+6+5+4+3=52。注意条件检查发生在递减之后，所以最后加入的是 3 而不是 2。",
+      "steps": ["初始 i=10、j=0。", "每轮累加后递减 i；只要递减后的 i 仍大于 2，就继续。", "最终累加项为 10 到 3，合计 52。"],
+      "takeaway": "do...while 的条件在循环体之后检查，循环体内先处理当前值，再改变控制变量。",
+      "answerReview": {"status": "consistent", "answer": "52", "reason": "循环将 10 到 3 的整数相加，结果为 52。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:4",
+      "sourceHash": "ca7303939ef519184a010f3cc24051110cbc6a165c3b56bbeb3657afa8bc5e9d",
+      "explanation": "循环执行两次，但 scanf 使用 %c，不会自动跳过空白。第一次读到字符 '0'，命中 case '0'，打印 another 后没有 break，于是继续落入 case '1' 再打印 number。第二次读到字符 '1'，只打印 number。输入行末的回车仍在输入流中，但循环到此结束，没有第三次读取。输出共三行：another、number、number。",
+      "steps": ["第 1 次读取 '0'：输出 another，再因缺少 break 落入下一标签输出 number。", "第 2 次读取 '1'：输出 number。", "回车留在输入流中但不再被读取。"],
+      "takeaway": "%c 会读取空格或回车；switch 没有 break 时会继续执行后续 case 的语句。",
+      "answerReview": {"status": "consistent", "answer": "another\\nnumber\\nnumber\\n", "reason": "输入的两个字符依次触发 case '0' 的贯穿和 case '1'。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:5",
+      "sourceHash": "0fc5fdb7f4c203292aa9d74b216839967cb5912f610fc0a4a8d956a8212c743a",
+      "explanation": "for 依次令 i=0、1、2，每轮进入 switch。i=0 没有对应 case，执行 default 打印 0。i=1 从 case 1 开始，没有 break，所以连续经过 case 2 和 default，打印三个 1。i=2 从 case 2 开始，再落到 default，打印两个 2。printf 没有空格或换行，所有数字连成 011122。",
+      "steps": ["i=0：进入 default，输出 0。", "i=1：依次执行 case 1、case 2、default，输出 111。", "i=2：执行 case 2 和 default，输出 22。", "拼接结果为 011122。"],
+      "takeaway": "case 标签只是跳转入口；执行后如果没有 break，会继续向下贯穿到后续语句。",
+      "answerReview": {"status": "consistent", "answer": "011122", "reason": "按三次 switch 的入口和贯穿顺序拼接输出，结果与题库答案一致。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:6",
+      "sourceHash": "163c0c7824a662ec43982b3c71a19df166a9094ed803e059d3e2dc0fd8da4b31",
+      "explanation": "for 让 i 取 1、2、3、4。switch 中没有 break，因此从匹配位置一直执行到 switch 结束。i=1 从 case 1 开始，落入 case 2 加 3，再落入 default 加 5，共加 8；i=2 从 case 2 开始，加 3 和 5，共 8；i=3 从 case 3 加 2，继续经过 case 1 标签而没有语句，再由 case 2 加 3、default 加 5，共 10；i=4 走 default 加 5。总和 8+8+10+5=31。",
+      "steps": ["i=1 时累加 3+5=8。", "i=2 时累加 3+5=8。", "i=3 时从 case 3 贯穿，累加 2+3+5=10。", "i=4 时 default 加 5；a 最终为 31。"],
+      "takeaway": "switch 贯穿时从命中的标签继续执行，连续标签可共享后面的语句；没有 break 就不会在标签边界停下。",
+      "answerReview": {"status": "consistent", "answer": "31", "reason": "四个 i 值对应增量 8、8、10、5，合计 31。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:7",
+      "sourceHash": "fd3f502297b29876c39bb1c6fca25c9b35e43be1e8a67ad510995e6a01174337",
+      "explanation": "每轮先打印当前 f1、f2，再按顺序执行两次更新。f1=f1+f2 用旧的 f1、f2 算出新 f1；下一句 f2=f1+f2 使用已经更新的 f1 和原来的 f2。因此五轮打印的数对依次是 (1,1)、(2,3)、(5,8)、(13,21)、(34,55)，循环后 f1=89、f2=144。%-5d 表示左对齐、字段最少 5 列；没有显式分隔符，列宽空格构成视觉间隔。答案列出的数值序列正确，但不能把空格当作固定单空格分隔。",
+      "steps": ["初始化 f1=f2=1。", "每轮先打印，再更新 f1，接着用新 f1 更新 f2。", "5 轮输出十个 Fibonacci 数：1、1、2、3、5、8、13、21、34、55。", "循环结束时追加输出 89,144。"],
+      "takeaway": "同一轮内多条赋值按顺序执行；第二条赋值会读到第一条已更新的变量值。printf 的字段宽度会影响空格布局。",
+      "answerReview": {"status": "consistent", "answer": "依次打印 1、1、2、3、5、8、13、21、34、55，最后打印 89,144；前面的数由 %-5d 左对齐到 5 列。", "reason": "逐轮按赋值顺序追踪得到题库所列数列；题库答案未呈现精确字段空格，但数值顺序一致。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:8",
+      "sourceHash": "bdf209d4a860ae7f291b9bc253a682560993c56eb5396a98995b668be2129498",
+      "explanation": "k 从 5 递减到 1。k=5、4 时走 default，break 只退出 switch，随后仍执行 k--；它不会退出 while。k=3 命中 case 3，n 加 3；k=2 命中 case 2 后贯穿到 case 3，n 加 2；k=1 命中 case 1，先加 1，再贯穿到 case 3 又加 1。总计 n=3+2+1+1=7。",
+      "steps": ["k=5、4：default 的 break 结束 switch，循环继续递减 k。", "k=3：n 增加 3。", "k=2：贯穿后 n 增加 2。", "k=1：两个累加语句都执行，n 增加 2；总数为 7。"],
+      "takeaway": "switch 中的 break 只结束 switch；要结束外层循环还需循环本身的控制语句或另一个 break。",
+      "answerReview": {"status": "consistent", "answer": "7", "reason": "k=3、2、1 的累加分别为 3、2、2，合计 7。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:9",
+      "sourceHash": "72f203f92d1203434620369ab4e10d99df7b30f167a25976bdf7e0501c4fcfa0",
+      "explanation": "for 的更新表达式是 k++、s--，但只有循环体执行完且没有 break 才会运行。k=1 时先走 else，s 从 0 加 1 得 1；更新后 k=2、s=0。k=2 得 s=2，更新到 k=3、s=1；k=3 得 s=4，更新到 k=4、s=3；k=4 得 s=7，更新到 k=5、s=6。此时条件 k<15 成立，进入循环后判断 s>k，即 6>5，执行 break，因此本轮不执行更新表达式。最终打印 (5,6)。",
+      "steps": ["前四轮 else 分别把 s 累加为 1、2、4、7；每次循环更新时 s 再减 1。", "到 k=5 时 s=6，比较 s>k 为真。", "break 直接退出，不再执行 k++、s--，最终 k=5、s=6。"],
+      "takeaway": "for 的更新表达式在正常完成循环体后执行；break 会跳过本轮更新。",
+      "answerReview": {"status": "consistent", "answer": "(5,6)", "reason": "k=5、s=6 时条件成立并立即 break，打印值与题库答案一致。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:10",
+      "sourceHash": "80329ca248491a2c0c68b8507dba5c6b1f6382ce74d307636faadfcc7c8a9cac",
+      "explanation": "i=0 时没有匹配标签，default 打印 0。i=1 从 case 1 开始，打印 1 后继续执行 case 2，打印 1，再遇到 break 退出 switch。i=2 直接从 case 2 打印 2 并 break。三个循环轮次拼在一起得到 0112。break 只结束 switch，for 自己仍正常进行下一轮。",
+      "steps": ["i=0：default 输出 0。", "i=1：case 1 和 case 2 都输出 1，然后 break。", "i=2：case 2 输出 2，然后 break。", "合并为 0112。"],
+      "takeaway": "break 放在 case 2 中，能阻止继续落入 default；它不会终止外围 for。",
+      "answerReview": {"status": "consistent", "answer": "0112", "reason": "三轮输出依次为 0、11、2，连续拼接为 0112。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:11",
+      "sourceHash": "ba6fe0f6cbf8936cc28d4f417258dc6f7fa92271825416568ee49992abcf5bd2",
+      "explanation": "i 从 1 取到 5。i 为奇数时 i%2 为非零，打印井号后执行 continue，跳到 for 的更新部分，本轮后续的星号输出被跳过；i 为偶数时条件为假，打印星号。因此五轮分别输出井号、星号、井号、星号、井号，最终为 #*#*#。",
+      "steps": ["i=1：奇数，输出 # 并跳过本轮其余语句。", "i=2：偶数，输出 *。", "i=3、4、5 依次输出 #、*、#。"],
+      "takeaway": "continue 结束当前循环体剩余部分并开始下一轮；for 的更新表达式仍会执行。",
+      "answerReview": {"status": "consistent", "answer": "#*#*#", "reason": "奇数轮输出井号，偶数轮输出星号，序列吻合。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:12",
+      "sourceHash": "a9459cd8002d3d6237d5df321669cbb0ddb34f070232a4ede43cb5a69dbfb662",
+      "explanation": "外层循环执行两轮。每轮开始 x++ 一次；内层 j=0、1、2，其中 j 为奇数的 1 会 continue，跳过该次 x++，j=0 和 j=2 各增加一次；内层循环结束后又执行一次 x++。所以每个外层循环增加 1+2+1=4，经过两轮得到 x=8。continue 只影响内层 for 的当前轮，不会跳过内层循环后的 x++。",
+      "steps": ["每轮外层开始时 x 加 1。", "内层 j=0、2 时 x 各加 1；j=1 直接 continue。", "内层结束后 x 再加 1。", "每轮增加 4，两轮后为 8。"],
+      "takeaway": "嵌套循环中的 continue 作用于它所在的最近一层循环；要逐层确认跳过了哪些语句。",
+      "answerReview": {"status": "consistent", "answer": "x=8", "reason": "每个外层循环使 x 增加四次，两轮总计八次。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:13",
+      "sourceHash": "1a86164203a3e4a01b5895eace6e262d578d1fa90eb2a83c7184ebc9eed0936d",
+      "explanation": "i 分别为 2、3、4。do 循环体先检查 i%3：i=2 和 4 时为真，continue 会直接跳到 do...while 条件；条件是 !i，因 i 非零而为假，退出 do 循环，然后外层的 n++ 仍会执行。i=3 时不 continue，执行 n++；条件 !3 为假退出，再执行外层 n++。因此三个外层迭代分别给 n 增加 1、2、1，最终 n=4。若把 continue 误认为跳过外层语句，就会少算。",
+      "steps": ["i=2：do 中 continue 到条件，!2 为假；外层 n 加 1。", "i=3：内层 n 加 1，条件 !3 为假；外层再加 1。", "i=4：内层 continue 后退出；外层加 1。", "总共 n=4。"],
+      "takeaway": "do...while 中 continue 会先检查循环条件；离开内层循环后，外层循环体后续语句仍会执行。",
+      "answerReview": {"status": "consistent", "answer": "n=4", "reason": "三个外层迭代分别增加 1、2、1，和为 4。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:14",
+      "sourceHash": "2645611da895f4214737b841c15a614a78bd92b1ee98367fb3699d3b98beba7b",
+      "explanation": "程序反复用较大数减较小数，直到两个值相等。这是用减法求最大公约数的过程。输入 65 和 14：65-14=51，51-14=37，37-14=23，23-14=9；此时 14-9=5，9-5=4，5-4=1，4-1=3，3-1=2，2-1=1。最后两数都为 1，打印 m=1,n=1。每次减法保持两数的最大公约数不变。",
+      "steps": ["每次只对较大的数减去较小的数。", "由 65、14 逐次相减，最终两个数都变成 1。", "m==n 时外层 while 停止，输出两个 1。"],
+      "takeaway": "减法版最大公约数算法保持 gcd 不变，但输入必须是正整数且非零；这里 65、14 满足条件。",
+      "answerReview": {"status": "consistent", "answer": "m=1,n=1", "reason": "65 和 14 的最大公约数为 1，反复相减会收敛到两个 1。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:15",
+      "sourceHash": "612baf168ff478259ec06445da08085bc3156029b1a5a672c3a3ea8a5338af3f",
+      "explanation": "题意是读字符直到换行，分别统计大写和小写字母，再输出两个计数的较大者。第一空声明并初始化 m、n；第二空每次用 getchar 赋给 c；第三空应检查小写字母的完整闭区间。题库答案写 c>'a' && c<'z'，会漏掉边界字母 a 和 z。另一个问题是原代码最后的 printf 调用缺少分号，原样程序有语法错误。按意图修正为：\nint m=0,n=0;\nchar c;\nwhile ((c=getchar()) != '\\n') {\n    if (c>='A' && c<='Z') m++;\n    if (c>='a' && c<='z') n++;\n}\nprintf(\"%d\\n\", m<n?n:m);\n若输入流在换行前结束，程序还应额外处理 EOF；题目只描述以回车结束的输入。",
+      "steps": ["计数器从 0 开始，getchar 每次读一个字符。", "大写判断使用 A 到 Z 的闭区间，小写判断使用 a 到 z 的闭区间。", "读到换行就停止，再用条件表达式输出 m、n 中较大者。", "比较时先修正题库边界条件，并补齐 printf 末尾分号。"],
+      "takeaway": "字符范围边界要包含首尾字母；检查填空题时也要看完整程序是否有语法错误。",
+      "answerReview": {"status": "conflict", "answer": "预期填入 int m=0,n=0;、c=getchar();、c>='a'&&c<='z'；同时应给末尾 printf 补分号。", "reason": "题库小写判断使用严格大于和小于，会漏计 a、z；原代码 printf 语句也缺少分号，按原样不能编译。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:16",
+      "sourceHash": "a26dbe72108aa064b7009c56bc9774baa36280ba32e05c7a40ac523eaf29013f",
+      "explanation": "先输出个位 n%10，再将 n 除以 10 去掉已输出的末位；只要剩余 n 不为 0 就继续。使用 do...while 保证输入 0 时也至少输出一次 0。比如 n=135：依次取 5、3、1，每次除以 10 后剩余 13、1、0，最后停止，得到 531。对正整数输入，题库的两个空 n/=10 和 n!=0 是匹配的。",
+      "steps": ["s=n%10 取出当前个位并打印。", "n/=10 去掉刚输出的末位。", "当 n 还不为 0 时重复；例 135 输出 5、3、1。"],
+      "takeaway": "整数逆序输出可以反复取余 10 得个位，再整除 10 去掉个位；do...while 也能让输入 0 至少输出一次。",
+      "answerReview": {"status": "consistent", "answer": "n/=10; n!=0", "reason": "先删除已输出的末位，再在剩余数字非零时继续处理，符合逆序输出算法。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序阅读题:17",
+      "sourceHash": "0e84abee1eb125ece59cb7a04be7726d19519575f130197128e09de8d1431e3f",
+      "explanation": "程序先读入一个成绩，并用它初始化最高分和最低分，然后在 x>=0 时处理该成绩并继续读下一个数。遇到负数后条件失败，负数不参与统计。更新最高分的判断是 x>amax；最低分则在 x<amin 时替换。题库填空顺序是 while 条件、最低分判断。该写法默认至少先输入一条非负成绩；若第一项就是负数，amax、amin 会错误地保留为哨兵值，所以实际健壮程序应先明确是否允许空数据。",
+      "steps": ["首个非负输入作为初始最大值和最小值。", "每个后续非负值分别与 amax、amin 比较并更新。", "负数令 while 条件失败，不参加统计。"],
+      "takeaway": "用首个有效数据初始化极值可以避免凭空指定初值；要说明结束标记是否可能出现在第一项。",
+      "answerReview": {"status": "consistent", "answer": "x>=0; x<amin", "reason": "条件让负数作为结束标记，第二个比较在当前值更小时更新最低分；隐含前提是至少有一条有效成绩。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序设计题:1",
+      "sourceHash": "a7dfec5e194486f82d87b6e077e8ee74dd7dcd9ee1a6f02e9d803ce00e7e7596",
+      "explanation": "三位水仙花数是各位数字立方和等于该数本身的整数。对 100 到 999 逐个检查：百位 h=n/100，十位 t=n/10%10，个位 u=n%10；若 h³+t³+u³=n 就输出。循环边界两端都包含。C89 程序：\n#include <stdio.h>\nint main(void)\n{\n    int n, h, t, u;\n    for (n = 100; n <= 999; n++) {\n        h = n / 100;\n        t = n / 10 % 10;\n        u = n % 10;\n        if (h*h*h + t*t*t + u*u*u == n)\n            printf(\"%d\\n\", n);\n    }\n    return 0;\n}\n",
+      "steps": ["循环检查每一个三位整数。", "用整除和取余拆出百位、十位、个位。", "计算三位数字立方和；相等时输出该数。"],
+      "takeaway": "拆十进制位时，除以 100 得百位，除以 10 再取余 10 得十位，直接对 10 取余得个位。",
+      "answerReview": {"status": "consistent", "answer": "逐个检查 100 至 999，输出各位立方和等于原数的数。", "reason": "题目未提供参考答案；循环范围和定义条件完整覆盖所有三位数。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序设计题:2",
+      "sourceHash": "df7dd189c1b1fbf0cad664a93e79f3cbf29b94d195bd77f36224ccd6ee6fa163",
+      "explanation": "按通常理解，组成三位数的三个数字必须互不相同，百位不能为 0；十位和个位可以为 0，只要不与已选数字重复。百位有 9 种选择（1 至 9），十位有 9 种（剩下 9 个数字），个位有 8 种，因此共 9×9×8=648 个。可以用三重循环直接枚举并计数，避免把 0 开头的组合误当三位数。\n#include <stdio.h>\nint main(void)\n{\n    int a, b, c, count;\n    count = 0;\n    for (a = 1; a <= 9; a++)\n        for (b = 0; b <= 9; b++)\n            for (c = 0; c <= 9; c++)\n                if (a != b && a != c && b != c)\n                    count++;\n    printf(\"%d\\n\", count);\n    return 0;\n}\n",
+      "steps": ["百位 a 从 1 到 9，排除首位为 0。", "十位 b 和个位 c 可从 0 到 9 选。", "仅当三个位置两两不同才计数。", "计数结果为 648。"],
+      "takeaway": "排列计数时要分清首位限制和数字互异限制；三位数首位不能为零，后两位可以为零。",
+      "answerReview": {"status": "consistent", "answer": "648", "reason": "百位 9 种，十位从剩余数字选 9 种，个位选 8 种，共 648 种。"}
+    },
+    {
+      "questionId": "self:h:5:综合拓展篇:程序设计题:3",
+      "sourceHash": "14e40f388b05706260131e4dd2f2ad8cc9db8c400d66212352132b122524bd80",
+      "explanation": "题目限定输入正整数。保留原数 copy，再反复用 copy/=10 统计位数：每删去一位，位数加 1；当 copy 小于 10 时只剩最高位，循环结束。输入 123456 会经过 123456、12345、1234、123、12、1，共 6 位。若输入 0 则不符合正整数前提，程序不把它当作合法输入处理。\n#include <stdio.h>\nint main(void)\n{\n    int n, copy, digits;\n    scanf(\"%d\", &n);\n    copy = n;\n    digits = 1;\n    while (copy >= 10) {\n        copy /= 10;\n        digits++;\n    }\n    printf(\"%d %d\\n\", n, digits);\n    return 0;\n}\n",
+      "steps": ["先把输入复制到 copy，原变量 n 留作最终输出。", "正整数至少一位，所以 digits 从 1 开始。", "每当 copy 至少为 10，就除以 10 并把位数加 1。", "输出原数和统计出的位数。"],
+      "takeaway": "统计十进制整数位数时要保留原值供输出；正整数用循环除以 10 直到小于 10。",
+      "answerReview": {"status": "consistent", "answer": "复制输入值，循环除以 10 统计位数，再输出原数和位数。", "reason": "题目未提供参考代码；算法对所有正整数都按十进制位数计数。"}
+    },
+    {
+      "questionId": "self:h:6:综合拓展篇:程序阅读题:1",
+      "sourceHash": "90e3c21ce13caa367871b922ee7a6eb9b33a5d6a220b2cc73dd2d0cefb3ac80c",
+      "explanation": "循环逐项检查 a[i]。遇到负数时 continue 跳过后面的 printf，直接进入下一轮；非负数才会打印。数组中的负数 -3、-6、-8 被跳过，2、4、10 连续打印，没有分隔符，所以本题代码实际输出第一行 2410。题库答案字段后面还附有“1 0 2 2 5 7 13 20”，与此数组和程序无关，属于混入的其他题目答案。",
+      "steps": ["i=0：2 非负，打印 2。", "i=1、3、4：元素为负，continue 跳过输出。", "i=2、5：打印 4 和 10。", "printf 无分隔符，输出 2410 后换行。"],
+      "takeaway": "continue 会跳过本轮后续语句；审题库答案时要核对它是否对应当前代码，而不能照抄串入的其他结果。",
+      "answerReview": {"status": "conflict", "answer": "2410", "reason": "代码只输出非负元素 2、4、10；题库答案额外附带一串与本题无关的数组结果。"}
+    },
+    {
+      "questionId": "self:h:6:综合拓展篇:程序阅读题:2",
+      "sourceHash": "de651b7ddc19d1606762653cfcf44b0709112d7b8b5520c1105fb14c3a3787a8",
+      "explanation": "前两个数组元素保持 1、0；从 i=2 开始，每项改为原项加前两项。逐项算得 a[2]=1+0+1=2，a[3]=0+2+0=2，a[4]=1+2+2=5，a[5]=0+5+2=7，a[6]=1+7+5=13，a[7]=0+13+7=20。最后按 i=0 到 7 输出。%5d 会为每个整数至少留 5 列，短数左侧补空格；它不会将整数改成小数。",
+      "steps": ["初始序列：1、0、1、0、1、0、1、0。", "依次覆盖 i=2 至 7，得到 2、2、5、7、13、20。", "最终序列为 1、0、2、2、5、7、13、20，按字段宽度输出。"],
+      "takeaway": "数组循环从低下标向高下标更新时，后续项会使用已经更新的前一项；%5d 控制列宽而非小数位。",
+      "answerReview": {"status": "conflict", "answer": "数组值为 1、0、2、2、5、7、13、20；每个数占至少 5 列右对齐。", "reason": "按代码逐项计算得到该整数序列；题库答案中的小数值与 int 数组及 %5d 格式不符。"}
+    },
+    {
+      "questionId": "self:h:6:综合拓展篇:程序阅读题:3",
+      "sourceHash": "1743cdcc6220561fd29c03ef558fe7eec52074547d88b405ef46662ebae75771",
+      "explanation": "先把 b[0] 暂存到 t，然后依次将后一项左移到前一项：b[0] 到 b[4] 变成原来的 b[1] 到 b[5]。最后把 t 放到 b[5]，完成循环左移一位。新数组依次是 2.2、3.3、4.4、5.5、6.6、1.1。printf 的 %6.2f 每项显示两位小数、总宽至少 6 列；中间没有换行，结果是一行连续的定宽字段。输入数据在二进制浮点中未必精确，但格式化会按两位小数显示。",
+      "steps": ["t 保存旧的 b[0]=1.1。", "循环把原 b[1] 至 b[5] 左移一格。", "把 t 放入末尾，形成 2.2、3.3、4.4、5.5、6.6、1.1。", "每项按 %6.2f 输出，未插入换行。"],
+      "takeaway": "数组左移时先保存将被覆盖的首项，再搬移其余元素，最后把暂存值放到末尾。",
+      "answerReview": {"status": "consistent", "answer": "2.20、3.30、4.40、5.50、6.60、1.10，各字段宽 6 列。", "reason": "逐项左移后得到该顺序，格式串明确保留两位小数。"}
+    },
+    {
+      "questionId": "self:h:6:综合拓展篇:程序阅读题:4",
+      "sourceHash": "91fd71c20e70f3a8c5191e2ced5c802ee2695f02ff93a86b1c8ca38ee085c9c9",
+      "explanation": "while 条件要求当前元素是奇数，循环才会把它加进 k 并移动到下一项。p[0]=11、p[1]=13 都是奇数，累计为 24；到 p[2]=14 时余数为 0，条件失败，停止，因此后面的 15、16、17、18 不再处理。输出 k=24。条件中的 i<7 还能防止数组下标越界。",
+      "steps": ["i=0，11 是奇数，k=11。", "i=1，13 是奇数，k=24。", "i=2，14 是偶数，while 条件为假并退出。", "输出 k=24。"],
+      "takeaway": "短路的 && 会先检查下标边界再访问数组；循环在遇到第一个偶数时停止，而非跳过偶数继续搜索。",
+      "answerReview": {"status": "consistent", "answer": "k=24", "reason": "循环只累计开头连续的两个奇数 11 和 13。"}
+    },
+    {
+      "questionId": "self:h:6:综合拓展篇:程序阅读题:5",
+      "sourceHash": "411cbbc1d4b1ece81498c8f538e07d4359485a6413508457b529e42cb7bef4e7",
+      "explanation": "题目问第三行。第一条 printf 先打印 a[0]=1，形成第一行。i=1 时设置 a[1]=1，内部循环因 j 初值为 0 且条件 j>0 不成立，输出第二行 1 1。i=2 时先设 a[2]=1，再从 j=1 向下更新：a[1]=a[1]+a[0]=2；打印 a[0..2]，第三行就是 1 2 1。题库答案字段在这行之后还含有其他行，和“第三行”所问不符。",
+      "steps": ["第一行只有 a[0]=1。", "第二行 i=1 时输出 1、1。", "i=2 时内部更新把 a[1] 改为 2，a[2] 保持 1。", "第三行打印 1、2、1。"],
+      "takeaway": "倒序更新杨辉三角一行时，要先理解内层循环改变了哪些下标；题目只问第三行就不要把后续行混入结果。",
+      "answerReview": {"status": "conflict", "answer": "第三行是 1 2 1。", "reason": "程序第三行确为 1、2、1；题库答案字段随后还列出多行额外数据，不是所问第三行。"}
+    },
+    {
+      "questionId": "self:h:6:综合拓展篇:程序阅读题:6",
+      "sourceHash": "dcd8ebbdca3bfe22b4b029b810be0770521c9b353f5f82b3f36b1dc772da63ee",
+      "explanation": "程序按行填入二维数组，每次打印一个元素。条件 i+j==3 在 0 到 2 的下标范围内只可能出现在 (1,2) 和 (2,1)。其中 (1,2) 读取上一行 a[0][2]，该值已由前面的循环设为 2，因此 a[1][2]=3；(2,1) 读取 a[1][1]=1，所以得到 2。第三行 i=2 时，j=0 走 else 得 0，j=1 命中条件得 2，j=2 走 else 得 2。故第三行内容为 0 2 2。",
+      "steps": ["第一行按 j 赋值为 0、1、2。", "第二行 j=2 时读取上一行同列值 2，再加 1 得 3；其他位置按 j 赋值。", "第三行 j=0、1、2 分别得到 0、2、2。"],
+      "takeaway": "按行填二维数组时，先追踪前面已赋值的元素；只要读取的是此前写入的位置，就不是未初始化值。",
+      "answerReview": {"status": "consistent", "answer": "0 2 2", "reason": "第三行三个位置分别按 else、引用上一行加一、else 计算为 0、2、2。"}
+    }
+  ]
+}

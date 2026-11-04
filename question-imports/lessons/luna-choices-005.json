@@ -1,0 +1,626 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "h-7-基础篇-11",
+      "sourceHash": "2f28f7e81ff55d66ebda4d7cde4c732c90c3babe56b65566b7c40e8ad3086283",
+      "explanation": "字符串ABC的字符码在题目ASCII假设下为65、66、67；每轮输出字符码除以10的余数，得到5、6、7。指针到达结尾空字符后停止。",
+      "steps": [
+        "65%10=5。",
+        "66%10=6，67%10=7。",
+        "结尾\u0000使循环结束。"
+      ],
+      "takeaway": "字符串指针逐字符移动，余数计算仅输出末位。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出567。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-12",
+      "sourceHash": "bfd415a80168b35f870304fcb0f9e0dd1a626fc550100b5ea64399d06a253970",
+      "explanation": "按题面，二维字符数组的初始化用圆括号包住逗号表达式，而不是大括号初始化列表；不能据此正确初始化str，程序不能按预期运行。若原意是用大括号列出两个字符串，str[1]应为小写one*Dream!，长度10，但题库选项C也把首字母写成大写One。",
+      "steps": [
+        "C数组初始化列表应写在花括号中。",
+        "当前括号逗号表达式不是char数组的合法初始化。",
+        "即使按可能意图修正，选项字符串大小写仍与题面不一致。"
+      ],
+      "takeaway": "数组初始化需使用花括号；字符串比较和输出也要保留原始大小写。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "按当前题面程序无可靠输出；题库C只对应修正后的近似意图",
+        "reason": "源代码使用圆括号而非花括号初始化二维数组，且选项首字母大小写与字符串不同。不能直接把它当成排版修正。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-13",
+      "sourceHash": "73ee675a280ef4f1010b73aaa9e7be7635780134fe5ba6d476115f5d16b748a2",
+      "explanation": "y从x开始向后移动，每轮先检查当前字符，再递增指针；遇到结尾空字符停止。y-x-1正好等于字符数，不包括\u0000。",
+      "steps": [
+        "指针走过每个非空字符。",
+        "在\u0000处终止。",
+        "返回已走过的字符数。"
+      ],
+      "takeaway": "字符串长度不包含结尾空字符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "函数返回字符串长度。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-14",
+      "sourceHash": "620641c65ef3f669dabab07b8e2dafc435d82e0a76d86509bec65df4a23d5cf3",
+      "explanation": "i=8时p指向a[8]；p-3指向a[5]，其后的字符串字符为6、7、8、9，终止符在a[9]，所以%s输出6789。",
+      "steps": [
+        "p-3=&a[5]。",
+        "从a[5]读取直到\u0000。"
+      ],
+      "takeaway": "%s从给定地址输出到结尾空字符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出6789。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-15",
+      "sourceHash": "f87e838e2da674a50a10160c103d5fb623ffbe4beb2c86553cab83ec346cc6f5",
+      "explanation": "pb是int*，x是int；要让pb指向x，必须赋入x的地址&x。",
+      "steps": [
+        "pb=x把整数当地址。",
+        "*pb是整数对象，不能接收int*。"
+      ],
+      "takeaway": "指针变量保存地址，取地址用&。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "pb=&x。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-16",
+      "sourceHash": "eb9e2739a473df5e09c65913ae451251a5434e593c3d24defeba64e2bf94cb1f",
+      "explanation": "cp指向一行5个int的数组；*cp得到第一行，*(*cp+2)解引用该行第三个元素，即c[0][2]。",
+      "steps": [
+        "cp+1是指针。",
+        "*(cp+3)是整行数组。",
+        "*(cp+1)+3仍是指针。"
+      ],
+      "takeaway": "区分元素值、行数组和地址表达式。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "只有D是数组基本元素值。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-17",
+      "sourceHash": "51e74558381f5d3a58e47916003c854709f32642db6a31e67e9fab4498b518ab",
+      "explanation": "p指向a[0]，p+2指向a[2]；解引用取得第三个元素3。",
+      "steps": [
+        "下标从0开始。",
+        "a[2]=3。"
+      ],
+      "takeaway": "指针加2前进两个元素。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出3。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-18",
+      "sourceHash": "864f8a89647eafdb21567745741937bf582b6aadea083abdbb3c1226be4aa85b",
+      "explanation": "每个字符都匹配case后一路贯穿至case4，i最终变3；每个字符都令v[3]加一。共8个字符，所以结果为0 0 0 8。",
+      "steps": [
+        "case没有break，会贯穿。",
+        "i总被最后的case4设成3。",
+        "八个字符共增加v[3]八次。"
+      ],
+      "takeaway": "switch缺少break会继续执行后续case。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出0 0 0 8。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-19",
+      "sourceHash": "c2d4886a0e4578cf061c748a0079cdb0ac7a0121370d722e742007221fb273b7",
+      "explanation": "p先指向a，a=*p+b即用a当前值10加b=1，得到11。",
+      "steps": [
+        "*p读到a=10。",
+        "a更新为10+1。"
+      ],
+      "takeaway": "解引用指针读写其所指对象。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "a为11。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-20",
+      "sourceHash": "c0b7fc6bd9936eff4cb57a9662b16e0fa272bdbced5f17fcf94f78bbcf8b5c53",
+      "explanation": "p指向a[0]=1，p+8指向a[8]=9，解引用得到9。",
+      "steps": [
+        "*p+9等于1+9=10。",
+        "*(p+8)取第九个元素。",
+        "p+8本身是地址。"
+      ],
+      "takeaway": "指针算术按元素个数移动。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "*(p+8)=9。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-21",
+      "sourceHash": "4f6543203339cdce91060d576584b07fddaf3eb5031fba40e26377c4eee5e808",
+      "explanation": "b=&a，所以*b就是a的当前值511；%d输出511。",
+      "steps": [
+        "b指向a。",
+        "解引用得到511。"
+      ],
+      "takeaway": "指针解引用取得所指变量的值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "输出511。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-22",
+      "sourceHash": "e818cad6cdae582462e6ebbea3f7cb86d7e4b323ecbd7a749ae6131d46e18e5f",
+      "explanation": "a<b成立，交换的是指针p1、p2，而不是a、b的内容。交换后p1指向b=8、p2指向a=5；后面直接打印a,b仍是5,8。",
+      "steps": [
+        "指针交换后* p1=8、* p2=5。",
+        "a和b本身未改。"
+      ],
+      "takeaway": "交换地址不会交换所指变量内容。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出8,5 5,8。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-23",
+      "sourceHash": "c39f0a7105303bbdcaa49085f389ae9c3acbc5b49dce765f263027c2543376fe",
+      "explanation": "r先保存p指向a，再令p指向b、q恢复为r指向a。于是*p=8、*q=7，而变量a、b仍为7、8。",
+      "steps": [
+        "交换的是指针变量。",
+        "a和b不变。"
+      ],
+      "takeaway": "指针重新指向不会改变原变量值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出8,7,7,8。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-24",
+      "sourceHash": "140696bfd0826695e5b72da3b7d27f3156bc7e6549327132797e7dfb6bdf6964",
+      "explanation": "int a=10,*b=&a是一条合法声明：a为整数，b为指向a的int指针。",
+      "steps": [
+        "A两声明之间缺少逗号/分隔符。",
+        "B的b未声明。",
+        "D把地址赋给float对象b，类型不匹配。"
+      ],
+      "takeaway": "指针声明中的星号修饰该变量类型。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C的声明和初始化匹配。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-25",
+      "sourceHash": "bc7a79a257328d2b38219624ab6b282a6acd1ef8f5a08cc1d60ee7dbf4b3ec55",
+      "explanation": "d已指向c；scanf三个%d分别要int*，因此传&a、&b、d即可分别写入a、b、c。",
+      "steps": [
+        "&d是int**，层级多了一层。",
+        "a、b本身不是地址。",
+        "*d是整数值而非地址。"
+      ],
+      "takeaway": "scanf的%d目标必须是int*。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "实参为&a、&b、d。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-26",
+      "sourceHash": "035a3cc828511d8a1549ccf77a3c4e65cb8ddedfe13bca52b9fb319a7b6b216d",
+      "explanation": "pa已经保存&a，因此pa本身就是scanf需要的int*。",
+      "steps": [
+        "a是整数值。",
+        "&pa是int**。",
+        "*pa是整数值。"
+      ],
+      "takeaway": "已有指针时可直接把它作为scanf目标地址。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "用pa读入a。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-27",
+      "sourceHash": "171a7bc58d617090c094aeb86e59c63d0a6fcfa14ccbecf4ba9284eaec670308",
+      "explanation": "p=&a[3]，数组下标形式p[5]等价于*(p+5)=a[8]=9。",
+      "steps": [
+        "p[0]=a[3]。",
+        "p[5]向后数5个元素。"
+      ],
+      "takeaway": "指针下标p[i]等价于*(p+i)。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "b为9。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-28",
+      "sourceHash": "83f4b02c623d2adeed27c9414432ee67211c7eaa4033eeb90c8117dcd3ac8876",
+      "explanation": "p指向a[0]=1，*p+9是1+9=10。",
+      "steps": [
+        "不是对p加9后取值。",
+        "算术加法得到10。"
+      ],
+      "takeaway": "先区分*的作用范围：*p+9是元素值加9。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出10。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-29",
+      "sourceHash": "4498c0d623701790c0cbb3d5e6502b0eaaa458408efb313b0ccc0e0c80286063",
+      "explanation": "*(p+2)取a[2]，按0起始下标是第三个元素3。",
+      "steps": [
+        "p指向a[0]。",
+        "前进两个元素到a[2]。"
+      ],
+      "takeaway": "数组下标从0开始。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出3。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-30",
+      "sourceHash": "8c786f565524c10b0fcbcfe6a0307cf893afd764152b09b96453250109230dce",
+      "explanation": "s=x+3指向x[3]；s[2]等价于x[5]。x[5]由初始化列表明确为0。",
+      "steps": [
+        "数组未写出的元素也会补零。",
+        "x[5]=0。"
+      ],
+      "takeaway": "未显式给出的数组元素会零初始化。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出0。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-31",
+      "sourceHash": "4af4c1c44f74fe0cb5402d36b0567f91c9adf8c86dd21dfef497bf8f21363cb9",
+      "explanation": "*p+=5解析为(*p)+=5，把a[0]从1改为6；该复合赋值表达式的值为更新后的6。",
+      "steps": [
+        "*p+6=7。",
+        "*(p+6)=a[6]=7。",
+        "p+5是地址。"
+      ],
+      "takeaway": "注意* p+=5会修改首元素。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "表达式值为6。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-32",
+      "sourceHash": "a9870cb612d1e0d8f4786f29aae5ea096a386e89dc03bc1e898ad4f628ed4729",
+      "explanation": "数组a[10]合法下标只有0至9；a[10]位于数组后一位，不是数组元素，访问越界。",
+      "steps": [
+        "*p和*a都是a[0]。",
+        "a[p-a]中p-a=0，引用a[0]。"
+      ],
+      "takeaway": "一位数组长度10的有效下标是0到9。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "a[10]越界。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-33",
+      "sourceHash": "d27c829e4a3aba573507c56170980845c8120d0112c1a3fa0d53830ca3492b3f",
+      "explanation": "a是数组名，不能被自增；a++违反数组名不可修改的约束。",
+      "steps": [
+        "p+1和a+1都计算下一元素地址。",
+        "++p令指针变量指向下一元素。"
+      ],
+      "takeaway": "数组名不是可修改的指针变量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "a++非法。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-34",
+      "sourceHash": "20fa9e37e2917a644e144397a8745e728e414376a0aa8b00c9eb7c0542348615",
+      "explanation": "s是数组名，不可用复合赋值修改；p是普通指针变量，可以移动。",
+      "steps": [
+        "p+=1有效。",
+        "*p++先取当前元素地址，再让p前进。",
+        "(*p)++递增所指元素。"
+      ],
+      "takeaway": "数组名不可修改，指针变量可以移动。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "s+=1非法。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-35",
+      "sourceHash": "02392001d423f0ff271e5adcd0184c8cc56f49d31be54539c2fcf581e9e8ee4f",
+      "explanation": "s是数组名，不能作为自增运算的可修改左值，因此p=s++非法。",
+      "steps": [
+        "p=s+1使p指向下一位置。",
+        "*(s+1)=*p可给第二个字符赋值。",
+        "*p++=s[2]将字符赋入当前目标后移动p。"
+      ],
+      "takeaway": "不要对数组名使用++。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "s++非法。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-36",
+      "sourceHash": "08d26858fc771ddee04b9f26659cde6fd44ebb08799f12cadab31a5f6ab3b891",
+      "explanation": "a为一维int数组，a+i是int*，*(a+i)已经是一个int值；再对这个int取*没有意义，类型不合法。",
+      "steps": [
+        "a[p-a]下标为0。",
+        "*(&a[i])就是a[i]。",
+        "p[i]与a[i]等价。"
+      ],
+      "takeaway": "一维数组中*(a+i)已是元素值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D多解引用了一次。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-37",
+      "sourceHash": "e05dbc2b425dd6db1e2e791da2a895b85212f12951daccd7d26a1ea160e6516d",
+      "explanation": "a[i]是int值，不能再用一元*解引用；其余三项分别通过指针偏移或下标取得元素。",
+      "steps": [
+        "*(p+i)=a[i]。",
+        "*(a+i)=a[i]。",
+        "p[i]=a[i]。"
+      ],
+      "takeaway": "一元*要求操作数是指针。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "*a[i]对整数再次解引用，错误。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-38",
+      "sourceHash": "e35bbffe5144593acc66595340eccc20770a3d068e7b265221ac46ee0f2da1cf",
+      "explanation": "同一数组中的两个元素指针可以相减，结果是元素距离；不能直接相加。",
+      "steps": [
+        "指针通常指向兼容类型对象。",
+        "变量地址可称其指针。",
+        "NULL可与指针比较。"
+      ],
+      "takeaway": "指针相减有条件，指针与指针不能直接相加。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C项错误。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-39",
+      "sourceHash": "7ded79ad4a5e76086cc146573378011416ce793a47b11186fac14ec0c607789d",
+      "explanation": "p=a+5指向a[5]=4；--p先将p移到a[4]，再解引用得到5。",
+      "steps": [
+        "a[4]为5。",
+        "前置--作用于指针变量后再取值。"
+      ],
+      "takeaway": "指针递减一个位置前进到前一个元素。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输出5。"
+      }
+    },
+    {
+      "questionId": "h-7-基础篇-40",
+      "sourceHash": "13f39286b7dfb119459c7e450783defbc5eba7e59b70e288e1a2135980803fb2",
+      "explanation": "*p++解析为*(p++)：先让p指向a[1]，不改变a[0]。随后*p+=1将a[1]从11改为12，a[2]仍12。",
+      "steps": [
+        "a[0]仍10。",
+        "a[1]变12。",
+        "a[2]原本就是12。"
+      ],
+      "takeaway": "后置++作用于指针，括号范围决定改的是指针还是元素。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "结果10,12,12。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-1",
+      "sourceHash": "4817faaa49f5e93ac68bf148ef87bade2a5769ed30dfa3d61c958eed034fcd28",
+      "explanation": "char s[5]最多容纳5个字符，包括结尾空字符；abcdef有6个字母，连同\u0000共7，放不下。",
+      "steps": [
+        "abc加结尾符共4。",
+        "字符列表可留下末尾零填充。",
+        "空字符串有结尾符。"
+      ],
+      "takeaway": "字符数组保存字符串时要给结尾\u0000留位置。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "字符串abcdef超出容量。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-2",
+      "sourceHash": "dfaa6cddacf847d04c13a179559efa4e94d809fe39a08e6a0ab196f045af8df9",
+      "explanation": "a由字符串字面量初始化，含6个字母和结尾\u0000，长度7；b只列出6个字符，没有\u0000，长度6。",
+      "steps": [
+        "内容前6个字符相同。",
+        "只有a能作为以\u0000结束的字符串。"
+      ],
+      "takeaway": "字符串字面量初始化会包含结尾空字符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "a比b多一个结尾\u0000。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-3",
+      "sourceHash": "2087266c6528c5c41af34de9ab3885549718f66598a433a2367bae358b009139",
+      "explanation": "字符数组不能用赋值运算符整体赋值；初始化可以整体给初值，但声明后需逐元素复制或用库函数。",
+      "steps": [
+        "A可存字符。",
+        "B可用%s整体读写字符串。",
+        "D可比较字符串内容，须用strcmp而非关系运算符；不过题干问错误描述，C明确错误。"
+      ],
+      "takeaway": "数组初始化和后续赋值是两回事。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "题库答案C；D字面上也可能被理解为字符串不能用关系运算符比较",
+        "reason": "C明确错误：数组不能整体赋值。D若“关系运算符”指直接比较字符串数组地址，也确实不能比较内容；需strcmp，故措辞有歧义。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-4",
+      "sourceHash": "67887cf1075c75374afc2650bbab19d36a697de12f3d27027147549d39ecec21",
+      "explanation": "%s从c[0]开始输出，遇到第一个\u0000就停止；数组前两项是a和b，所以输出ab。",
+      "steps": [
+        "第三项是结尾空字符。",
+        "后面的c不会被%s访问。"
+      ],
+      "takeaway": "%s遇到首个\u0000停止。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "输出ab。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-5",
+      "sourceHash": "70c585a05cdfb719e131454dff5d1cbe3a9cf5e78db561a186f35dd93f8cc620",
+      "explanation": "scanf中的%s需要字符数组首地址；数组名a、b在调用时转为首元素指针。",
+      "steps": [
+        "gets只有一个数组参数，且不安全。",
+        "&a和&b是指向整个数组的指针，类型不匹配%s。"
+      ],
+      "takeaway": "用%s读字符数组时传数组名。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "scanf(\"%s %s\",a,b)。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-6",
+      "sourceHash": "9b1a6200d3d6f2925f99e6cadd557b1c9515b9acf74e98ca1199b0f5b6543d7e",
+      "explanation": "a和b都是数组，数组名不能用a=b整体赋值，因此该行编译不通过。",
+      "steps": [
+        "数组声明可先定义空数组。",
+        "赋值行违反数组不可整体赋值规则。"
+      ],
+      "takeaway": "数组对象不能整体赋值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "编辑/编译出错。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-7",
+      "sourceHash": "533855126ca4feb437a01666f4de55827c3705538298325ff29d3967cf851cd0",
+      "explanation": "转义序列\t、\r、\\各形成一个字符，随后\u0000立即结束C字符串；其后的will和换行不属于字符串内容。strlen计前三个字符。",
+      "steps": [
+        "\t算一个制表符。",
+        "\r算一个回车符。",
+        "反斜杠转义为一个反斜杠，长度合计3。"
+      ],
+      "takeaway": "strlen统计首个\u0000之前的字符数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "长度3。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-8",
+      "sourceHash": "090f0c6d57daf3af323bc2d0ba234aac859617282ccfc3575054b85509b26ee9",
+      "explanation": "strcmp(a,b)在内容相等时返回0；要判断相等应写strcmp(a,b)==0。D测试大于0，只判断字典序大于，不是相等。",
+      "steps": [
+        "==比较指针地址。",
+        "赋值会覆盖a。",
+        "strcpy复制内容而非比较。"
+      ],
+      "takeaway": "strcmp相等时返回0。",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "无正确选项；题库答案D是字典序大于判断",
+        "reason": "判断相等应测试strcmp(a,b)==0；当前D的>0只表示s1大于s2。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-9",
+      "sourceHash": "8d6c77764680a4ca7555954df89a2827b199b19906a7d8829589845d225549f4",
+      "explanation": "strcat后ss为123456789，但随后的gets(ss)会把新输入ABC写到数组开头并加结尾空字符，覆盖旧内容；printf输出ABC。",
+      "steps": [
+        "gets读取整行并存到ss。",
+        "输入新字符串覆盖原有首部。"
+      ],
+      "takeaway": "输入函数会把新数据写入目标数组。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "输出ABC。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-10",
+      "sourceHash": "fefffb96d86238803879659fd422203a08bb1e227d2b00d231d827ed6b8b833d",
+      "explanation": "strcmp(s1,s2)>0 当且仅当s1按字典序大于s2时为真，正好满足要求。",
+      "steps": [
+        "strcmp返回负、零、正分别表示小于、相等、大于。",
+        "直接比较指针地址不比较字符串内容。"
+      ],
+      "takeaway": "用strcmp比较字符串字典序。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D正确。"
+      }
+    }
+  ]
+}

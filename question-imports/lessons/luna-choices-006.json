@@ -1,0 +1,626 @@
+{
+  "schemaVersion": 1,
+  "author": "Luna",
+  "lessons": [
+    {
+      "questionId": "h-8-基础篇-11",
+      "sourceHash": "4e1508faa6681d8ed7a56862b3891cb163c22e9bbb01a87f95508c4df48ab10b",
+      "explanation": "scanf(\"%s\",s) stops at whitespace, so it cannot read an entire line containing spaces. The other forms read characters until newline (though gets is unsafe and can overflow if input exceeds the buffer).",
+      "steps": [
+        "gets reads the line but has no bounds check.",
+        "getchar loops store every character including spaces.",
+        "%s ends at the first whitespace."
+      ],
+      "takeaway": "%s reads one whitespace-delimited word, not a whole line.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "The %s form cannot retain embedded spaces."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-12",
+      "sourceHash": "5fd2c3116934830da320b952ea6246bd51e35116ae83d28d0703cf549db9bd37",
+      "explanation": "The array contains seven weekday abbreviations; only Tue and Thu begin with uppercase T. The loop counts those two.",
+      "steps": [
+        "Mon, Wed, Fri, Sat, Sun do not start with T.",
+        "Tue and Thu satisfy p[i][0]==T."
+      ],
+      "takeaway": "Check the first character of each row.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "Two strings begin with T."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-13",
+      "sourceHash": "2060744fe288ef60f556441a8ac0e82386a03b7cd4537b87ab2662ff1f82fe4a",
+      "explanation": "China contains five letters; a character array initialized from a string literal also stores the terminating null character, so it occupies six char elements.",
+      "steps": [
+        "Five visible letters.",
+        "One trailing \u0000."
+      ],
+      "takeaway": "String array size includes the terminator.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "Six bytes/elements assuming one byte per char."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-14",
+      "sourceHash": "6289374eebec315ce3f541d0cefa0b5e14c55e8f9756ca4ccf0378b887eadb43",
+      "explanation": "The literal has ATS (3), newline (1), digits 012 (3), octal escape \u0001 (1), and escaped backslash (1): nine characters before the terminator.",
+      "steps": [
+        "\n is one character.",
+        "\u0001 is one octal escape character.",
+        "\\ is one backslash."
+      ],
+      "takeaway": "Each escape sequence contributes one character.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 9 (C); printf format mismatch prevents a standard-guaranteed result",
+        "reason": "strlen returns size_t, but the code prints it with %d, which expects int; the call has undefined behavior as written."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-15",
+      "sourceHash": "3e6907590b04831b2b7e861f1d6680eb3c3a9775c4ab3c58973be5e6e4b01e48",
+      "explanation": "The six explicit letters initialize the first six positions; the remaining elements of the char array are zero-initialized. The first zero is therefore at index 6, so strlen is 6.",
+      "steps": [
+        "Positions 0–5 hold string.",
+        "Position 6 is \u0000."
+      ],
+      "takeaway": "Omitted aggregate elements are zero-initialized.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 6 (A); printf %d with size_t is undefined",
+        "reason": "strlen returns size_t, not int; %d does not match the argument type."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-16",
+      "sourceHash": "6b2f1bf6706b1fadfdd11722738146c2da30f64633353068db4f8b811619b6d4",
+      "explanation": "Counting the escapes as characters: tab, quote, octal 5, hex ÿ, and newline. That is five characters before the final terminator.",
+      "steps": [
+        "Each escape sequence denotes one character.",
+        "Five characters precede the implicit \u0000."
+      ],
+      "takeaway": "Escape sequences may use several source characters but denote one character.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 5 (A); printf format mismatch makes behavior undefined",
+        "reason": "strlen returns size_t but the format is %d."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-17",
+      "sourceHash": "50c333e10810889043a3a36ab8332e26a5afa12a45499d24f5ef1ed5b7a7448d",
+      "explanation": "The source escape \\ produces one backslash, followed by literal 141 (four characters); a adds one character; abc adds three and \t adds one. Total length is 9.",
+      "steps": [
+        "\\141 begins with a literal backslash and digits 141.",
+        "a is one octal escape.",
+        "Add abc and tab: 4+1+3+1=9."
+      ],
+      "takeaway": "Distinguish \\141 from the single octal escape a.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 9 (A); printf %d with size_t is undefined",
+        "reason": "strlen returns size_t; %d expects int."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-18",
+      "sourceHash": "50f00547fbf6748754816e771f165615187148edc6e0970e52d13f54eca694e2",
+      "explanation": "The literal contains a,b, newline, octal newline \n, backslash, and quote: six characters, followed by the implicit terminator.",
+      "steps": [
+        "\n and \n each count as one character.",
+        "\\ and \" each count as one.",
+        "Total 2+1+1+1+1=6."
+      ],
+      "takeaway": "Count decoded characters, not backslashes in source spelling.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 6 (C); printf format mismatch is undefined",
+        "reason": "strlen returns size_t but is passed to %d."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-19",
+      "sourceHash": "16191e39682af1519367bec09d26701faa5305738268eb2d68f87cbbc16a45a2",
+      "explanation": "Decode the literal: a,b and newline; then escaped backslash plus literal 012; then escaped backslash and escaped quote. The total is 9 characters.",
+      "steps": [
+        "ab\n contributes 3.",
+        "\\012 contributes a backslash plus three digits: 4.",
+        "\\\" contributes backslash and quote: 2; total 9."
+      ],
+      "takeaway": "An escaped backslash prevents following digits from becoming an octal escape.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 9 (C); printf format mismatch is undefined",
+        "reason": "strlen returns size_t while %d requires int."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-20",
+      "sourceHash": "6ad12e5988c14156e9ebf25739a15edadfd39219b2cf1d7b1133161bf3be48a2",
+      "explanation": "The literal contains tab, newline, backslash, the four ordinary characters 0will, then newline: nine characters total. Here \\ makes a literal backslash, so the following 0 is not a null escape.",
+      "steps": [
+        "Tab and newline count once each.",
+        "\\0 is a backslash followed by ordinary 0, then will.",
+        "Add final newline: total 9."
+      ],
+      "takeaway": "Parse escapes left to right; \\0 is not the null character.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 9 (C); %d mismatches size_t",
+        "reason": "The string length is 9, but passing strlen result to %d has undefined behavior."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-21",
+      "sourceHash": "9932b76a5f2194cd4bfc3d3dd7a0880b62ddd1a588e68c64211504abe3be5141",
+      "explanation": "strlen stops at the first embedded null in the literal, immediately after abcde; later fghjik and the final null are not counted.",
+      "steps": [
+        "First five letters are nonzero.",
+        "The next character is explicit \u0000."
+      ],
+      "takeaway": "strlen ends at the first null character.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected length 5 (D); printf format mismatch is undefined",
+        "reason": "strlen returns size_t while the code uses %d."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-22",
+      "sourceHash": "3c0d0692ad6a7d588fea4b0263bd6a710bb5e3a8f0da0f3830db9288df10724e",
+      "explanation": "The array has eight letters plus the explicit null, so sizeof(a)=9. strlen counts only the eight letters.",
+      "steps": [
+        "sizeof counts every array element.",
+        "strlen excludes the terminator."
+      ],
+      "takeaway": "sizeof(array) and strlen(string) measure different things.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "9,8。"
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-23",
+      "sourceHash": "82e0903d1bfb38f2689381c43d45f2f6b2cc7d2f20887dbf9a99310c4d23774e",
+      "explanation": "a has seven letters plus its terminator, so its inferred size is8. b is explicitly size10.",
+      "steps": [
+        "sizeof(a)=8.",
+        "sizeof(b)=10."
+      ],
+      "takeaway": "An inferred char array initialized by a string includes the null.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected 8 10 (C); printf uses %d for size_t",
+        "reason": "sizeof yields size_t; passing it to %d invokes undefined behavior as written."
+      }
+    },
+    {
+      "questionId": "h-8-基础篇-24",
+      "sourceHash": "85df3a775f5cb5e41b23c17874ac3a0e575a533db8670e045e209bb670f908d1",
+      "explanation": "The literal has newline, digits 123, and escaped backslash: five content characters. strlen is5; the array also includes the implicit null, so sizeof is6.",
+      "steps": [
+        "\n counts one.",
+        "123 counts three.",
+        "\\ counts one; add terminator for sizeof."
+      ],
+      "takeaway": "sizeof includes the terminator; strlen does not.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "Expected 5,6 (B); printf format mismatch is undefined",
+        "reason": "strlen and sizeof produce size_t, but the format uses %d."
+      }
+    },
+    {
+      "questionId": "h-8-综合拓展篇-1",
+      "sourceHash": "58dcb823ac2befd7c0930e8964ad2e1701e3a6319d15b074dbe246a0be8e573f",
+      "explanation": "c+3 points to the fourth array element, which is c; the next element is the terminating null, so %s prints only c.",
+      "steps": [
+        "c[3]=c.",
+        "c[4]=\u0000 stops output."
+      ],
+      "takeaway": "A pointer may start at the middle of a character array.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "Output c."
+      }
+    },
+    {
+      "questionId": "h-8-综合拓展篇-2",
+      "sourceHash": "e337c1e472576713e35091913c519e84f9e75dc58e0dd5bc1be5fe56bbe2df75",
+      "explanation": "As written, A uses parentheses instead of an array initializer; B has an unterminated character constant; C uses TM as an undeclared initializer; D supplies a string longer than the array. The source key B does not identify a valid option.",
+      "steps": [
+        "Array initialization uses braces or a string literal directly.",
+        "B is malformed at the quote around c.",
+        "The remaining choices also have problems as displayed."
+      ],
+      "takeaway": "Check exact punctuation and capacity in character-array initialization.",
+      "answerReview": {
+        "status": "conflict",
+        "answer": "No valid option as displayed; key B is malformed",
+        "reason": "The imported B literal is missing a closing quote, while A/C/D are also invalid or overlength as shown."
+      }
+    },
+    {
+      "questionId": "h-8-综合拓展篇-3",
+      "sourceHash": "63f7c55dbc899a9ce1032239ba86c35fd4021f78aecc429190e3e9019b93590d",
+      "explanation": "strcpy copies ABC and its null into a. Positions 4 and 5 retain the original e and f; a[5] is f. The printed character is f.",
+      "steps": [
+        "After copy: a[0..3] is A,B,C,\u0000.",
+        "a[5] remains f."
+      ],
+      "takeaway": "strcpy overwrites through the copied terminator, not the entire destination array.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "a[5] is f."
+      }
+    },
+    {
+      "questionId": "h-8-综合拓展篇-4",
+      "sourceHash": "d868e413221c0e7491ad72144fc81e72893eb877c45975993988f0f0baed0e3a",
+      "explanation": "String comparison is lexicographic, not based only on length. STOP followed by a space differs from STOP; That is less than The because at the first differing letter a comes before e.",
+      "steps": [
+        "A and B are false: unequal lengths can still be compared.",
+        "A trailing space changes the string.",
+        "That < The lexicographically."
+      ],
+      "takeaway": "Use lexicographic character order, not string length.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "That is lexicographically smaller than The."
+      }
+    },
+    {
+      "questionId": "h-8-综合拓展篇-5",
+      "sourceHash": "09431ff5e175f8adae0485630a12d78f5b5f7310f7f78c2b778357925efed515",
+      "explanation": "A word begins at a non-space character whose previous character is a space; for i=0 the sentinel c2 is set to space. So count when c1 is non-space and c2 is space.",
+      "steps": [
+        "Current character must not be space.",
+        "Previous character must be space.",
+        "This counts transitions into words."
+      ],
+      "takeaway": "Count a word at its first character.",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "題库B意图：c1!= && c2==",
+        "reason": "The imported character constants contain multiple spaces inside single quotes; if literal, these are multi-character constants. The intended single-space test is clear, but exact source text is defective."
+      }
+    },
+    {
+      "questionId": "h-8-综合拓展篇-6",
+      "sourceHash": "72318953fd843e6da39cf908806f9618a80694a69d191708c8dd2362100a2f99",
+      "explanation": "The loop finds the largest character in morning, which is r, at index2. But the subsequent assignments set a[2]=a[7]=\u0000 and then copy the new a[2] back to a[7]; t is never used. puts therefore prints the prefix mo.",
+      "steps": [
+        "Maximum character is r.",
+        "a[7] is initially terminator.",
+        "a[2] becomes terminator, so output stops after mo."
+      ],
+      "takeaway": "Track assignment order; saving a value in t matters only if it is used.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "Output mo."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-1",
+      "sourceHash": "1cbda83d2bf54eb238e426e0d4c37c137fa5274e784101b7f3902775c405c850",
+      "explanation": "D declares both parameters as int and declares local z before summing and returning it.",
+      "steps": [
+        "A uses undeclared z.",
+        "B omits the type of y in a modern prototype.",
+        "C uses an old-style implicit return type and mismatched style."
+      ],
+      "takeaway": "A function definition needs parameter types and declared local variables.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D is a valid typed definition."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-2",
+      "sourceHash": "0e45eee636ae4d5e980d6d1b2fb0b6aaa961c239138f543c60b3a77343e7456f",
+      "explanation": "The function’s declared return type determines the type of value returned to the caller; the return expression is converted to that type as needed.",
+      "steps": [
+        "The caller’s type does not set the function return type.",
+        "The function definition specifies it."
+      ],
+      "takeaway": "Return type belongs to the function declaration/definition.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "Defined function type controls its return type."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-3",
+      "sourceHash": "5d52c4f53309a99d3af6e5738a8d9bd8c53e47486958293d8a3d7a64954e1ea1",
+      "explanation": "The call passes an int as the first argument and int* as the second. The first three headers accept an int and an int pointer (array parameters adjust to pointers); the fourth expects int for both and mismatches the second argument.",
+      "steps": [
+        "&a[9] has type int*.",
+        "An array parameter int x[] adjusts to int*.",
+        "A plain int second parameter is incompatible."
+      ],
+      "takeaway": "Array function parameters are adjusted to pointers.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "Only D has the wrong second parameter type."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-4",
+      "sourceHash": "c727dd07a5c7a7be99e0910a697a8c263c34310476e0f8bd8b15afdf29f548d7",
+      "explanation": "A file-scope global name has file scope from its declaration to the end of that translation unit; extern declarations can make the same object accessible elsewhere. Its effective reach depends on declaration position and linkage.",
+      "steps": [
+        "It is not automatically visible throughout every source file.",
+        "A function does not delimit global scope.",
+        "extern declarations matter across translation units."
+      ],
+      "takeaway": "Scope and linkage are distinct; extern declarations connect declarations.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D best captures definition position and extern behavior."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-5",
+      "sourceHash": "532bd8718bf69440595d6a0e3a02b4e448757f9947cee9cf35ef11affa34f230",
+      "explanation": "The outer call to func has three comma-separated arguments: f2(...), the parenthesized comma expression, and the final parenthesized comma expression. Commas inside parentheses do not split outer arguments.",
+      "steps": [
+        "The first is one function-call expression.",
+        "Each parenthesized comma expression is one argument."
+      ],
+      "takeaway": "Only commas at the call’s outer nesting level separate arguments.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "Three actual arguments."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-6",
+      "sourceHash": "156c9c2e879d0c3e28cb18893c07b659e7fbecb1a01efdc56adfd8288350892c",
+      "explanation": "The function expects a char and a float. Passing integer constants 32 and 32 is permitted through argument conversions; the second becomes 32.0f and the first converts to char.",
+      "steps": [
+        "A passes a string pointer where char is expected.",
+        "B tries to assign a void return value.",
+        "C uses a multi-character constant with implementation-defined value."
+      ],
+      "takeaway": "Arguments undergo conversions to the declared parameter types.",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "題库D；C is also a valid call using an implementation-defined multi-character constant",
+        "reason": "C’s multi-character character constant has type int and can be converted to char; absent a requirement for a single-character literal, it is callable too."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-7",
+      "sourceHash": "956c1eaf1c37170eb14e1d7cb32414e6956099f2b851ee5839d272c421309c23",
+      "explanation": "When an array name is passed as a function argument, it usually converts to a pointer to its first element; the function receives the address, not a copy of all elements.",
+      "steps": [
+        "Array-to-pointer conversion yields &array[0].",
+        "The length is not transmitted automatically."
+      ],
+      "takeaway": "Pass array length separately when a function needs it.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "The first element address."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-8",
+      "sourceHash": "aaf76172055fb2b1226cba31e216665bd83e40d8464b0ea23f65034e729e6319",
+      "explanation": "Inside fun, d starts at2; p=d++ assigns old value2 to p, then d becomes3, so the first print is2. The caller’s a is passed by value and stays1; combined output is21.",
+      "steps": [
+        "p receives 2.",
+        "a remains unchanged.",
+        "Outputs concatenate as 2 then 1."
+      ],
+      "takeaway": "Ordinary parameters are copies unless pointers are used.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "Output21."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-9",
+      "sourceHash": "53ec559f2e7ae053d931489f63db22f7efafec619a5e2fa8a599f1b63ab9fa57",
+      "explanation": "a,b,c are parameters passed by value. Assignments inside fun change only those local copies; x,y,z remain10,20,30.",
+      "steps": [
+        "No pointer parameters are used.",
+        "Caller variables are unchanged."
+      ],
+      "takeaway": "Pass-by-value does not modify the caller’s original variables.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "Output10,20,30."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-10",
+      "sourceHash": "ac1595ae2ec036fa3a3be253224b198cdae5b07de5d314513826abf826a77a11",
+      "explanation": "A variable declared in a nested compound statement has block scope limited to that block, not the entire function. The other statements describe local names and parameters correctly.",
+      "steps": [
+        "Different blocks can have same local name.",
+        "Parameters are local to the function.",
+        "Nested block variables cease to be in scope at block end."
+      ],
+      "takeaway": "A nested block narrows a variable’s scope.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "D is incorrect."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-11",
+      "sourceHash": "3b219783fdea43ecbd2fbd49c34c5e720beb7a501381a424c6e58863ac1e44c0",
+      "explanation": "fun’s local d starts5; d+=p++ uses p=3 and makes local d=8, which is printed. Global d remains1. Back in main, d+=a++ uses old a=3, making global d=4; output is8 4.",
+      "steps": [
+        "The local d shadows global d only inside fun.",
+        "p++ does not change caller a.",
+        "Main then changes global d to4."
+      ],
+      "takeaway": "Same-named local and global variables are separate objects.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "Output8 4."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-12",
+      "sourceHash": "163832d90906f68b1c12d9875147bdb0cb4699c86b7a0752b789b9ff790f61b1",
+      "explanation": "static a starts3 and retains its value between calls. First call adds2 to produce5; second adds1 to produce6, which is printed.",
+      "steps": [
+        "Static local initialized once.",
+        "Second invocation continues from5."
+      ],
+      "takeaway": "Static local state persists across calls.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "Output6."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-13",
+      "sourceHash": "fe357844e3a31f8926ae72adc7e57f4d647ddb48a8358f130cf62cbcb823819c",
+      "explanation": "The outer i++ prints1 then advances the outer i to2. The inner block has a separate i initialized0; it becomes6 and prints6,3. After the block, outer i is2, so final output is1,6,3,2,3.",
+      "steps": [
+        "Outer i prints1 then becomes2.",
+        "Inner i=0+3*2=6.",
+        "Inner i ends with its block."
+      ],
+      "takeaway": "A nested block can shadow an outer variable.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "Output1,6,3,2,3."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-14",
+      "sourceHash": "40e057dc70eb57d9fb098d6bfdd8685a5e169ecd4d1de0541e760ccffc3cf27a",
+      "explanation": "auto and register describe automatic-duration local variables, whose storage is associated with entering the block; register is only a suggestion to the implementation.",
+      "steps": [
+        "extern refers to an object defined elsewhere.",
+        "static storage persists for program lifetime."
+      ],
+      "takeaway": "Storage duration is distinct from where a name is visible.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "auto and register are the automatic-storage categories here."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-15",
+      "sourceHash": "cae049e476d6c16ba7fd240a8cf7ee9815129b6a262400fc524c40e22b1e84e6",
+      "explanation": "The first argument is the comma expression: x-- uses6 then x=5; y++ yields7 then y=8; final x+y is13. The second argument z-- yields old8. Their sum is21.",
+      "steps": [
+        "First argument evaluates to13.",
+        "Second argument evaluates to8.",
+        "func returns 13+8=21."
+      ],
+      "takeaway": "Comma expression value is its final operand; postfix operators return old values.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "Output21."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-16",
+      "sourceHash": "b9b5465a781093369b279d05edbbc1db1c51fa453157c7dc89a500b82bb6ff8f",
+      "explanation": "The loop condition i<=n with n=3 includes indices0,1,2,3. Their values are2,3,4,5 and product is120.",
+      "steps": [
+        "Four elements are multiplied.",
+        "2×3×4×5=120."
+      ],
+      "takeaway": "Check whether loop bound is < or <=.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "Output120."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-17",
+      "sourceHash": "3f0ee7309bc2ecc79935cb7e3e2d23a27274617495393ad7410fa8a970cc4e56",
+      "explanation": "f(3,4)=(4-3)*3=3; f(3,5)=(5-3)*3=6; outer f(3,6)=(6-3)*3=9.",
+      "steps": [
+        "Evaluate inner calls first.",
+        "Outer call is f(3,6)."
+      ],
+      "takeaway": "Nested calls must be reduced from the inside out.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "Output9."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-18",
+      "sourceHash": "0e768cb4936853ae1968d51b4700fbe3624988b63d902c5b017758691bbc1cad",
+      "explanation": "Inner fun(5,6) returns (5+6)/2=5 by integer division. Outer call is fun(8,5), which returns (8+5)/2=6.",
+      "steps": [
+        "5 and6 differ, so inner average truncates 5.",
+        "13/2 truncates to6."
+      ],
+      "takeaway": "Integer division discards the fractional part.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "Output6."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-19",
+      "sourceHash": "f8029a6e4661d41f5b4a06be939091dcf22322f68b73e82d863d312b5f7012fa",
+      "explanation": "A static-storage-duration object with no explicit initializer is zero-initialized. Automatic and register local integers are not guaranteed an initial value.",
+      "steps": [
+        "static local or global defaults to zero.",
+        "auto/register do not."
+      ],
+      "takeaway": "Static storage receives zero initialization.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "Choose static."
+      }
+    },
+    {
+      "questionId": "h-9-基础篇-20",
+      "sourceHash": "c6cfcdd7bc5be4dce1388dfd8a235f099111bd373b9b88324f3a388f5c404628",
+      "explanation": "fun receives each pair by value and swaps only its local parameters. The caller’s array is unchanged by all five calls, so it prints the original sequence.",
+      "steps": [
+        "No pointer/address arguments are passed.",
+        "Local swaps do not write back to c."
+      ],
+      "takeaway": "To swap caller array elements, pass pointers or swap in the caller.",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "Array remains 1,2,3,4,5,6,7,8,9,0."
+      }
+    }
+  ]
+}
