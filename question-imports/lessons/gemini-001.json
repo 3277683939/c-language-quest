@@ -1,0 +1,597 @@
+{
+  "schemaVersion": 1,
+  "author": "Gemini",
+  "lessons": [
+    {
+      "questionId": "h-10-基础篇-29",
+      "sourceHash": "90e45ecf87901f65d3a90fac0d817005ea5b8853272bec81c752675bdd8cf117",
+      "explanation": "结构体指针访问成员需用 -> 运算符或 (*指针).成员；. 运算符优先级高于 * 运算符，*ps.name 会因优先结合产生语法错误。",
+      "steps": [
+        "student.name 为结构体变量名直接访问成员，合法正确。",
+        "ps->name 为结构体指针间接访问成员，合法正确。",
+        "(*ps).name 先对指针 ps 解引用获得结构体实体，再用 . 访问 name，合法正确。",
+        "*ps.name 中 . 优先级高于 *，等价于 *(ps.name)，但指针 ps 本身没有 .name 成员，语法错误。"
+      ],
+      "takeaway": "成员运算符 . 的优先级高于解引用运算符 *，通过指针解引用访问成员必须加括号 (*p).m，或直接用 p->m。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "*ps.name 优先级结合错误，无法正确获取 name 成员。"
+      }
+    },
+    {
+      "questionId": "h-10-基础篇-30",
+      "sourceHash": "50c81adccb87774623e0b46aa4f62bbf68e19192eaaef9b2eade551768d5bc0e",
+      "explanation": "C 语言中结构体是完整的一等类型，可以作为函数的参数以及函数的返回值类型进行整体传递与返回。",
+      "steps": [
+        "A 项错误：定义结构体类型时可以在末尾直接声明该类型的变量（如 struct Node { int v; } a, b;）。",
+        "B 项错误：结构体变量所占内存是所有成员所占空间加上对齐填充之和；占最大成员空间的属于共用体（union）。",
+        "C 项正确：函数可以直接返回结构体类型，返回时会复制整个结构体的值。",
+        "D 项错误：若通过 typedef 定义了类型别名，使用时可直接写别名，前面不能加 struct。"
+      ],
+      "takeaway": "结构体可以整体传参和作为返回值；结构体大小等于各成员之和加内存对齐填充。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "结构体类型完全可以作为函数的返回值类型；其余选项均存在概念混淆。"
+      }
+    },
+    {
+      "questionId": "h-11-基础篇-1",
+      "sourceHash": "33c3ddcbc32e684987139b0e7e51ce0a2a847161258b16c2431f1886897c74ec",
+      "explanation": "向已有文本文件末尾追加写入数据，fopen 的打开模式应使用 \"a\"（append）。",
+      "steps": [
+        "\"a\" 表示为输出（追加）打开文本文件，若文件存在则位置指针移到末尾，若不存在则创建新文件。",
+        "\"ab\" 用于二进制文件的追加写入。",
+        "\"ab+\" 和 \"a+\" 包含读操作权限，并非纯粹的增加数据模式。"
+      ],
+      "takeaway": "追加文本用 \"a\"，追加二进制用 \"ab\"，带加号表示可读可写。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "向文本文件尾追加数据的标准 fopen 模式字符串为 \"a\"。"
+      }
+    },
+    {
+      "questionId": "h-11-基础篇-2",
+      "sourceHash": "748a8f8f2916a1bda02f806afceb7eb99e4c7c92febc097adebfc3f1c2ca50a6",
+      "explanation": "C 语言标准 I/O 库中用于打开文件的函数是 fopen()，成功时返回 FILE* 文件指针，失败返回 NULL。",
+      "steps": [
+        "fopen()：传入文件名和打开模式，实现打开或创建文件。",
+        "fclose()：关闭已打开的文件流并释放缓冲区。",
+        "fseek()：移动文件内部的位置指示器。",
+        "rewind()：将文件位置指示器重置到文件起始处。"
+      ],
+      "takeaway": "打开文件用 fopen，关闭文件用 fclose，指针复位用 rewind。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "fopen 是 C 语言中打开文件的标准库函数。"
+      }
+    },
+    {
+      "questionId": "h-11-基础篇-3",
+      "sourceHash": "f59a5368730abd7b5b97fbfc629bb2b258869b08bb436e84ccd88d670ec4c1bd",
+      "explanation": "建立新文件用 w，二进制文件加 b，具备读写功能加 +，组合后为 \"wb+\"。",
+      "steps": [
+        "新建文件用 \"w\"，若原文件存在则内容被清空，不存在则创建。",
+        "二进制文件要求模式串中带有 \"b\"。",
+        "读写兼顾要求模式串中带有 \"+\"。",
+        "综合要求，模式字符串为 \"wb+\"（或 \"w+b\"）。"
+      ],
+      "takeaway": "新建用 w，追加用 a，只读用 r；加 b 表示二进制，加 + 表示可读写。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "\"wb+\" 含义为新建一个用于读写的二进制文件。"
+      }
+    },
+    {
+      "questionId": "h-11-基础篇-4",
+      "sourceHash": "a96e139930260383ac421d4c0b34daf6c51b9af457f35813630d3b09d1822636",
+      "explanation": "fopen 模式 \"ab\" 中，'a' 表示追加写入（append），'b' 表示二进制文件（binary），合起来表示向二进制文件尾增加数据。",
+      "steps": [
+        "'a' 会将文件内部位置指针直接定位到文件末尾进行写入。",
+        "'b' 告知系统以二进制流处理，不对换行符进行转义或转换。",
+        "因此 \"ab\" 即向二进制文件尾部增加数据。"
+      ],
+      "takeaway": "字母 a 代表追加到末尾，字母 b 代表二进制流。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "\"ab\" 明确对应向二进制文件末尾追加写入。"
+      }
+    },
+    {
+      "questionId": "h-11-基础篇-5",
+      "sourceHash": "4281dc362523c00fbd057fc84cef62ba3da8f25d3e2d51dc1dfdb37938a6d96b",
+      "explanation": "fopen 的 \"r\" 模式专用于为输入（只读）打开一个已存在的文本文件，若文件不存在则打开失败返回 NULL。",
+      "steps": [
+        "\"r\" 代表 read（只读），不能用于写入。",
+        "缺省 'b' 时默认按文本文件（text stream）方式处理。",
+        "若文件不存在，fopen 返回 NULL，不会新建文件。"
+      ],
+      "takeaway": "\"r\" 模式只读打开已有文本文件，文件必须真实存在。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "\"r\" 的标准含义即为输入（读）打开一个文本文件。"
+      }
+    },
+    {
+      "questionId": "h-11-基础篇-6",
+      "sourceHash": "a56ae8a25c09d0a18e168d2ce7e796c1f7ac3a745ba10515fb015ad2ade4ee0f",
+      "explanation": "fwrite 是按二进制块直接向文件写入内存字节的函数，可将整型数以二进制格式写入文件。",
+      "steps": [
+        "fprintf 输出的是格式化的 ASCII 字符序列（如数字 123 输出为字符 '1','2','3'）。",
+        "fwrite 传入变量内存地址和字节数，将内存二进制原样写出，如 fwrite(&num, sizeof(int), 1, fp)。",
+        "fread 是读入函数，fputc 只能输出单个字符。"
+      ],
+      "takeaway": "二进制块写用 fwrite，文本格式化写用 fprintf，字符写用 fputc。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "fwrite 能够把整型数的内存二进制字节镜像直接写入文件。"
+      }
+    },
+    {
+      "questionId": "h-11-基础篇-7",
+      "sourceHash": "9e3dbdf8d88e80facb2e79657c3a71f9d1029d89fa16d2f6abc44af6ea02934f",
+      "explanation": "库函数 feof(fp) 用于检测文件结束符，在文件遇到末尾标记时返回非零值（真），未结束时返回 0（假）。",
+      "steps": [
+        "feof 函数原型为 int feof(FILE *stream)。",
+        "当流的文件结束标志被设置时，feof 返回一个非零整数值。",
+        "若尚未到达文件末尾，feof 返回 0。"
+      ],
+      "takeaway": "feof 到达末尾返回非零值，未到末尾返回 0；不要误记为返回 EOF。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "feof 检测到 EOF 标志后返回非零值（真）。"
+      }
+    },
+    {
+      "questionId": "n1-1-1",
+      "sourceHash": "782ff6585455aeefcd9bf2e55ec0f864db48181eac735d6c73a0db7c87fed016",
+      "explanation": "C 语言是函数式结构的程序设计语言，函数是组织执行代码和模块的基本构成单位。",
+      "steps": [
+        "C 语言没有 Pascal 等语言中的“过程（Procedure）”，所有子程序统称为函数。",
+        "无论 main 函数还是自定义函数，都是独立的逻辑单元。",
+        "因此函数构成了 C 程序的基本构建模块。"
+      ],
+      "takeaway": "函数是 C 语言程序的基本构成单位，程序由一个或多个函数组成。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "C 语言的基本单位是函数，没有单独的过程或超文本概念。"
+      }
+    },
+    {
+      "questionId": "n1-1-2",
+      "sourceHash": "db7372f55fa2b2e492f327d79e170e9f4163df1ee99d210d8eaf3aed4d7da7cb",
+      "explanation": "C 程序的唯一入口点是 main 函数（主函数），程序运行时系统总由主函数开始执行。",
+      "steps": [
+        "无论 main 函数写在源文件的最前、中间还是最后，程序执行都从 main 开始。",
+        "main 函数中调用其他函数，并在 main 退出时终止整个程序。",
+        "主程序或主过程并非 C 语言的正规术语，C 中严格称为主函数。"
+      ],
+      "takeaway": "C 程序执行总是从 main 函数（主函数）开始，也在 main 函数中结束。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "主函数 main 是 C 程序的唯一执行入口。"
+      }
+    },
+    {
+      "questionId": "n1-1-3",
+      "sourceHash": "c52d4d9d96cf4418aa3c9ce10a6ad298851c9270ab8b0d3b1db7020b1276d8f5",
+      "explanation": "C 语言为自由格式语言，代码中的空格、Tab 与换行均视为空白符，可在任意单词之间的空格处换行。",
+      "steps": [
+        "语句换行不需要特殊的逗号或分号修饰，分号是语句结束符，换行无需加分号。",
+        "除关键字内部和双引号字符串中间不可直接断开换行外，任何标记符之间的空格处均可直接回车换行。",
+        "因此只要在任意一个空格处换行即可保持语法完整。"
+      ],
+      "takeaway": "C 语言代码自由书写，除关键字和字符串字面量内部外，可在任何空白处换行。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C 语言允许在语句中任意两个记号间的空格处换行书写。"
+      }
+    },
+    {
+      "questionId": "n1-1-4",
+      "sourceHash": "dcabbb1325335d4aa9642fe13beface31ae7a2312df2ee8bb5fb9c3a190e8151",
+      "explanation": "计算机以有限二进制位数表示数值，实数在计算机中采用浮点编码，无法精确无误地表示所有实数，存在舍入误差。",
+      "steps": [
+        "A 项正确：C 语言用分号作为语句结束符，语句间必须有分号。",
+        "B 项正确：整型赋给实型变量会发生隐式类型转换，转化为浮点数存储，语法合法。",
+        "C 项不正确：如 0.1 无法在二进制浮点中精确表示，且整型溢出也会导致错误，并非所有实数都能无误表示。",
+        "D 项正确：% 为取模求余运算符，双操作数必须均为整数。"
+      ],
+      "takeaway": "浮点数存在二进制精度与舍入误差，不可能精确表示所有实数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "计算机无法绝对精确无误地表示所有实数，C 描述过于绝对故错误。"
+      }
+    },
+    {
+      "questionId": "n1-1-5",
+      "sourceHash": "8ba2fbc508a874b6202c091f852b2ed0cba63a3558eba0e90915cfdefaeb12e8",
+      "explanation": "C 语言合法标识符只能由字母、数字和下划线组成，且不能以数字开头；点号 '.' 是运算符，不能用于标识符。",
+      "steps": [
+        "ABC 和 abc 分别由大写与小写字母组成，合法。",
+        "a_bc 由字母和下划线组成，合法。",
+        "ab.c 中包含了点号 '.'，属于结构体成员访问运算符，是非法字符。"
+      ],
+      "takeaway": "标识符字符集只有英文字母、数字和下划线三类，不能含有任何标点或运算符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "ab.c 含有非法字符点号 '.'，不是合法的 C 标识符。"
+      }
+    },
+    {
+      "questionId": "n1-1-6",
+      "sourceHash": "3f478355d71d1c9bb55097229c088edb671079b667d1f2da85a82e0ee18eda0c",
+      "explanation": "_HJ 满足首字符为下划线、其余字符为字母的规则，是合法的自定义标识符。",
+      "steps": [
+        "_HJ：下划线开头，后跟字母，符合标识符命名规则。",
+        "9_student：以数字 9 开头，违反“不能以数字开头”规则。",
+        "long：是 C 语言保留数据类型关键字，不能用作普通用户标识符。",
+        "LINE 1：中间包含空格字符，会被当作两个词法单元，非法。"
+      ],
+      "takeaway": "下划线可作为标识符首字符；关键字与含空格的名称均不能作标识符。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "_HJ 是唯一符合命名规则且非关键字的标识符。"
+      }
+    },
+    {
+      "questionId": "n1-1-7",
+      "sourceHash": "2c8434bcc1a202fcdb94bd3c369d3268f6421ce9f282182699827dc11b996234",
+      "explanation": "C 程序执行入口始终为 main() 函数，不受 main() 函数在源码文件中书写前后顺序的影响。",
+      "steps": [
+        "A 项错误：程序并不按文件文本从第一个函数开始执行，而是找 main 函数。",
+        "B 项错误：C 语言不支持函数嵌套定义，被调用函数必须定义在 main 外部。",
+        "C 项正确：C 程序启动时始终首先进入 main() 函数执行。",
+        "D 项错误：main() 函数可以放在程序的开头、中间或最后位置。"
+      ],
+      "takeaway": "C 程序无论把 main 函数写在哪个位置，执行起点都一定是 main 函数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "C 程序总是从 main() 函数开始执行是确定的执行规则。"
+      }
+    },
+    {
+      "questionId": "n1-1-8",
+      "sourceHash": "393e763cc3685fea30a4a0eb8a6733f69b4dd597c5683e69db04695ca0681d3a",
+      "explanation": "八进制转义字符格式为 \\ooo，八进制数码只能包含 0~7；'\\483' 中含有数码 8，属于非法八进制转义序列。",
+      "steps": [
+        "'\\2'：合法的八进制转义字符，数值为 2。",
+        "\"    \"：合法的字符串常量，包含若干个空格字符。",
+        "'3'：合法的普通字符常量，表示数字字符 3。",
+        "'\\483'：8 不是合法的八进制数码，且三位八进制 483 超过单字节字符范围，是非法常量。"
+      ],
+      "takeaway": "八进制转义字符以反斜杠开头且只允许使用 0 到 7 的数码，不能出现 8 或 9。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "483 含有非八进制字符 8，转义字符常量语法非法。"
+      }
+    },
+    {
+      "questionId": "n1-1-9",
+      "sourceHash": "c9344726cfc2dbdcf1d02efbc87327b3f2f995210e537438b2acd9dec44dba25",
+      "explanation": "求余运算符 % 要求其左右两边的操作数都必须是整型数据，x 为 double 型，执行 x%(-3) 语法错误。",
+      "steps": [
+        "x%(-3)：x 是双精度浮点型 double，% 运算符不适用于浮点数，必须使用整型。",
+        "w+=-2：无符号长整型与整型常量进行复合赋值运算，会隐式转换，语法正确。",
+        "k=(a=2,b=3,a+b)：合法的逗号表达式和赋值运算。",
+        "a+=a=+(b=4)*(a=3)：合法的表达式，=+ 表示正号与乘积后赋值给 a。"
+      ],
+      "takeaway": "求余运算符 % 的两侧操作数必须全为整型，浮点型求余需调用 fmod 函数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "x 为 double 类型，不能参与 % 运算，表达式语法错误。"
+      }
+    },
+    {
+      "questionId": "n1-1-10",
+      "sourceHash": "7989b4dc82272d8f87ba646d769f24125fb1e05a82c5e03b1bf1e743c99dad77",
+      "explanation": "在 C 语言中，字符型变量在内存中存储的是该字符对应的 ASCII 码（整型数值），占一个字节。",
+      "steps": [
+        "计算机底层不能直接存储字形，需通过字符编码表映射为整数。",
+        "C 语言标准默认采用 ASCII 码对英文字母和控制字符进行编码存储。",
+        "例如 'a' 在内存中存储的二进制值为 01100001（即十进制 97 的二进制形式）。"
+      ],
+      "takeaway": "字符在内存中本质上是存为其 ASCII 码对应的整数值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "C 语言中字符型数据以 ASCII 码形式存放于内存单元中。"
+      }
+    },
+    {
+      "questionId": "n1-1-11",
+      "sourceHash": "1cb208f9cb53ceaeca5fac78c6363666035d5c9bff0f1229b98c32c74a909f84",
+      "explanation": "先算括号和强制类型转换，再按自左向右计算模和乘除，最后加浮点数 x，整数 1/4 截断为 0 导致后项为 0。",
+      "steps": [
+        "计算 (int)(x + y)：x=2.5, y=4.7，x+y=7.2，转为 int 后取整数部分为 7。",
+        "计算乘除模运算（优先级相同，从左向右）：a=7，a%3 = 7%3 = 1。",
+        "接着计算 1 * 7 = 7。",
+        "接着计算 7 % 2 = 1。",
+        "接着计算 1 / 4：操作数均为整数，整除结果为 0。",
+        "最后计算加法：x + 0 = 2.5 + 0 = 2.500000。"
+      ],
+      "takeaway": "关注整数整除的截断特性：较小整数除以较大整数（如 1/4）结果为 0。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "后半部分 1/4 整除截断为 0，总结果等于 x 的值 2.500000。"
+      }
+    },
+    {
+      "questionId": "n1-1-12",
+      "sourceHash": "c683c8d2cbb818bd1fdc636a8ac4b362592436118a00223a7a7030e22be1eb79",
+      "explanation": "算术混合运算中类型自动向精度最高的操作数提升，表达式中出现了 double 类型的 z，最终结果类型提升为 double。",
+      "steps": [
+        "w * x：char 型 w 与 int 型 x 相乘，w 提升为 int，乘积为 int 类型。",
+        "(w * x) + z：int 与 double 相加，int 自动提升为 double，和为 double 类型。",
+        "上式 - y：double 与 float 相减，float 自动提升为 double，差为 double 类型。",
+        "整个表达式最终的数据类型为 double。"
+      ],
+      "takeaway": "表达式中只要含有 double 操作数，整个算术运算的最终结果类型就会提升为 double。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "最高类型为 double，根据常规算术转换规则最终结果为 double。"
+      }
+    },
+    {
+      "questionId": "n1-1-13",
+      "sourceHash": "4871992bdfbce56ab482d23ba4279ca0e6ac0ef1a14e8345715335b3f3da6a6e",
+      "explanation": "'\\' 缺少后转义字符导致单引号未闭合语法错误；'081' 无反斜杠且含 8，不是合法的转义字符。",
+      "steps": [
+        "'\\\\'：反斜杠转义反斜杠自身，表示字符 '\\'，完全合法。",
+        "'\\'：反斜杠转义了后面的单引号，导致该字符常量未正常闭合，语法错误。",
+        "'081'：既无转义前导符 \\，又含有非八进制字符 8，不是合法的转义字符。",
+        "'\\0'：八进制空字符（ASCII 0），合法的转义字符。"
+      ],
+      "takeaway": "转义字符必须以反斜杠开头，且单个反斜杠不能直接跟闭合单引号。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "BC",
+        "reason": "B 项引起引号未闭合错误，C 项无反斜杠且含 8，均不是合法的转义字符。"
+      }
+    },
+    {
+      "questionId": "n1-1-14",
+      "sourceHash": "3b221ec474660b41b569cf32f2f61ecf95767425b36c65b4149b2956ad768173",
+      "explanation": "赋值运算符为右结合性，先计算 x -= x*x 得到 -30，再计算外层 x += -30 得到 -60。",
+      "steps": [
+        "原式等价于 x += (x -= (x * x))。",
+        "初始 x = 6，计算 x * x = 36。",
+        "计算内层 x -= 36，即 x = x - 36 = 6 - 36 = -30，此时变量 x 的值已被更新为 -30。",
+        "计算外层 x += (-30)，即 x = x + (-30) = -30 + (-30) = -60。"
+      ],
+      "takeaway": "复合赋值运算符具有右结合性，右侧子表达式赋值完成后变量的新值会参与外层运算。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "经两步右结合复合赋值计算，最终 x 变量的值为 -60。"
+      }
+    },
+    {
+      "questionId": "n1-1-15",
+      "sourceHash": "2e24861f979d0f117dbccefaee5939ddb6bc3fd31c19d4043d3e59d96d7661f1",
+      "explanation": "按转义字符解析内部字符序列，双反斜杠转义为一个反斜杠，反斜杠引号转义为一个双引号，总字符数为 7。",
+      "steps": [
+        "字符串字面量为 \"\\\\\\\"ABC\\\"\\\\\"，去除最外层配对双引号后分析内部内容：",
+        "1. \\\\ 转义表示一个字符 '\\'。",
+        "2. \\\" 转义表示一个字符 '\"'。",
+        "3. 普通字符 'A'、'B'、'C' 分别占 3 个字符。",
+        "4. \\\" 转义表示一个字符 '\"'。",
+        "5. \\\\ 转义表示一个字符 '\\'。",
+        "合计长度为 1 + 1 + 3 + 1 + 1 = 7。"
+      ],
+      "takeaway": "字符串长度 strlen 只计算实际字符个数，双反斜杠和转义双引号各自只计 1 个长度。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B",
+        "reason": "转义解析后实际字符序列为 \\\"ABC\"\\，总长度为 7。"
+      }
+    },
+    {
+      "questionId": "n1-2-1",
+      "sourceHash": "c094c0ea649311236e66d2e36598435b528da17cb07f3a59d1fc4d9f5b2b8d20",
+      "explanation": "%-8.3f 要求左对齐且占 8 列，1234.123 恰占 8 字符；%10.3f 右对齐占 10 列，前面补充 2 个空格对齐。",
+      "steps": [
+        "m = 1234.123，精度保留 3 位小数为 1234.123，字符数（4位整数+1小数点+3小数）为 8。",
+        "printf(\"%-8.3f\\n\", m)：负号表示左对齐，指定总宽 8 列，实际字符已占满 8 列，直接输出 1234.123。",
+        "printf(\"%10.3f\\n\", m)：默认右对齐，总宽 10 列，实际占 8 列，前面需补 2 个空格输出 \"  1234.123\"。"
+      ],
+      "takeaway": "格式占位符负号表示左对齐；实际字符数达到或超出最小宽度时按实际宽度输出。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "第一行输出左对齐 1234.123，第二行输出右对齐补空格的 1234.123。"
+      }
+    },
+    {
+      "questionId": "n1-2-2",
+      "sourceHash": "8df1bf005aeec011a42a03831273afb7bf69a53ef2757084d70f8263f5d5883a",
+      "explanation": "第一条连续赋值先算括号内 z=10, y=15 再算 x=10；第二条逗号表达式从左向右计算，最终取 x+10 赋值给 y。",
+      "steps": [
+        "第一段语句 x = (y = (z = 10) + 5) - 5：",
+        "先赋值 z = 10；接着 y = 10 + 5 = 15；最后 x = 15 - 5 = 10。此时 x=10, y=15, z=10。",
+        "第二段语句 y = (z = x = 0, x + 10)：",
+        "逗号表达式从左向右求值，先执行 z = x = 0（x 和 z 均变为 0），再算 x + 10 即 0 + 10 = 10。",
+        "逗号表达式的值 10 赋给 y，因此 y 变为 10，x 和 z 保持 0。此时 x=0, y=10, z=0。"
+      ],
+      "takeaway": "赋值表达式右结合并返回赋值后的值；逗号表达式从左向右求值并以最后一个子表达式的值为整体结果。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "首行输出 x=10,y=15,z=10，次行逗号表达式更新后输出 x=0,y=10,z=0。"
+      }
+    },
+    {
+      "questionId": "n1-2-3",
+      "sourceHash": "3184b84ecbc7944c7bf001d9301b03973354f4c73632a78defd6ab1faee2e21f",
+      "explanation": "scanf 格式串中出现的非格式说明符（如 \"x=\"、\",\"、\"y=\"）在输入时必须完全原样键入，否则匹配失败。",
+      "steps": [
+        "格式串为 \"x=%d,y=%f\"。",
+        "用户在键盘输入时，必须严格原样输入普通字符 \"x=\"，输入整数 10，输入逗号 \",\"，输入普通字符 \"y=\"，最后输入 66.6。",
+        "若输入缺少前缀或缺少逗号，scanf 会立即匹配终止，导致后续变量无法正确读取。"
+      ],
+      "takeaway": "scanf 格式控制字符串中的普通字符在控制台输入时必须逐字完全原样键入。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A",
+        "reason": "格式控制串包含非格式字符，必须原样输入 \"x=10,y=66.6\"。"
+      }
+    },
+    {
+      "questionId": "n1-2-4",
+      "sourceHash": "c1d87a382a37ddfe4eac9d40d9997b24e1a8032cceaf813cde34689492f2b5f9",
+      "explanation": "%c 会读取输入流中的下一个任意字符（包含空格和回车），为了让字符 'b' 存入 c，不能在 30 与 b 之间夹杂任何空白符。",
+      "steps": [
+        "scanf(\"%d%c\", &a, &c) 中，%d 会扫描并读取整型数值 30，遇到非数字字符即停止。",
+        "紧随其后的 %c 不会跳过空白符；若输入 \"30 b\"，紧跟 30 的空格就会被当作字符赋给 c，导致 c = ' '。",
+        "若输入 \"30<回车>b\"，回车换行符会被读入 c，导致 c = '\\n'。",
+        "只有连续输入 \"30b\" 时，30 赋给 a，紧随其后的字符 'b' 才能被正确读取并赋给 c。"
+      ],
+      "takeaway": "%c 转换符不会跳过空格或回车，与 %d 连用时紧跟其后的字符不能有前置空白。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "紧凑输入 30b 才能防止空格或换行符被 %c 意外捕获。"
+      }
+    },
+    {
+      "questionId": "n1-2-5",
+      "sourceHash": "a56e4ebcc5ad0e3fe2e04063792d2cca43362a1c7c0627cc8fad6179650892d4",
+      "explanation": "scanf 输入 long 需用 %ld，输入 double 必须用 %lf；printf 输出 long 需用 %ld，输出 double 用 %lf（或 %f）。",
+      "steps": [
+        "变量 a 是 long 型，scanf 和 printf 均需使用 %ld 说明符。",
+        "变量 x 是 double 型，在 scanf 输入时必须严格使用 %lf（若用 %f 会发生 4 字节与 8 字节内存不匹配写入错误）。",
+        "printf 输出时，标准库参数可使用 %lf 打印 double 变量。",
+        "综合两句，输入为 scanf(\"%ld%lf\",&a,&x)，输出为 printf(\"%ld,%lf\",a,x)。"
+      ],
+      "takeaway": "scanf 读取 double 必须使用 %lf，不能用 %f；long 型读写均用 %ld。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "输入必须使用 %ld 和 %lf 与变量类型精确对应，匹配选项 C。"
+      }
+    },
+    {
+      "questionId": "n1-2-6",
+      "sourceHash": "10b372f63fb55f68603b7305cc4b1ec2b30eb2df07dddec27c0934bfe3868eee",
+      "explanation": "3/2 为两个整型常量的整除运算，小数部分被截断结果为 1，加上 double 型 x (1.0) 得 2.0，输出默认保留 6 位小数为 2.000000。",
+      "steps": [
+        "分析 3/2：因为 3 和 2 都是 int 型常量，整除结果为整数 1（而非 1.5）。",
+        "计算 x + 1：x 为 double 型 (1.0)，整型 1 提升为 double 型 1.0，相加得到 2.0。",
+        "将 2.0 赋给 double 型变量 y，y 的值为 2.0。",
+        "printf(\"%f\", y) 使用 %f 打印浮点数，默认显示 6 位小数，输出 \"2.000000\"。"
+      ],
+      "takeaway": "整型除法自动舍去小数部分；%f 输出默认保留 6 位小数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "3/2 整除截断为 1，y 赋值为 2.0，%f 格式化输出为 2.000000。"
+      }
+    },
+    {
+      "questionId": "n1-2-7",
+      "sourceHash": "9bcb7c4e516353de6185d86356a2e8ac85523cd1a5f9dce9d3c52bd4e0f89ac8",
+      "explanation": "-2L 是 long int 类型的长整型常量，其数值为 -2，赋给 int 型变量 a 在取值范围内不会截断，输出为 -2。",
+      "steps": [
+        "字面量 -2L 带长整型后缀 L，类型为 long int，值为 -2。",
+        "变量 a 为普通整型 int。将 long 类型的 -2 赋给 int 变量 a，发生类型转换。",
+        "由于 -2 属于 int 能够表示的数值区间，转换后数值保持为 -2。",
+        "printf(\"%d\\n\", a) 按有符号十进制整型输出，结果为 -2。"
+      ],
+      "takeaway": "长整型赋值给普通整型时，只要数值未超出 int 范围即可完整保留原值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "-2L 赋值完全合法且不越界，输出确定值为 -2。"
+      }
+    },
+    {
+      "questionId": "n1-3-1",
+      "sourceHash": "6b604e2d44cf73b855bd2b6d5cb3adf088d40a8b95ed698a93af94dbc4e44728",
+      "explanation": "x%2 为 0%2=0（假），逻辑与 && 遇到左侧为假发生短路，整个表达式的值为 0。",
+      "steps": [
+        "A 项 !x：x=0，!0 为逻辑非，结果为 1。",
+        "B 项 x<y ? 1 : 0：0 < 3 为真，返回表达式 1 的值，结果为 1。",
+        "C 项 x%2 && y==z：x%2 即 0%2，结果为 0；在逻辑与 && 运算中，左侧为 0 判定为假，发生短路，整体表达式结果为 0。",
+        "D 项 y = x || z/3：x=0 为假，z/3 即 3/3=1 为真，0||1 逻辑值为 1，赋值给 y 后整个赋值表达式值为 1。"
+      ],
+      "takeaway": "逻辑与 && 左操作数为 0 时发生短路，表达式直接判定为 0（假）。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "x%2 值为 0 触发短路，逻辑与表达式整体结果为 0。"
+      }
+    },
+    {
+      "questionId": "n1-3-3",
+      "sourceHash": "9f5ed80f96ab6cef3aa589a7b8042ec60cdd921bedaa4fd94d7ab80d6e1fd40c",
+      "explanation": "条件运算符具有右结合性，外层判断 w<x（1<2）为真，直接选取表达式 w 的值（1），后续嵌套分支不再求值。",
+      "steps": [
+        "条件表达式为 w < x ? w : (y < z ? y : z)。",
+        "代入变量值：w=1, x=2, y=3, z=4。",
+        "计算首个条件 w < x，即 1 < 2，判断结果为真（1）。",
+        "因为条件为真，取首个分支表达式 w 的值，其值为 1。",
+        "后方的嵌套条件表达式 y < z ? y : z 被跳过，表达式最终结果为 1。"
+      ],
+      "takeaway": "条件运算符首个条件成立时直接取第二个操作数，后置分支被短路跳过。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "1<2 为真直接返回 w 的值 1，对应选项 D。"
+      }
+    },
+    {
+      "questionId": "n1-3-4",
+      "sourceHash": "74bd9f895a57d5026482ac0e7038b4178e60cd8bea67e3d6015ac0c88046bdf3",
+      "explanation": "依次分析四个 printf：10>10 为假输出 0；w++||z++ 逻辑或短路输出 1；!w>z 为 0>7 输出 0；w&&z 为 4&&7 输出 1。",
+      "steps": [
+        "1. x>10 ? x+100 : x-10：x=10，10>10 为假，取 x-10 = 0，首行输出 0。",
+        "2. w++ || z++：w=3 非零为真，逻辑或 || 发生短路，不执行 z++，w 自增为 4，逻辑值为真（1），次行输出 1。",
+        "3. !w > z：当前 w=4, z=7；!w 即 !4 = 0，0 > 7 为假，第三行输出 0。",
+        "4. w && z：当前 w=4, z=7，两数均非零，4 && 7 逻辑与结果为真（1），第四行输出 1。",
+        "综合四行输出分别为 0, 1, 0, 1。"
+      ],
+      "takeaway": "注意逻辑运算符的短路规则与 ! 运算符高于关系运算符的优先级。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C",
+        "reason": "四行输出依次为 0, 1, 0, 1，与选项 C 对应。"
+      }
+    },
+    {
+      "questionId": "n1-3-5",
+      "sourceHash": "ae5e384c84ba57b44cda38bbc33eebbd96c9aaadb31fc4f6b2e05c28ce4feedc",
+      "explanation": "if 条件括号内是赋值表达式 x = a + b，语法完全合法；a+b 为 0，赋值后整个条件表达式值为 0（假），执行 else 分支输出 # # # #。",
+      "steps": [
+        "在 C 语言中，if 括号内允许使用赋值表达式（=），语法完全合法，能顺利通过编译与连接。",
+        "a=0, b=0，计算 a + b = 0，将 0 赋值给变量 x，x 的值变为 0。",
+        "赋值表达式 (x = a + b) 的整体值等于变量 x 被赋的值，即 0。",
+        "0 在条件判断中视为假，因此 if 条件不满足，程序转入 else 分支执行，输出 \"# # # #\\n\"。"
+      ],
+      "takeaway": "赋值表达式具有返回值且可在 if 中充当条件；值为 0 时判定为假。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D",
+        "reason": "赋值表达式合法，值为 0 判定为假，执行 else 分支输出 # # # #。"
+      }
+    }
+  ]
+}
