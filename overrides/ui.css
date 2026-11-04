@@ -680,7 +680,11 @@ main {
   flex: 1;
   min-width: 0;
   word-break: break-word;
+  white-space: pre-wrap;
+  tab-size: 4;
 }
+.option-space { color: var(--ink-soft, #65796f); }
+.option-space-note { margin: 10px 0 0; color: var(--ink-soft, #65796f); font-size: 13px; }
 .option.selected {
   border-color: var(--orange);
   background: #fff8f5;

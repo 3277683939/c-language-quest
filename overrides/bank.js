@@ -9770,14 +9770,17 @@ window.QUESTION_BANK = {
       "options": [
         "IF",
         "-123",
-        "ab",
+        "a b",
         "int"
       ],
       "answer": "A",
       "explanation": "参考答案来自本书“习题及参考答案”部分。原题以图片呈现，保留代码、公式和选项版面。",
       "answerOrigin": "本书配套参考答案",
       "sourceImage": "questions/x-1-2.webp",
-      "chapterName": "第1章 程序设计与 C 语言"
+      "chapterName": "第1章 程序设计与 C 语言",
+      "optionSpaceMarkers": [
+        2
+      ]
     },
     {
       "id": "x-1-3",

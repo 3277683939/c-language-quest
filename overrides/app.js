@@ -950,6 +950,12 @@ function formatQuizStem(stem) {
   return html;
 }
 
+function formatQuizOption(text, question, index) {
+  const escaped = esc(text);
+  if (!question.optionSpaceMarkers?.includes(index)) return escaped;
+  return escaped.replace(/ /g, '<span class="option-space" role="img" aria-label="空格" title="一个空格">□</span>');
+}
+
 function renderQuiz() {
   if (quiz.finished) {
     renderResult();
@@ -991,9 +997,11 @@ function renderQuiz() {
           const l = String.fromCharCode(65 + i);
           const chosen = selected.includes(l);
           const cls = result ? (q.answer.includes(l) ? 'correct' : chosen ? 'incorrect' : '') : chosen ? 'selected' : '';
-          return `<button class="option ${cls}" ${result ? 'disabled' : ''} data-answered="${!!result}" aria-pressed="${chosen}" onclick="choose('${l}')"><span class="letter">${l}</span><span class="option-text">${esc(o)}</span></button>`;
+          return `<button class="option ${cls}" ${result ? 'disabled' : ''} data-answered="${!!result}" aria-pressed="${chosen}" onclick="choose('${l}')"><span class="letter">${l}</span><span class="option-text">${formatQuizOption(o, q, i)}</span></button>`;
         }).join('')}
       </div>
+
+      ${q.optionSpaceMarkers?.length ? '<p class="option-space-note">□ 表示一个空格。</p>' : ''}
 
       ${result ? `
         <div class="feedback ${result.correct ? '' : 'bad'}">
