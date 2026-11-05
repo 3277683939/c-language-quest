@@ -975,7 +975,7 @@
           ? '注册结果处理异常。请先检查邮箱；若已完成注册，可直接登录。'
           : err?.name === 'AbortError'
           ? '连接注册服务超时。可以先检查邮箱，稍后重试或切换网络后登录。'
-          : '无法连接注册服务。请切换网络，或在系统浏览器打开网站后再试。';
+          : '无法连接注册服务。请点击下方“检测注册连接”，将检测结果反馈给管理员。';
         updateStatus('guest', message);
         appBridge.toast(message);
         appBridge.render();
@@ -1185,6 +1185,50 @@
     }
   }
 
+  // A deliberately invalid signup payload tests the actual POST/CORS route.
+  // No real email/password/session, no registration, and no automatic retries.
+  async function checkCloudConnection() {
+    if (!isCloudConfigured()) return [{code:'CONFIG',message:'云服务尚未配置。'}];
+    const cfg = getCloudConfig();
+    const results = [];
+    for (const stage of ['AUTH', 'REGISTER']) {
+      const started = Date.now();
+      try {
+        const res = await safeFetch(cfg.url + (stage === 'AUTH' ? '/auth/v1/health' : '/auth/v1/signup'), {
+          method: stage === 'AUTH' ? 'GET' : 'POST',
+          headers: {'apikey':cfg.publishableKey, 'Content-Type':'application/json'},
+          ...(stage === 'REGISTER' ? {body:JSON.stringify({email:'connection-check.invalid',password:''})} : {})
+        }, 8000);
+        const data = await res.json().catch(() => null);
+        const reached = stage === 'AUTH' ? res.ok && data?.name === 'GoTrue'
+          : [400,422].includes(res.status) && typeof data?.error_code === 'string';
+        results.push({code: stage + (reached ? '-OK' : res.ok ? '-UNEXPECTED' : '-HTTP'+res.status),
+          message: reached ? (stage === 'AUTH' ? '云服务可连接' : '注册接口可连接（未创建账号）')
+            : res.status === 401 || res.status === 403 ? '服务拒绝请求，需管理员检查配置或访问限制'
+            : res.status === 429 ? '请求过于频繁，请稍后再试' : '服务返回异常响应',
+          ms: Date.now()-started});
+      } catch(err) {
+        results.push({code:stage+(err?.name==='AbortError'?'-TIMEOUT':'-NET'),
+          message:err?.name==='AbortError'?'连接超时':'当前浏览器未收到服务响应（网络、域名解析或跨域等原因待核对）',ms:Date.now()-started});
+      }
+    }
+    return results;
+  }
+
+  async function showConnectionCheck(button) {
+    if (button.disabled) return;
+    const output = button.closest('.account-connection-check')?.querySelector('[role="status"]');
+    if (!output) return;
+    button.disabled = true;
+    output.textContent = '正在检测，最长约 16 秒…';
+    try {
+      const results = await checkCloudConnection();
+      if (!output.isConnected) return;
+      output.textContent = results.map(r => `${r.code}：${r.message}${r.ms == null ? '' : `（${r.ms} ms）`}`).join('\n')
+        + '\n请将这段检测结果发给网站管理员。连接成功也不代表账号已经注册或验证邮件已发送。';
+    } finally { if (button.isConnected) button.disabled = false; }
+  }
+
   /**
    * 渲染账户主界面
    */
@@ -1375,6 +1419,8 @@
       `;
     }
 
+    if (configured) html += `<section class="account-card account-connection-check"><h3>注册遇到网络错误？</h3><p class="account-info-text">检测当前设备到云服务的连接。不使用你的邮箱或密码，不创建账号、不发送邮件。</p><button type="button" class="secondary" onclick="window.CQuestAccount.showConnectionCheck(this)">检测注册连接</button><p role="status" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.8"></p></section>`;
+
     // 4. 底部离线备份保障（任何情况下均可使用）
     html += `
         <div class="account-card account-backup-footer">
@@ -1486,6 +1532,8 @@
     statusLabel,
     handleLogin,
     handleSignup,
+    checkCloudConnection,
+    showConnectionCheck,
     handleLogout,
     handleSyncNow,
     handleMergeChoice,
