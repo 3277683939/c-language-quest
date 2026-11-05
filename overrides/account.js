@@ -73,6 +73,8 @@
   let isSyncing = false;
   let pendingMerge = null; // { user, session, guestState } 待决定是否合并游客进度
   let pendingAuthHashNotice = null; // 'verified' | 'error' | null 邮件回跳通知标记
+  let pendingSignupEmail = ''; // Memory only; never persist a verification code.
+  let lastCodeResendAt = 0;
   let singleFlightRefreshPromise = null;
   let lastLocalEditTime = 0;
   let lastSyncedLocalEditTime = 0;
@@ -129,7 +131,8 @@
     return {
       provider: cfg.provider || 'supabase',
       url: (cfg.url || '').trim().replace(/\/+$/, ''),
-      publishableKey: (cfg.publishableKey || '').trim()
+      publishableKey: (cfg.publishableKey || '').trim(),
+      emailCodeEnabled: cfg.emailCodeEnabled === true
     };
   }
 
@@ -745,6 +748,7 @@
    * 表单与交互方法 1: 登录
    */
   async function handleLogin(formEl) {
+    if (status === 'authenticating') return;
     if (!isCloudConfigured()) {
       appBridge.toast('尚未配置云端服务，当前处于本地离线模式。');
       return;
@@ -923,8 +927,9 @@
         return;
       }
       if (!accessToken && !refreshToken) {
-        updateStatus('signup_pending', '请查收验证邮件，验证后登录。若此前已注册，请直接登录。');
-        appBridge.toast('请查收验证邮件，验证后登录。');
+        pendingSignupEmail = email;
+        updateStatus('signup_pending', getCloudConfig().emailCodeEnabled ? '请查收邮件中的数字验证码，在下方“输入邮箱验证码”完成验证，再用邮箱和密码登录。' : '请查收验证邮件，验证后登录。若此前已注册，请直接登录。');
+        appBridge.toast(statusMessage);
         appBridge.render();
         return;
       }
@@ -1187,6 +1192,56 @@
 
   // A deliberately invalid signup payload tests the actual POST/CORS route.
   // No real email/password/session, no registration, and no automatic retries.
+  async function handleEmailCode(formEl, resend = false) {
+    if (!getCloudConfig().emailCodeEnabled) { appBridge.toast('邮箱验证码尚未开启，请联系管理员完成发信配置。'); return; }
+    if (status === 'authenticating' || currentUser || !isCloudConfigured()) return;
+    const fields = new FormData(formEl);
+    const email = String(fields.get('email') || '').trim();
+    const token = String(fields.get('code') || '').trim();
+    const codeInput = formEl.querySelector?.('input[name="code"]');
+    if (codeInput) codeInput.value = '';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || (!resend && !/^\d{6,10}$/.test(token))) {
+      appBridge.toast('请填写注册邮箱和邮件中的数字验证码。'); return;
+    }
+    if (resend && lastCodeResendAt && injected.now()-lastCodeResendAt < 60000) {
+      appBridge.toast('请间隔至少 60 秒再申请新的验证码。'); return;
+    }
+    if (resend) lastCodeResendAt = injected.now();
+    pendingSignupEmail = email;
+    const reqGen = generationToken;
+    updateStatus('authenticating', resend ? '正在申请新的验证码…' : '正在验证邮箱…');
+    appBridge.render();
+    try {
+      const cfg = getCloudConfig();
+      const res = await safeFetch(cfg.url + (resend ? '/auth/v1/resend' : '/auth/v1/verify'), {
+        method:'POST', headers:{apikey:cfg.publishableKey,'Content-Type':'application/json'},
+        body:JSON.stringify(resend ? {type:'signup',email} : {type:'email',email,token})
+      });
+      const data = await res.json().catch(() => null);
+      if (generationToken !== reqGen) return;
+      if (!res.ok) {
+        const code = data?.error_code || data?.code;
+        updateStatus('signup_pending', res.status === 429 ? '验证码请求过于频繁，请稍后再试。'
+          : code === 'otp_expired' || res.status === 403 ? '验证码错误或已过期，请核对最新邮件，或重新发送验证码。'
+          : '邮箱验证未完成，请核对邮箱和验证码后重试。');
+      } else if (resend) {
+        updateStatus('signup_pending', '若该邮箱有待验证账号，将收到新验证码。请检查收件箱和垃圾箱，使用最新一封邮件。');
+      } else if (data?.user?.id && typeof data.user.email === 'string'
+        && data.user.email.toLowerCase() === email.toLowerCase() && data.user.email_confirmed_at) {
+        // Discard verification tokens. Password login keeps existing merge safeguards.
+        pendingSignupEmail = '';
+        updateStatus('guest', '邮箱验证成功！请在上方使用注册邮箱和密码登录。');
+      } else {
+        updateStatus('signup_pending', '验证结果未能确认，请先尝试邮箱密码登录，勿连续提交验证码。');
+      }
+    } catch (_) {
+      if (generationToken !== reqGen) return;
+      updateStatus('signup_pending', '无法连接邮箱验证服务。请使用下方“检测注册连接”核对网络；验证码无需点击链接。');
+    }
+    appBridge.toast(statusMessage);
+    appBridge.render();
+  }
+
   async function checkCloudConnection() {
     if (!isCloudConfigured()) return [{code:'CONFIG',message:'云服务尚未配置。'}];
     const cfg = getCloudConfig();
@@ -1408,7 +1463,7 @@
                 </label>
               </div>
               <p class="account-mail-tip" style="font-size:11px;color:#7a8780;line-height:1.6;margin:4px 0 8px;">
-                说明：当前默认邮件服务仅支持项目团队邮箱，其他邮箱需配置邮件服务方可收到验证邮件。
+                ${getCloudConfig().emailCodeEnabled ? '收到数字验证码后，在下方完成邮箱验证，无需打开邮件链接。' : '注册后请查收邮箱验证邮件。'}若邮件未送达，请检查垃圾箱或联系管理员。
               </p>
               <div class="account-form-actions">
                 <button type="submit" class="secondary account-submit-btn">注册新账号 ✦</button>
@@ -1418,6 +1473,8 @@
         </div>
       `;
     }
+
+    if (configured && !currentUser && getCloudConfig().emailCodeEnabled) html += `<section class="account-card account-email-code"><h3>输入邮箱验证码</h3><p class="account-info-text">先注册，再将邮件中的数字验证码填到这里。已注册但未验证的账号，也可重新发送验证码。</p><form class="account-form" onsubmit="event.preventDefault();window.CQuestAccount.handleEmailCode(this)"><div class="account-field"><label for="verify-email">注册邮箱</label><input id="verify-email" name="email" type="email" autocomplete="email" required value="${esc(pendingSignupEmail)}" placeholder="你的注册邮箱"></div><div class="account-field"><label for="verify-code">邮件验证码</label><input id="verify-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" placeholder="输入邮件中的数字验证码"></div><div class="account-form-actions"><button type="submit" class="primary" ${status === 'authenticating' ? 'disabled' : ''}>验证邮箱</button><button type="button" class="secondary" onclick="window.CQuestAccount.handleEmailCode(this.form,true)" ${status === 'authenticating' ? 'disabled' : ''}>重新发送验证码</button></div></form><p class="account-info-text">验证成功后用邮箱和密码登录。不会将验证码保存在学习记录中。</p></section>`;
 
     if (configured) html += `<section class="account-card account-connection-check"><h3>注册遇到网络错误？</h3><p class="account-info-text">检测当前设备到云服务的连接。不使用你的邮箱或密码，不创建账号、不发送邮件。</p><button type="button" class="secondary" onclick="window.CQuestAccount.showConnectionCheck(this)">检测注册连接</button><p role="status" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.8"></p></section>`;
 
@@ -1522,6 +1579,8 @@
     isSyncing = false;
     appBridge = null;
     pendingAuthHashNotice = null;
+    pendingSignupEmail = '';
+    lastCodeResendAt = 0;
   }
 
   return {
@@ -1532,6 +1591,7 @@
     statusLabel,
     handleLogin,
     handleSignup,
+    handleEmailCode,
     checkCloudConnection,
     showConnectionCheck,
     handleLogout,
