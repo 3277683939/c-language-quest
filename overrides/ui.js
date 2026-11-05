@@ -1,5 +1,6 @@
 /* Shared navigation and accessible UI chrome; no learning data migrations. */
 const UI_ICONS={
+ leaderboard:'<path d="M8 3h8v5a4 4 0 0 1-8 0ZM8 5H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4M12 12v6m-4 3h8m-6-3h4"/>',
  map:'<path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2Z"/><path d="M9 3v16M15 5v16"/>',
  random:'<path d="M3 6h3c4 0 8 12 12 12h3M3 18h3c1 0 3-2 5-5M14 7c2-1 3-1 4-1h3"/><path d="m18 3 3 3-3 3m0 6 3 3-3 3"/>',
  wrong:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>',

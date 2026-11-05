@@ -278,6 +278,7 @@ const names = {
   library: '题库与资料',
   progress: '学习记录',
   account: '账户与云存档',
+  leaderboard: '学习排行榜',
   practice: '原题自练',
   coach: 'AI 教练',
   teach: 'Agent 教学'
@@ -308,6 +309,7 @@ function render() {
     library: renderLibrary,
     progress: renderProgress,
     account: () => window.CQuestAccount ? window.CQuestAccount.render() : renderProgress(),
+    leaderboard: () => window.CQuestLeaderboard.render(),
     practice: renderPractice,
     coach: renderCoach,
     teach: renderCoach

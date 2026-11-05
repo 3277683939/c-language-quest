@@ -385,7 +385,7 @@
   /**
    * 基础 Supabase REST 请求封装
    */
-  async function supabaseRequest(endpoint, method, body, authRequired = false) {
+  async function supabaseRequest(endpoint, method, body, authRequired = false, affectsSync = true) {
     const cfg = getCloudConfig();
     if (!cfg.url || !cfg.publishableKey) {
       throw new Error('Supabase configuration missing');
@@ -415,7 +415,7 @@
         body: body ? JSON.stringify(body) : undefined
       });
     } catch (netErr) {
-      if (generationToken === currentGen && currentUser?.id === currentUid) {
+      if (affectsSync && generationToken === currentGen && currentUser?.id === currentUid) {
         updateStatus('offline', '网络连接失败，已保存至本地');
       }
       throw netErr;
@@ -1395,6 +1395,48 @@
     el.innerHTML = html;
   }
 
+  function leaderboardSession() {
+    return { configured: isCloudConfigured(), loggedIn: !!(currentUser && currentSession?.access_token) && status !== 'authenticating', pendingMerge: !!pendingMerge };
+  }
+
+  async function leaderboardRpc(action, params = {}) {
+    const endpoints = { list: 'cquest_rank_list', profile: 'cquest_rank_profile', join: 'cquest_rank_join', leave: 'cquest_rank_leave' };
+    if (!Object.hasOwn(endpoints, action)) throw new Error('不支持的排行榜操作。');
+    if (!isCloudConfigured()) throw new Error('排行榜云服务尚未配置。');
+    const auth = leaderboardSession();
+    if (action !== 'list' && (!auth.loggedIn || auth.pendingMerge)) throw new Error('请先登录并处理待合并的云存档。');
+    const body = {};
+    if (action === 'join') {
+      const nickname = typeof params.nickname === 'string' ? params.nickname.trim() : '';
+      if ([...nickname].length < 2 || [...nickname].length > 16 || /[@<>\p{Cc}\p{Cf}]/u.test(nickname)) throw new Error('昵称需为2—16个字符，不能包含邮箱、控制字符或尖括号。');
+      body.nickname = nickname;
+    }
+    const generation = generationToken;
+    try {
+      const response = await supabaseRequest('/rest/v1/rpc/' + endpoints[action], 'POST', body, auth.loggedIn && !auth.pendingMerge, false);
+      const data = await response.json();
+      if (generationToken !== generation) throw new Error('账号已切换，请重新加载排行榜。');
+      if (!response.ok) {
+        const err = new Error(['PGRST202', '42P01', '42883'].includes(data?.code) ? '排行榜服务尚未启用，请稍后再试。' : response.status === 401 || response.status === 403 ? '登录已失效，请重新登录后再试。' : data?.code === 'PT400' ? '昵称格式不正确，请修改后再试。' : '排行榜操作失败，请稍后重试。');
+        err.code = data?.code; throw err;
+      }
+      if (action === 'list') {
+        if (!Array.isArray(data)) throw new Error('排行榜数据格式异常，请重试。');
+        return data.slice(0, 50).map(row => {
+          const rank = Number(row.rank), solved = Number(row.solved);
+          if (!Number.isSafeInteger(rank) || rank < 1 || !Number.isSafeInteger(solved) || solved < 0 || typeof row.nickname !== 'string') throw new Error('排行榜数据格式异常，请重试。');
+          return { rank, nickname: row.nickname.slice(0, 64), solved, mine: row.mine === true };
+        });
+      }
+      if (!data || typeof data.joined !== 'boolean' || typeof data.nickname !== 'string') throw new Error('排行榜数据格式异常，请重试。');
+      return { joined: data.joined, nickname: data.nickname.slice(0, 64) };
+    } catch (err) {
+      if (err.superseded) throw new Error('账号已切换，请重新加载排行榜。');
+      if (err.name === 'TypeError' || err.name === 'AbortError' || err.name === 'SyntaxError') throw new Error('排行榜暂时无法连接，请稍后重试。');
+      throw err;
+    }
+  }
+
   // 暴露给单元测试的内部辅助注入
   function _setInjectedDeps(deps) {
     injected = { ...injected, ...deps };
@@ -1449,6 +1491,8 @@
     handleMergeChoice,
     togglePasswordVisibility,
     isCloudConfigured,
+    leaderboardSession,
+    leaderboardRpc,
     checkAndCleanAuthHash,
     _getPendingAuthHashNotice: () => pendingAuthHashNotice,
     _setPendingAuthHashNotice: (v) => { pendingAuthHashNotice = v; },
