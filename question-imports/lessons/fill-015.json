@@ -1,0 +1,486 @@
+{
+ "schemaVersion": 1,
+ "author": "DeepSeek",
+ "lessons": [
+  {
+   "questionId": "self:x:8:习题集:填空题:7",
+   "sourceHash": "7ec7baef6ecb931b61859ac5eba3891507a0b80b1e11f6cf0ebd5b93a2e117f7",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案「内存的一个地址」正确。指针变量的值本身只是一串比特，编译器按声明类型把它解释成内存单元的编号：解引用 *p 就是\"按这个编号去访问那段内存\"。\n\n```c\nint i = 42;\nint *p = &i;\nprintf(\"%p %d\\n\", (void *)p, *p);   /* 打印 i 的地址，再打印 42 */\n```\n\n要分清两层：p 里存的是地址，*p 才是那块内存里存的数据。同一串比特声明成 int * 和 char * ，解引用时读的字节数不同（4 字节 vs 1 字节），结果自然不同——这就是\"类型决定怎么解释这个地址\"的由来。",
+   "steps": [
+    "指针变量的值是一个内存单元编号，不是数据本身。",
+    "&i 取出 i 的地址并赋给 p，此时 p 保存的就是这个编号。",
+    "解引用 *p 时，编译器按 p 的类型 int 决定从该地址读 4 个字节。"
+   ],
+   "takeaway": "指针存的不是数据而是地址，声明类型决定解引用时读几个字节。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "内存的一个地址",
+    "reason": "资料答案与推导一致：指针变量保存的是内存单元的编号（地址），而非数据本身。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:8",
+   "sourceHash": "35b943ca89ea7023f43e86e1fb932eb802aea053b29150b6c36d2fd2b89cb68c",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：原题引号里的格式串被 OCR 打散，题干 char*s=\"d, d'n\" 应是 char *s=\"%d,%d\\n\"（百分号与反斜杠丢失）。\n\n资料答案 2,3 正确：printf 的第一个参数就是格式串，s 指向 \"%d,%d\\n\"，两个 %d 依次由 a、b 填充，屏幕上是 2,3 再换行。\n\n```c\nchar *s = \"%d,%d\\n\";\nint a = 2, b = 3;\nprintf(s, a, b);      /* 2,3 后换行 */\n```\n\n要点：printf 不检查参数个数和类型，格式串里的转换说明与后面实参一一对应。把变量字符串直接当格式串（printf(s, ...)）在真实项目里是格式化字符串漏洞，本题只是考\"格式串可以由指针给出\"。",
+   "steps": [
+    "把 s 还原成 \"%d,%d\\n\"，识别出两个 %d 与 a、b 对应。",
+    "按顺序填值：第一个 %d 取 a=2，第二个 %d 取 b=3。",
+    "%d 之间的逗号原样输出，\\n 负责换行，最终显示 2,3。"
+   ],
+   "takeaway": "printf(s,a,b) 里 s 就是格式串，两个 %d 依次对应 a、b。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "2,3（末尾换行）",
+    "reason": "格式串按 \"%d,%d\\n\" 还原后输出 2,3，与资料答案一致；题干字符被 OCR 打散，待对原卷。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:9",
+   "sourceHash": "0f34df04ae9ba7bdd4bd23032fcf9dd9eeb46d1c140f3b7bd335c9f1dcc99e40",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干的 int;; 是 int i; 的 OCR 误读，中间的分号只是句读。\n\n同一段代码里 p 先指向 int 变量 i，又指向 float 变量 f，只有 void * 能同时接住这两种指针还不报警告。C 规定任何对象指针与 void * 之间可以隐式转换，赋值不需要强制类型转换。\n\n```c\nint i; float f;\nvoid *p;        /* p 的声明 */\np = &i;         /* 可以 */\np = &f;         /* 也可以 */\n```\n\n若声明成 int *p，第二句 p=&f 类型不兼容；若声明成 float *p，第一句就过不去。代价是用 void * 取值时必须显式转换，例如 *(int *)p。注意 C++ 不允许这种隐式转换，本题按 C 讲。",
+   "steps": [
+    "先看 p 被赋过哪几种地址：&i 是 int *，&f 是 float *。",
+    "能同时接收两者的只有 void *（通用指针，C 里可隐式互转）。",
+    "声明为 void *p；之后取值要写 *(int *)p 这种显式转换。"
+   ],
+   "takeaway": "一个指针要先后指向不同类型的变量，就声明成 void *。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "void *p",
+    "reason": "资料答案 void *p 正确：C 中 void * 可与任意对象指针隐式转换，故两句赋值都合法。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:10",
+   "sourceHash": "e3f9a8a5f7749142c3ca50f76325b59da0a9f85802f0455318bc92312f5efd65",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案「取操作数地址」正确。& 有两种身份：作双目运算符是按位与，作单目运算符是取地址。\n\n```c\nint x = 7;\nint *p = &x;        /* 单目：取 x 的地址 */\nint y = x & 3;      /* 双目：按位与，结果 3 */\n```\n\n判断依据是它后面跟几个操作数：&x 只有一个操作数，是取地址，结果类型是\"指向 x 类型的指针\"，只能赋给指针，赋给 int 会报错；x & 3 有两个操作数，是把两个整数的二进制位逐位相与。\n\n补充：& 的操作数必须是左值（有确定存储单元的变量），&5、&(a+b)、&register 变量都不合法。",
+   "steps": [
+    "看操作数个数：&x 一个操作数是单目，x&3 两个是双目。",
+    "单目 & 的结果是地址，类型为指向操作数类型的指针。",
+    "所以功能表述为：取操作数的内存地址。"
+   ],
+   "takeaway": "& 单目是取地址，双目是按位与，看它后面有几个操作数。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "取操作数地址",
+    "reason": "资料答案与推导一致：单目 & 作用于左值时得到该操作数的存储地址。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:11",
+   "sourceHash": "dc1f97fe0387de082d27d52e2de5a1c044e7ef7fde6241fe4ae25b013e43c9d6",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案 char *s 正确。s=\"VisualC++2010\" 是把字符串常量的首地址存进 s，所以 s 必须是指针。\n\n```c\nchar *s;\ns = \"Visual C++ 2010\";\nputs(s);\n```\n\n三种常见错法：char s; 时 s 只是一个字符，右边却是地址；char s[20]; 虽然能存下字符串，但数组名不是可赋值的左值，声明之后不能整体赋值；int *s; 类型对不上，赋 char 地址会有警告。\n\nC 里字符串常量的类型是 char[]，退化为 char *，所以 char *s 不产生警告；C++ 里字面量是 const char[]，必须写 const char *s。本题按 C 作答。",
+   "steps": [
+    "右边是字符串常量，它的值是首地址，左边必须能存地址。",
+    "char s; 存不了地址，char s[20]; 不能在声明后整体赋值。",
+    "所以声明为 char *s，赋值时把字面量首地址存进指针。"
+   ],
+   "takeaway": "给指针赋字符串字面量，声明要写成 char *s。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "char *s",
+    "reason": "资料答案 char *s 正确：字符串常量赋给指针才合法且无警告（C 中字面量类型为 char[]）。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:12",
+   "sourceHash": "51cebe17de3c3aca1f92512e4d723f1d69ade72bb0b20e8b56846b3e92cd9caa",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 char aC3] 应为 char a[3]，printf(\"d\" 应为 printf(\"%d\"。\n\nchar a[3]=\"AB\" 正好放下 'A'、'B'、'\\0' 三个字符。p=a 后 p 指向 a[0]，p[2] 就是 a[2]，也就是结尾的空字符。用 %d 打印字符，输出的是它的编码值 0。\n\n```c\nchar a[3] = \"AB\";\nchar *p = a;\nprintf(\"%d\\n\", p[2]);   /* 0 */\n```\n\n若换成 %c 打印，屏幕上什么都看不到（空字符不可见）。顺带记一个坑：写成 char a[2]=\"AB\" 就没有位置放 '\\0'，C 允许这样写但后面用 %s 打印会越界。",
+   "steps": [
+    "a[3] 三个元素依次是 'A'、'B'、'\\0'。",
+    "p=a 后 p[2] 与 a[2] 是同一个元素，值为 0。",
+    "%d 打印字符时输出编码值，所以结果是 0。"
+   ],
+   "takeaway": "数组末尾的 '\\0' 用 %d 打印出来就是 0。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "0",
+    "reason": "a[2] 是字符串结束符 '\\0'，按 %d 输出其编码值 0，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:13",
+   "sourceHash": "736c2d96a131b29e3625e478a704f6752ce910b2f2e1db92a52a62e3627f6955",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 \"hello'tworld'n\" 是 \"hello\\tworld\\n\" 被 OCR 的结果（反斜杠读成了单引号），printf 里末尾的 'n 同理是 \\n。\n\n这串字符依次是 h e l l o、制表符、w o r l d、换行符，共 12 个。sizeof(str) 算的是整个数组字节数，还要加上结尾的 '\\0'，所以是 13。注意 str 是数组名，sizeof 不会退化成指针。\n\n下标从 0 数：0 h、1 e、2 l、3 l、4 o、5 制表符、6 w、7 o、8 r、9 l、10 d。所以 *(str+10) 就是字符 d。\n\n```c\nchar str[] = \"hello\\tworld\\n\";\nprintf(\"%d,%c\\n\", sizeof(str), *(str + 10));   /* 13,d */\n```\n\n%c 打印的是字符本身 d，而不是它的编码 100。",
+   "steps": [
+    "数出转义字符各占一个字符，串长 12，加上 '\\0' 得 sizeof 为 13。",
+    "从 0 开始数下标，第 10 个是 'd'。",
+    "按 %d,%c 的格式输出：13,d。"
+   ],
+   "takeaway": "sizeof(字符数组) = 可见字符数 + 转义字符数 + 1 个 '\\0'。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "13,d",
+    "reason": "sizeof 含结尾 '\\0' 得 13，*(str+10) 为 'd'，与资料答案一致；题干转义符被 OCR 成单引号。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:14",
+   "sourceHash": "af2b578f4f2a35e60983fdea6aaa05b5edcc8bdce3e8d0d1f88fd3f098d6ada3",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案「数组的首地址」正确。数组名在表达式里（除 sizeof 和 & 之外）自动转换成指向首元素的指针，所以 f(a) 实际传的是 &a[0]。\n\n```c\nvoid show(int *p, int n)\n{\n    for (int i = 0; i < n; i++) printf(\"%d \", p[i]);\n}\nint a[5] = {1, 2, 3, 4, 5};\nshow(a, 5);        /* a 退化为 &a[0] */\n```\n\n由此得到两个结论：形参写 int p[] 与 int *p 完全等价，都只是一个指针；函数内部 sizeof(p) 得到的是指针大小，不是数组大小，所以长度必须另外传进来。\n\n这也解释了为什么函数里改 p[i] 能改到实参数组，而改 p 本身不会影响外面的 a。",
+   "steps": [
+    "数组名作实参时退化为指向首元素的指针。",
+    "形参收到的是地址，函数并不知道数组有多长。",
+    "所以长度要作为另一个参数传入，函数内 sizeof(p) 只是指针大小。"
+   ],
+   "takeaway": "数组名传参传的是首地址，长度必须另传。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "数组的首地址",
+    "reason": "资料答案与推导一致：数组名作实参退化为 &a[0]，形参只是指针。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:15",
+   "sourceHash": "13262c8ac818d5552de7492b5d195f5bc7ab9899b247e58bdac72a03928c7cd8",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 aC3]C4] 是 a[3][4] 的 OCR 结果。\n\na 是 3 行 4 列的 int 二维数组，按行连续存放。a[0][0] 在 2000，a[1][0] 与它正好相差一整行，即 4 个 int。32/64 位编译器 int 占 4 字节，一行 16 字节。\n\n所以 a[1][0] 的地址是 2000 + 4×4 = 2016。\n\n```c\nint a[3][4];\nprintf(\"%d\\n\", (int)((char *)&a[1][0] - (char *)&a[0][0]));   /* 16 */\n```\n\n环境提醒：若 int 只占 2 字节（Turbo C），一行是 8 字节，答案会变成 2008。本题按 int=4 字节的现代编译器作答。",
+   "steps": [
+    "二维数组按行连续存放，换行即跳过一整行。",
+    "一行是 4 个 int，4×4=16 字节。",
+    "2000 加 16 得 a[1][0] 的地址 2016。"
+   ],
+   "takeaway": "二维数组换行一次跳过一整行，行字节数 = 列数 × 元素大小。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "2016",
+    "reason": "每行 4 个 int 共 16 字节，2000+16=2016，与资料答案一致；该值依赖 int 为 4 字节。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:16",
+   "sourceHash": "a79ebacb51c567859cb7560bbdbffe7d2dbfb8028ae4bbbad15f340fc19c51e8",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 aC3]C4]= {1,2,3,4}; 是 a[3][4]={1,2,3,4}; 的 OCR 结果。\n\n&a[0][0] 是首元素的地址，类型是 int *。+2 让它指向同一行的第 3 个元素 a[0][2]，再解引用取到的就是 3。\n\n```c\nint a[3][4] = {1, 2, 3, 4};         /* 只填满第一行 */\nprintf(\"%d\\n\", *(&a[0][0] + 2));    /* 3 */\n```\n\n初始化列表按行铺开：a[0] 得到 1、2、3、4，a[1] 和 a[2] 全部补 0。\n\n关键区别在指针类型：&a[0][0] 是 int *，加 1 只走 4 字节；&a[0] 是 int (*)[4]（行指针），加 1 要走一整行 16 字节。",
+   "steps": [
+    "&a[0][0] 是 int *，指向第一个元素。",
+    "+2 以 int 为步长，落到 a[0][2]。",
+    "解引用取该元素的值 3。"
+   ],
+   "takeaway": "int * 加 1 走一个元素，行指针加 1 走一整行。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "3",
+    "reason": "&a[0][0]+2 指向 a[0][2]，其值为 3，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:17",
+   "sourceHash": "6a4419daf660c0da318987a5ca5e88135e1b52e4035ea49c1e45f7c1150dda1b",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 int aC3]C4]={...},(*p)C4]=a; 是 int a[3][4]={...},(*p)[4]=a; 的 OCR 结果。\n\np 的声明 int (*p)[4] 表示 p 是\"指向含 4 个 int 的数组\"的指针，也就是行指针。p=a 后 p 指向第 0 行，p[2] 等价于 *(p+2)，是第 2 行，p[2][1] 就是 a[2][1]。\n\n元素按行铺开：第 0 行 1~4，第 1 行 5~8，第 2 行 9~12。第 2 行第 2 个（下标 1）是 10。\n\n```c\nint a[3][4] = {1,2,3,4,5,6,7,8,9,10,11,12}, (*p)[4] = a;\nprintf(\"%d\\n\", p[2][1]);   /* 10 */\n```\n\n行指针的加法以\"一行 4 个 int\"为步长，这是它与 int * 的根本不同；若把 p 声明成 int *p=a，p[2][1] 就是语法错误。",
+   "steps": [
+    "认出 (*p)[4] 是行指针，p=a 指向第 0 行。",
+    "p[2] 即第 2 行，p[2][1] 取该行第 2 个元素。",
+    "第 2 行是 9,10,11,12，下标 1 的值为 10。"
+   ],
+   "takeaway": "(*p)[4] 是行指针，p[i][j] 等价于 a[i][j]。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "10",
+    "reason": "p[2][1] 即 a[2][1]，第 2 行第二个元素为 10，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:18",
+   "sourceHash": "c5466bea4a73c1fceb08a978532c7f3ab1db3bebf6b755670ee48632f4c5891c",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nint (*p1)() 里，括号让 * 先与 p1 结合：p1 是指针；后面紧跟 ()，说明它指向一个返回 int 的函数。所以 p1 是指向函数的指针变量。\n\n```c\nint max2(int a, int b) { return a > b ? a : b; }\nint fun(int (*p1)(), int *p2) { return p1(1, 2) + *p2; }\nint main(void) { int x = 5; return fun(max2, &x); }\n```\n\n与第二个形参 int *p2（指向 int 的指针）对比，就知道括号的位置有多重要：\n\nint *f()   —— f 是函数，返回 int *；\nint (*f)() —— f 是指针，指向返回 int 的函数。\n\n判断口诀：先看 f 先和谁结合，f 先和 * 结合就是指针，先和 () 结合就是函数。",
+   "steps": [
+    "先看括号：(*p1) 说明 p1 是指针。",
+    "再看后面紧跟 ()，说明它指向的是函数。",
+    "所以 p1 是指向（返回 int 的）函数的指针变量。"
+   ],
+   "takeaway": "int (*f)() 是指向函数的指针，int *f() 是返回指针的函数。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "函数",
+    "reason": "资料答案「函数」正确：(*p1)() 表明 p1 指向返回 int 的函数。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:19",
+   "sourceHash": "e68e2483422a007337af11393bf15784e965720e439b74c501fa6eec0095f203",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 find-nxouldtext.txt 是被吞掉空格的命令行，末尾的「91」是资料残留编号。按原题应为执行 find -nxould text.txt。\n\n此时 argv[0]=\"find\"，argv[1]=\"-nxould\"，argv[2]=\"text.txt\"，argc=3。\n\nargv[1] 指向字符 '-'。先执行 ++argv[1]，让这个指针本身往后挪一个字符，指向 'n'；再解引用得到字符 'n'。\n\n```c\n/* 命令行：find -nxould text.txt */\nprintf(\"%c\\n\", *++argv[1]);   /* n */\n```\n\n要分清两种写法：++argv[1] 改的是 argv[1] 这个指针（指针数组里的元素）；(*argv)[1] 才是取 argv[0] 所指字符串的第二个字符。",
+   "steps": [
+    "按命令行拆出 argv[0]=\"find\"、argv[1]=\"-nxould\"。",
+    "argv[1] 现在指向 '-'，++ 后指向 'n'。",
+    "解引用得到字符 'n'，所以结果是 n。"
+   ],
+   "takeaway": "*++argv[1] 先把指针挪过 '-'，再取到字符 'n'。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "n",
+    "reason": "argv[1] 指向 \"-nxould\"，++ 后指向 'n'，解引用得 n，与资料答案一致；命令行原文被 OCR 粘连。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:20",
+   "sourceHash": "9a88b838dec74a53b98ef9144849e4b68a79a80b1abeee23bd52ddd93ca947da",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 aC2] 是 a[2]，末尾的 'n 是 \\n。\n\nchar *a[2]={\"one\",\"two\"}, **p=a; 这里 a 是指针数组，p 指向 a[0]。\n\n第一句 *(p++)+1：先取 p 的当前值 a[0]（\"one\" 的首地址），然后 p 自增指向 a[1]；接着 +1 让这个字符串指针指向 'n'，用 %s 从 'n' 打到结尾，输出 ne，再输出逗号。\n\n第二句 p 已经指向 a[1]，**p 是 \"two\" 的首字符 't'，减 1 得到 's'，用 %c 输出 s 并换行。\n\n```c\nchar *a[2] = {\"one\", \"two\"}, **p = a;\nprintf(\"%s,\", *(p++) + 1);   /* ne, */\nprintf(\"%c\\n\", **p - 1);     /* s */\n```\n\n结果是 ne,s。p++ 改的是指针，+1 改的是指向的位置，别混。",
+   "steps": [
+    "*(p++) 先取 a[0]，p 随后指向 a[1]。",
+    "a[0]+1 得到 \"ne\"，%s 输出 ne 加逗号。",
+    "第二句 **p 是 't'，减 1 得 's'，%c 输出 s。"
+   ],
+   "takeaway": "p++ 移动指针，*(p)+1 移动指向的字符，两者不可混。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "ne,s",
+    "reason": "*(p++)+1 得 \"ne\"，p 移向 a[1] 后 **p-1 得 's'，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:21",
+   "sourceHash": "7b875910f7d5a471922aa2bd0aeb09b716a9612a58e699725569613e5b521ee9",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 stC] 是 st[]，末尾的 'n 是 \\n。\n\nst 是指针数组，四个元素分别指向 \"ONE\"、\"TWO\"、\"FOUR\"、\"K\"。\n\n*(st+1) 取到 \"TWO\" 的首地址，再 +1 指向 'W'，%s 从 'W' 一直打到字符串结尾，输出 WO。\n\n*(st+2) 是 \"FOUR\" 首地址，+2 指向 'U'；外面再套一个 * 才取到字符 'U'，减 1 得 'T'，用 %c 输出 T。\n\n```c\nchar *st[] = {\"ONE\", \"TWO\", \"FOUR\", \"K\"};\nprintf(\"%s,%c\\n\", *(st+1) + 1, *(*(st+2) + 2) - 1);   /* WO,T */\n```\n\n关键：%s 的参数必须是指针，%c 的参数必须是字符值。*(st+2)+2 还是 char *，所以要多解引用一次。",
+   "steps": [
+    "*(st+1) 是 \"TWO\" 的地址，+1 后指向 'W'，%s 输出 WO。",
+    "*(st+2)+2 指向 'U'，再解引用取字符 'U'。",
+    "'U'-1='T'，用 %c 输出，最终是 WO,T。"
+   ],
+   "takeaway": "%s 要指针、%c 要字符值，多套一层 * 才能从指针取到字符。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "WO,T",
+    "reason": "*(st+1)+1 输出 \"WO\"，*(*(st+2)+2)-1 为 'T'，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:22",
+   "sourceHash": "d60a45c519f0cf516c672cf34c11b7f3992d9288ec80ee87f193e5a959d1e584",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：资料答案 p=aC0]或*a58 是被压扁的三个空的答案，还原为 p=a[0]（或 p=*a）、5、8。\n\n第一个空：a[0] 的类型是 int[4]，作右值时退化为 &a[0][0]；*a 先取第 0 行，同样退化为首元素地址。所以 p=a[0]; 或 p=*a; 都与 p=&a[0][0]; 等价。\n\n第二个空 *(p+5)：初始化只填满第一行，其余补 0，铺开是 1,2,3,0,4,5,0,0,6,7,8,0，下标 5 是 5。\n\n第三个空 *(a[2]+2)：a[2]+2 指向 a[2][2]，值为 8。\n\n```c\nstatic int a[3][4] = {{1,2,3},{4,5},{6,7,8}};\nint *p = a[0];                        /* 等价 p = *a; */\nprintf(\"%d %d\\n\", *(p+5), *(a[2]+2)); /* 5 8 */\n```\n\n注意 p 是 int *，所以 *(p+5) 是跨行平铺计数，而不是第 5 行。",
+   "steps": [
+    "把 a[0] 与 *a 都看成退化为 &a[0][0] 的地址，与 p=&a[0][0] 等价。",
+    "按行铺开补 0：1,2,3,0,4,5,0,0,6,7,8,0，取下标 5 得 5。",
+    "a[2]+2 指向 a[2][2]，值为 8。"
+   ],
+   "takeaway": "a[0] 与 *a 都退化为首元素地址；int * 的加法是平铺计数。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "p=a[0]；5；8",
+    "reason": "三空依次为 p=a[0]（或 p=*a）、5、8，与资料答案还原后的内容一致。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:23",
+   "sourceHash": "b78b923fec00ee50a0aa10f022186c0df48b3de419f2a4413ef7f9ef690ae1c2",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：资料答案「函数的人口地址」中「人口」是「入口」的 OCR 误认。\n\n编译链接后，每个函数在可执行文件里都有一处唯一的起始地址，调用函数就是把控制权转到这个地址，所以它叫函数的入口地址，也叫函数指针。\n\n```c\nint add(int a, int b) { return a + b; }\nint (*p)(int, int) = add;     /* p 保存 add 的入口地址 */\nprintf(\"%d\\n\", p(2, 3));      /* 5 */\n```\n\n函数名在表达式里同样退化为指向自身的指针，所以 add 与 &add 的值相同，p=add 和 p=&add 都能用。这也是能把函数当参数传递（回调）的基础。",
+   "steps": [
+    "函数在可执行文件里有一处唯一起始地址。",
+    "调用函数即把控制权转到该地址，因此称函数入口地址。",
+    "函数名退化为指针，可直接赋给函数指针变量。"
+   ],
+   "takeaway": "函数名退化为指针，它保存的就是函数的入口地址。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "函数的入口地址",
+    "reason": "资料答案「函数入口地址」正确（「人口」为 OCR 误认）。"
+   }
+  },
+  {
+   "questionId": "self:x:8:习题集:填空题:24",
+   "sourceHash": "dc89ad23cd6b149360cc308193d208e6a40957cb23d88e5c6d0351987577530d",
+   "explanation": "核验方式：AI推导（未运行，仅按 C11 语义推演）\n资料答案只留下一个 float，是残缺记录，覆盖不了三个空；题干 floadmax(...) 与后文 max() 也不一致。待核对：原题应为 float max(float a, float b);。\n\n第一空定义函数指针，返回类型和参数表都必须与目标函数一致：float (*p)(float, float);。括号不能省，省了就成了\"返回 float * 的函数声明\"。\n\n第二空让指针指向函数：p = max;（也可写 p = &max;，函数名退化为入口地址）。\n\n第三空通过指针调用：(*p)(a, b)，也可以简写 p(a, b)，两者等价。\n\n```c\nfloat max(float a, float b) { return a > b ? a : b; }\nfloat (*p)(float, float);          /* 定义指向函数的指针 */\np = max;                           /* 指向 max 函数 */\nprintf(\"%f\\n\", (*p)(3.0f, 5.0f));  /* 5.000000 */\n```\n\n三空的类型必须环环相扣：声明一致、赋值同型、调用按参数表传参。",
+   "steps": [
+    "第一空：float (*p)(float, float);，括号保证 p 先与 * 结合。",
+    "第二空：p = max;，函数名退化为入口地址，不加 & 也对。",
+    "第三空：(*p)(a, b)，也可写 p(a, b)。"
+   ],
+   "takeaway": "函数指针的声明、赋值、调用三处类型必须完全一致。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "第一空 float (*p)(float, float);；第二空 p = max;；第三空 (*p)(a, b)",
+    "reason": "资料答案只有一个 float，未给出三个空的完整形式，函数名还有 fload/max 两种 OCR 写法，无法逐空核对，按 C 语法补全。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:1",
+   "sourceHash": "ed92ef4fc64a512ad644d3239751218e9429328ce02a6762813a4b8ea2dd2748",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案「结构变量名.成员名」正确。点号是成员访问运算符，左边必须是结构（或联合）变量，右边必须是该结构里声明过的成员名。\n\n```c\nstruct date { int year, month, day; };\nstruct date d = {2018, 6, 6};\nprintf(\"%d\\n\", d.year);    /* 2018 */\nd.day = 7;                 /* 成员可以像普通变量一样赋值 */\n```\n\n几个易错点：点号不能用于结构指针，p.year 是错的，要写 p->year；成员名只在所属结构内有意义，不同结构可以有同名成员；d.year 本身是左值，可以取地址 &d.year，也可以 ++d.year。",
+   "steps": [
+    "结构变量用点号访问成员：变量名.成员名。",
+    "成员是普通变量，可读可写，也能取地址。",
+    "结构指针不能用点号，要改用 ->。"
+   ],
+   "takeaway": "结构变量用点，结构指针用箭头。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "结构变量名.成员名",
+    "reason": "资料答案与推导一致：结构变量访问成员用点号。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:2",
+   "sourceHash": "a09adead8be9a67b1c085d4517880e2484c72273e28207d86a7258bdde4f19c3",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案「构造」正确。结构成员可以是基本类型（int、char、float），也可以是构造类型（数组、结构、联合），甚至指针类型——这正是结构能描述复杂对象的原因。\n\n```c\nstruct date { int year, month, day; };\nstruct student {\n    char name[20];          /* 数组成员 */\n    struct date birthday;   /* 结构成员：嵌套 */\n    int *scores;            /* 指针成员 */\n};\n```\n\n两条限制：结构不能包含自身类型的成员（大小无法确定），但可以包含自身类型的指针，链表结点就是这么写的；成员也不能是函数，只能是指向函数的指针。",
+   "steps": [
+    "成员类型不受限：基本类型、构造类型、指针都可以。",
+    "数组与结构成员让结构可以嵌套描述复杂对象。",
+    "但结构不能直接包含自身，只能放自身类型的指针。"
+   ],
+   "takeaway": "结构成员可以是任意类型，含数组、结构、指针，但不能是自身整体。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "构造",
+    "reason": "资料答案「构造」正确：成员可为数组、结构、联合等构造类型，也可为指针。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:3",
+   "sourceHash": "262c946052753af1a706f99622398f39a11eb4eb1dd94ceeb11c62370fe4541c",
+   "explanation": "核验方式：AI推导（未运行，仅按 C11 语义推演）\n资料答案写的是「原书参考答案（见章节题解）」，没有实际内容，按题面自己推。\n\na 是结构变量，b 是指向该结构的指针（b=&a）。通过 b 访问成员 day 只有两条路。\n\n一是先解引用再取成员：(*b).day。括号必须有，因为点号优先级高于 *，写成 *b.day 会被解释成 *(b.day)，而 b.day 本身就不合法。\n\n二是用指向运算符：b->day，它与 (*b).day 完全等价，也是更常用的写法。\n\n```c\nstruct { int day; char month; int year; } a, *b = &a;\n(*b).day = 1;      /* 形式一 */\nb->day = 2;        /* 形式二，等价 */\nprintf(\"%d\\n\", a.day);   /* 2 */\n```\n\n所以两个空的答案就是 b->day 和 (*b).day。",
+   "steps": [
+    "b 是结构指针，不能直接用 a.day 之外的写法 b.day。",
+    "第一条路：先解引用再取成员 (*b).day，括号不可省。",
+    "第二条路：用箭头 b->day，与前者等价。"
+   ],
+   "takeaway": "通过结构指针访问成员：(*p).成员 或 p->成员。",
+   "answerReview": {
+    "status": "unresolved",
+    "answer": "b->day 和 (*b).day",
+    "reason": "资料答案只写「原书参考答案（见章节题解）」，没有给出实际内容，按题面独立推出两种形式。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:4",
+   "sourceHash": "9102a40955cc7ac29c7b587defacdd3c23a9a94fc5573f1b86941a3dcf2d51ea",
+   "explanation": "核验方式：AI推导（未运行，仅按 C11 语义推演）\n待核对：题干只剩「1．填空题」一行，原题正文丢失，只留下资料答案 &p.num，因此空位数量与格式串都无法核对。\n\n从答案反推题意：空里要填一个地址表达式，用于 scanf 把读入的整数写进结构变量 p 的 num 成员。scanf 的转换说明要求对应实参是地址，所以填 &p.num（等价写法 &(p.num)）。\n\n```c\nstruct person { int num; char name[15]; } p;\nscanf(\"%d\", &p.num);      /* 把读到的整数写进 p.num */\n```\n\n要点：结构成员和普通变量一样，输入必须取地址；点号优先级高于 &，所以 &p.num 不需要再加括号。若只有结构指针 q，则写 &q->num。",
+   "steps": [
+    "题干残缺，只能由资料答案 &p.num 反推空位在 scanf 的地址参数处。",
+    "scanf 的 %d 需要 int * ，所以要取 num 的地址。",
+    "结构成员同样用 & 取地址，得 &p.num。"
+   ],
+   "takeaway": "结构成员的输入和普通变量一样，都要用 & 取地址。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "&p.num",
+    "reason": "题干正文丢失只剩「1．填空题」，只能由资料答案反推空位应填 &p.num，原题空位与格式串无法核对。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:4-2",
+   "sourceHash": "4f885d19f3351f32aa5574a64b916b30605181096cbafb10d802cb04ffb94461",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干 nameC15] 应为 name[15]，scanf 里的 \"d\" 应为 \"%d\"。\n\nscanf 需要知道把数据写到哪块内存，所以第二个参数必须是地址。p 是结构变量，num 是它的 int 成员，取地址即 &p.num。\n\n```c\nstruct person { int num; char name[15]; } p;\nscanf(\"%d\", &p.num);\n```\n\n三种错法：写 p.num 传的是值而非地址，运行时崩溃；写 &p 传的是整个结构的地址，%d 会把 int 写到结构起始处（本题恰好和 num 同址，但类型仍是 struct person *，不合法）；写 *p.num 更是语法错误。\n\n字符串成员则可以直接写 p.name，因为数组名本身就是地址。",
+   "steps": [
+    "scanf 的每个转换说明都要对应的地址实参。",
+    "num 是结构成员，取地址用 &p.num。",
+    "点号优先级高于 &，无需额外括号。"
+   ],
+   "takeaway": "scanf 填结构成员要写 &p.成员名。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "&p.num",
+    "reason": "资料答案 &p.num 正确：scanf 的 %d 需要 int 成员 num 的地址。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:5",
+   "sourceHash": "c4d15c890cfd8da188eaecbb7d8afea3b98a1bd74519bc36f8a7f6d24bd09a31",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案 p->n 正确。(*p).n 与 p->n 完全等价：前者先解引用得到结构本身，再用点号取成员；后者是 C 为结构指针提供的简写运算符。\n\n```c\nstruct stru { int n; } str, *p = &str;\n(*p).n = 1;\np->n = 2;                 /* 与上一句等价 */\nprintf(\"%d\\n\", p->n);     /* 2 */\n```\n\n两个常见错误：p.n 是错的，指针不能用点号；*p.n 也是错的，因为点号优先级高，它被解释成 *(p.n)。\n\n记法：-> 左边必须是指针，右边必须是该指针所指结构的成员名；(*p).n 里的括号不能丢。",
+   "steps": [
+    "p 是指向结构的指针，先用 *p 得到结构本身。",
+    "再用点号取成员，写成 (*p).n，括号不可省。",
+    "C 提供的简写就是 p->n。"
+   ],
+   "takeaway": "结构指针取成员：(*p).n 或 p->n，两者等价。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "p->n",
+    "reason": "资料答案 p->n 正确，与 (*p).n 完全等价。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:6",
+   "sourceHash": "6dce211df4bdcbfe4ad63d456e5e742944a7f9f8b5ca24e46e7b7559dde8700b",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：题干「数目固定、 数据类型」中间的空就是要填的字，填「不同」后读作「数目固定、不同数据类型的有序数据的集合」。\n\n数组要求所有元素类型相同，靠下标区分，适合批量同质数据；结构的成员类型可以各不相同，靠成员名区分，适合描述一个对象的多个属性。\n\n```c\nint a[3];                                          /* 三个 int，同类型 */\nstruct { int id; char name[8]; double score; } s;   /* 三个成员，类型各异 */\n```\n\n相同点：元素或成员数目在定义时就固定；都按顺序存放（结构可能有对齐填充）；都能在定义时整体赋初值。",
+   "steps": [
+    "数组元素类型必须相同，结构成员类型可以不同。",
+    "数组靠下标区分元素，结构靠成员名区分。",
+    "两者共同点是数目固定、按顺序存放。"
+   ],
+   "takeaway": "数组同类型同质，结构不同类型异质，都数目固定。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "不同",
+    "reason": "资料答案「不同」正确：结构成员类型可各不相同，数组元素必须同类型。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:7",
+   "sourceHash": "78f90a48e2c1eb6bac986893e9065cdae6311529b8eebe52f1541ce93fd53d9d",
+   "explanation": "核验方式：AI推导（未运行，仅按 C11 语义推演）\n资料答案只写了 sizeof，是残缺记录：空里要的是完整表达式，不是一个关键字。\n\nsizeof 有两种写法：sizeof(类型名) 和 sizeof 表达式。要算结构类型 struct List 的长度，应写 sizeof(struct List)。关键字 struct 不能省，因为 List 本身不是类型名。\n\n```c\nstruct List { int data; struct List *next; };\nprintf(\"%zu\\n\", sizeof(struct List));   /* int 加指针，可能还有填充字节 */\n```\n\n若之前用 typedef 起过别名（typedef struct List List;），才能直接写 sizeof(List)。补充：sizeof 的结果类型是 size_t，值在编译期就确定，不会真的去访问变量。",
+   "steps": [
+    "空里要的是完整表达式，不能只写 sizeof。",
+    "结构类型作 sizeof 的操作数必须带关键字 struct。",
+    "所以写成 sizeof(struct List)。"
+   ],
+   "takeaway": "sizeof(结构类型) 要带 struct 关键字，除非该类型有 typedef 别名。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "sizeof(struct List)",
+    "reason": "资料答案仅给出 sizeof 关键字，未写类型参数，属残缺记录；按题面补全为 sizeof(struct List)。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:8",
+   "sourceHash": "43780dcb9b252409d37bbbccbf9e8582a922592db543fcdf444a2585b02a079d",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：资料答案里的方框是换行或空格的 OCR 残留，实际是 stdlib.h（旧教材也写 malloc.h，Turbo C 用 alloc.h）。\n\nmalloc、calloc、realloc、free 的原型都在标准头文件 stdlib.h 里声明。不包含就看不到原型，编译器会按隐式声明处理，把返回值当 int——64 位下指针会被截断，程序随机崩溃。\n\n```c\n#include <stdlib.h>\nint *p = (int *)malloc(10 * sizeof(int));\nif (p == NULL) { /* 分配失败，别直接解引用 */ }\nfree(p);\np = NULL;\n```\n\n三条实践要点：malloc 返回 void *，C 里可以不写强制转换；一定要判 NULL；用完 free 并把指针置空。",
+   "steps": [
+    "malloc 系列函数的原型在 stdlib.h 中声明。",
+    "不包含头文件会导致隐式声明、返回值被当 int，指针可能被截断。",
+    "所以要在文件开头写 #include <stdlib.h>。"
+   ],
+   "takeaway": "用 malloc/free 先 #include <stdlib.h>，并记得判 NULL。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "stdlib.h",
+    "reason": "资料答案 stdlib.h 与标准一致（方框为 OCR 残留；旧教材的 malloc.h/alloc.h 属实现相关写法）。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:9",
+   "sourceHash": "ee359074991c22536cd3d571ec0e41ffe13dbf935f28ecbee11dafa349c7a2bf",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n资料答案 12、4 对应 int 与指针都是 4 字节的 32 位编译器。\n\n成员布局：int day 占 0~3；char month 占 4；为了把 int year 对齐到 4 的倍数，第 5~7 字节被填充；year 占 8~11。所以 sizeof(a)=12，里面有 3 个字节是填充、不存数据。\n\nsizeof(b) 算的是指针变量本身的大小，与它指向什么结构无关，32 位下是 4。\n\n```c\nstruct { int day; char month; int year; } a, *b = &a;\nprintf(\"%zu %zu\\n\", sizeof(a), sizeof(b));\n```\n\n环境提醒：int 为 2 字节的 Turbo C 下结果是 6 和 2；64 位编译器下指针占 8 字节，第二个空变成 8。因此本题答案取决于编译环境，资料答案只在 32 位、int=4 的前提下成立。",
+   "steps": [
+    "按对齐规则排成员：day 0~3、month 4、填充 5~7、year 8~11，得 12。",
+    "sizeof(b) 是指针大小，与所指结构无关，32 位为 4。",
+    "换环境就变：Turbo C 为 6 和 2，64 位第二个空为 8。"
+   ],
+   "takeaway": "结构大小含对齐填充；指针大小只与地址位宽有关。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "12 和 4（32 位、int 4 字节）",
+    "reason": "答案随数据模型变化：Turbo C 为 6/2，64 位指针为 8，资料答案只在 int 与指针均 4 字节时成立。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:10",
+   "sourceHash": "ccee4879a16f380e5cd28d17a88fec8294ff124cb6423e03bbd9d46698c4395a",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：资料答案 structdated={2018,6,6}; 是丢了空格的排版错误，正确写法是 struct date d = {2018, 6, 6};\n\n结构变量初始化用花括号，按成员声明顺序依次给值：year=2018、month=6、day=6。\n\n```c\nstruct date { int year, month, day; };\nstruct date d = {2018, 6, 6};      /* 定义并同时初始化 */\nprintf(\"%d-%d-%d\\n\", d.year, d.month, d.day);   /* 2018-6-6 */\n```\n\n要点：初始化只能在定义时做。定义之后要整体赋值，得逐个成员赋，或用复合字面量 d = (struct date){2018, 6, 6};。初值个数少于成员数时，其余成员自动置 0。",
+   "steps": [
+    "定义变量时用花括号按成员顺序给初值。",
+    "顺序是 year、month、day，依次填 2018、6、6。",
+    "完整语句：struct date d = {2018, 6, 6};"
+   ],
+   "takeaway": "结构初始化按成员声明顺序对应花括号里的值。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "struct date d = {2018, 6, 6};",
+    "reason": "资料答案缺空格，还原后为 struct date d={2018,6,6};，与推导一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:11",
+   "sourceHash": "6517cdf5941447cb64bebf6c7e0bea2144ddc60d9363eea6fec3e37c0bb5add9",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n待核对：代码里 static structsxC2]={5,&xC1],7,&xC0]} 应为 static struct s x[2]={{5,&x[1]},{7,&x[0]}}，中间的「1  26」是 OCR 残留。\n\n两个结点用 next 互相指回：x[0]={5, &x[1]}，x[1]={7, &x[0]}，构成一个环。ptr 从 &x[0] 出发，循环 3 次：\n\n第 1 次打印 x[0].a=5，ptr 转到 &x[1]；\n第 2 次打印 x[1].a=7，ptr 转回 &x[0]；\n第 3 次打印 5，ptr 再到 &x[1]，i 到 3 循环结束。\n\n```c\nstruct s { int a; struct s *next; };\nstatic struct s x[2] = {{5, &x[1]}, {7, &x[0]}}, *ptr = &x[0];\nfor (int i = 0; i < 3; i++) { printf(\"%d\", ptr->a); ptr = ptr->next; }\n/* 输出 575 */\n```\n\n所以结果是 575（printf 没加分隔符，三个数字连在一起）。static 让数组在程序启动时就按初值建好，&x[1] 这类地址才能直接写进初值里。",
+   "steps": [
+    "看清初始化：x[0]={5,&x[1]}，x[1]={7,&x[0]}，形成环。",
+    "ptr 依次指向 x[0]、x[1]、x[0]，打印 5、7、5。",
+    "三次打印无分隔符，连成 575。"
+   ],
+   "takeaway": "链表结点用 next 互指成环时，遍历三次会回到起点。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "575",
+    "reason": "按初始化 x[0]={5,&x[1]}、x[1]={7,&x[0]} 走三次：5、7、5，与资料答案 575 一致。"
+   }
+  }
+ ]
+}

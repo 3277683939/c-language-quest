@@ -1,0 +1,486 @@
+{
+ "schemaVersion": 1,
+ "author": "DeepSeek",
+ "lessons": [
+  {
+   "questionId": "self:n10:1:综合卷:填空题:25",
+   "sourceHash": "176ea80e45ab9e94f1fb23d778bbcaec878669d65f6b44683de72933d9df5c43",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n三空依次填 int、float、char。\n\n整型用 int，单精度实型用 float，字符型用 char，三者都是 C 的基本数据类型关键字，声明时写在变量名前面。\n\n```c\nint n = 3;        /* 基本整型 */\nfloat f = 2.5f;   /* 单精度实型 */\nchar c = 'A';     /* 字符型 */\n```\n\n资料答案第二个写作 floate，多出的 e 是笔误，C 里没有这个关键字，正确拼写是 float。\n\n顺带分清：float 一般 4 字节、7 位有效数字；double 是双精度，8 字节；char 本质是 1 字节的小整数，存的是字符的 ASCII 码。",
+   "steps": [
+    "第一空定整型：关键字 int。",
+    "第二空定单精度实型：关键字 float（资料答案 floate 为笔误）。",
+    "第三空定字符型：关键字 char。"
+   ],
+   "takeaway": "三个基本类型关键字：int 整型、float 单精度、char 字符型，没有 floate。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "int、float、char",
+    "reason": "三空分别对应整型、单精度实型、字符型的关键字 int/float/char，与资料答案一致；资料把 float 误写作 floate，属笔误，不影响结论。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:26",
+   "sourceHash": "de49b0bf4c0b426bcbcc8d0cc75b7f39a1f83cd4235873206e5f6138e2206999",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n结果是 5。\n\n*、/、% 三个运算符同级，结合方向从左到右，所以按书写顺序算：\n3*20=60 → 60/4=15 → 15%10=5。\n\n参与运算的全是 int，除法 60/4 能整除，不存在截断；% 求余，15 除以 10 余 5。\n\n```c\nint v = 3 * 20 / 4 % 10;   /* v = 5 */\n```\n\n易错点是先把 4%10 或 20/4 算了：4%10=4 会让式子变成 15，20/4=5 会让式子变成 3*5%10=5（碰巧同值，别被巧合骗了）。记住同级左结合就行。",
+   "steps": [
+    "同级左结合，先算 3*20 得 60。",
+    "再算 60/4 得 15。",
+    "最后 15%10 取余得 5。"
+   ],
+   "takeaway": "* / % 同级左结合，3*20/4%10 依次得 60、15、5。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "5",
+    "reason": "按同级从左到右：3*20=60，60/4=15，15%10=5，与资料答案 5 一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:27",
+   "sourceHash": "b014249903509e8127b509b9f4adab500fe56cdc728e303a0c0d6fc98abaf878",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填一对花括号 {}。\n\n把若干条语句用 { } 括起来，整体在语法上算作一条语句，叫复合语句，也叫分程序块。函数体本身就是一个复合语句，if、while、for 后面要跟多条语句时也靠它。\n\n```c\nif (a > b) {\n    t = a;\n    a = b;\n    b = t;\n}          /* 三条语句合成一个复合语句 */\n```\n\n两个细节：右花括号后面不要再加分号，写了会多出一条空语句；复合语句内部定义的变量只在该块内有效，出了 } 就看不见了。",
+   "steps": [
+    "题眼是“多个语句组成一个语句”，只有花括号能做到。",
+    "语法上 { … } 是一个整体，可出现在任何需要一条语句的位置。",
+    "收尾别画蛇添足：} 后面不加分号。"
+   ],
+   "takeaway": "多条语句用 { } 括起来就是复合语句，整体当一条语句用，右括号后不加分号。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "{}",
+    "reason": "复合语句由一对花括号把多条语句括成整体，与资料答案 {} 一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:28",
+   "sourceHash": "53291dbf9b954f21b068fee3ef3a6335051b67c1df9622f6dc90185dd3f7fd3b",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n真正要填的空是最后一个：在程序开头加 #include <stdio.h>（写成 #include \"stdio.h\" 也合法）。\n\nputchar、getchar 都是标准库函数，原型声明放在头文件 stdio.h 里。不包含它，老编译器会按“隐式声明返回 int”放行，C99 起则报警告或错误，所以规范写法必须先包含头文件。\n\n```c\n#include <stdio.h>\n\nint main(void)\n{\n    int c = getchar();   /* 读一个字符 */\n    putchar(c);          /* 输出一个字符 */\n    return 0;\n}\n```\n\n待核对：题干“putchar ______ 函数和 getchar ______ 函数”里的两个空位疑似标点 OCR 错位，原文应是“使用 putchar 函数和 getchar 函数”，实际只有一个空。",
+   "steps": [
+    "putchar/getchar 属于标准输入输出库，声明在 stdio.h。",
+    "所以程序开头必须写 #include <stdio.h>。",
+    "题干前两个空位是标点错位，不是要填内容。"
+   ],
+   "takeaway": "用 putchar、getchar、printf、scanf 之前，开头必须有 #include <stdio.h>。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "在程序开头加 #include <stdio.h>",
+    "reason": "putchar/getchar 的原型在 stdio.h 中，资料答案“加 #include <stdio.h>”正确；题干前两个空位应为标点，属 OCR 错位。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:29",
+   "sourceHash": "bc79a1366f4b6b5512494b156cbdfba14dd0b47357552fffb700e5aec5f9ef95",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 # 号。\n\n预处理命令一律以 # 开头，而且 # 必须是该行的第一个非空白字符；命令本身不加分号，也不参与运行，在编译之前由预处理器处理完就被替换或删除。\n\n```c\n#include <stdio.h>     /* 文件包含 */\n#define MAX 100        /* 宏定义 */\n\nint main(void) { return MAX > 0 ? 0 : 1; }\n```\n\n常见三类：#include、#define、#if/#ifdef/#endif 条件编译。注意 # 后面不能有空格以外的分隔，写 # define 虽然合法但不规范；# 行写成分号结尾会把分号一起带进替换文本，这是常见坑。",
+   "steps": [
+    "预处理命令的标志就是行首的 #。",
+    "# 必须是该行第一个非空白字符。",
+    "# 行不加分号，编译前就被处理掉。"
+   ],
+   "takeaway": "预处理语句以 # 开头，# 要在行首，命令后不加分号。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "#",
+    "reason": "C 的预处理命令以 # 引导，且 # 须位于行首，与资料答案 # 一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:40",
+   "sourceHash": "fd15b236914336974cd168ddd53b5de8e986c22587c945dc95bf17c114387f0a",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n区别在于句尾有没有分号：表达式不是语句，表达式末尾加上分号才成为语句。\n\n表达式由运算符和运算对象组成，一定能算出一个值，如 a+b、x=1、i++；语句是程序执行的最小单位，以分号结束。\n\n```c\nx + 1;    /* 表达式语句：算完把结果丢掉 */\nx = 1;    /* 表达式语句：赋值副作用保留 */\n;         /* 空语句，只有一个分号 */\n```\n\n准确说法是：任何表达式加一个分号就构成语句，但语句不都是表达式语句，if、for、return、复合语句就不属于这一类。",
+   "steps": [
+    "表达式一定有值，但没有分号就只是表达式。",
+    "末尾补上分号，才成为可执行的表达式语句。",
+    "结论：分号是表达式与语句的分界。"
+   ],
+   "takeaway": "表达式有值、语句以分号结尾；表达式后加分号即成为表达式语句。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "句尾有无分号结束",
+    "reason": "C 中表达式加分号才成为语句，区别就在句尾分号，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:41",
+   "sourceHash": "02af26806a1ea09ad78250a1156b4cb0c30c19554731664185373a194d2277eb",
+   "explanation": "核验方式：AI推导（未运行，仅按 C11 语义推演）\n空里应填“没有”：C 语言本身没有专门的输入、输出语句。\n\nC 只提供 if、for、while、return 这类语句关键字，输入输出完全靠标准库函数完成：printf、scanf、putchar、getchar、puts 等，原型都在 stdio.h。所以读写的写法是函数调用语句，不是语言级的 I/O 语句——这是 C 与 PASCAL、BASIC 的显著区别。\n\n```c\n#include <stdio.h>\n\nint main(void)\n{\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%d\", n);\n    return 0;\n}\n```\n\n待核对：题干两个空位与资料答案“没有；有、没有”都疑似 OCR 错乱，按最合理考点（C 无 I/O 语句、靠库函数实现）作答。",
+   "steps": [
+    "C 的关键字表里没有输入、输出语句。",
+    "输入输出由 stdio.h 里的库函数提供。",
+    "所以结论是“没有”，读写写成函数调用语句。"
+   ],
+   "takeaway": "C 没有输入输出语句，scanf/printf 只是 stdio.h 里的库函数。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "没有（C 语言不提供输入输出语句，输入输出由标准库函数实现）",
+    "reason": "资料答案“没有；有、没有”与题干两个空位均疑似 OCR 错乱，只能确定核心考点是 C 无 I/O 语句，具体每空填字无法还原，故判歧义。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:42",
+   "sourceHash": "f50106f85323fddfa6d631dd670d7d0fb57f2c25186709985a9068c4eb0bd949",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n结果是 3。\n\n/、*、% 同级左结合，逐步算：\n10/3=3（整型除法，小数直接截掉）→ 3*9=27 → 27%10=7 → 7/2=3。\n\n关键在第一步：10/3 不是 3.333 而是 3，只要运算对象都是 int，就一路按整型算到底。\n\n```c\nint v = 10 / 3 * 9 % 10 / 2;   /* v = 3 */\ndouble w = 10.0 / 3;           /* 3.333…，有 double 参与才保留小数 */\n```\n\n若擅自先把 10/3*9 当成 10/(3*9)，会得到 0，那是不顾左结合的典型错法。",
+   "steps": [
+    "10/3 整型除法得 3，余数被丢掉。",
+    "3*9=27，27%10=7。",
+    "7/2 再整除得 3。"
+   ],
+   "takeaway": "整型除法先截断：10/3 得 3，再乘 9 取余除 2，最终 3。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "3",
+    "reason": "10/3=3，3*9=27，27%10=7，7/2=3，与资料答案 3 一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:43",
+   "sourceHash": "9b4f4c4b4a955f167d851531cf65a3bab3ef8f4aacb6d2bf886a16a21e8717f3",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n表达式的值是 3。\n\n条件运算符 ?: 先求 x>0：x=1，条件成立，取问号后面的分支 2*x+1，冒号后的 0 不求值。2*1+1=3。\n\n```c\nint x = 1;\nint v = x > 0 ? 2 * x + 1 : 0;   /* v = 3 */\n```\n\n优先级别搞混：?: 低于 > 和 +，所以 2*x+1 会整个先算完再做选择；?: 又高于赋值，写 y = x>0 ? a : b 是选完再赋值。若 x 取 -1，条件为假，值就是 0。",
+   "steps": [
+    "先判 x>0，x=1 成立。",
+    "取真分支 2*x+1，代入得 3。",
+    "假分支 0 不参与计算。"
+   ],
+   "takeaway": "x=1 时 x>0 成立，取 2*x+1=3；?: 只求值被选中的分支。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "3",
+    "reason": "x=1 使 x>0 为真，取 2*x+1=3，与资料答案 3 一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:44",
+   "sourceHash": "2e892b439a91f0717746f25e9b9b9f7bec177453fdd3b33589ec7365462b4544",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填：无条件转向语句。\n\ngoto 后面跟一个标号，执行到它时不做任何判断，直接跳到同一函数内该标号处继续执行，所以叫无条件转移。\n\n```c\nfor (i = 0; i < n; i++)\n    for (j = 0; j < m; j++)\n        if (a[i][j] == key) goto found;\nfound:                     /* 一次跳出两层循环 */\n    cnt++;\n```\n\n两个限制：标号必须和 goto 在同一函数内，不能跨函数跳；不能跳进变量作用域内部。结构化程序里一般用 break、continue、return 代替，goto 只在多层跳出或统一错误出口时偶尔使用。",
+   "steps": [
+    "goto 后接标号，无条件跳转。",
+    "标号与 goto 必须在同一函数内。",
+    "因此它属于无条件转向语句。"
+   ],
+   "takeaway": "goto 是无条件转向语句，只能在本函数内按标号跳，不能跨函数。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "无条件转向语句",
+    "reason": "goto 执行时不作条件判断、直接转向标号处，正是无条件转向语句，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:45",
+   "sourceHash": "69d86b93fc8f33a56b7776310a44121778453e9e81739ebd5b50e0086be0bb61",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填：调用函数（主调函数）。\n\nreturn 结束当前函数的执行，把控制权连同可选的返回值交回调用它的那个函数，从调用点之后的下一条语句继续。\n\n```c\nint add(int a, int b) { return a + b; }   /* 返回到 main */\n\nint main(void)\n{\n    int s = add(2, 3);   /* 从这里接着执行，s=5 */\n    return 0;            /* main 的 return 结束整个程序 */\n}\n```\n\n两种形式：return 表达式; 带回一个值；return; 用于 void 函数提前收尾。main 的返回值作为进程退出码交给操作系统，0 表示正常结束。",
+   "steps": [
+    "return 立即终止当前函数的执行。",
+    "控制权回到调用者的下一句，即可返回调用函数。",
+    "有返回值时顺带把值送出。"
+   ],
+   "takeaway": "return 从被调函数返回调用函数，并可选带回返回值。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "调用函数",
+    "reason": "return 使控制权返回调用它的函数（主调函数），与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:46",
+   "sourceHash": "b394d2176f3f8a9b1a273d0dfdffe51944d598721bb6a22cbe72cb02d52c5380",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n两空填：指针；指针变量。\n\n变量的地址就叫这个变量的指针；专门用来存放地址的变量叫指针变量，声明时在名字前加 *。\n\n```c\nint a = 5;\nint *p = &a;        /* p 里存 a 的地址，p 是指针变量 */\nint v = *p;         /* 解引用，取到 5 */\n```\n\n三个东西要分清：&a 是取地址，p 的值是地址（即指针），*p 是通过地址访问目标。指针变量本身也占内存、也有自己的地址，所以才有二级指针 int **q = &p;",
+   "steps": [
+    "变量的地址称为该变量的指针。",
+    "存地址的变量是指针变量，声明加 *。",
+    "& 取地址、* 解引用，两者配对使用。"
+   ],
+   "takeaway": "地址即指针，存地址的变量叫指针变量：int *p = &a。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "指针；指针变量",
+    "reason": "变量地址称指针、存放地址的变量称指针变量，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:47",
+   "sourceHash": "cac945a4fbc36849126edf7e4e38c78f90c4627fa9fb2b9b1c4137cb4057bd96",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n行下标下限 0，列下标上限 4。\n\ndouble x[3][5] 是 3 行 5 列，下标一律从 0 起：行下标 0~2，列下标 0~4，上限是长度减 1。\n\n```c\ndouble x[3][5];\n/* 合法：x[0][0] … x[2][4]，共 15 个元素 */\n/* 越界：x[3][…]、x[…][5] */\n```\n\n15 个元素按行连续存放，x[1][0] 紧跟在 x[0][4] 后面，这就是二维数组能用一级指针线性遍历的原因。常考的反向问法是“行下标上限是多少”，答案是 2。",
+   "steps": [
+    "3 行对应行下标 0、1、2，下限是 0。",
+    "5 列对应列下标 0 到 4，上限是 4。",
+    "记住：下限恒为 0，上限是维长减 1。"
+   ],
+   "takeaway": "double x[3][5] 的行下标 0~2、列下标 0~4，行下限 0、列上限 4。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "0；4",
+    "reason": "行下标 0~2 下限为 0，列下标 0~4 上限为 4，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:48",
+   "sourceHash": "0847e52e76effae886d993a4515a1b048ad6d542394a3e7028b3ca39ae3f8d01",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n两空填：宏定义；文件包含处理。\n\nC 的预处理功能主要有三类：宏定义 #define（无参宏与带参宏）、文件包含 #include、条件编译 #if/#ifdef/#ifndef/#else/#elif/#endif；此外还有 #undef、#line、#pragma 等。\n\n```c\n#include <stdio.h>     /* 文件包含 */\n#define PI 3.14159     /* 宏定义 */\n#if PI > 3             /* 条件编译 */\nint big = 1;\n#else\nint big = 0;\n#endif\n```\n\n三者都在编译前完成：宏是纯文本替换，不做类型检查、不占运行时间；#include 是把头文件内容原样插到该行位置。",
+   "steps": [
+    "#define 提供宏定义（文本替换）。",
+    "#include 提供文件包含能力。",
+    "第三类就是题干已给出的条件编译。"
+   ],
+   "takeaway": "预处理三件套：宏定义、文件包含、条件编译。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "宏定义；文件包含处理",
+    "reason": "预处理功能除条件编译外主要是宏定义与文件包含，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:49",
+   "sourceHash": "690c611c6a836f573189a09cea0a02c9ecddbde21dd3be43da3bcb1c97a85a1e",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n两空填：值；地址。\n\n结构体成员本质是普通变量，作实参时把成员的值复制给形参，函数内改动不影响原结构体，是单向值传递。\n\n传指向结构体的指针时复制的是地址，被调函数通过 p->成员 或 (*p).成员 直接改原对象，是地址传递。\n\n```c\nstruct point { int x, y; };\n\nvoid byval(struct point p)  { p.x = 100; }   /* 改不到原对象 */\nvoid byptr(struct point *p) { p->x = 100; }  /* 改到原对象 */\n```\n\n结构体可能很大，即使只读也常传 const 指针，省掉整块拷贝的开销。",
+   "steps": [
+    "成员当实参，复制的是值，属值传递。",
+    "传结构体指针，复制的是地址，属地址传递。",
+    "要改原结构体就必须走指针。"
+   ],
+   "takeaway": "传成员是值传递（单向），传结构体指针是地址传递（可改原对象）。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "值；地址",
+    "reason": "成员作参为值传递，结构体指针作参为地址传递，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:50",
+   "sourceHash": "ff3060f5d6d1d9c2aca52bd9f49ee2ea3c22b47646b211ae2fbe484634ed33df",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填：二进制位（bit）。\n\n位运算直接对整型数据在内存里的二进制位逐位操作，不产生十进制进位：& 按位与、| 按位或、^ 按位异或、~ 按位取反、<< 左移、>> 右移。\n\n```c\n5 & 3    /* 0101 & 0011 = 0001 = 1 */\n5 | 3    /* 0101 | 0011 = 0111 = 7 */\n5 ^ 3    /* 0101 ^ 0011 = 0110 = 6 */\n1 << 3   /* 0001 左移三位 = 1000 = 8 */\n```\n\n常见用途：用 & 取某一位或判奇偶（n&1），用 | 置位，用 ^ 翻转某位，用移位代替乘除 2 的幂。注意只对整型有效，且 ~ 与逻辑非 ! 完全是两回事。",
+   "steps": [
+    "位运算的操作对象是整数的二进制位。",
+    "六种运算符：& | ^ ~ << >>。",
+    "按位操作、不进位，这是它与算术运算的根本差别。"
+   ],
+   "takeaway": "位运算按二进制位逐位操作，不进位，运算符为 & | ^ ~ << >>。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "二进制位",
+    "reason": "位运算针对数据的二进制位逐位操作，与资料答案“二进制位”一致。"
+   }
+  },
+  {
+   "questionId": "self:n10:1:综合卷:填空题:51",
+   "sourceHash": "25e0e817cd0a6344d014be1d1e0327e24db9ec5634f350c037caa4161de72d55",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n两空填：文本文件；二进制文件。\n\n按数据的组织形式（存放方式）划分：文本文件把数据按字符编码逐字节存，人能直接看懂，存 12345 占 5 个字节；二进制文件按内存中的二进制形式原样存，int 12345 只占 4 个字节，省空间、读写快，但用文本编辑器看是乱码。\n\n```c\nFILE *f1 = fopen(\"a.txt\", \"w\");    /* 文本模式 */\nFILE *f2 = fopen(\"b.dat\", \"wb\");   /* 二进制模式 */\n```\n\n顺带：按读写方式还可分顺序文件与随机文件，那是另一个分类维度。题干尾部“二、单选题（每题”是版面残留，与本题无关。",
+   "steps": [
+    "按组织形式分，首先是文本文件（ASCII 文件）。",
+    "另一类是二进制文件，按内存原样存储。",
+    "文本省心、二进制省空间，各有适用场景。"
+   ],
+   "takeaway": "按组织形式分为文本文件与二进制文件，前者按字符编码、后者按内存二进制存。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "文本文件；二进制文件",
+    "reason": "C 按数据组织形式把文件分为文本文件与二进制文件，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:10",
+   "sourceHash": "9d0ed97fc3bc41f372361d8d1b26d2e7fb213172d8d28249f93ae2cfc1201627",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nz 的值是 4。\n\n先把 OCR 打碎的代码还原（“ll”是“||”）：\n\n```c\nint x = 2, y, z = 5;\nscanf(\"%d\", &y);              /* 读到 4，y = 4 */\ny = z-- || scanf(\"%d\", &z) && x++;\n```\n\n&& 优先级高于 ||，式子等价于 z-- || (scanf(...) && x++)。\n后置自减先取值：z-- 的值是 5，非 0 为真，随后 z 变成 4。\n|| 左边已为真就短路，右边的 scanf 根本不执行，键盘上的 3 没人读取，z 不会被改写。\n\n最终 x=2、y=1、z=4，所以空里填 4。",
+   "steps": [
+    "scanf 读到 4 存进 y，此时 z 仍是 5。",
+    "z-- 先取 5 为真、再让 z 减到 4。",
+    "|| 短路使第二个 scanf 不执行，z 就停在 4。"
+   ],
+   "takeaway": "z-- 取 5 为真触发 || 短路，第二个 scanf 不执行，z 只减一次得 4。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "4",
+    "reason": "z-- 值为 5 使 || 短路，后续 scanf 不执行，z 由 5 减为 4，与资料答案 4 一致。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:11",
+   "sourceHash": "2088b5220cfed5afe109c14461671355e6abd930fc1c658175715e4844e2dd02",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ne 的值是 21。\n\na=10、b=15，a>b 即 10>15 为假，?: 走冒号后面的分支 ++c。前置自增先加再用：c 由 20 变 21，整个表达式的值也是 21，赋给 e。\n\n```c\nint a = 10, b = 15, c = 20, e;\ne = a > b ? --c : ++c;   /* e = 21，c = 21，--c 未被求值 */\n```\n\n两处易错：把前置 ++ 当成先用后加，会算出 e=20；以为两个分支都执行，会以为 c 先减后加回到 20。?: 只求值被选中的那个分支，另一支完全不动。",
+   "steps": [
+    "先判 a>b：10>15 为假。",
+    "取假分支 ++c，c 先自增成 21。",
+    "表达式值 21 赋给 e。"
+   ],
+   "takeaway": "a>b 为假走 ++c，e 与 c 同为 21，--c 分支不求值。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "21",
+    "reason": "10>15 为假，执行 ++c 使 c 与表达式值均为 21，e=21，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:12",
+   "sourceHash": "5499fd45c6044f4c30c2672081860549b568bdbbacf6b60aa2217e22a137c66b",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n空里应填 x>=1 && x<5（写成 (x>=1)&&(x<5) 同义）。\n\n题干“x 取值在 C1,/5) 范围内”是 OCR 错乱，原意是左闭右开区间 [1,5)：含 1、不含 5。条件就是 1<=x 且 x<5，两个关系表达式用 && 连接。\n\n```c\ny = (x >= 1 && x < 5) ? 1 : -1;\n```\n\n两个细节：C 不能像数学那样连写 1<=x<5 表示区间，那样会先算 1<=x 得 0/1 再与 5 比较，结果恒为真；整个条件加括号可读性更好。资料答案末尾的 sqrt 是 OCR 错字，原处应是数字 5。",
+   "steps": [
+    "把 [1,5) 翻译成 1<=x 与 x<5 两个条件。",
+    "两句必须同时成立，用 && 连接。",
+    "填 x>=1 && x<5；资料答案的 sqrt 是 5 的 OCR 错字。"
+   ],
+   "takeaway": "区间 [1,5) 的 C 写法是 x>=1 && x<5，不能用连写不等式。",
+   "answerReview": {
+    "status": "conflict",
+    "answer": "x>=1 && x<5",
+    "reason": "区间 [1,5) 对应 x>=1 && x<5；资料答案写作 x>=1&&x<sqrt，尾部 sqrt 不是合法数值，属 OCR 错乱，与正确结论冲突。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:13",
+   "sourceHash": "eb02692038b62f5d58f41cdb188e3730e846377b914fd8213b4508fa34b1ac85",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\na、c 的值分别是 2、5。\n\na=1、b=2，条件 a>b 即 1>2 为假，?: 取冒号后的 (c += ++a)。前置 ++a 先把 a 加到 2，再用 2 参与运算，c = 3+2 = 5。\n\n```c\nint a = 1, b = 2, c = 3;\na > b ? (c -= --a) : (c += ++a);   /* a=2，c=5，减号分支不求值 */\n```\n\n注意两点：条件为假时 (c-=--a) 整支不执行，所以 --a 不会把 a 减回 0；++a 是前置，参与运算的是自增后的值。若条件写成 a<b，结果才会是 a=0、c=2。",
+   "steps": [
+    "判 a>b：1>2 为假。",
+    "执行 (c += ++a)，a 先变 2，表达式用 2。",
+    "c = 3+2 = 5，最终 a=2、c=5。"
+   ],
+   "takeaway": "条件为假走 (c+=++a)：a 先增为 2，c 变 5，另一分支不执行。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "2,5",
+    "reason": "1>2 为假，执行 c+=++a 得 a=2、c=5，与资料答案 2,5 一致。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:14",
+   "sourceHash": "f40c2e3d343baeb82e515438fd78a9eb5bb04fb814f7ecf5dd2a3fbdbe70ca18",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nx、y、z 分别是 0、1、1。\n\nif 的条件是 x>0 && ++y>0。x=0，x>0 为假，&& 立刻短路，++y 根本不执行，y 保持 1。条件整体为假，走 else，执行 z--，z 由 2 变 1。x 全程没被改动，仍是 0。\n\n```c\nint x = 0, y = 1, z = 2;\nif (x > 0 && ++y > 0) z++;   /* ++y 被短路跳过 */\nelse z--;                    /* z 从 2 变 1 */\n```\n\n若把初值改成 x=1，++y 才会执行使 y=2，z 也变成 3。短路求值是本题唯一考点，答 y=2 就是漏了它。",
+   "steps": [
+    "x=0 使 x>0 为假，&& 短路。",
+    "++y 不执行，y 仍为 1。",
+    "条件为假执行 else 的 z--，z 变 1，x 不变。"
+   ],
+   "takeaway": "x>0 为假导致 && 短路，++y 不执行：结果 0、1、1。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "0,1,1",
+    "reason": "x>0 为假，++y 被短路跳过使 y=1，else 分支 z-- 使 z=1，x 保持 0，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:15",
+   "sourceHash": "a4cf094027f1dffc3697201f8f869a40721a4829146072b929a01171dae48c08",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\na、b、c 的值分别是 1、2、3。\n\n先把 OCR 还原：“elseif”是 else if，“6ll”是 6||。\n\n```c\nint a = 0, b = 3, c = 2;\nif (a++ && b++) c--;\nelse if (a + 1 == 6 || b--) c++;\n```\n\na++ 取 0 为假，a 变成 1；&& 短路，b++ 不执行，b 仍是 3，if 分支跳过。\nelse if 里 a+1 是 2，2==6 为假，于是求 || 右边 b--：取 3 为真，b 变成 2，条件成立，执行 c++ 得 3。\n\n结果 a=1、b=2、c=3。若 && 没短路，b 会被加两次，结果就完全不同。",
+   "steps": [
+    "a++ 取 0 为假，a 自增为 1，&& 短路使 b++ 不执行。",
+    "else if 中 2==6 为假，转求 b--。",
+    "b-- 取 3 为真并使 b=2，执行 c++ 得 3。"
+   ],
+   "takeaway": "a++ 取 0 触发短路跳过 b++；else if 靠 b-- 为真使 c 增为 3。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "1,2,3",
+    "reason": "a++ 取 0 短路跳过 b++（b=3），else if 中 b-- 为真使 b=2 且 c 增为 3、a=1，与资料答案 1,2,3 一致。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:16",
+   "sourceHash": "2d550d55bdebb53a80a20685e4b77f6157b3cc59601f3870e106020980a37bdf",
+   "explanation": "核验方式：AI推导（未运行，仅按 C11 语义推演）\n按资料答案 sqrt 反推，空里应填 sqrt(x)，更严谨写 sqrt((double)x)，并且程序开头要 #include <math.h>。\n\n题干“数学表达式 /、 关所对应的C语言表达式”已被 OCR 打碎，只剩 / 、关、13 几个符号碎片；结合答案 sqrt 判断，原题考的是数学上的开平方在 C 里怎么写。\n\n```c\n#include <math.h>\ndouble y = sqrt(x);            /* x 可隐式转 double */\ndouble z = sqrt((double)x);    /* x 为 int 时显式转换更清楚 */\n```\n\n要点：C 没有 √ 运算符，开方必须调用库函数 sqrt；它返回 double，赋给 int 会被截断（sqrt(2)=1.414 变 1）。若原题其实是分数 1/3，则要写 1.0/3 才有小数，1/3 得 0。待核对原题符号。",
+   "steps": [
+    "题干符号残缺，只能按答案 sqrt 判断考点是开方。",
+    "C 无 √ 运算符，开方用库函数 sqrt(x)。",
+    "需 #include <math.h>，且注意返回 double 被赋给 int 会截断。"
+   ],
+   "takeaway": "数学 √x 的 C 写法是 sqrt(x)（需 math.h），返回 double 别直接塞 int。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "sqrt(x)（更严谨 sqrt((double)x)，需 #include <math.h>）",
+    "reason": "题干“/、关、13”等符号已被 OCR 打碎，无法还原原始数学表达式；仅凭资料答案 sqrt 推断考点为开方，具体形式待核对，故判歧义。"
+   }
+  },
+  {
+   "questionId": "self:x:4:习题集:填空题:17",
+   "sourceHash": "9908c2db0ef68e6ccf187e56efedcf9cc1cd61f52aaf508ebadc9583543de94b",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n输出是 1,0,1。\n\n先还原 OCR：“ll”是 ||，“'n”是 \\n，“return0”是 return 0。\n\n```c\nint a = 0, b = 0, c = 0;\nif (a++ && (b += a) || ++c) printf(\"%d,%d,%d\", a, b, c);\n```\n\n按优先级 && 高于 ||，条件等价于 (a++ && (b+=a)) || ++c。\n一、a++ 取 0 为假，a 变 1；&& 短路，(b+=a) 不执行，b 仍 0。\n二、左半为假，|| 继续求 ++c：c 变 1，值为真。\n三、条件成立，打印 a=1、b=0、c=1。\n\n```\n1,0,1\n```\n\n若把 && 和 || 的优先级弄反，或忽略短路，答案就会错。",
+   "steps": [
+    "a++ 取 0 为假，a 变 1，&& 短路使 b+=a 不执行。",
+    "左半为假，|| 求值 ++c，c 变 1 为真。",
+    "条件成立打印三个变量：1,0,1。"
+   ],
+   "takeaway": "&& 高于 ||，a++ 取 0 短路掉 b+=a，而 ++c 仍会执行，得 1,0,1。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "1,0,1",
+    "reason": "a++ 取 0 为假且短路 b+=a（b=0），|| 右侧 ++c 使 c=1 为真并打印，a=1，与资料答案 1,0,1 一致。"
+   }
+  },
+  {
+   "questionId": "self:x:5:习题集:填空题:1",
+   "sourceHash": "473d3759738a61495751705f84efa6a10bbf4610086702e87bf419e001e49c92",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 continue。\n\ncontinue 的作用是跳过本次循环中它后面的语句，直接进入下一次循环：while、do-while 回到条件判断，for 则先执行表达式 3（如 i++）再判断条件。\n\n```c\nfor (i = 1; i <= 10; i++) {\n    if (i % 2 == 0) continue;   /* 偶数跳过本轮 */\n    sum += i;\n}\n```\n\n和 break 的区别：break 结束整个循环，continue 只结束本轮。goto 也能跳到循环末尾，但破坏结构化，题干特意把它排除掉，所以只剩 continue。题干缺了空位线，按语义补 continue 语句。",
+   "steps": [
+    "“提前结束本次循环、进入下一次”正是 continue 的定义。",
+    "continue 在 for 中会先执行 i++ 再判条件。",
+    "与 break 区分：break 结束整个循环。"
+   ],
+   "takeaway": "continue 跳过本轮剩余语句进入下一轮，break 才是整个循环结束。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "continue",
+    "reason": "提前结束本次循环、直接进入下一次循环的语句是 continue，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:5:习题集:填空题:2",
+   "sourceHash": "9a6facc5165a6d84c2ce090f24884df286061436d58b9a2213fca7ea3e9302f7",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 do-while 语句。\n\n三种循环里只有 do-while 是先执行循环体、后判断条件，所以循环体至少执行一次；while 和 for 都是先判断，条件一开始就为假时一次都不执行。\n\n```c\nint n;\ndo {\n    scanf(\"%d\", &n);   /* 至少读一次 */\n} while (n <= 0);       /* 这里必须有分号 */\n```\n\n两个考点：do { } while(条件); 末尾的分号不能漏；括号里写的是“继续循环”的条件，与 while 的写法一致，不是退出条件。",
+   "steps": [
+    "do-while 先执行后判断，天然保证至少一次。",
+    "while、for 先判断，可能一次都不执行。",
+    "写 do-while 时别漏掉 while(条件) 后的分号。"
+   ],
+   "takeaway": "循环体至少执行一遍用 do-while：先做后判，末尾分号不能漏。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "do-while",
+    "reason": "只有 do-while 先执行循环体后判断条件，能保证至少执行一次，与资料答案 dowhile 一致。"
+   }
+  },
+  {
+   "questionId": "self:x:5:习题集:填空题:3",
+   "sourceHash": "61ca4b2574b7cc4ed4f4a306ec9f8f9953c716a88f754b99485130a27d06813e",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 continue。\n\ncontinue 的作用对象只能是循环，它必须写在 while、do-while、for 的循环体内（嵌套其中的 if、switch 里也算），写在循环外编译器直接报错。\n\n```c\nwhile (n-- > 0) {\n    if (a[n] < 0) continue;   /* 只能在循环体内 */\n    sum += a[n];\n}\n```\n\n为什么不是 break：break 既能用在循环里，也能用在 switch 的 case 里，“只能在循环体中出现”对它不成立。return 可以出现在任何函数体内，goto 也不限于循环，被绑死在循环体里的只有 continue。",
+   "steps": [
+    "continue 的语义决定它只能作用于循环。",
+    "写在循环外是语法错误，编译器会报错。",
+    "break 还能进 switch，所以不满足“只能在循环体”。"
+   ],
+   "takeaway": "continue 只能写在循环体内；break 还可用于 switch，故不唯一。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "continue",
+    "reason": "continue 的作用对象仅为循环，语法上只能出现在循环体内，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:5:习题集:填空题:4",
+   "sourceHash": "19676352c561d94e1abee2cf5e9ca5c8d68714b3f9f3853e282457067450ec78",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 for 语句。\n\nfor 的三个表达式都可缺省，但两个分号必须保留：for(;;) 表示初值、条件、增量全空，条件缺省按“恒真”处理，形成无限循环，只能靠 break、return 或 goto 退出。\n\n```c\nfor (;;) {                       /* 条件缺省，恒真 */\n    if ((c = getchar()) == EOF) break;\n}\n\nfor (i = 0; ; i++) {             /* 只缺条件 */\n    if (i > 100) break;\n}\n```\n\nwhile 与 do-while 括号里必须给条件表达式，不能省；while(1) 是写了个恒真条件，不等于缺省。这就是本题答案是 for 的原因。",
+   "steps": [
+    "for(;;) 合法，三个表达式均可省略。",
+    "条件缺省视为恒真，靠 break 退出。",
+    "while、do-while 的条件不能省略。"
+   ],
+   "takeaway": "循环条件可缺省的只有 for：for(;;) 表示恒真，while 的条件必须写。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "for",
+    "reason": "for 的三个表达式都可省略、条件缺省视为恒真，while 与 do-while 的条件不可省，与资料答案 for 一致。"
+   }
+  },
+  {
+   "questionId": "self:x:5:习题集:填空题:5",
+   "sourceHash": "974c0be89a0d8f0e730479ba84dd5789bba9c72b2a757f0a8263390b68f10b6d",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n输出 5,10。\n\n```c\nint k, x;\nfor (k = 0, x = 0; k <= 9 && x != 10; k++)\n    x = x + 2;\nprintf(\"%d,%d\", k, x);\n```\n\n逗号表达式同时给 k、x 置 0。每轮循环体让 x 加 2，循环头再让 k 加 1，条件是 k<=9 且 x!=10。\n\n推演：k=0,x=0 进入 → x=2,k=1；k=1,x=2 → x=4,k=2；k=2,x=4 → x=6,k=3；k=3,x=6 → x=8,k=4；k=4,x=8 → x=10,k=5。此时 k=5<=9 仍成立，但 x=10!=10 为假，&& 整体为假，循环终止。\n\n打印 k=5、x=10，即 5,10。若条件只写 k<=9，x 会一路加下去，结果就不一样了。",
+   "steps": [
+    "k=x=0 起步，每轮 x 加 2、k 加 1。",
+    "第 5 轮结束时 x=10、k=5。",
+    "下次判断 x!=10 为假，&& 不成立退出，打印 5,10。"
+   ],
+   "takeaway": "x 每轮加 2，加到 10 时 k 正好是 5，输出 5,10。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "5,10",
+    "reason": "循环执行 5 轮后 x=10、k=5，再判断 x!=10 为假而退出，打印 5,10，与资料答案一致。"
+   }
+  }
+ ]
+}

@@ -1,0 +1,489 @@
+{
+ "schemaVersion": 1,
+ "author": "DeepSeek",
+ "lessons": [
+  {
+   "questionId": "self:x:9:习题集:填空题:12",
+   "sourceHash": "6eab8dde0131c15e30693e36b2ff3ca483ffba609bca5e24ac0fa18e6eee8e5f",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n空里要补的是结构体的成员列表，两个域正好对应题干说的两个指针域。\n\n```c\nstruct link\n{ char *data;          /* 指向字符串的指针域 */\n  struct link *next;   /* 指向结点的指针域 */\n} *head;               /* 定义结构体的同时声明指针变量 head */\n```\n\n为什么这么填：\n- data 指向字符串，类型是 char *，不能只写 char，char 只装得下一个字符。\n- next 指向\"同一种结点\"，结点的类型名是 struct link，指针就写 struct link *。link 只是结构体标签，没有 typedef 时不能单独当类型名用，写成 link * 会报错。\n- 也不能少星号写成 struct link next：结构体里塞一个自己的完整副本，大小算不出来，编译器直接拒绝。\n\n`}*head;` 不是填空内容，它表示在定义类型的同时声明一个指向该类型的指针变量 head，常用来做链表头。资料答案被 OCR 挤成一行 char*datastructlink*next;，还原后就是上面两行。",
+   "steps": [
+    "先看题干给的两个域：data 存字符串地址，next 存下一个结点的地址，所以都得是指针。",
+    "data 写 char *，因为字符串在 C 里就是字符数组的首地址。",
+    "next 写 struct link *，结构体内部引用自己必须用指针，且要带 struct 关键字。",
+    "最后确认 *head 只是顺带声明的链表头指针，不占填空位置。"
+   ],
+   "takeaway": "结构体里引用自身只能用指针：struct 标签 *next，用完整副本会算不出大小。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "char *data; struct link *next;",
+    "reason": "资料答案 char*datastructlink*next; 是 OCR 压成一行的 char *data; struct link *next;，两个域的类型与本题推导一致，仅分隔符丢失。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:13",
+   "sourceHash": "553e77f9479b3fed295b3227993659352c13d962c09cbd601e9a0d40cdafa70d",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n链表是 x → y → z 三个结点连在一起，删掉中间的 y，只要让 x 的 link 直接指向 z，把 y 从链上跳过。\n\n```c\nx->link = z;   /* 删除结点 y 的赋值语句 */\n```\n\n为什么是这一句：\n- 单链表只能顺着 link 走，唯一\"指着 y\"的结点是它的前驱 x，改 x->link 就等于把 y 摘下来。\n- z 不用动：z 的 link 仍然指向 y 后面那个结点，删掉 y 后这个关系照样成立。\n- 要真正回收内存，在这句之后补一条 free(y)；反过来先 free(y) 再去读 y->link 就是访问已释放的内存。\n- 如果删的是首结点（没有前驱），才需要 head = head->link，本题 x 是前驱，用不上。\n\n语句是赋值语句，分号不能少。",
+   "steps": [
+    "认清结构：x 是前驱、z 是后继，y 夹在中间。",
+    "改前驱指针：x->link 从 y 改成 z，y 就脱离链表。",
+    "补一句 free(y) 才算真正释放，且必须放在改指针之后。"
+   ],
+   "takeaway": "删单链表结点只改前驱的 link 指向后继，再 free 该结点。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "x->link=z;",
+    "reason": "资料答案为 x->link=z;，与按 x→y→z 结构推导的删除语句完全一致，删除中间结点只需改前驱指针。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:14",
+   "sourceHash": "64fb2ab14705d36d7a1dda35d4fbf5d93b9ec2e501af46b20f37d45a1ce97d92",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n题面代码被 OCR 破坏，先还原成可读的样子：\n\n```c\nstruct node m[5], *p = m, *q = m + 4;\nint i = 0;\nwhile (p != q) {\n    p->k = ++i; p++;\n    q->k = i++; q--;\n}\nq->k = i;\nfor (i = 0; i < 5; i++) printf(\"%d\", m[i].k);\n```\n\np 从 m[0] 往右走，q 从 m[4] 往左走，每轮各填一个数，然后向中间靠：\n- 第 1 轮：m[0].k=++i=1（i 变 1）；m[4].k=i++=1（i 变 2）。p 到 m[1]，q 到 m[3]。\n- 第 2 轮：m[1].k=++i=3（i 变 3）；m[3].k=i++=3（i 变 4）。p 到 m[2]，q 也到 m[2]。\n- 此时 p==q，循环结束，中间元素 m[2] 在循环里从未被写过。\n- 循环后执行 q->k=i，即 m[2].k=4。\n\n五个 k 依次是 1 3 4 3 1，printf 中间没有分隔符，所以屏幕上是 13431。\n\n两个易错点：++i 是先加再用，i++ 是先取值再自增，正因为一个 ++ 在前一个在后，两端才拿到不同的数；另外循环条件是 p!=q 而不是 p<q，指针相等那轮直接不进循环。",
+   "steps": [
+    "先把 OCR 打乱的声明还原：struct node m[5], *p=m, *q=m+4;。",
+    "逐轮推演两端赋值：第 1 轮得 1 和 1（i 变成 2），第 2 轮得 3 和 3（i 变成 4）。",
+    "两轮后 p 与 q 都指向 m[2]，循环退出，中间元素靠循环后的 q->k=i 补成 4。",
+    "printf 无分隔符，五个值 1 3 4 3 1 连成 13431。"
+   ],
+   "takeaway": "双向填充：两端各写 ++i 与 i++，指针相遇即停，最后补中间元素得 13431。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "13431",
+    "reason": "按还原后的程序逐轮推演，m[0..4].k 为 1、3、4、3、1，无分隔输出 13431，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:15",
+   "sourceHash": "21a40547f890ea1598dc8fe1b221ad0ab3369a91c702fc023613201986ee0f65",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n空里填 &stu.sno，整句是 scanf(\"%d\", &stu.sno);\n\n```c\nstruct students { int sno; char sname[10]; } stu;\nscanf(\"%d\", &stu.sno);      /* 空里就是 &stu.sno */\n```\n\n为什么必须这么写：\n- %d 要求对应的实参是 int 变量的地址，scanf 需要地址才能把读到的整数写回去，所以成员前面要加取地址符 &。\n- sno 是 int 成员，&stu.sno 的类型正是 int *，跟 %d 严格对应。\n- stu 是普通结构变量，访问成员用点运算符；只有 stu 本身是指针时才写 stu->sno，取地址写成 &stu->sno。\n- 只写 stu.sno 是最常见的错法：scanf 会把这个未初始化的值当地址用，往随机位置写数据，轻则数据不对，重则崩溃。\n\n顺带一提，题面里 snameC10] 是 sname[10] 的 OCR，char 数组存字符串，读名字要用 scanf(\"%s\", stu.sname)，数组名本身就是地址，不加 &。",
+   "steps": [
+    "看清 %d 要的是地址，不是值。",
+    "sno 是 int 成员，取地址 &stu.sno 得到 int *，与 %d 匹配。",
+    "stu 是变量不是指针，成员用 . 访问；对照 %s 读 sname 时数组名已是指针，不加 &。"
+   ],
+   "takeaway": "scanf 的 %d 要地址：结构变量用 &stu.成员，结构指针用 &p->成员。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "&stu.sno",
+    "reason": "资料答案为 &stu.sno，与按 %d 需 int 地址、stu 为结构变量（用点运算符）推导的实参一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:16",
+   "sourceHash": "2079d1855204df1abf8fce38647b83e767e569a6c0a4fabfc73375f2d27b25ef",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 enum。\n\n```c\nenum weekday { MON, TUE, WED };   /* 定义枚举类型 */\nenum weekday today = TUE;         /* 用 enum 加类型名声明变量 */\n```\n\n要点：\n- enum 是 C 的关键字，负责定义枚举类型；C 区分大小写，写成 Enum、ENUM 都不认。\n- 枚举本质上是 int 的一组具名常量：没显式赋值时从 0 开始依次加 1，所以 MON=0、TUE=1、WED=2。\n- 枚举常量是标识符而不是字符串，printf 用 %d 输出得到编号；想在屏幕上显示名字，得自己查表或用 switch。\n- 嫌每次都要写 enum 麻烦，可以用 typedef：typedef enum { RED, GREEN } Color; 之后直接写 Color c;。\n\n注意枚举只是让代码可读，编译器不会检查赋进去的值是否在列表里，c = 99; 也照样通过。",
+   "steps": [
+    "回忆关键字表：与结构体 struct、联合体 union 并列的是 enum。",
+    "写出定义形式 enum 类型名 { 常量列表 };，再用 enum 类型名 变量; 声明变量。",
+    "记住枚举常量默认从 0 递增，可读性来自名字而不是字符串。"
+   ],
+   "takeaway": "定义枚举用关键字 enum，枚举常量默认从 0 开始依次加 1。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "enum",
+    "reason": "资料答案为 enum，与 C 语言中定义枚举类型所用关键字一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:17",
+   "sourceHash": "c3281b9d65206b94a9fbcaf2661f0311695937794946bb893375a90c6f6e77e8",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 4（单位是字节）。\n\n```c\nunion B { float b1; float b2; };            /* 题面 unionB 是 union B 的 OCR */\nprintf(\"%u\", (unsigned)sizeof(union B));    /* 输出 4 */\n```\n\n理由：\n- 联合体的所有成员共用同一块存储，同一时刻只有一个成员是\"有效\"的，写 b1 就会冲掉 b2。\n- 联合体的大小等于最大成员的大小，再按最严对齐要求向上取整，绝不是各成员相加。\n- 两个成员都是 float，float 一般占 4 字节，所以 sizeof 得 4。\n- 换成 struct { float b1; float b2; } 就是 8：结构体成员各占各的空间。union 与 struct 的这个差别是必考点。\n- 如果写成 union { int a; double b; }，大小就是 8，因为 double 更大且对齐更严。",
+   "steps": [
+    "先分清 union 与 struct：前者成员共用存储，后者成员独立存储。",
+    "共用存储时总大小取最大成员，float 为 4 字节，故得 4。",
+    "对比记忆：同样的两个 float 放进 struct 就是 8 字节。"
+   ],
+   "takeaway": "union 的大小取最大成员（并按对齐取整），不是各成员之和。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "4",
+    "reason": "资料答案为 4，与联合体大小取最大成员、float 占 4 字节的规则一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:18",
+   "sourceHash": "d29a3c0aea535823dd251b45eb48af649b09735cdeb03f62660235eaa553c5a3",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n枚举常量按\"没写值就比前一个大 1\"往下排：\n\n```c\nenum ani { mouse, cat, dog, rabbit = 0, sheep, cow = 6, tiger };\n/* mouse=0  cat=1  dog=2  rabbit=0  sheep=1  cow=6  tiger=7 */\n```\n\n- 开头没有赋值，第一个常量从 0 起：mouse=0，cat=1，dog=2。\n- 碰到 rabbit=0，显式赋值把递增打断，rabbit 回到 0，紧跟其后的 sheep 就从 0 加 1 变成 1。\n- 再碰 cow=6，同样打断递增，tiger 顺延成 7。\n- 代入表达式：cat + sheep + cow = 1 + 1 + 6 = 8，用 %d 输出就是 8。\n\n注意两点：不同枚举常量取相同的值完全合法，rabbit 和 mouse 都等于 0 不会报错；枚举常量在表达式里就是 int，直接参与加法。题面 printf(\"d\",…) 是 \"%d\" 的 OCR，少了百分号。",
+   "steps": [
+    "先给每个常量编号：0、1、2、0、1、6、7。",
+    "关键在 rabbit=0 与 cow=6 两处显式赋值会重置递增。",
+    "代入 cat+sheep+cow 得 1+1+6=8。"
+   ],
+   "takeaway": "枚举里显式赋值会重置后续常量的递增起点，答案是 8。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "8",
+    "reason": "枚举常量为 0、1、2、0、1、6、7，cat+sheep+cow=1+1+6=8，与资料答案一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:19",
+   "sourceHash": "cd36229db018a321d9432cba4396292a1e2c3b6b98fb5cd0b46d8a8ebacceef3",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 1。\n\n```c\nenum ABC { A, B, C };       /* A=0, B=1, C=2 */\nprintf(\"%d\\n\", A + 1);      /* 输出 1 */\n```\n\n理由：\n- 枚举常量默认从 0 开始递增，第一个 A 就是 0。\n- 枚举常量在表达式里按 int 参与运算，A+1 就是普通的整数加法 0+1=1，跟枚举本身没关系。\n- 得到的结果是 int 类型的 1，不是枚举类型；C 里枚举变量也可以存列表之外的值，编译器不拦。\n- 如果写成 A+2 会得 2、写 B+1 会得 2，做题时先编号再代入最稳。\n\n题面里的 printf(\"d'n\",…) 是 printf(\"%d\\n\",…) 的 OCR，\"d\" 前面掉了 %，'n 是反斜杠 n 被识别成了单引号。\n\n顺便记住：C 语言里枚举常量不能重名，同一作用域内 A 被用过后别的枚举不能再叫 A。",
+   "steps": [
+    "先编号：A=0、B=1、C=2。",
+    "枚举常量当 int 用，A+1 即 0+1=1。",
+    "注意 printf 格式串被 OCR 破坏成 \"d\\n\"，实际是 %d\\n。"
+   ],
+   "takeaway": "枚举常量默认从 0 起编号，A+1 就是 0+1=1。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "1",
+    "reason": "资料答案为 1，与枚举默认从 0 编号、A 为 0 的推导一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:20",
+   "sourceHash": "fc3fe144cf3c47e33fa0a505536c7b28f0a0c7d843839b50f92abd295ccb1fd1",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 typedef int NUM[10];（资料答案里的 NUMC10] 是 NUM[10] 的 OCR）\n\n```c\ntypedef int NUM[10];     /* NUM 成为\"含 10 个 int 的数组\"这个类型名 */\nNUM a;                   /* 等价于 int a[10]; */\nNUM b, c;                /* b、c 也都是长度为 10 的 int 数组 */\n```\n\n写法的通用套路：\n- 先按需要写一条普通声明，例如 int NUM[10];，这条声明里 NUM 是变量名。\n- 在最前面加上 typedef，NUM 的身份就从\"变量\"变成\"类型名\"，其余部分一个字都不动。\n- 所以数组维度留在名字后面写成 [10]，不能搬到前面去。\n- 对比 typedef int *NUM; 那是\"整型指针\"别名，NUM a; 得到的是指针而不是数组，两种写法只差一个方括号，考试常拿来做干扰项。\n- typedef 定义的类型不占存储，只是给已有类型起名字。",
+   "steps": [
+    "先写出普通数组声明 int NUM[10];，确认维度在名字后面。",
+    "在最前面加 typedef，NUM 变成类型名。",
+    "再用 NUM a; 验证：等价于 int a[10];，说明填写正确。"
+   ],
+   "takeaway": "typedef 加在普通声明最前面，数组维度要留在名字后面。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "typedef int NUM[10];",
+    "reason": "资料答案 typedefintNUMC10]; 是 OCR 丢失空格并把方括号识别成 C 的结果，还原即 typedef int NUM[10];，与推导一致。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:21",
+   "sourceHash": "041d755a8f43959796d1af0689b862c07b7a6fa9a4d2e2e07cb51aff71c366f1",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n题干已经用一条定义语句把 struct DATE 定义好了，这里只差\"定义变量并初始化\"：\n\n```c\nstruct DATE dd = { 2018, 5, 18 };\n```\n\n- 变量名 dd 写在类型名后面，初始化列表按成员声明顺序一一对应：year=2018、month=5、day=18。\n- 三个成员都是 int，写 05 也可以，但 C 里以 0 开头的整数常量是八进制，05 的值仍是 5，所以资料答案写 5 没错。\n- 资料答案给的是 struct DATE{int year;int month;int day;}dd={2018,5,18};，把整个类型定义又抄了一遍。题干已经定义过 struct DATE，同一作用域内再定义一次属于重定义，编译器会报 redefinition of 'struct DATE'，所以这条答案和题干\"已有定义语句\"矛盾。\n- 只有当题干从没给过类型定义时，才需要把定义和变量写在一条语句里；本题不能这样写。\n\n记忆：类型定义一次就够，之后定义变量只需 struct 标签 变量名 = { 初值 }。",
+   "steps": [
+    "题干已给出 struct DATE 的完整定义，所以只需定义变量。",
+    "按成员顺序写初始化列表：{2018, 5, 18}。",
+    "注意别跟着资料答案重复写类型定义，同一作用域重定义会编译报错。"
+   ],
+   "takeaway": "类型已定义过就只写变量声明，初始化列表按成员顺序对应。",
+   "answerReview": {
+    "status": "conflict",
+    "answer": "struct DATE dd = {2018, 5, 18};",
+    "reason": "资料答案把 struct DATE 的成员定义又抄了一遍，与题干\"已有定义语句\"冲突：同作用域重定义 struct DATE 属约束违例，编译报错；本题只需 struct DATE dd={2018,5,18};。"
+   }
+  },
+  {
+   "questionId": "self:x:9:习题集:填空题:22",
+   "sourceHash": "7b7b89ac71a921e6275fbe61b25b4f61d1d0bfe1efc0e62a285232dee4ce5832",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 typedef char *STR;（资料答案 typedefchar*STR; 是 OCR 挤成一行）\n\n```c\ntypedef char *STR;    /* STR 是\"字符指针\"类型别名 */\nSTR s;                /* 等价于 char *s; */\n```\n\n要点：\n- typedef 不产生新类型，只是给已有类型起别名，编译器把它当同一种类型看待。\n- 别名里带星号时，STR 整体就是指针类型，所以 STR a, b; 里 a、b 都是 char *；而 char *a, b; 只有 a 是指针、b 是普通 char。\n- 这正是 typedef 比 #define 强的地方：#define STR char * 只是文本替换，STR a, b; 会展开成 char *a, b;，b 就不是指针了。\n- typedef 语句以分号结尾，通常写在源文件开头、所有函数之外；宏定义则不加分号。\n\n判断是否写对：把别名当类型用在定义语句里，能还原成题目要求的 char *s 就对了。",
+   "steps": [
+    "题目要求 STR s 等价于 char *s，说明别名代表\"字符指针\"整体。",
+    "写成 typedef char *STR;，星号跟着类型走，不能写成 typedef char (*STR);。",
+    "验证 STR a, b; 两个都是 char *，这正是 typedef 优于 #define 的地方。"
+   ],
+   "takeaway": "typedef char *STR; 让 STR 整体成为字符指针类型，声明多个变量都安全。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "typedef char *STR;",
+    "reason": "资料答案 typedefchar*STR; 是 OCR 丢失空格的结果，还原即 typedef char *STR;，与 STR s 等价 char *s 的要求一致。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:1",
+   "sourceHash": "c69e53472a5878ef5e7413aa47d8d4659dff8e0fb08510550ab00e35fdf5d1e6",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 stdio.h，完整写法是 #include <stdio.h>。\n\n- FILE 不是 C 的关键字，而是 stdio.h 里用 typedef 定义的结构体类型，内部装着缓冲区指针、读写位置、错误标志等信息，各编译器实现不同。\n- 我们只通过 FILE *fp 使用它，从不去碰内部成员，这正是封装的好处：换平台不用改代码。\n- 除了 FILE，fopen、fclose、fread、fwrite、fprintf、fscanf、getchar、printf、EOF、NULL 也都在 stdio.h 里声明，所以文件操作程序第一行基本都是它。\n- 拼写要准：stdio 是 standard input/output 的缩写，写成 studio.h 是初学者最经典的错。\n\n少这个头文件时，编译器不认识 FILE，会直接报 unknown type name 'FILE'。",
+   "steps": [
+    "FILE 是标准库用 typedef 定义的结构体类型，不是关键字。",
+    "它随标准输入输出函数一起声明在 stdio.h 中。",
+    "所以文件程序必须 #include <stdio.h>，尖括号表示到系统目录找。"
+   ],
+   "takeaway": "FILE 定义在 stdio.h 里，文件操作程序都要先包含它。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "stdio.h",
+    "reason": "资料答案为 stdio.h，与 FILE 及 fopen/fread 等文件函数声明所在头文件一致。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:2",
+   "sourceHash": "b6f9fd40229c94045f0f228fafb33072e6d4f61b8682919b7e2624b82fb428f8",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 \"a+\"，即 fp = fopen(\"e:\\\\data\\\\abc.txt\", \"a+\");\n\n- \"a\" 是 append：只写，新数据一律追加到文件末尾，原有内容保留。\n- \"a+\" 在追加的基础上增加读权限：可以先把文件读完，再往后写，正好对应\"先读出数据、后追加写入\"。\n- 对比 \"r+\"：可读可写，但写从文件开头开始，会覆盖原有数据，不符合\"在原有数据之后添加\"。\n- 对比 \"w\"、\"w+\"：打开就先截断清空，原有数据全没了，直接排除。\n- 本题文件已存在；\"a\" 和 \"a+\" 在文件不存在时会新建，而 \"r\"、\"r+\" 要求文件必须存在。\n\n题面路径里的目录分隔符被 OCR 成了两个单引号，C 字符串中反斜杠要转义，实际应写成 \"e:\\\\data\\\\abc.txt\"。",
+   "steps": [
+    "拆需求：要能读、要能追加写，两个条件同时满足的只有 \"a+\"。",
+    "排除 \"r+\"（写会覆盖开头）和 \"w\"/\"w+\"（打开即清空）。",
+    "落到代码时别忘了路径里的反斜杠要写成两个。"
+   ],
+   "takeaway": "能读又能追加写用 \"a+\"；\"r+\" 会覆盖开头，\"w\" 会清空文件。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "\"a+\"",
+    "reason": "资料答案 \"a+\" 与\"先读、后追加写、保留原数据\"的要求一致；\"r+\" 会覆盖开头内容，\"w\"/\"w+\" 会清空文件。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:3",
+   "sourceHash": "78f6727ce8fed92ba2d73e262ff911ecbd391f1e132421fd1a80793bb96b0366",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 -1。\n\n- EOF 是 stdio.h 里定义的宏，通常写作 #define EOF (-1)，是个 int 常量。\n- 它不是文件里的某个字符，而是读函数（fgetc、fscanf 等）读到文件末尾或出错时返回的结束标志。\n- 用 -1 做标记很安全：字符的取值在 0~255 之间，不可能等于 -1，不会和真实字符撞车。\n- 判断写法：while ((ch = fgetc(fp)) != EOF) …；注意 ch 必须声明成 int，声明成 char 时 0xFF 这类字节可能被解释成 -1，导致提前结束。\n- 要区分\"读到末尾\"和\"读出错\"，可以用 feof(fp) 和 ferror(fp) 再确认一下。",
+   "steps": [
+    "EOF 是宏，不是字符，值是 -1。",
+    "读函数在文件末尾或出错时返回它，所以判断要用 ch == EOF。",
+    "变量必须用 int 接收，用 char 会被 0xFF 误判。"
+   ],
+   "takeaway": "EOF 是值为 -1 的宏，用来表示读取结束，接收变量必须是 int。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "-1",
+    "reason": "资料答案为 -1，与 stdio.h 中 EOF 常被定义为 (-1) 的事实一致。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:4",
+   "sourceHash": "245345509bd9142b6037fac035abeeff45c2f7d395a709c31a99524bf83d7e10",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n两空依次填：ASCII 文件（文本文件）和二进制文件。\n\n- 按数据的存储形式分类就是这么两类，划分依据是\"数据在文件里以什么形式存在\"。\n- 文本文件把每个数据按字符编码存成可读字符：整数 12345 用 fprintf 写进去占 5 个字节 '1''2''3''4''5'。\n- 二进制文件按内存里的字节原样存：同样的 12345 用 fwrite 写只占 sizeof(int) 个字节，记事本打开是乱码。\n- 文本文件人眼可读、跨平台方便，但要转换、速度慢、浮点可能丢精度；二进制文件紧凑、快、精度不丢，但不可直接阅读。\n- 打开方式和读写函数都要配套：文本模式 \"r\"/\"w\" 配 fprintf/fscanf，二进制模式 \"rb\"/\"wb\" 配 fwrite/fread。",
+   "steps": [
+    "按存储形式分类只有两种：文本（ASCII）与二进制。",
+    "文本按字符编码存，二进制按内存字节原样存。",
+    "记住配套关系：fprintf/fscanf 对文本，fwrite/fread 对二进制。"
+   ],
+   "takeaway": "文件按存储形式分 ASCII 文件（文本）和二进制文件，读写函数与打开模式都要配套。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "ASCII 文件 二进制文件",
+    "reason": "资料答案给的 ASCII 文件与二进制文件，正是按数据存储形式划分的两类，与教材定义一致。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:5",
+   "sourceHash": "265fdf81abf35a915f7c0f5fade6c72de28c249daaa8012186c3d8720392c6fa",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 \"a+\"。\n\n- 题目两个要求：能读出文件里的全部数据（要读权限），新数据接在原有数据之后（要追加）。\n- \"a+\" 正好两者都满足：读指针可以自由移动，写永远发生在文件末尾。\n- \"r+\" 能读也能写，但写从文件头开始，会把原来的内容覆盖掉，不满足\"之后添加\"。\n- \"w+\" 一打开就把文件截断清空，原有数据直接没了，排除。\n- \"a\" 只有写权限，读不出来，也不符合。\n\n补充一个易踩的点：\"a+\" 打开时读位置在文件开头，但如果中途写过数据，文件位置会移到末尾，想回头读要先 rewind(fp) 或 fseek(fp, 0, SEEK_SET)。",
+   "steps": [
+    "把要求拆成两条：能读 + 追加写。",
+    "逐项排除：\"w+\" 清空、\"a\" 不能读、\"r+\" 覆盖开头。",
+    "结论 \"a+\"，并注意写过后读之前要 rewind。"
+   ],
+   "takeaway": "\"a+\" 同时给读和追加写，是\"读完再往后加\"的唯一正确模式。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "\"a+\"",
+    "reason": "资料答案 \"a+\" 与\"读出全部数据并在原数据之后添加\"的要求一致，\"r+\" 会覆盖文件开头内容。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:6",
+   "sourceHash": "4a33d9ff73b5b4b0cca99543f6d16031b669fe83076db07070849747719198b2",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 \"r+\"（调用写成 fopen(\"abc\", \"r+\")，引号不要漏）。\n\n- 题目两个条件：文件已经存在、既能读又能用新数据覆盖原来的内容。\n- \"r+\" 以读写方式打开已存在的文件，位置在文件开头，读和写都从当前位置进行，写入会覆盖原有字节，完全符合。\n- \"w\"、\"w+\" 打开时先把文件长度截断为 0，虽然能写，但\"读出原来的内容\"就做不到了。\n- \"a\"、\"a+\" 的写只能追加到末尾，无法覆盖中间的数据。\n- \"r\" 只有读权限，不能写。\n\n所以前提\"已经存在\"很关键：文件不存在时 \"r+\" 直接返回 NULL，而 \"w+\" 会新建一个空文件，两者的差别正在这里。\n\n记忆口诀：r 是读、w 是清空重写、a 是追加，加号表示\"顺带能读\"。",
+   "steps": [
+    "条件一：文件已存在且能读；条件二：写要能覆盖原内容。",
+    "\"r+\" 位置在开头、读写都允许，写入即覆盖，符合两条。",
+    "\"w\"/\"w+\" 会截断清空，\"a\"/\"a+\" 只能追加，都被排除。"
+   ],
+   "takeaway": "要能读又要覆盖原数据选 \"r+\"，\"w\" 系列会先清空文件。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "\"r+\"",
+    "reason": "资料答案 \"r+\" 与\"已存在文件、可读且可用新数据覆盖原数据\"的要求一致，\"w\"/\"w+\" 会截断文件。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:7",
+   "sourceHash": "ec2d200ab72142c209f4df49b96065fa2df227e19ec20eaeefab1d3fa7c65fb5",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 fread。\n\n```c\nFILE *fp = fopen(\"abc.dat\", \"rb\");\nfloat y;\nfread(&y, sizeof(float), 1, fp);   /* 读出 25.0 */\nfclose(fp);\n```\n\n理由：\n- 原程序用 fwrite(&x, sizeof(float), 1, fp) 把 float 的 4 个字节原样写入，文件里没有可读的字符形式。\n- 谁写谁读：fwrite 配 fread，fprintf 配 fscanf。拿 fscanf 去读这种字节流读不出 25.0。\n- fread 的参数顺序是：缓冲区地址、单个元素字节数、元素个数、文件指针，返回值是实际读到的元素个数。\n- 打开方式也要配套：写用的是 \"wb\"，读就得用 \"rb\"；文本模式下换行符可能被转换，二进制数据会被破坏。\n\n一般还要判断返回值：if (fread(&y, sizeof(float), 1, fp) != 1) 说明没读成功，可能文件为空或路径不对。",
+   "steps": [
+    "看建立文件的代码：fwrite 按二进制写 float，文件里是 4 个原始字节。",
+    "读写函数必须配对，fwrite 对应 fread。",
+    "参数依次为 &变量、sizeof(float)、1、fp，并用 \"rb\" 打开。"
+   ],
+   "takeaway": "二进制写用 fwrite，读就必须用 fread，模式也要用 \"rb\"。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "fread",
+    "reason": "资料答案为 fread，与建立文件时使用的 fwrite 二进制写操作配对，符合读写函数对应的规则。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:8",
+   "sourceHash": "6260348e7b614c8ebfb53fc0d6af01993f6399e39caac4747bf4d2d9b12bc1e3",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n返回值是 NULL（空指针）。\n\n- fopen 打开失败时返回空指针 NULL，不会中止程序，也不通过返回值返回错误码。\n- 本题用 \"r\" 方式，要求文件必须已存在；b.dat 不存在，所以必然打开失败。\n- 正确写法必须先判断再用：\n```c\nFILE *fp = fopen(\"e:\\\\b.dat\", \"r\");\nif (fp == NULL) { perror(\"e:\\\\b.dat\"); return 1; }\n```\n- 失败原因除了文件不存在，还可能是路径写错、没有访问权限、文件被占用；具体原因用 perror 打印更直观。\n- 拿到 NULL 后继续 fscanf 或 fclose，就是空指针解引用，程序会直接崩溃，这是初学者最常见的崩溃来源之一。",
+   "steps": [
+    "回忆 fopen 的约定：成功返回文件指针，失败返回 NULL。",
+    "\"r\" 模式要求文件已存在，b.dat 不存在必然失败。",
+    "所以返回值是 NULL，且后续必须判空再使用。"
+   ],
+   "takeaway": "fopen 失败一律返回 NULL，用之前必须 if (fp == NULL) 判空。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "NULL",
+    "reason": "资料答案为 NULL，与 fopen 在 \"r\" 模式下文件不存在时返回空指针的规定一致。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:9",
+   "sourceHash": "8ae8da188e8e4a75947a923da884aefecddcfbd0458a4636e7955b940f53c9b1",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nm、n 已声明时，完整语句是：\n\n```c\nfscanf(fp, \"%d%d\", &m, &n);\n```\n\n- fun 里用 fprintf(fp,\"%d%d\", x, y) 把 12 和 345 连着写进文件，文件内容其实是字符序列 12345，两个数之间一个分隔符都没有。\n- 读的时候格式串要和写的时候保持一致，实参用变量地址 &m、&n，这是 fscanf 的基本要求。\n- 但这里有个真问题：%d 会一直读到非数字为止，第一个 %d 就把 12345 整个读走，第二个 %d 已经到文件末尾，fscanf 只返回 1，n 保持原值。也就是说按 \"%d%d\" 写进去的数据根本读不回两个数。\n- 要让读写都成立，写的时候就得加分隔：fprintf(fp, \"%d %d\", x, y)，读时写 fscanf(fp, \"%d %d\", &m, &n)。\n- 另外题干 main 里定义的是 int x, y; 最后却要求存到 m、n，两处变量名不一致，这里按 m、n 讲。",
+   "steps": [
+    "先确认写文件用的是 fprintf 加 \"%d%d\"，读就用 fscanf，两者必须配对。",
+    "格式串与写时一致，实参取地址 &m、&n。",
+    "指出隐患：无分隔写入 12345 后，读回只能得到一个数，需在格式串里加空格。",
+    "题干 main 中定义 x、y 却要求存入 m、n，变量名不一致。"
+   ],
+   "takeaway": "“谁写谁读、格式串一致”：fprintf 配 fscanf，且写入时要留分隔符。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "fscanf(fp, \"%d%d\", &m, &n);",
+    "reason": "资料答案只给了函数名 fscanf，与题干\"写出完整语句\"的要求不符；且 fun 用 \"%d%d\" 无分隔写入 12345，按同一格式读回只能得到 12345 一个数，读不出两个数据；题干变量名 x、y 与 m、n 也不一致。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:10",
+   "sourceHash": "91ded5db279fada84d676ce71adbd98268f9590e0654f4af803611096011c382",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 FILE *fp;，即先定义文件指针变量。\n\n- fopen 的返回值类型是 FILE *，必须赋给一个 FILE * 类型的变量；光有 #include <stdio.h> 只解决了 FILE 类型认不认识的问题，变量本身还要声明。\n- 也可以在定义时直接初始化：FILE *fp = fopen(\"asc.txt\", \"r\");\n- 不能只写 FILE fp;：那样 fp 是结构体对象而不是指针，fp = fopen(...) 等于给整个结构体赋值，类型不匹配，编译报错。\n- 工程写法是先判空再使用：\n```c\nFILE *fp;\nif ((fp = fopen(\"asc.txt\", \"r\")) == NULL) { perror(\"asc.txt\"); return 1; }\n```\n- 用完记得 fclose(fp) 关闭并刷新缓冲区，否则可能丢数据、占着文件句柄。\n\n一句话：文件操作三件套是 定义 FILE * 变量、fopen 打开、fclose 关闭。",
+   "steps": [
+    "fopen 返回 FILE *，所以要先有 FILE * 类型的变量来接。",
+    "声明 FILE *fp; 之后 fp=fopen(...) 类型才匹配。",
+    "补充判断：正常写法应把 fopen 放进 if 里判空，用完 fclose。"
+   ],
+   "takeaway": "fopen 返回 FILE *，必须先有 FILE * 变量，写成 FILE fp 是类型不匹配。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "FILE *fp;",
+    "reason": "资料答案 FILE *fp; 与\"fopen 返回值需赋给 FILE * 变量\"的要求一致，也是该语句能正常编译的前提。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:11",
+   "sourceHash": "a8bf0897905619a88020314418b6bda7950a17942b174241c581bd25473ba321",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n输出 0,-1。\n\n```c\nprintf(\"%d,%d\", NULL, EOF);    /* 常见实现下输出 0,-1 */\n```\n\n- EOF 是 stdio.h 里的宏，值是 -1，%d 打印出来就是 -1。\n- NULL 是空指针常量，值为 0（glibc 里定义为 ((void*)0)），按整数看就是 0，所以前半段打印 0。\n- 格式串两个 %d 中间有一个逗号，输出中间也就带一个逗号，最终是 0,-1。\n- 一个技术细节：若 NULL 被定义成 ((void*)0)，把 void* 实参交给 %d 严格说属于格式与实参类型不匹配，标准没规定输出结果；但空指针的位模式是全 0，主流编译器在 32/64 位下都打印 0。\n- 想避免这种写法就用 %p 打印指针，或写成 (int)NULL 显式转换。\n\n这题考的就是记住两个符号常量的数值：NULL 为 0，EOF 为 -1。",
+   "steps": [
+    "回忆两个宏的值：NULL 是空指针常量 0，EOF 是 -1。",
+    "格式串中间有逗号，输出里也就有逗号，串成 0,-1。",
+    "注意严格按标准把 void* 交给 %d 是格式不匹配，答案依赖实现。"
+   ],
+   "takeaway": "NULL 的数值是 0、EOF 是 -1，输出 0,-1（依赖实现）。",
+   "answerReview": {
+    "status": "ambiguous",
+    "answer": "0,-1",
+    "reason": "资料答案 0,-1 与主流实现一致；但 NULL 若定义为 ((void*)0)，用 %d 输出指针实参属格式与类型不匹配，标准未规定结果，答案依赖实现。"
+   }
+  },
+  {
+   "questionId": "self:x:10:习题集:填空题:12",
+   "sourceHash": "0d8508a424c948b3064d4eb8f5b8097707cbfb0c363258acd3cb885aa506b3f0",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n两空依次填 fseek 和 rewind。\n\n- fseek(fp, offset, whence) 把文件位置指针移到指定位置，whence 取 SEEK_SET（从文件头起）、SEEK_CUR（从当前位置起）、SEEK_END（从文件末尾起）。例：fseek(fp, 0, SEEK_SET) 回到开头，fseek(fp, sizeof(int), SEEK_SET) 跳过第一个整数。\n- rewind(fp) 等价于 fseek(fp, 0, SEEK_SET)，并额外清除文件的错误标志，专门用于回到文件头。\n- 随机定位的意义：不必从头顺序读，可以直接跳到第 N 条记录，这是二进制文件按记录存取的基础。\n- 配套的 ftell(fp) 返回当前位置相对于文件头的字节偏移，和 fseek 一起可用来求文件长度：\n```c\nfseek(fp, 0, SEEK_END);\nlong size = ftell(fp);\nrewind(fp);\n```\n\n题面答案 fseekrewind 是两个函数名被 OCR 连写在一起，实际要分两空填。",
+   "steps": [
+    "随机定位靠 fseek，三个参数是文件指针、偏移量、起始位置。",
+    "回到文件头用 rewind，它等价于 fseek(fp,0,SEEK_SET)。",
+    "两者都与 ftell 配合使用，用来算偏移和文件长度。"
+   ],
+   "takeaway": "随机定位 fseek、回头 rewind，配套 ftell 求偏移。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "fseek rewind",
+    "reason": "资料答案 fseekrewind 是两个函数名被 OCR 连写，拆开即 fseek 与 rewind，与\"随机定位/文件头定位\"的对应关系一致。"
+   }
+  },
+  {
+   "questionId": "self:x:11:习题集:填空题:1",
+   "sourceHash": "e3903d6e9b1b6bdcc1c4875d0162a30d2d8f7f20aa5f490ea011b4268d012f45",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 #（井号）。\n\n- 以 # 开头的是预处理命令，例如 #include <stdio.h>、#define N 10、#ifdef DEBUG、#endif。\n- # 必须是该行的第一个非空白字符，前面可以有空格或制表符，但不能再有别的内容；# 与命令名之间允许有空格。\n- 预处理命令不以分号结尾，手滑加上分号，那个分号会变成替换文本或语句的一部分，反而出错。\n- 预处理在编译之前完成，处理完仍然是 C 源程序，所以预处理命令不是 C 语句，编译器根本看不到它们。\n- 反过来，# 出现在字符串或字符常量里就只是普通字符，例如 printf(\"#\"); 不会被当成预处理。",
+   "steps": [
+    "回忆所有预处理命令的写法：#include、#define、#if、#endif 都以 # 起头。",
+    "# 必须是一行里第一个非空白字符。",
+    "预处理命令不加分号，它们在编译前就被处理掉了。"
+   ],
+   "takeaway": "预处理命令一律以 # 开头，且必须是该行第一个非空白字符。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "#",
+    "reason": "资料答案为 #，与 C 预处理命令以井号起始的语法规定一致。"
+   }
+  },
+  {
+   "questionId": "self:x:11:习题集:填空题:2",
+   "sourceHash": "5a6e551af5f90700182bb6395358e6802fd4493f3b1c3782c768033191536790",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n三空依次是：宏定义、文件包含、条件编译。\n\n- 宏定义：#define N 10、#define MAX(a,b) ((a)>(b)?(a):(b))，做纯文本替换；配套的 #undef 用来取消宏。\n- 文件包含：#include <stdio.h> 或 #include \"my.h\"，把另一个文件的全部内容插到这一行所在位置。\n- 条件编译：#if、#ifdef、#ifndef、#elif、#else、#endif，按条件决定哪段代码参与编译，常用于调试开关和头文件防重复包含。\n- 三者都由预处理器完成，都发生在编译之前，都不生成任何机器指令。\n- 顺带一提，#pragma 和 #error 也是预处理命令，但教材通常把功能归为上面三类。",
+   "steps": [
+    "按功能回忆：#define 系列是宏定义，#include 是文件包含，#if 系列是条件编译。",
+    "三者都在预处理阶段由预处理器执行，与编译器无关。",
+    "答题顺序要按题干空的顺序写：宏定义、文件包含、条件编译。"
+   ],
+   "takeaway": "C 的三大预处理功能：宏定义、文件包含、条件编译。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "宏定义 文件包含 条件编译",
+    "reason": "资料答案三项与 C 预处理的三种功能（宏定义、文件包含、条件编译）完全对应。"
+   }
+  },
+  {
+   "questionId": "self:x:11:习题集:填空题:3",
+   "sourceHash": "834677ea67d260539735d35e8631e4895866bd537c52fdaeaac8f815fb3391d9",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填：在程序编译之前（由预处理器）进行的一种预处理／文本处理。\n\n- 预处理命令不属于 C 语句，真正被编译器编译的代码里已经没有它们了。\n- 它做的是文本层面的事：替换宏、把 #include 的文件内容整段插进来、按 #if 筛掉不参与编译的行。\n- 因此它不受 C 语法约束：不以分号结尾、不遵守作用域和语句顺序、调试器也无法单步停在宏定义上。\n- 宏替换不做类型检查，也不对参数求值，很容易踩副作用：\n```c\n#define SQR(x) x*x\nint r = SQR(a+1);   /* 展开成 a+1*a+1，结果错 */\n```\n- 整个流程的顺序是：预处理 → 编译 → 汇编 → 链接，预处理永远是第一步。\n\n一句话：预处理是\"编译前的文字加工\"，不是运行期的动作。",
+   "steps": [
+    "抓住\"不是 C 语句\"这一点：它由预处理器处理，不参与编译成指令。",
+    "说出处理时机：在编译之前，属于文本替换/文件插入/条件筛选。",
+    "用 SQR(a+1) 展开错误的例子说明它没有类型检查和求值规则。"
+   ],
+   "takeaway": "预处理是编译之前的文本加工，不受 C 语句规则约束。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "在程序编译之前进行的一种预处理",
+    "reason": "资料答案\"在程序编译前进行的一种预处理\"与预处理命令在编译阶段之前由预处理器处理的定义一致。"
+   }
+  },
+  {
+   "questionId": "self:x:11:习题集:填空题:4",
+   "sourceHash": "bf78ba1b7465b7f0e8ed73e70df0c90ba90aa7483bb3fbfac566c436fd63ed91",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填：宏替换（也叫宏展开）。\n\n- 宏展开就是把源码里出现的宏名，逐个换成 #define 后面那串替换文本，纯文本操作，不做计算也不做类型检查。\n- 替换发生在预处理阶段，展开后得到的仍然是源程序，再交给编译器。\n- 例：#define N 5 之后写 int a[N];，预处理后变成 int a[5];。\n- 带参数的宏要先把实参代进形参再展开，所以括号特别重要：#define SQR(x) ((x)*(x)) 才能让 SQR(a+1) 得到正确结果，少一层括号就变成 a+1*a+1。\n- 正因为是文本替换，宏名不要和变量名重名；调试时看到的也是替换后的代码，变量值里看不到宏，这是宏的主要缺点。",
+   "steps": [
+    "宏名在预处理阶段被替换文本原样替换，这个过程叫宏替换或宏展开。",
+    "替换是纯文本的，不做运算、不做类型检查。",
+    "所以宏体要加足括号，防止展开后运算优先级被改变。"
+   ],
+   "takeaway": "宏替换即文本替换（宏展开），无类型检查，括号必须写足。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "宏替换或宏展开",
+    "reason": "资料答案\"宏替换或宏展开\"与 #define 处用替换文本替换宏名的过程定义一致。"
+   }
+  },
+  {
+   "questionId": "self:x:11:习题集:填空题:5",
+   "sourceHash": "3376cf6f0845530d575252637877b1c89e6ed82b17009bbdc4e7c2da8a3ab47c",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填：预处理（阶段）。\n\n- C 程序从源文件到可执行文件分四步：预处理 → 编译 → 汇编 → 链接。\n- #include 与 #define 在第一步就被处理完：前者把被包含文件的全部内容原样插进来，后者做文本替换。\n- 到编译阶段，编译器拿到的已经是展开后的代码，看不到 #include、#define 这些命令了。\n- 这解释了几个常见现象：头文件里只放声明、宏定义不加分号、宏出错时报错行号常常对不上原文件。\n- 想亲眼看这一步做了什么，给 gcc 加 -E 参数只做预处理，把展开结果输出出来即可。\n\n顺便记：条件编译 #if/#ifdef 也在这个阶段完成筛选，所以没被选中的分支里的语法错误编译器看不到。",
+   "steps": [
+    "记住四步流程：预处理、编译、汇编、链接。",
+    "#include 和 #define 都在第一步由预处理器处理。",
+    "所以编译阶段已经看不到这两条命令，-E 可以查看预处理结果。"
+   ],
+   "takeaway": "#include 与 #define 都在预处理阶段完成，之后编译器只见展开后的代码。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "预处理",
+    "reason": "资料答案为\"预处理\"，与 #include/#define 由预处理器在编译之前处理的阶段划分一致。"
+   }
+  },
+  {
+   "questionId": "self:x:11:习题集:填空题:6",
+   "sourceHash": "edad85641be34121a72444fba15f3ead735f9e3bc208ef8c698dc2e1b51aa51e",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 ctype.h，完整写法 #include <ctype.h>。\n\n- 字符判别函数都声明在 ctype.h 里：isalpha（字母）、isdigit（数字）、isalnum（字母或数字）、isspace（空白）、isupper、islower、isxdigit 等。\n- 配套的转换函数 tolower、toupper 也在同一个头文件里。\n- 这些函数接收 int（通常传字符或 EOF），返回非 0 表示真、0 表示假；判断时不要写 if (isalpha(c) == 1)，因为返回值只保证\"非零\"。\n- 漏掉这个头文件，编译器会按隐式声明处理，出现警告甚至返回值被截断的错误。\n- 典型用法：\n```c\n#include <ctype.h>\nif (isdigit(c)) n = c - '0';\n```",
+   "steps": [
+    "字符判别函数属于标准库，声明在 ctype.h。",
+    "同头文件还有 tolower/toupper 等转换函数。",
+    "返回值只保证非 0 为真，判断时别和 1 比较。"
+   ],
+   "takeaway": "isalpha/isdigit 等字符函数都在 ctype.h 里。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "ctype.h",
+    "reason": "资料答案为 ctype.h，与 isalpha/isdigit 等字符判别函数所在头文件一致。"
+   }
+  },
+  {
+   "questionId": "self:x:11:习题集:填空题:7",
+   "sourceHash": "fa1174b9c8ac7cfed62dc9b1fa0cd2cbafaa32ade6b1bd8e426374de53b9bbf9",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n填 string.h，完整写法 #include <string.h>。\n\n- 字符串操作函数都在 string.h 里：strlen、strcpy、strncpy、strcat、strncat、strcmp、strncmp、strchr、strstr、memset、memcpy 等。\n- 这些函数以 '\\0' 作为字符串结束标志，所以字符数组必须留出放 '\\0' 的位置：存 10 个字符要开 char s[11]。\n- 用 strcpy、strcat 前一定确认目标数组够大，否则越界写内存；更稳的写法是 strncpy、strncat 并手动补 '\\0'。\n- 注意 C 里是 string.h，C++ 里对应 <cstring>，不要混；另外 strlen 算的是字符个数，不含 '\\0'。\n- 典型用法：\n```c\n#include <string.h>\nchar s[20] = \"abc\";\nstrcat(s, \"def\");      /* s 变成 \"abcdef\" */\nint n = strlen(s);     /* n == 6 */\n```",
+   "steps": [
+    "字符串处理函数属于标准库，声明在 string.h。",
+    "它们依赖 \u0000 结尾，数组要预留结束符的位置。",
+    "strlen 不计 \u0000，strcpy/strcat 要注意目标缓冲区大小。"
+   ],
+   "takeaway": "strlen/strcpy/strcmp 等字符串函数都在 string.h 里。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "string.h",
+    "reason": "资料答案为 string.h，与 strlen/strcpy/strcat 等字符串操作函数所在头文件一致。"
+   }
+  }
+ ]
+}
