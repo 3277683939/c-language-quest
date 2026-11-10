@@ -1498,6 +1498,70 @@
     el.innerHTML = html;
   }
 
+  function bugReportSession() {
+    const auth = leaderboardSession();
+    return {configured:auth.configured,loggedIn:auth.loggedIn,
+      admin:auth.loggedIn && !auth.pendingMerge && currentUser?.app_metadata?.cquest_role === 'admin'};
+  }
+
+  function cleanBugContext(input) {
+    const c = input && typeof input === 'object' && !Array.isArray(input) ? input : {};
+    const clean = {};
+    const allowed = {
+      page:['map','random','wrong','favorites','practice','coach','library','progress','account','leaderboard','feedback'],
+      mode:['choice','practice','page'],browser:['WeChat','Huawei','Edge','Chrome','Firefox','Safari','Other']
+    };
+    for (const key of Object.keys(allowed)) if (allowed[key].includes(c[key])) clean[key]=c[key];
+    if (typeof c.questionId === 'string' && /^[A-Za-z0-9:_-]{0,100}$/.test(c.questionId)) clean.questionId=c.questionId;
+    if (Number.isInteger(c.position) && c.position>=0 && c.position<=999999) clean.position=c.position;
+    if (Number.isInteger(c.viewport?.width) && Number.isInteger(c.viewport?.height)
+      && c.viewport.width>0 && c.viewport.width<=10000 && c.viewport.height>0 && c.viewport.height<=10000)
+      clean.viewport={width:c.viewport.width,height:c.viewport.height};
+    return clean;
+  }
+
+  async function bugReportRpc(action,params={}) {
+    const endpoints={submit:'cquest_bug_submit',list:'cquest_bug_list',resolve:'cquest_bug_resolve'};
+    if (!Object.hasOwn(endpoints,action)) throw new Error('不支持的反馈操作。');
+    const auth=bugReportSession();
+    if (!auth.configured) throw new Error('反馈云服务尚未配置，可先复制反馈内容。');
+    if (action!=='submit' && !auth.admin) throw new Error('只有站点管理员能查看和处理反馈。');
+    const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
+    let body={};
+    if (action==='submit') {
+      const description=typeof params.description==='string'?params.description.trim():'';
+      if (!uuid.test(params.reportId || '') || !['按钮','显示','题目内容','注册登录','其他'].includes(params.category)
+        || [...description].length<10 || [...description].length>2000) throw new Error('请选择问题类型，并填写10—2000字的问题描述。');
+      body={report_id:params.reportId,payload:{category:params.category,description,context:cleanBugContext(params.context)}};
+    } else if (action==='resolve') {
+      if (!uuid.test(params.reportId || '') || !['open','resolved'].includes(params.status)) throw new Error('反馈编号或状态不正确。');
+      body={report_id:params.reportId,new_status:params.status};
+    }
+    const gen=generationToken;
+    try {
+      const res=await supabaseRequest('/rest/v1/rpc/'+endpoints[action],'POST',body,auth.loggedIn,false);
+      const data=await res.json();
+      if (gen!==generationToken) throw new Error('账号已切换，请重新操作。');
+      if (!res.ok) throw new Error(['PGRST202','42P01','42883'].includes(data?.code)?'反馈服务尚未启用，请先复制反馈内容。'
+        :res.status===429?'反馈提交较多，请稍后再试；内容已保留。'
+        :res.status===401||res.status===403?'无权进行此操作，请重新登录后再试。'
+        :res.status===400?'反馈内容格式不正确，请检查后再试。':'反馈提交失败，请稍后重试或复制反馈内容。');
+      if (action==='list') {
+        if (!Array.isArray(data)) throw new Error('反馈列表格式异常。');
+        return data.slice(0,100).map(r=>({id:String(r.id),created_at:String(r.created_at),
+          category:String(r.category).slice(0,20),description:String(r.description).slice(0,4000),
+          context:cleanBugContext(r.context),status:r.status==='resolved'?'resolved':'open'}));
+      }
+      if (action==='submit' && data?.accepted===true && data.id===params.reportId) return {accepted:true,id:data.id};
+      if (action==='resolve' && data?.updated===true) return {updated:true};
+      throw new Error('服务未确认操作成功，请保留反馈内容后重试。');
+    } catch(err) {
+      if (err.superseded) throw new Error('账号已切换，请重新操作。');
+      if (['TypeError','AbortError','SyntaxError'].includes(err.name)) throw new Error('反馈暂时无法发送，请保留草稿或复制反馈内容。');
+      throw err;
+    }
+  }
+
   function leaderboardSession() {
     return { configured: isCloudConfigured(), loggedIn: !!(currentUser && currentSession?.access_token) && status !== 'authenticating', pendingMerge: !!pendingMerge };
   }
@@ -1594,6 +1658,8 @@
     handleEmailCode,
     checkCloudConnection,
     showConnectionCheck,
+    bugReportSession,
+    bugReportRpc,
     handleLogout,
     handleSyncNow,
     handleMergeChoice,

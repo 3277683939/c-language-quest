@@ -283,6 +283,7 @@ const names = {
   progress: '学习记录',
   account: '账户与云存档',
   leaderboard: '学习排行榜',
+  feedback: '反馈管理',
   practice: '原题自练',
   coach: 'AI 教练',
   teach: 'Agent 教学'
@@ -314,6 +315,7 @@ function render() {
     progress: renderProgress,
     account: () => window.CQuestAccount ? window.CQuestAccount.render() : renderProgress(),
     leaderboard: () => window.CQuestLeaderboard.render(),
+    feedback: () => window.CQuestBugReport.renderAdmin(),
     practice: renderPractice,
     coach: renderCoach,
     teach: renderCoach
@@ -708,7 +710,7 @@ function renderPracticeLevelQuiz() {
 
     <div class="quiz-foot">
       <small>
-        <span>作答后查看答案，自行评估并标记掌握情况</span>
+        <span>作答后查看答案，自行评估并标记掌握情况</span><button type="button" class="text-button" onclick="CQuestBugReport.open(getBugReportContext())">反馈此题</button>
       </small>
       <div class="quiz-step-actions">
         <button class="secondary" onclick="prevPracticeQuestion()" ${practiceQuiz.index === 0 ? 'disabled' : ''}>← 上一题</button>
@@ -933,6 +935,23 @@ function currentQ() {
   return Q.find(q => q.id === quiz.ids[quiz.index]);
 }
 
+function getBugReportContext() {
+  const ua = navigator.userAgent || '';
+  const browser = /MicroMessenger/i.test(ua) ? 'WeChat' : /HuaweiBrowser/i.test(ua) ? 'Huawei'
+    : /Edg/i.test(ua) ? 'Edge' : /Firefox/i.test(ua) ? 'Firefox' : /Chrome|CriOS/i.test(ua) ? 'Chrome'
+    : /Safari/i.test(ua) ? 'Safari' : 'Other';
+  const context = {page:view === 'teach' ? 'coach' : view,mode:'page',
+    viewport:{width:Math.round(innerWidth),height:Math.round(innerHeight)},browser};
+  if ($('#quiz-dialog').open && quiz && !quiz.finished) {
+    context.questionId=currentQ()?.id || '';context.mode='choice';context.position=quiz.index+1;
+  } else if ($('#quiz-dialog').open && practiceQuiz && !practiceQuiz.finished) {
+    context.questionId=practiceQuiz.units[practiceQuiz.index]?.id || '';context.mode='practice';context.position=practiceQuiz.index+1;
+  } else if (view==='practice' && typeof getFilteredPracticeUnits==='function') {
+    context.questionId=getFilteredPracticeUnits()[currentPracticeIndex]?.id || '';context.mode='practice';context.position=currentPracticeIndex+1;
+  }
+  return context;
+}
+
 function formatQuizStem(stem) {
   if (!stem) return '';
   const lines = stem.split(/\r?\n/);
@@ -1049,6 +1068,7 @@ function renderQuiz() {
       <small>
         <span class="desktop-quiz-hint">${result ? '认真理解，比一次答对更重要。' : '键盘 A–E 选择，Enter 提交。'}</span>
         <span class="mobile-quiz-hint">${result ? '进度已保存' : '选择答案后点击确认'}</span>
+        <button type="button" class="text-button" onclick="CQuestBugReport.open(getBugReportContext())">反馈此题</button>
       </small>
       ${result ? `<button class="primary" onclick="nextQuestion()">${quiz.index === quiz.ids.length - 1 ? '查看本次成绩' : '下一题'} →</button>` : `<button class="primary" id="submit-answer" ${selected.length ? '' : 'disabled'} onclick="submitAnswer()">确认答案 →</button>`}
     </div>
