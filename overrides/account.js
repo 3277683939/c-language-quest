@@ -21,7 +21,12 @@
     localStorage: typeof localStorage !== 'undefined' ? localStorage : null,
     sessionStorage: typeof sessionStorage !== 'undefined' ? sessionStorage : null,
     now: () => Date.now(),
-    timer: setTimeout
+    // 注意：必须包一层箭头函数。浏览器里 window.setTimeout 是访问器方法，
+    // 直接把它存成对象属性再以 injected.timer(...) 调用会改变 this，触发
+    // "Illegal invocation"，导致所有防抖/定时同步在真实浏览器里静默失效。
+    timer: (fn, delay) => setTimeout(fn, delay),
+    // 可覆盖的超时配置（Node 测试可缩短以快速模拟超时）
+    timeouts: { request: 12000, health: 8000, emailCode: 12000 }
   };
 
   function getStorage(type) {
@@ -52,6 +57,106 @@
     return JSON.parse(JSON.stringify(obj));
   }
 
+  // 读取注入的超时配置（缺省回退到安全默认值）
+  function timeoutFor(kind) {
+    const defaults = { request: 12000, health: 8000, emailCode: 12000 };
+    const t = injected.timeouts || {};
+    const v = Number(t[kind]);
+    if (Number.isFinite(v) && v > 0) return v;
+    return defaults[kind] || defaults.request;
+  }
+
+  function isBrowserOnline() {
+    if (typeof navigator === 'undefined' || typeof navigator.onLine !== 'boolean') return true;
+    return navigator.onLine;
+  }
+
+  // 把传输层异常归类为可区分、可展示的中文错误（超时/断网/网络/坏响应）
+  function classifyRequestError(err, actionLabel) {
+    const label = actionLabel || '连接云服务';
+    const name = err && err.name;
+    const raw = String((err && err.message) || '');
+    if (name === 'AbortError' || /aborted|timeout/i.test(raw)) {
+      return {
+        kind: 'timeout',
+        httpStatus: 0,
+        message: '连接' + label + '超时（等待响应过久）。本机学习进度已保存，请稍后手动重试。'
+      };
+    }
+    if (name === 'SyntaxError') {
+      return {
+        kind: 'bad_response',
+        httpStatus: 0,
+        message: '连接' + label + '返回了无法解析的数据。本机学习进度已保存，请稍后手动重试。'
+      };
+    }
+    if (!isBrowserOnline()) {
+      return {
+        kind: 'offline',
+        httpStatus: 0,
+        message: '当前设备处于断网状态，无法连接' + label + '。本机学习进度已保存，恢复网络后可手动重试。'
+      };
+    }
+    return {
+      kind: 'network',
+      httpStatus: 0,
+      message: '无法连接' + label + '（域名解析失败、网络中断或跨域被拦截）。本机学习进度已保存，请检查网络后手动重试。'
+    };
+  }
+
+  // 把 HTTP 状态 + 云端错误码翻译成互不相同的准确中文提示
+  function describeHttpFailure(statusCode, data, actionLabel) {
+    const label = actionLabel || '云服务';
+    const code = String(
+      (data && (data.error_code || data.code || (data.error && data.error_code) || '')) || ''
+    );
+    const msg = String((data && (data.msg || data.message || data.error_description || '')) || '');
+    if (code === 'invalid_credentials' || code === 'invalid_grant' || /invalid login credentials/i.test(msg)) {
+      return { kind: 'credentials', httpStatus: statusCode, message: '邮箱或密码不正确，请检查后重新输入。' };
+    }
+    if (code === 'email_not_confirmed' || /email not confirmed/i.test(msg)) {
+      return { kind: 'email_unconfirmed', httpStatus: statusCode, message: '该邮箱还未完成验证：请先查收验证邮件完成验证，再回来登录。' };
+    }
+    if (code === 'email_address_not_authorized') {
+      return { kind: 'email_not_authorized', httpStatus: statusCode, message: '当前邮件服务无法向此邮箱发送验证邮件，请联系网站管理员配置邮件服务。' };
+    }
+    if (code === 'over_email_send_rate_limit' || code === 'over_email_send_limit') {
+      return { kind: 'email_rate_limit', httpStatus: statusCode, message: '验证邮件发送次数已达限制，请稍后再试，不要连续点击注册。' };
+    }
+    if (code === 'over_request_rate_limit' || statusCode === 429) {
+      return { kind: 'rate_limit', httpStatus: statusCode, message: '请求过于频繁，云服务暂时拒绝了本次操作，请稍等片刻后手动重试。' };
+    }
+    if (code === 'user_already_exists') {
+      return { kind: 'user_exists', httpStatus: statusCode, message: '此邮箱已注册，请改用登录。' };
+    }
+    if (code === 'signup_disabled') {
+      return { kind: 'signup_disabled', httpStatus: statusCode, message: '网站暂未开放新用户注册。' };
+    }
+    if (code === 'otp_expired') {
+      return { kind: 'code_expired', httpStatus: statusCode, message: '验证码错误或已过期，请核对最新邮件，或重新发送验证码。' };
+    }
+    if (statusCode === 409 || /progress changed|concurrency conflict/i.test(msg)) {
+      return {
+        kind: 'conflict',
+        httpStatus: statusCode,
+        message: '云端记录已被其他设备更新，自动重新合并未成功。你本机的进度已保存，请稍后手动重试同步。'
+      };
+    }
+    if (statusCode >= 500) {
+      return { kind: 'server', httpStatus: statusCode, message: label + '暂时不可用（HTTP ' + statusCode + '），本机进度已保存，请稍后手动重试。' };
+    }
+    return { kind: 'http', httpStatus: statusCode, message: label + '返回错误（HTTP ' + statusCode + '），本机进度已保存，请稍后手动重试。' };
+  }
+
+  function makeHttpError(statusCode, data, actionLabel) {
+    const info = describeHttpFailure(statusCode, data, actionLabel);
+    const err = new Error(info.message);
+    err.kind = info.kind;
+    err.httpStatus = statusCode;
+    err.isHttp = true;
+    return err;
+  }
+
   // 外部注入的 app.js 回调函数
   let appBridge = {
     getState: () => null,
@@ -78,6 +183,21 @@
   let singleFlightRefreshPromise = null;
   let lastLocalEditTime = 0;
   let lastSyncedLocalEditTime = 0;
+  let lastSyncError = null; // { kind, message, at, httpStatus } 最近一次同步失败原因
+  let autoSyncPaused = false; // 网络失败后暂停自动同步：仅允许手动重试或网络恢复时单次尝试
+  let busyAction = ''; // '' | 'login' | 'signup' | 'code' | 'sync'
+  let syncPromise = null; // 同步单飞（in-flight 去重）
+  // 表单草稿（仅内存，绝不持久化密码/验证码）
+  let authDraftLogin = { email: '', remember: true };
+  let authDraftSignup = { email: '', remember: true };
+  let emailCodeDraft = { email: '', code: '' };
+
+  function resetTransientState() {
+    lastSyncError = null;
+    autoSyncPaused = false;
+    busyAction = '';
+    syncPromise = null;
+  }
 
   // 检查并清除 Supabase 邮件验证回跳 URL 中的敏感令牌与错误片段
   function checkAndCleanAuthHash(customEnv) {
@@ -173,6 +293,50 @@
     return `c-quest-baseline_${getProjectNamespace()}_u_${userId}`;
   }
 
+  function getPendingKey(userId) {
+    return `c-quest-pending_${getProjectNamespace()}_u_${userId}`;
+  }
+
+  // “本机有未同步改动”持久标记：刷新页面后依然能如实提示“待同步”，
+  // 若只依赖内存里的时间戳，断网刷新后会误判为已同步。
+  function markPendingChanges() {
+    if (!currentUser || !currentUser.id) return;
+    const locStorage = getStorage('local');
+    if (!locStorage || typeof locStorage.setItem !== 'function') return;
+    try {
+      locStorage.setItem(getPendingKey(currentUser.id), '1');
+    } catch (e) {
+      // 存储满/隐私模式：不影响主流程
+    }
+  }
+
+  function clearPendingChanges() {
+    if (!currentUser || !currentUser.id) return;
+    const locStorage = getStorage('local');
+    if (!locStorage || typeof locStorage.removeItem !== 'function') return;
+    try {
+      locStorage.removeItem(getPendingKey(currentUser.id));
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  function readPendingMarker() {
+    if (!currentUser || !currentUser.id) return false;
+    const locStorage = getStorage('local');
+    if (!locStorage || typeof locStorage.getItem !== 'function') return false;
+    try {
+      return locStorage.getItem(getPendingKey(currentUser.id)) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function hasPendingLocalChanges() {
+    if (!currentUser) return false;
+    return readPendingMarker() || lastLocalEditTime > lastSyncedLocalEditTime;
+  }
+
   function updateStatus(newStatus, msg) {
     status = newStatus;
     statusMessage = msg || '';
@@ -202,6 +366,11 @@
     const lbl = statusLabel();
     if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function' && typeof CustomEvent === 'function') {
       try {
+        // 同时给顶栏状态标记 data-state，供移动端 CSS 按状态显示（微信/手机视口）
+        if (typeof document !== 'undefined' && document && typeof document.getElementById === 'function') {
+          const badge = document.getElementById('account-status');
+          if (badge && badge.setAttribute) badge.setAttribute('data-state', status);
+        }
         window.dispatchEvent(new CustomEvent('cquest:account-status', {
           detail: { status, label: lbl }
         }));
@@ -228,12 +397,13 @@
   }
 
   // 封装安全 fetch：支持超时中止、redirect: 'error'
-  async function safeFetch(url, options = {}, timeoutMs = 12000) {
+  async function safeFetch(url, options = {}, timeoutMs = null) {
     const fetchFn = injected.fetch;
     if (!fetchFn) throw new Error('Fetch not available');
+    const limit = Number(timeoutMs) > 0 ? Number(timeoutMs) : timeoutFor('request');
 
     const controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
-    const timerId = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+    const timerId = controller ? setTimeout(() => controller.abort(), limit) : null;
 
     try {
       const opts = {
@@ -380,6 +550,8 @@
       // 离线时不作废会话，保留离线状态
       if (generationToken === reqGen && currentSession === session) {
         updateStatus('offline', '离线模式，本地凭据有效');
+        // 刷新/首屏即离线时，让账号页立刻显示“等待同步/手动重试”降级提示
+        refreshAccountView();
       }
       return false;
     }
@@ -566,9 +738,12 @@
 
     // 记录用户主动本地修改时间戳
     lastLocalEditTime = injected.now();
+    // 持久化“待同步”标记：断网/离线刷新后仍能如实提示本机进度未上传
+    markPendingChanges();
 
     // 已登录且配置可用时，调度后台防抖同步
-    if (currentUser && isCloudConfigured() && !pendingMerge) {
+    // 网络失败/离线后进入暂停态：答题只落本机，不再每次修改都排一次注定失败的同步。
+    if (currentUser && isCloudConfigured() && !pendingMerge && !autoSyncPaused && !isSyncing) {
       scheduleSync(600);
     }
   }
@@ -593,7 +768,32 @@
       pendingAuthHashNotice = null;
     }
 
+    installNetworkListeners();
     initAuth();
+  }
+
+  // 网络恢复时只尝试一次同步（幂等）；断网时暂停自动同步，避免无限重试循环
+  let networkListenersInstalled = false;
+  function installNetworkListeners() {
+    if (networkListenersInstalled) return;
+    if (typeof window === 'undefined' || typeof window.addEventListener !== 'function') return;
+    networkListenersInstalled = true;
+    try {
+      window.addEventListener('online', () => {
+        if (!currentUser || pendingMerge || busyAction === 'sync') return;
+        autoSyncPaused = false;
+        updateStatus('offline', '网络已恢复，正在尝试同步一次…');
+        scheduleSync(800);
+        appBridge.render();
+      });
+      window.addEventListener('offline', () => {
+        autoSyncPaused = true;
+        if (currentUser) {
+          updateStatus('offline', '网络已断开，答题进度已保存在本机，联网后可手动重试同步。');
+          appBridge.render();
+        }
+      });
+    } catch (e) {}
   }
 
   function scheduleSync(delayMs) {
@@ -604,10 +804,40 @@
     }, delayMs || 500);
   }
 
+  // 把同步阶段的各类失败翻译为可区分的信息
+  function classifySyncError(err) {
+    if (err && err.isHttp) return describeHttpFailure(err.httpStatus, err.data, '云同步');
+    const raw = String((err && err.message) || '');
+    const httpMatch = /HTTP (\d{3})/.exec(raw);
+    if (httpMatch) return describeHttpFailure(Number(httpMatch[1]), null, '云同步');
+    if (/Concurrency conflict/i.test(raw)) {
+      return {
+        kind: 'conflict',
+        httpStatus: 0,
+        message: '云端记录已被其他设备更新，自动重新合并未成功。本机进度已保存，请稍后手动重试。'
+      };
+    }
+    return classifyRequestError(err, '云端服务');
+  }
+
   /**
    * 核心云同步流程 (乐观并发重试 + LWW 合并 + 在途新答题强保全)
+   * 外层负责单飞（in-flight 去重），避免双击/定时器叠加重复请求。
    */
   async function syncWithCloud(retryCount = 0) {
+    if (!isCloudConfigured() || !currentUser || !currentSession || pendingMerge) {
+      return;
+    }
+    if (retryCount > 0) return runSync(retryCount);
+    if (syncPromise) return syncPromise;
+    const p = runSync(0);
+    syncPromise = p;
+    const clear = () => { if (syncPromise === p) syncPromise = null; };
+    p.then(clear, clear);
+    return p;
+  }
+
+  async function runSync(retryCount = 0) {
     if (!isCloudConfigured() || !currentUser || !currentSession || pendingMerge) {
       return;
     }
@@ -631,7 +861,7 @@
       );
 
       if (!getRes.ok) {
-        throw new Error(`Failed to fetch cloud progress (HTTP ${getRes.status})`);
+        throw makeHttpError(getRes.status, null, '云同步');
       }
 
       const rows = await getRes.json();
@@ -679,13 +909,13 @@
         if (errJson.message && errJson.message.includes('Progress changed') && retryCount < 3) {
           updateStatus('conflict', '检测到其他设备更新，正在重新合并...');
           isSyncing = false;
-          return await syncWithCloud(retryCount + 1);
+          return await runSync(retryCount + 1);
         }
-        throw new Error(`Concurrency conflict: ${errJson.message || '409 Conflict'}`);
+        throw makeHttpError(saveRes.status, errJson, '保存云存档');
       }
 
       if (!saveRes.ok) {
-        throw new Error(`Cloud save RPC failed (HTTP ${saveRes.status})`);
+        throw makeHttpError(saveRes.status, null, '保存云存档');
       }
 
       const saveResult = await saveRes.json();
@@ -722,6 +952,14 @@
 
       lastSyncTime = injected.now();
       lastSyncedLocalEditTime = syncSnapshotTime;
+      // 同步成功：清除失败记录，恢复自动同步
+      lastSyncError = null;
+      autoSyncPaused = false;
+      // 本次上传已覆盖快照时刻的全部本地改动；若请求在途期间又有新答题，
+      // 标记保留，等下一轮同步成功后再清除。
+      if (lastLocalEditTime <= syncSnapshotTime) {
+        clearPendingChanges();
+      }
 
       // 检查在网络请求期间本地是否产生过新答题
       if (lastLocalEditTime > syncSnapshotTime) {
@@ -731,13 +969,31 @@
       } else {
         updateStatus('idle', '云端已同步');
       }
+      // 同步成功若停留在账号页，刷新以清空“同步暂停”卡片并更新同步时间
+      refreshAccountView();
 
     } catch (err) {
       if (err.superseded) return;
       if (generationToken === myGen && currentUser?.id === myUid) {
+        const info = classifySyncError(err);
+        lastSyncError = {
+          kind: info.kind,
+          message: info.message,
+          httpStatus: info.httpStatus || 0,
+          at: injected.now()
+        };
+        // 失败后暂停自动同步：只保留用户手动重试或网络恢复时的单次尝试
+        autoSyncPaused = true;
         if (status !== 'offline') {
-          updateStatus('offline', err.message || '同步遇到异常，已转为本机存储');
+          updateStatus('offline', info.message);
+        } else {
+          // 已处于 offline 状态时仍刷新提示文案（区分超时/服务器/冲突）
+          statusMessage = info.message;
+          dispatchStatusEvent();
         }
+        // 若用户正停留在账号页，立即重绘以展示“同步已暂停/手动重试”卡片，
+        // 否则页面会停留在失败前渲染的旧 HTML，用户看不到任何降级提示。
+        refreshAccountView();
       }
     } finally {
       isSyncing = false;
@@ -748,6 +1004,7 @@
    * 表单与交互方法 1: 登录
    */
   async function handleLogin(formEl) {
+    if (busyAction) return;
     if (status === 'authenticating') return;
     if (!isCloudConfigured()) {
       appBridge.toast('尚未配置云端服务，当前处于本地离线模式。');
@@ -759,14 +1016,18 @@
     const password = (formData.get('password') || '').toString();
     const remember = Boolean(formData.get('remember'));
 
+    // 仅保留非敏感输入（邮箱/记住我）；密码绝不缓存、绝不持久化
+    authDraftLogin = { email, remember };
     // 立即清空密码输入框（包括显示状态下的密码）
     clearPasswordInputs(formEl);
 
     if (!email || !password) {
       appBridge.toast('请填写完整的邮箱与密码。');
+      appBridge.render();
       return;
     }
 
+    busyAction = 'login';
     updateStatus('authenticating', '正在验证登录信息...');
     appBridge.render();
 
@@ -788,17 +1049,23 @@
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         if (generationToken !== reqGen) return;
-        const errMsg = errData.error_description || errData.msg || errData.message || '邮箱或密码错误';
-        updateStatus('guest', errMsg);
-        appBridge.toast('登录失败：' + errMsg);
-        appBridge.render();
+        const info = describeHttpFailure(res.status, errData, '登录');
+        updateStatus('guest', info.message);
+        appBridge.toast('登录失败：' + info.message);
         return;
       }
 
       const data = await res.json();
       if (generationToken !== reqGen) return;
 
-      const user = data.user;
+      const user = data && data.user;
+      if (!user || typeof user.id !== 'string' || !user.id || typeof user.email !== 'string'
+        || typeof data.access_token !== 'string' || !data.access_token) {
+        updateStatus('guest', '登录服务返回的数据无法识别，本机学习进度已保存，请稍后手动重试。');
+        appBridge.toast('登录服务返回的数据无法识别，请稍后手动重试。');
+        return;
+      }
+
       const session = {
         access_token: data.access_token,
         refresh_token: data.refresh_token,
@@ -811,6 +1078,8 @@
       currentUser = user;
       currentSession = session;
       savePersistedSession(session, remember);
+      autoSyncPaused = false;
+      lastSyncError = null;
 
       // 检查本机是否存在游客数据
       const guestProgress = getGuestProgress();
@@ -818,7 +1087,6 @@
         pendingMerge = { user, session, guestProgress };
         updateStatus('idle', '请选择是否合并本机游客记录');
         appBridge.toast('登录成功！检测到本机有做题记录，请选择是否合并。');
-        appBridge.render();
         return;
       }
 
@@ -835,14 +1103,16 @@
       updateStatus('idle', '登录成功');
       appBridge.toast('登录成功，正在同步云端存档...');
       await syncWithCloud();
-      appBridge.render();
 
     } catch (err) {
       if (generationToken === reqGen) {
-        updateStatus('guest', '网络请求失败');
-        appBridge.toast('登录遇到网络错误，请稍后重试。');
-        appBridge.render();
+        const info = classifyRequestError(err, '登录服务');
+        updateStatus('guest', info.message);
+        appBridge.toast(info.message);
       }
+    } finally {
+      busyAction = '';
+      appBridge.render();
     }
   }
 
@@ -850,6 +1120,7 @@
    * 表单与交互方法 2: 注册
    */
   async function handleSignup(formEl) {
+    if (busyAction) return;
     if (status === 'authenticating') return;
     if (!isCloudConfigured()) {
       appBridge.toast('尚未配置云端服务。');
@@ -861,17 +1132,22 @@
     const password = (formData.get('password') || '').toString();
     const remember = Boolean(formData.get('remember'));
 
+    // 仅保留非敏感输入（邮箱/记住我）；密码绝不缓存、绝不持久化
+    authDraftSignup = { email, remember };
     clearPasswordInputs(formEl);
 
     if (!email || !password) {
       appBridge.toast('请填写完整的邮箱与密码。');
+      appBridge.render();
       return;
     }
     if (password.length < 6) {
       appBridge.toast('密码长度不能少于 6 位。');
+      appBridge.render();
       return;
     }
 
+    busyAction = 'signup';
     updateStatus('authenticating', '正在注册账号...');
     appBridge.render();
 
@@ -905,10 +1181,13 @@
           user_already_exists: '此邮箱已注册，请改用登录。',
           signup_disabled: '网站暂未开放新用户注册。'
         };
-        const errMsg = messages[errData.error_code || errData.code] || errData.msg || errData.message || '注册未能完成';
+        const codeKey = errData.error_code || errData.code || '';
+        let errMsg = messages[codeKey];
+        if (!errMsg) {
+          errMsg = describeHttpFailure(res.status, errData, '注册服务').message;
+        }
         updateStatus('guest', errMsg);
         appBridge.toast('注册失败：' + errMsg);
-        appBridge.render();
         return;
       }
 
@@ -976,15 +1255,22 @@
 
     } catch (err) {
       if (generationToken === reqGen) {
-        const message = responseReceived
-          ? '注册结果处理异常。请先检查邮箱；若已完成注册，可直接登录。'
-          : err?.name === 'AbortError'
-          ? '连接注册服务超时。可以先检查邮箱，稍后重试或切换网络后登录。'
-          : '无法连接注册服务。请点击下方“检测注册连接”，将检测结果反馈给管理员。';
+        let message;
+        if (responseReceived) {
+          message = '注册结果处理异常。请先检查邮箱；若已完成注册，可直接登录。';
+        } else if (err?.name === 'AbortError') {
+          message = '连接注册服务超时。可以先检查邮箱，稍后重试或切换网络后登录。';
+        } else if (!isBrowserOnline()) {
+          message = '当前设备处于断网状态，无法连接注册服务。请恢复网络后手动重试；若已提交注册，请先检查邮箱。';
+        } else {
+          message = '无法连接注册服务。请点击下方“检测注册连接”，将检测结果反馈给管理员。';
+        }
         updateStatus('guest', message);
         appBridge.toast(message);
-        appBridge.render();
       }
+    } finally {
+      busyAction = '';
+      appBridge.render();
     }
   }
 
@@ -1116,12 +1402,18 @@
       syncTimer = null;
     }
 
+    // 退出前记录本机是否还有未上传的改动（用于准确提示，进度保留在账号本地存档）
+    const hadPendingChanges = Boolean(
+      currentUser && (lastLocalEditTime > lastSyncedLocalEditTime || autoSyncPaused || lastSyncError)
+    );
+
     const cfg = getCloudConfig();
     const token = currentSession?.access_token;
 
     currentUser = null;
     currentSession = null;
     pendingMerge = null;
+    resetTransientState();
     clearPersistedSession();
     updateStatus('guest', '已退出登录');
 
@@ -1154,21 +1446,39 @@
       isApplyingRemote = false;
     }
 
-    appBridge.toast('已退出账号，当前已恢复本机游客记录。');
+    appBridge.toast(hadPendingChanges
+      ? '已退出账号，已恢复本机游客记录；该账号在本机仍有未同步的进度，下次登录同一账号会继续合并。'
+      : '已退出账号，当前已恢复本机游客记录。');
     appBridge.render();
   }
 
   /**
-   * 手动触发同步
+   * 手动触发同步（单飞：在途时重复点击不会重复发请求）
    */
   async function handleSyncNow() {
     if (!currentUser) {
       appBridge.toast('请先登录账号后再执行云端同步。');
       return;
     }
+    if (busyAction === 'sync' || syncPromise) {
+      appBridge.toast('正在同步，请稍候…');
+      return;
+    }
+    busyAction = 'sync';
+    autoSyncPaused = false;
     appBridge.toast('正在执行云端同步...');
-    await syncWithCloud();
     appBridge.render();
+    try {
+      await syncWithCloud();
+    } finally {
+      busyAction = '';
+      appBridge.render();
+    }
+    if (lastSyncError) {
+      appBridge.toast('同步未完成：' + lastSyncError.message);
+    } else {
+      appBridge.toast('云端同步完成。');
+    }
   }
 
   /**
@@ -1194,20 +1504,24 @@
   // No real email/password/session, no registration, and no automatic retries.
   async function handleEmailCode(formEl, resend = false) {
     if (!getCloudConfig().emailCodeEnabled) { appBridge.toast('邮箱验证码尚未开启，请联系管理员完成发信配置。'); return; }
+    if (busyAction) return;
     if (status === 'authenticating' || currentUser || !isCloudConfigured()) return;
     const fields = new FormData(formEl);
     const email = String(fields.get('email') || '').trim();
     const token = String(fields.get('code') || '').trim();
     const codeInput = formEl.querySelector?.('input[name="code"]');
     if (codeInput) codeInput.value = '';
+    // 仅保留内存草稿（绝不持久化验证码）
+    emailCodeDraft = { email, code: resend ? '' : token };
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || (!resend && !/^\d{6,10}$/.test(token))) {
-      appBridge.toast('请填写注册邮箱和邮件中的数字验证码。'); return;
+      appBridge.toast('请填写注册邮箱和邮件中的数字验证码。'); appBridge.render(); return;
     }
     if (resend && lastCodeResendAt && injected.now()-lastCodeResendAt < 60000) {
       appBridge.toast('请间隔至少 60 秒再申请新的验证码。'); return;
     }
     if (resend) lastCodeResendAt = injected.now();
     pendingSignupEmail = email;
+    busyAction = 'code';
     const reqGen = generationToken;
     updateStatus('authenticating', resend ? '正在申请新的验证码…' : '正在验证邮箱…');
     appBridge.render();
@@ -1234,9 +1548,20 @@
       } else {
         updateStatus('signup_pending', '验证结果未能确认，请先尝试邮箱密码登录，勿连续提交验证码。');
       }
-    } catch (_) {
+    } catch (err) {
       if (generationToken !== reqGen) return;
-      updateStatus('signup_pending', '无法连接邮箱验证服务。请使用下方“检测注册连接”核对网络；验证码无需点击链接。');
+      const info = classifyRequestError(err, '邮箱验证服务');
+      let msg;
+      if (info.kind === 'timeout') {
+        msg = '连接邮箱验证服务超时。验证码无需点击链接；请稍后手动重试，或先用邮箱密码登录。';
+      } else if (info.kind === 'offline') {
+        msg = '当前处于断网状态，无法连接邮箱验证服务。恢复网络后可手动重试；验证码无需点击链接。';
+      } else {
+        msg = '无法连接邮箱验证服务。请使用下方“检测注册连接”核对网络；验证码无需点击链接。';
+      }
+      updateStatus('signup_pending', msg);
+    } finally {
+      busyAction = '';
     }
     appBridge.toast(statusMessage);
     appBridge.render();
@@ -1287,6 +1612,22 @@
   /**
    * 渲染账户主界面
    */
+  /**
+   * 仅当用户当前停留在账号页时重绘账号视图。
+   * 用于后台同步失败后即时展示“同步暂停/手动重试”卡片，避免停留在旧 HTML；
+   * 在其它视图（地图/答题弹窗）重绘会打断当前操作，因此不处理。
+   */
+  function refreshAccountView() {
+    try {
+      if (!appBridge || typeof appBridge.render !== 'function') return;
+      if (typeof location === 'undefined' || !location) return;
+      const view = String(location.hash || '').replace(/^#/, '').split('?')[0];
+      if (view === 'account') appBridge.render();
+    } catch (e) {
+      // 渲染异常不影响同步状态机
+    }
+  }
+
   function render() {
     const el = (typeof document !== 'undefined') ? document.getElementById('app') : null;
     if (!el) return;
@@ -1373,6 +1714,58 @@
       </div>
     `;
 
+    // 2.1 本机保存状态（断网/未同步时明确提示"本地已保存/待同步"）
+    const hasUnsyncedChanges = hasPendingLocalChanges();
+    let localSaveState = 'saved';
+    let localSaveText;
+    if (!configured) {
+      localSaveText = '本机学习进度已保存（云账户未配置，仅保存在当前浏览器）。';
+    } else if (!currentUser) {
+      localSaveText = '本机学习进度已保存（游客模式，登录后可合并到云账号）。';
+    } else if (lastSyncError || status === 'offline' || status === 'conflict' || hasUnsyncedChanges) {
+      localSaveState = 'pending';
+      localSaveText = '本机有改动待同步：答题进度已保存在本机，不会丢失；恢复网络后可手动重试同步。';
+    } else if (lastSyncTime > 0) {
+      localSaveText = '本机与云端记录已同步。';
+    } else {
+      localSaveText = '正在等待首次云端同步，本机记录已保存。';
+    }
+    html += `<p class="account-local-save-note" data-local-state="${localSaveState}" role="status">${esc(localSaveText)}</p>`;
+
+    // 2.2 云端不可达时的降级提示卡片（仅用户手动重试，或网络恢复时尝试一次）
+    if (configured && currentUser && (lastSyncError || status === 'offline' || status === 'conflict')) {
+      const kindLabels = {
+        timeout: '云端响应超时，同步已暂停',
+        offline: '当前处于断网状态，同步已暂停',
+        network: '无法连接云端服务，同步已暂停',
+        server: '云端服务暂时不可用，同步已暂停',
+        rate_limit: '云端请求过于频繁，同步已暂停',
+        conflict: '检测到其他设备更新，自动重新合并未完成',
+        bad_response: '云端返回数据异常，同步已暂停',
+        http: '云端返回错误，同步已暂停'
+      };
+      const alertKind = (lastSyncError && lastSyncError.kind) || (status === 'conflict' ? 'conflict' : status === 'offline' ? 'offline' : 'http');
+      const alertTitle = kindLabels[alertKind] || '同步暂时中断，进度已保存在本机';
+      const alertMessage = statusMessage || (lastSyncError && lastSyncError.message) || '云端暂时无法同步。';
+      html += `
+        <div class="account-card account-sync-alert" data-sync-error-kind="${esc(alertKind)}" role="status">
+          <div class="account-banner-head">
+            <span class="account-banner-icon">⏸</span>
+            <div>
+              <h3>${esc(alertTitle)}</h3>
+              <p>${esc(alertMessage)}</p>
+              <p>你的答题记录已保存在本机，不会丢失。网络恢复后系统只会尝试同步一次；也可以手动重试。</p>
+            </div>
+          </div>
+          <div class="account-merge-actions">
+            <button class="primary" onclick="window.CQuestAccount.handleSyncNow()" ${(isSyncing || busyAction === 'sync') ? 'disabled' : ''}>
+              ${(isSyncing || busyAction === 'sync') ? '正在同步…' : '手动重试同步 ↻'}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
     // 3. 核心账户动作区
     if (!configured) {
       html += `
@@ -1396,8 +1789,8 @@
             您已成功登录 <strong>${esc(currentUser.email)}</strong>。系统会在答题或修改时自动同步；若网络波动，本地将自动暂存并在连通后合并。
           </p>
           <div class="account-actions-row">
-            <button class="primary" onclick="window.CQuestAccount.handleSyncNow()" ${isSyncing ? 'disabled' : ''}>
-              ${isSyncing ? '正在同步中...' : '立即同步到云端 ↻'}
+            <button class="primary" onclick="window.CQuestAccount.handleSyncNow()" ${(isSyncing || busyAction === 'sync') ? 'disabled' : ''}>
+              ${(isSyncing || busyAction === 'sync') ? '正在同步中...' : '立即同步到云端 ↻'}
             </button>
             <button class="quiet danger-btn" onclick="window.CQuestAccount.handleLogout()">
               退出当前账号
@@ -1417,7 +1810,7 @@
             <form class="account-form" onsubmit="event.preventDefault(); window.CQuestAccount.handleLogin(this)">
               <div class="account-field">
                 <label>电子邮箱</label>
-                <input type="email" name="email" required autocomplete="username" placeholder="your@email.com">
+                <input type="email" name="email" required autocomplete="username" placeholder="your@email.com" value="${esc(authDraftLogin.email || '')}">
               </div>
               <div class="account-field">
                 <div class="account-field-head">
@@ -1428,12 +1821,12 @@
               </div>
               <div class="account-checkbox">
                 <label>
-                  <input type="checkbox" name="remember" checked>
+                  <input type="checkbox" name="remember" ${authDraftLogin.remember ? 'checked' : ''}>
                   记住登录状态（在当前设备持久保留）
                 </label>
               </div>
               <div class="account-form-actions">
-                <button type="submit" class="primary account-submit-btn">立即登录 ↗</button>
+                <button type="submit" class="primary account-submit-btn" ${busyAction === 'login' ? 'disabled' : ''}>${busyAction === 'login' ? '正在登录…' : '立即登录 ↗'}</button>
               </div>
             </form>
           </div>
@@ -1447,7 +1840,7 @@
             <form class="account-form" onsubmit="event.preventDefault(); window.CQuestAccount.handleSignup(this)">
               <div class="account-field">
                 <label>电子邮箱</label>
-                <input type="email" name="email" required autocomplete="username" placeholder="your@email.com">
+                <input type="email" name="email" required autocomplete="username" placeholder="your@email.com" value="${esc(authDraftSignup.email || '')}">
               </div>
               <div class="account-field">
                 <div class="account-field-head">
@@ -1458,7 +1851,7 @@
               </div>
               <div class="account-checkbox">
                 <label>
-                  <input type="checkbox" name="remember" checked>
+                  <input type="checkbox" name="remember" ${authDraftSignup.remember ? 'checked' : ''}>
                   注册后自动记住登录状态
                 </label>
               </div>
@@ -1466,7 +1859,7 @@
                 ${getCloudConfig().emailCodeEnabled ? '收到数字验证码后，在下方完成邮箱验证，无需打开邮件链接。' : '注册后请查收邮箱验证邮件。'}若邮件未送达，请检查垃圾箱或联系管理员。
               </p>
               <div class="account-form-actions">
-                <button type="submit" class="secondary account-submit-btn">注册新账号 ✦</button>
+                <button type="submit" class="secondary account-submit-btn" ${busyAction === 'signup' ? 'disabled' : ''}>${busyAction === 'signup' ? '正在注册…' : '注册新账号 ✦'}</button>
               </div>
             </form>
           </div>
@@ -1474,7 +1867,7 @@
       `;
     }
 
-    if (configured && !currentUser && getCloudConfig().emailCodeEnabled) html += `<section class="account-card account-email-code"><h3>输入邮箱验证码</h3><p class="account-info-text">先注册，再将邮件中的数字验证码填到这里。已注册但未验证的账号，也可重新发送验证码。</p><form class="account-form" onsubmit="event.preventDefault();window.CQuestAccount.handleEmailCode(this)"><div class="account-field"><label for="verify-email">注册邮箱</label><input id="verify-email" name="email" type="email" autocomplete="email" required value="${esc(pendingSignupEmail)}" placeholder="你的注册邮箱"></div><div class="account-field"><label for="verify-code">邮件验证码</label><input id="verify-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" placeholder="输入邮件中的数字验证码"></div><div class="account-form-actions"><button type="submit" class="primary" ${status === 'authenticating' ? 'disabled' : ''}>验证邮箱</button><button type="button" class="secondary" onclick="window.CQuestAccount.handleEmailCode(this.form,true)" ${status === 'authenticating' ? 'disabled' : ''}>重新发送验证码</button></div></form><p class="account-info-text">验证成功后用邮箱和密码登录。不会将验证码保存在学习记录中。</p></section>`;
+    if (configured && !currentUser && getCloudConfig().emailCodeEnabled) html += `<section class="account-card account-email-code"><h3>输入邮箱验证码</h3><p class="account-info-text">先注册，再将邮件中的数字验证码填到这里。已注册但未验证的账号，也可重新发送验证码。</p><form class="account-form" onsubmit="event.preventDefault();window.CQuestAccount.handleEmailCode(this)"><div class="account-field"><label for="verify-email">注册邮箱</label><input id="verify-email" name="email" type="email" autocomplete="email" required value="${esc(emailCodeDraft.email || pendingSignupEmail)}" placeholder="你的注册邮箱"></div><div class="account-field"><label for="verify-code">邮件验证码</label><input id="verify-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" placeholder="输入邮件中的数字验证码"></div><div class="account-form-actions"><button type="submit" class="primary" ${(status === 'authenticating' || busyAction === 'code') ? 'disabled' : ''}>验证邮箱</button><button type="button" class="secondary" onclick="window.CQuestAccount.handleEmailCode(this.form,true)" ${(status === 'authenticating' || busyAction === 'code') ? 'disabled' : ''}>重新发送验证码</button></div></form><p class="account-info-text">验证成功后用邮箱和密码登录。不会将验证码保存在学习记录中。</p></section>`;
 
     if (configured) html += `<section class="account-card account-connection-check"><h3>注册遇到网络错误？</h3><p class="account-info-text">检测当前设备到云服务的连接。不使用你的邮箱或密码，不创建账号、不发送邮件。</p><button type="button" class="secondary" onclick="window.CQuestAccount.showConnectionCheck(this)">检测注册连接</button><p role="status" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.8"></p></section>`;
 
@@ -1620,7 +2013,12 @@
       generationToken,
       lastSyncTime,
       lastLocalEditTime,
-      lastSyncedLocalEditTime
+      lastSyncedLocalEditTime,
+      lastSyncError,
+      autoSyncPaused,
+      busyAction,
+      pendingLocalChanges: hasPendingLocalChanges(),
+      syncInFlight: !!syncPromise
     };
   }
 
@@ -1645,6 +2043,13 @@
     pendingAuthHashNotice = null;
     pendingSignupEmail = '';
     lastCodeResendAt = 0;
+    lastSyncError = null;
+    autoSyncPaused = false;
+    busyAction = '';
+    syncPromise = null;
+    authDraftLogin = { email: '', remember: true };
+    authDraftSignup = { email: '', remember: true };
+    emailCodeDraft = { email: '', code: '' };
   }
 
   return {

@@ -29,6 +29,8 @@ const blank = () => ({
 });
 
 let state = blank(), storageOK = true, selectedChapter = 1, mapSource = 'h', listLimit = 30, quiz = null, practiceQuiz = null, selected = [], view = 'map';
+// 同一题重渲染时保留滚动位置；触摸连点保护状态（见文件末尾事件监听）。
+let lastQuizViewKey = '', lastQuizTap = null, suppressQuizTapUntil = 0;
 
 try {
   const raw = JSON.parse((window.CQuestAccount ? window.CQuestAccount.readLocalProgress() : localStorage.getItem(KEY)) || 'null');
@@ -532,6 +534,9 @@ function continueLearning() {
    非选择题自练关卡运行器 (Subjective Practice Runner)
    ======================================================== */
 function startPracticeLevel(level) {
+  quiz = null;
+  selected = [];
+  lastQuizViewKey = '';
   practiceQuiz = {
     levelId: level.id,
     label: level.title,
@@ -564,6 +569,9 @@ function resumePracticeQuiz() {
     continueLearning();
     return;
   }
+  quiz = null;
+  selected = [];
+  lastQuizViewKey = '';
   practiceQuiz = {
     levelId: l.id,
     label: l.title,
@@ -582,6 +590,26 @@ function currentPracticeQ() {
   return practiceQuiz?.units[practiceQuiz.index];
 }
 
+/* 自练题解卡片 HTML：首次渲染与 AI 异步到达时共用，避免整题重渲染打断草稿输入或跳滚动。 */
+function practiceAILessonHTML(u) {
+  const teachingEntry = state.teaching ? state.teaching[u.id] : null;
+  if (!teachingEntry || !teachingEntry.lesson) return '';
+  const lesson = teachingEntry.lesson;
+  return `
+      <div class="practice-ai-card">
+        <div class="ai-card-header">
+          <strong>✦ AI 专属题解</strong>
+          <span class="ai-provider-tag">${esc(lesson.provider === 'deepseek' ? 'DeepSeek' : 'Agent')} · AI生成</span>
+        </div>
+        ${lesson.hint ? `<div class="ai-hint"><b>提示：</b>${esc(lesson.hint)}</div>` : ''}
+        <div class="ai-explanation">${formatTeaching(lesson.explanation)}</div>
+        ${lesson.steps && lesson.steps.length ? `<div class="ai-steps"><b>解题步骤：</b><ol>${lesson.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>` : ''}
+        ${lesson.code ? `<div class="ai-code"><pre><code>${esc(lesson.code)}</code></pre></div>` : ''}
+        ${lesson.takeaway ? `<div class="ai-takeaway"><b>记忆要点：</b>${esc(lesson.takeaway)}</div>` : ''}
+      </div>
+    `;
+}
+
 function renderPracticeLevelQuiz() {
   if (!practiceQuiz) return;
   if (practiceQuiz.finished) {
@@ -590,6 +618,10 @@ function renderPracticeLevelQuiz() {
   }
   const u = currentPracticeQ();
   if (!u) return;
+  const scrollBody = $('#quiz-dialog .quiz-body');
+  const prevScroll = scrollBody ? scrollBody.scrollTop : 0;
+  const viewKey = 'practice:' + (practiceQuiz.levelId || '') + ':' + u.id;
+  const keepScroll = lastQuizViewKey === viewKey;
 
   if (!state.drafts) state.drafts = {};
   if (!state.selfChecks) state.selfChecks = {};
@@ -604,25 +636,8 @@ function renderPracticeLevelQuiz() {
   const stemHTML = (typeof formatPracticeStem === 'function' ? formatPracticeStem(u.stem) : esc(u.stem).replace(/\n/g, '<br>')) + (u.options?.length ? '<div class="practice-options">'+u.options.map((o,i)=>'<p><strong>'+String.fromCharCode(65+i)+'.</strong> '+esc(o)+'</p>').join('')+'</div>' : '');
   const codeBlockHTML = (u.code && typeof renderCodeBlock === 'function') ? renderCodeBlock(u.code) : (u.code ? `<pre class="practice-code"><code>${esc(u.code)}</code></pre>` : '');
 
-  // AI 题解展示
-  const teachingEntry = state.teaching ? state.teaching[u.id] : null;
-  let aiLessonHTML = '';
-  if (teachingEntry && teachingEntry.lesson) {
-    const lesson = teachingEntry.lesson;
-    aiLessonHTML = `
-      <div class="practice-ai-card">
-        <div class="ai-card-header">
-          <strong>✦ AI 专属题解</strong>
-          <span class="ai-provider-tag">${esc(lesson.provider === 'deepseek' ? 'DeepSeek' : 'Agent')} · AI生成</span>
-        </div>
-        ${lesson.hint ? `<div class="ai-hint"><b>提示：</b>${esc(lesson.hint)}</div>` : ''}
-        <div class="ai-explanation">${formatTeaching(lesson.explanation)}</div>
-        ${lesson.steps && lesson.steps.length ? `<div class="ai-steps"><b>解题步骤：</b><ol>${lesson.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>` : ''}
-        ${lesson.code ? `<div class="ai-code"><pre><code>${esc(lesson.code)}</code></pre></div>` : ''}
-        ${lesson.takeaway ? `<div class="ai-takeaway"><b>记忆要点：</b>${esc(lesson.takeaway)}</div>` : ''}
-      </div>
-    `;
-  }
+  // AI 题解展示（复用同一段 HTML：异步到达时只更新 #practice-quiz-ai-section）
+  const aiLessonHTML = practiceAILessonHTML(u);
 
   // 答案区域展示
   let answerContent = '';
@@ -721,6 +736,9 @@ function renderPracticeLevelQuiz() {
     </div>
   `;
   if (window.CQuestLessons) CQuestLessons.mount();
+  const body = $('#quiz-dialog .quiz-body');
+  if (body) body.scrollTop = keepScroll ? Math.min(prevScroll, Math.max(0, body.scrollHeight - body.clientHeight)) : 0;
+  lastQuizViewKey = viewKey;
 }
 
 function onPracticeQuizDraftInput(val) {
@@ -780,32 +798,41 @@ function requestPracticeQuizAI() {
   toast('已请求 DeepSeek 讲解，请稍候…');
 }
 
+/* 自练进度可能因云端同步/清空而丢失；写回前先恢复 state.session，避免“下一题”抛错卡死。 */
+function syncPracticeSession() {
+  if (!practiceQuiz) return;
+  if (state.session && state.session.type === 'practice') {
+    state.session.levelId = practiceQuiz.levelId;
+    state.session.index = practiceQuiz.index;
+  } else {
+    state.session = { type: 'practice', levelId: practiceQuiz.levelId, index: practiceQuiz.index };
+  }
+}
+
 function prevPracticeQuestion() {
-  if (!practiceQuiz || practiceQuiz.index <= 0) return;
+  if (!practiceQuiz || practiceQuiz.finished || practiceQuiz.index <= 0) return;
   practiceQuiz.index--;
   practiceQuiz.showAnswer = false;
-  state.session.index = practiceQuiz.index;
+  syncPracticeSession();
   save();
   renderPracticeLevelQuiz();
-  $('#quiz-dialog').scrollTop = 0;
 }
 
 function nextPracticeQuestion() {
-  if (!practiceQuiz) return;
+  if (!practiceQuiz || practiceQuiz.finished) return;
   if (practiceQuiz.index >= practiceQuiz.units.length - 1) {
     finishPracticeLevel();
     return;
   }
   practiceQuiz.index++;
   practiceQuiz.showAnswer = false;
-  state.session.index = practiceQuiz.index;
+  syncPracticeSession();
   save();
   renderPracticeLevelQuiz();
-  $('#quiz-dialog').scrollTop = 0;
 }
 
 function finishPracticeLevel() {
-  if (!practiceQuiz) return;
+  if (!practiceQuiz || practiceQuiz.finished) return;
   practiceQuiz.finished = true;
   practiceQuiz.elapsed = Math.floor((Date.now() - practiceQuiz.start) / 1000);
 
@@ -834,6 +861,7 @@ function finishPracticeLevel() {
 }
 
 function renderPracticeLevelResult() {
+  if (!practiceQuiz) return;
   const total = practiceQuiz.units.length;
   const mastered = practiceQuiz.masteredCount;
   const review = total - mastered;
@@ -860,10 +888,11 @@ function renderPracticeLevelResult() {
       </div>
     </div>
   `;
-  $('#quiz-dialog').scrollTop = 0;
+  lastQuizViewKey = '';
 }
 
 function retryPracticeLevel() {
+  if (!practiceQuiz) return;
   const l = practiceQuiz;
   startPracticeLevel({
     id: l.levelId,
@@ -900,6 +929,7 @@ function startQuiz(questions, label, levelId = null) {
     return;
   }
   practiceQuiz = null;
+  lastQuizViewKey = '';
   quiz = {
     ids: questions.map(q => q.id),
     label,
@@ -925,6 +955,7 @@ function resumeQuiz() {
     return;
   }
   practiceQuiz = null;
+  lastQuizViewKey = '';
   quiz = s;
   selected = [];
   renderQuiz();
@@ -942,10 +973,11 @@ function getBugReportContext() {
     : /Safari/i.test(ua) ? 'Safari' : 'Other';
   const context = {page:view === 'teach' ? 'coach' : view,mode:'page',
     viewport:{width:Math.round(innerWidth),height:Math.round(innerHeight)},browser};
-  if ($('#quiz-dialog').open && quiz && !quiz.finished) {
+  // dialog 内实际运行的运行器决定 mode，避免残留的上一轮 quiz 抢走自练的反馈上下文。
+  if ($('#quiz-dialog').open && practiceQuiz && !practiceQuiz.finished) {
+    context.questionId=currentPracticeQ()?.id || '';context.mode='practice';context.position=practiceQuiz.index+1;
+  } else if ($('#quiz-dialog').open && quiz && !quiz.finished) {
     context.questionId=currentQ()?.id || '';context.mode='choice';context.position=quiz.index+1;
-  } else if ($('#quiz-dialog').open && practiceQuiz && !practiceQuiz.finished) {
-    context.questionId=practiceQuiz.units[practiceQuiz.index]?.id || '';context.mode='practice';context.position=practiceQuiz.index+1;
   } else if (view==='practice' && typeof getFilteredPracticeUnits==='function') {
     context.questionId=getFilteredPracticeUnits()[currentPracticeIndex]?.id || '';context.mode='practice';context.position=currentPracticeIndex+1;
   }
@@ -982,11 +1014,17 @@ function formatQuizOption(text, question, index) {
 }
 
 function renderQuiz() {
+  if (!quiz) return;
   if (quiz.finished) {
     renderResult();
     return;
   }
   const q = currentQ();
+  if (!q) return;
+  const scrollBody = $('#quiz-dialog .quiz-body');
+  const prevScroll = scrollBody ? scrollBody.scrollTop : 0;
+  const viewKey = 'choice:' + quiz.ids[quiz.index];
+  const keepScroll = lastQuizViewKey === viewKey;
   const result = quiz.results[quiz.index];
   const fav = state.favorites.includes(q.id);
   const multi = q.answer.length > 1;
@@ -1075,6 +1113,9 @@ function renderQuiz() {
   `;
   if (typeof renderTeachingPanel === 'function') renderTeachingPanel();
   if (window.CQuestLessons) CQuestLessons.mount();
+  const body = $('#quiz-dialog .quiz-body');
+  if (body) body.scrollTop = keepScroll ? Math.min(prevScroll, Math.max(0, body.scrollHeight - body.clientHeight)) : 0;
+  lastQuizViewKey = viewKey;
 }
 
 function requestAIForCurrentQuestion() {
@@ -1107,8 +1148,9 @@ function choose(l) {
 }
 
 function submitAnswer() {
-  if (!quiz || !selected.length || quiz.results[quiz.index]) return;
+  if (!quiz || quiz.finished || !selected.length || quiz.results[quiz.index]) return;
   const q = currentQ();
+  if (!q) return;
   const correct = selected.join('') === q.answer;
   quiz.results[quiz.index] = { id: q.id, selected: [...selected], correct };
   const old = state.answers[q.id] || { attempts: 0, correct: 0 };
@@ -1126,7 +1168,7 @@ function submitAnswer() {
 }
 
 function nextQuestion() {
-  if (!quiz.results[quiz.index]) return;
+  if (!quiz || quiz.finished || !quiz.results[quiz.index]) return;
   if (quiz.index === quiz.ids.length - 1) {
     finishQuiz();
     return;
@@ -1136,10 +1178,10 @@ function nextQuestion() {
   state.session = quiz;
   save();
   renderQuiz();
-  $('#quiz-dialog').scrollTop = 0;
 }
 
 function finishQuiz() {
+  if (!quiz || quiz.finished) return;
   quiz.finished = true;
   const correct = quiz.results.filter(r => r.correct).length;
   const score = Math.round(correct / quiz.ids.length * 100);
@@ -1161,6 +1203,7 @@ function finishQuiz() {
 }
 
 function renderResult() {
+  if (!quiz) return;
   const correct = quiz.results.filter(r => r.correct).length;
   const wrong = quiz.ids.length - correct;
   const level = !!quiz.levelId;
@@ -1187,20 +1230,23 @@ function renderResult() {
       </div>
     </div>
   `;
-  $('#quiz-dialog').scrollTop = 0;
+  lastQuizViewKey = '';
 }
 
 function retryQuiz() {
+  if (!quiz) return;
   const old = quiz;
   startQuiz(old.ids.map(id => Q.find(q => q.id === id)), old.label, old.levelId);
 }
 
 function retryMistakes() {
+  if (!quiz) return;
   const a = quiz.results.filter(r => !r.correct).map(r => Q.find(q => q.id === r.id));
   startQuiz(a, '本次错题巩固');
 }
 
 function nextLevel() {
+  if (!quiz) return;
   const levels = allLevels().filter(l => l.type === 'choice');
   const idx = levels.findIndex(l => l.id === quiz.levelId);
   const next = levels[idx + 1];
@@ -1578,8 +1624,52 @@ $('#quiz-dialog').addEventListener('cancel', e => {
   }
 });
 
+/* AI 讲解异步到达：自练关卡只更新题解卡片，不整题重渲染（保留已输入草稿、滚动位置与焦点）。 */
+window.addEventListener('cquest:teaching-received', e => {
+  if (!practiceQuiz || practiceQuiz.finished || quiz) return;
+  if (!$('#quiz-dialog').open) return;
+  const id = e && e.detail ? e.detail.questionId : '';
+  const u = currentPracticeQ();
+  if (!id || !u || u.id !== id) return;
+  const section = $('#practice-quiz-ai-section');
+  if (section) section.innerHTML = practiceAILessonHTML(u);
+  if (window.CQuestLessons) CQuestLessons.mount();
+});
+
+/* 触摸连点保护：确认答案/下一题等按钮在重渲染后原地替换，第二次快速点击会误触新按钮。
+   只对连续两次触摸（间隔 <360ms、位移 <40px）且首击是动作按钮/按钮已被替换时生效；
+   鼠标点击、键盘与程序化 click（Playwright 回归测试）不受影响。 */
+function quizTapActionTarget(el) {
+  return el && el.closest ? el.closest('.quiz-foot button, .quiz-head button, .quiz-step-actions button, .result-buttons button, .quiz-meta button') : null;
+}
+document.addEventListener('touchstart', e => {
+  const dialog = $('#quiz-dialog');
+  if (!dialog || !dialog.open) { lastQuizTap = null; return; }
+  const t = e.touches && e.touches[0];
+  if (!t) return;
+  const now = performance.now();
+  const actionEl = quizTapActionTarget(e.target);
+  if (lastQuizTap && actionEl && now - lastQuizTap.t < 360 && Math.hypot(t.clientX - lastQuizTap.x, t.clientY - lastQuizTap.y) < 40) {
+    if (lastQuizTap.actionable || !lastQuizTap.el.isConnected) {
+      suppressQuizTapUntil = now + 600;
+      lastQuizTap = null;
+      return;
+    }
+  }
+  lastQuizTap = { t: now, x: t.clientX, y: t.clientY, el: e.target, actionable: !!actionEl };
+}, { capture: true, passive: true });
+document.addEventListener('click', e => {
+  if (!suppressQuizTapUntil || performance.now() > suppressQuizTapUntil) return;
+  if (!quizTapActionTarget(e.target)) return;
+  suppressQuizTapUntil = 0;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+}, true);
+
 document.addEventListener('keydown', e => {
-  if (!$('#quiz-dialog').open || $('#material-dialog').open || /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName) || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (!$('#quiz-dialog').open || /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName) || e.ctrlKey || e.metaKey || e.altKey) return;
+  // 顶层是反馈 / 资料 / 更多菜单等非做题弹窗时，做题热键不得穿透（否则会在遮罩下改答案或提交）
+  if (document.querySelector('dialog[open]:not(#quiz-dialog)')) return;
   if (practiceQuiz && !practiceQuiz.finished) {
     if (e.key === 'ArrowRight' || e.key === 'n') {
       e.preventDefault();

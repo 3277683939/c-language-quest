@@ -5,6 +5,10 @@
   const DRAFT_KEY = 'cquest-bug-draft-v1';
   const CATEGORIES = ['按钮', '显示', '题目内容', '注册登录', '其他'];
 
+  // 背景滚动锁由 overrides/ui.js 的通用 dialog 锁统一处理（按 dialog[open] 计数、
+  // 支持嵌套弹窗、移动端生效、关闭最后一层时精确恢复 scrollY）。
+  // 这里不再重复加锁，避免两套锁互相恢复滚动位置。
+
   // 粗粒度浏览器提取，绝不泄露完整 UA 或指纹
   function getRoughBrowser() {
     const ua = (typeof navigator !== 'undefined' && navigator.userAgent) || '';
@@ -17,6 +21,19 @@
     return 'Other';
   }
 
+  // 云端 questionId 白名单只接受 ^[A-Za-z0-9:_-]{0,100}$（见 cloud/bug-reports.sql）。
+  // 自练单元 id 形如 self:h:1:基础篇:填空题:1，含中文，直接提交会被前后端白名单丢弃/拒绝，
+  // 这里做可逆 ASCII 编码：白名单字符原样保留，其余字符写成 _<十六进制码点>（基础篇 => _57fa_7840_7bc7）。
+  function encodeQuestionId(raw) {
+    if (typeof raw !== 'string' || !raw) return '';
+    let out = '';
+    for (const ch of raw) {
+      out += /^[A-Za-z0-9:_-]$/.test(ch) ? ch : '_' + ch.codePointAt(0).toString(16);
+      if (out.length > 100) break;
+    }
+    return out.slice(0, 100);
+  }
+
   // 安全清洗 context：只含 page/模式/题号/位置/屏幕尺寸/粗粒度浏览器名称
   // 严禁完整URL、UA、邮箱、答案、草稿或Key
   function sanitizeContext(raw) {
@@ -24,12 +41,30 @@
     const clean = {};
     const allowed = {page:['map','random','wrong','favorites','practice','coach','library','progress','account','leaderboard','feedback'],mode:['choice','practice','page'],browser:['WeChat','Huawei','Edge','Chrome','Firefox','Safari','Other']};
     for (const key of Object.keys(allowed)) if (allowed[key].includes(raw[key])) clean[key]=raw[key];
-    if (typeof raw.questionId==='string' && /^[A-Za-z0-9:_-]{0,100}$/.test(raw.questionId)) clean.questionId=raw.questionId;
+    const qid = encodeQuestionId(raw.questionId);
+    if (qid) clean.questionId=qid;
     if (Number.isInteger(raw.position) && raw.position>=0 && raw.position<=999999) clean.position=raw.position;
     const v=raw.viewport || {width:window.innerWidth,height:window.innerHeight};
     if (Number.isInteger(v.width) && Number.isInteger(v.height) && v.width>0 && v.height>0 && v.width<=10000 && v.height<=10000) clean.viewport={width:v.width,height:v.height};
     clean.browser ||= getRoughBrowser();
     return clean;
+  }
+
+  // 展示用上下文：题号仍显示用户可读的原始值；提交给云端时使用 sanitizeContext 编码后的值
+  function contextParts(ctx) {
+    if (!ctx) return [];
+    const parts = [];
+    if (ctx.page) parts.push(`页面: ${ctx.page}`);
+    if (ctx.mode) parts.push(`模式: ${ctx.mode}`);
+    if (ctx.questionId != null) parts.push(`题号: ${ctx.questionId}`);
+    if (ctx.position != null) parts.push(`位置: ${ctx.position}`);
+    if (ctx.viewport) parts.push(`屏幕: ${ctx.viewport.width}×${ctx.viewport.height}`);
+    if (ctx.browser) parts.push(`浏览器: ${ctx.browser}`);
+    return parts;
+  }
+
+  function contextLine(ctx) {
+    return `附带信息: ${contextParts(ctx).join(' | ') || '无'}`;
   }
 
   // 生成随机 reportId
@@ -98,6 +133,8 @@
   }
 
   let currentContext = null;
+  // 展示用副本（题号保留原始中文 id），提交时用 currentContext 的 ASCII 编码值
+  let currentContextDisplay = null;
   let activeReportId = null;
   let dialogElement = null;
   let submitting = false;
@@ -180,14 +217,7 @@
         ctxPreview.textContent = '';
       } else {
         ctxPreview.style.display = 'block';
-        const parts = [];
-        if (currentContext.page) parts.push(`页面: ${currentContext.page}`);
-        if (currentContext.mode) parts.push(`模式: ${currentContext.mode}`);
-        if (currentContext.questionId != null) parts.push(`题号: ${currentContext.questionId}`);
-        if (currentContext.position != null) parts.push(`位置: ${currentContext.position}`);
-        if (currentContext.viewport) parts.push(`屏幕: ${currentContext.viewport.width}×${currentContext.viewport.height}`);
-        if (currentContext.browser) parts.push(`浏览器: ${currentContext.browser}`);
-        ctxPreview.textContent = `附带信息: ${parts.join(' | ') || '无'}`;
+        ctxPreview.textContent = contextLine(currentContextDisplay || currentContext);
       }
     }
 
@@ -229,6 +259,8 @@
       if (dialog.open) dialog.close();
     };
 
+    // 背景滚动锁由 overrides/ui.js 的通用 dialog 锁统一处理（含嵌套计数与恢复），此处不再重复加锁
+
     closeBtn.addEventListener('click', closeHandler);
     cancelBtn.addEventListener('click', closeHandler);
 
@@ -239,14 +271,7 @@
       const includeCtx = attachCheckbox.checked && currentContext;
       let text = `【C语言闯关营 反馈】\n类别: ${cat}\n描述: ${desc || '(未填写)'}`;
       if (includeCtx) {
-        const parts = [];
-        if (currentContext.page) parts.push(`页面: ${currentContext.page}`);
-        if (currentContext.mode) parts.push(`模式: ${currentContext.mode}`);
-        if (currentContext.questionId != null) parts.push(`题号: ${currentContext.questionId}`);
-        if (currentContext.position != null) parts.push(`位置: ${currentContext.position}`);
-        if (currentContext.viewport) parts.push(`屏幕: ${currentContext.viewport.width}×${currentContext.viewport.height}`);
-        if (currentContext.browser) parts.push(`浏览器: ${currentContext.browser}`);
-        text += `\n附带环境: ${parts.join(' | ')}`;
+        text += `\n附带环境: ${contextParts(currentContextDisplay || currentContext).join(' | ')}`;
       }
       const ok = await copyText(text);
       statusDiv.className = ok ? 'cquest-bug-status cquest-bug-status-info' : 'cquest-bug-status cquest-bug-status-error';
@@ -324,6 +349,10 @@
     if (submitting) {dialogElement?.focus();return;}
     // 严格清洗并隔离上下文，新开对话不得保留旧上下文
     currentContext = sanitizeContext(rawContext);
+    const rawQuestionId = rawContext && typeof rawContext.questionId === 'string' ? rawContext.questionId : '';
+    currentContextDisplay = currentContext && rawQuestionId && rawQuestionId !== currentContext.questionId
+      ? Object.assign({}, currentContext, { questionId: rawQuestionId })
+      : currentContext;
 
     const dialog = ensureDialog();
     const draft = loadDraft();
@@ -356,14 +385,7 @@
     // 更新预览
     if (currentContext) {
       ctxPreview.style.display = 'block';
-      const parts = [];
-      if (currentContext.page) parts.push(`页面: ${currentContext.page}`);
-      if (currentContext.mode) parts.push(`模式: ${currentContext.mode}`);
-      if (currentContext.questionId != null) parts.push(`题号: ${currentContext.questionId}`);
-      if (currentContext.position != null) parts.push(`位置: ${currentContext.position}`);
-      if (currentContext.viewport) parts.push(`屏幕: ${currentContext.viewport.width}×${currentContext.viewport.height}`);
-      if (currentContext.browser) parts.push(`浏览器: ${currentContext.browser}`);
-      ctxPreview.textContent = `附带信息: ${parts.join(' | ') || '无'}`;
+      ctxPreview.textContent = contextLine(currentContextDisplay || currentContext);
     } else {
       ctxPreview.style.display = 'none';
       ctxPreview.textContent = '';
@@ -389,6 +411,7 @@
     if (!dialog.open) {
       dialog.showModal();
     }
+    // 背景滚动锁由 overrides/ui.js 的通用 dialog 锁统一处理，避免两套锁互相恢复滚动位置
   }
 
   // 管理端反馈渲染

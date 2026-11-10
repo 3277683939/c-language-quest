@@ -388,8 +388,76 @@
   margin-top: 10px;
 }
 
+/* 本机保存状态提示（断网/待同步时明确告知进度已保存在本机） */
+.account-local-save-note {
+  margin: -6px 0 0;
+  padding: 10px 14px;
+  border: 1px dashed #cfdccc;
+  border-radius: 9px;
+  background: #f7faf4;
+  color: #4f6657;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.account-local-save-note[data-local-state="pending"] {
+  border-color: #f0cda4;
+  border-style: solid;
+  background: #fff8ef;
+  color: #8a5626;
+}
+
+/* 云端不可达 / 版本冲突 降级提示卡片 */
+.account-sync-alert {
+  border-color: #f0cda4;
+  background: #fffaf3;
+}
+
+.account-sync-alert .account-banner-head h3 {
+  color: #a05a22;
+}
+
+.account-sync-alert .account-banner-head p {
+  color: #7d5a35;
+}
+
+.account-sync-alert .account-banner-icon {
+  color: #d08a3e;
+}
+
+.account-sync-alert[data-sync-error-kind="timeout"],
+.account-sync-alert[data-sync-error-kind="offline"],
+.account-sync-alert[data-sync-error-kind="network"] {
+  border-color: #e9c9a3;
+  background: #fff7ec;
+}
+
+.account-sync-alert[data-sync-error-kind="conflict"] {
+  border-color: #e8d9a8;
+  background: #fffbea;
+}
+
+.account-submit-btn:disabled,
+.account-merge-actions button:disabled,
+.account-actions-row button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* 移动端 390px 深度适配 */
 @media (max-width: 760px) {
+  .account-entry-state[data-state="offline"],
+  .account-entry-state[data-state="conflict"] {
+    display: inline;
+    max-width: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .account-entry {
+    max-width: 100%;
+  }
   .account-header {
     flex-direction: column;
     gap: 10px;

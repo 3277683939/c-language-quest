@@ -1693,7 +1693,9 @@ body[data-view="coach"] .section-top, body[data-view="teach"] .section-top { fle
     margin: 0;
     width: 100vw;
     max-width: none;
+    height: 100vh;
     height: 100dvh;
+    max-height: 100vh;
     max-height: 100dvh;
     border-radius: 0;
     overscroll-behavior: contain;
@@ -2230,5 +2232,250 @@ body[data-view="coach"] .section-top, body[data-view="teach"] .section-top { fle
   }
   .feedback-admin-actions {
     justify-content: space-between;
+  }
+}
+
+/* =========================================================================
+   微信移动端深度适配（域 2）：真实可视高度 / 安全区 / 字体缩放 / 触控 / 弹窗
+   - 回退顺序统一为「先 100vh / 100dvh 传统值，再 var(--app-height, 100dvh)」：
+     ui.js 用 visualViewport.height 写 --app-height(px)，跟随微信地址栏伸缩与软键盘；
+     老内核不认识 dvh 时回退 100vh，JS 未执行时现代浏览器仍有 dvh 兜底。
+   - --safe-bottom 用 :root 变量承载 env()，无刘海环境为 0px，也便于测试覆盖验证。
+   ========================================================================= */
+
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+html,
+body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* 1) 地址栏伸缩：100vh 在移动端是「大视口」，底部按钮/固定导航会被地址栏盖住 */
+.workspace {
+  min-height: 100vh;
+  min-height: var(--app-height, 100dvh);
+}
+#quiz-dialog {
+  max-height: calc(100vh - 48px);
+  max-height: calc(var(--app-height, 100dvh) - 48px);
+}
+#quiz-content {
+  max-height: calc(100vh - 48px);
+  max-height: calc(var(--app-height, 100dvh) - 48px);
+}
+#material-dialog {
+  height: 90vh;
+  height: min(90dvh, calc(var(--app-height, 100dvh) - 16px));
+}
+#more-dialog {
+  max-height: 80vh;
+  max-height: min(80dvh, calc(var(--app-height, 100dvh) - 40px));
+}
+.cquest-bug-dialog {
+  max-height: 85vh;
+  max-height: min(85dvh, calc(var(--app-height, 100dvh) - 24px));
+}
+@media (min-width: 761px) and (max-width: 980px) {
+  .chapters {
+    max-height: calc(100vh - 80px);
+    max-height: calc(var(--app-height, 100dvh) - 80px);
+  }
+}
+
+/* 2) 弹窗滚动锁：dialog 在 top layer，锁 body 不影响弹窗自身定位与滚动 */
+body.dialog-scroll-locked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 3) 反馈弹窗「附上当前上下文」：原生 checkbox 只有 18px 命中区，整行 label 做成 ≥44px */
+.cquest-bug-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 0;
+  cursor: pointer;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+.cquest-bug-checkbox-label input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 0;
+  flex: 0 0 auto;
+}
+.cquest-bug-checkbox-label span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* 4) 手机端：全屏做题弹窗跟真实可视高度、底部安全区、44px 触控、键盘避让 */
+@media (max-width: 760px) {
+  .sidebar {
+    height: calc(56px + var(--safe-bottom, 0px));
+    padding: 0 4px var(--safe-bottom, 0px);
+  }
+  .workspace {
+    padding-bottom: calc(68px + var(--safe-bottom, 0px));
+  }
+  #toast {
+    bottom: calc(68px + var(--safe-bottom, 0px));
+  }
+
+  #quiz-dialog {
+    height: 100vh;
+    height: var(--app-height, 100dvh);
+    max-height: 100vh;
+    max-height: var(--app-height, 100dvh);
+    width: 100%;
+    max-width: 100%;
+  }
+  #quiz-content {
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .quiz-foot {
+    padding-bottom: calc(10px + var(--safe-bottom, 0px));
+  }
+  .cquest-bug-dialog {
+    padding-bottom: calc(18px + var(--safe-bottom, 0px));
+  }
+  #more-dialog {
+    padding-bottom: calc(18px + var(--safe-bottom, 0px));
+  }
+
+  /* 触控目标 ≥44px */
+  .action-btn {
+    min-height: 44px;
+  }
+  .icon-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .account-entry {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+  .quiz-back {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  #quiz-dialog .icon-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .quiz-foot .text-button {
+    min-height: 44px;
+    padding: 4px 2px;
+  }
+  .quiz-foot .primary {
+    min-height: 44px;
+  }
+  .segmented button {
+    min-height: 44px;
+    padding: 8px 6px;
+  }
+  .chapter {
+    min-height: 44px;
+  }
+  .primary,
+  .secondary,
+  .quiet {
+    min-height: 44px;
+  }
+  /* hero 主按钮（.hero-copy .primary 在基础样式里 min-height:38px，优先级更高，需同权重覆盖） */
+  .hero-copy .primary {
+    min-height: 44px;
+  }
+  .text-button {
+    min-height: 44px;
+  }
+  .topbar .avatar {
+    min-height: 44px;
+  }
+  .more-menu a {
+    min-height: 44px;
+  }
+  .more-menu button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  /* 键盘打开：隐藏底部固定导航；非全屏弹窗上移，输入框不被键盘盖住 */
+  body.keyboard-open .sidebar {
+    transform: translateY(110%);
+  }
+  body.keyboard-open dialog[open]:not(#quiz-dialog) {
+    inset-block-start: 0;
+    inset-block-end: auto;
+    margin: 8px auto;
+    max-height: calc(var(--app-height, 100dvh) - 16px);
+  }
+}
+
+/* 5) 短横屏（640x360 等微信横屏）：做题底栏横排，给内容留出 ≥150px 高度 */
+@media (max-width: 760px) and (max-height: 480px) {
+  #quiz-dialog .quiz-head {
+    min-height: 44px;
+    padding: 5px 12px;
+  }
+  #quiz-dialog .quiz-head h2 {
+    font-size: 14px;
+  }
+  .quiz-foot {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 12px calc(8px + var(--safe-bottom, 0px));
+  }
+  .quiz-foot small {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 0;
+    line-height: 1.2;
+  }
+  .quiz-foot small .text-button {
+    font-size: 12.5px;
+  }
+  .quiz-foot .primary {
+    width: auto;
+    flex: 0 0 auto;
+    min-width: 148px;
+  }
+  .quiz-step-actions {
+    display: flex;
+    width: auto;
+    flex: 0 0 auto;
+  }
+  .quiz-step-actions .primary,
+  .quiz-step-actions .secondary {
+    min-width: 96px;
+  }
+  .quiz-body {
+    padding: 10px 12px 12px;
   }
 }
