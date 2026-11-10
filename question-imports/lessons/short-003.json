@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "author": "DeepSeek",
+  "lessons": [
+    {
+      "questionId": "self:n11:1:简答篇:简答题:51",
+      "sourceHash": "eef3709e83201bf013dac65257f416eedda5257988650d2fc3a56858f8b84451",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 定义：用 malloc/calloc/realloc 从堆上拿到内存，用完没有 free，指针被覆盖或提前返回，这块内存再也拿不回来。\n2. 后果：进程占用内存单调上升，长驻服务变慢，最后申请失败或被杀。\n3. 常见成因：出错分支提前 return/break、指针重新赋值覆盖旧地址、链表删结点忘 free、只释放了最外层结构。\n4. 与它区分：泄漏是「该还的没还」，野指针、越界是另一类错误。\n展开：严格说泄漏的是堆内存的引用，进程结束时操作系统会整块回收，所以短命程序影响有限，长驻程序才致命。排查用 valgrind --leak-check=full，或者加 -fsanitize=address 重新编译。写代码的习惯是：每个 malloc 旁边先想好配对的 free，所有返回路径都汇到同一个 cleanup 出口。",
+      "steps": [
+        "先给定义：申请了堆内存、没有释放、指针也丢了，程序再也无法归还这块内存。",
+        "再答后果：占用持续增长，最终内存不足，程序变慢甚至崩溃。",
+        "补三个典型场景：出错分支提前返回、指针被重新赋值覆盖、函数返回前忘记释放。",
+        "最后补排查手段 valgrind 或 AddressSanitizer，并说明进程退出后系统会回收。"
+      ],
+      "takeaway": "申请了没释放、指针又丢了，堆内存就永远收不回来。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "内存泄漏是程序运行期间已分配的内存没有被释放，导致内存占用不断增加，可能使程序变慢或崩溃。",
+        "reason": "资料答案的表述与标准定义一致，补充了成因和检测手段但不改变结论。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:52",
+      "sourceHash": "c17d18c4d8517f05c76391f72350b49680b37ee6b8c37f9743b1fa81a1b66950",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 定义：取值为空指针常量的指针，C 标准保证它不指向任何对象，也不指向任何函数。\n2. 写法：用 <stddef.h> 的 NULL，本质是实现定义的 0 值指针常量，通常是 (void*)0 或 0。\n3. 解引用空指针是未定义行为，多数平台上表现为段错误。\n4. free(NULL) 是合法且无害的空操作；释放后把指针置 NULL 是防御习惯。\n展开：NULL 不是字符 '\\0'，也不等于未初始化的野指针——野指针里是垃圾地址，判不出来，只能靠初始化成 NULL 来避免。使用前先判空：if (p != NULL) { ... }。地址 0 一般落在受保护页，不能拿来做有效地址。函数返回指针失败时用 NULL 表示，调用方必须检查，这是 C 里最常见的接口约定。",
+      "steps": [
+        "先回答定义：值是空指针常量、不指向任何有效对象的指针。",
+        "补写法：C 里用 NULL，它由 <stddef.h> 提供，是 0 值指针常量。",
+        "说明后果：解引用是未定义行为，通常崩成段错误。",
+        "补两条实用规则：free(NULL) 安全；指针初始化和释放后都置 NULL。"
+      ],
+      "takeaway": "空指针的值是 0、不指向任何对象，用 NULL 表示，解引用必崩。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "空指针是不指向任何有效内存地址的指针，C 语言中用 NULL 表示。",
+        "reason": "与资料答案一致，补充了 NULL 的来源、解引用后果和 free(NULL) 的安全性。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:53",
+      "sourceHash": "00e3308e607f421f0b2939fe3667ae6541025754dcf6a9e394eff3cd1ec918d6",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 形式：expr1, expr2, ..., exprN，从左到右依次求值。\n2. 值：整个逗号表达式的值等于最后一个子表达式的值，类型也是最后一个的类型。\n3. 顺序有保证：逗号运算符是序列点，前一个子表达式一定先算完。\n4. 优先级最低，所以赋值要加括号：int x = (a, b, c); 取的是 c。\n展开：最典型的用法在 for 头里：for (i = 0, j = n - 1; i < j; ++i, --j)。要分清三种逗号——函数实参之间的逗号、初始化列表里的逗号都不是逗号运算符，只有表达式层级的逗号才是。反例：int x = a, b, c; 会被解析成一条声明，x 初始化为 a，同时声明 b 和 c，根本不是逗号表达式。",
+      "steps": [
+        "先给定义：用逗号把多个表达式串成一个，整体取最后一个子表达式的值和类型。",
+        "强调求值顺序：从左到右，逗号是序列点，前面的先算完。",
+        "点出优先级最低，赋值时必须写括号，否则只把第一个式子赋给左边。",
+        "举 for 头里 i = 0, j = n - 1 的用法，并提醒声明里的逗号不是逗号运算符。"
+      ],
+      "takeaway": "逗号表达式从左到右算，整体的值就是最后一式的值，赋值别忘括号。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "逗号表达式用逗号把多个表达式组合成一个，从左到右依次求值，整体返回最后一个表达式的值，例如 x = (a, b, c);。",
+        "reason": "资料答案正确，补充了序列点、优先级和与声明中逗号的区别。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:54",
+      "sourceHash": "ce9be40912a515dedb4da9cd246095ecf8f44e5869de0c8de074bc1a2bc416a3",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 作用：告诉编译器通过这个名字不能修改数据，直接写就会编译报错。\n2. 它不等于编译期常量：C 里 const int n 不能当数组维度或 case 标号，那是 #define 和 enum 的活儿。\n3. 三种位置：const int *p 数据只读指针可改；int * const p 指针只读；const int * const p 都只读。\n4. 修饰函数形参表示函数承诺不改实参，是接口契约，也便于编译器优化。\n展开：读法技巧是 const 修饰它左边的东西，左边没有就修饰右边，所以 const int *p 里 const 管的是 int，*p 不能改、p 可以改。把 const 对象的地址赋给非 const 指针属于违反约束，编译器会报警；绕过强制转换真的写进去就是未定义行为。",
+      "steps": [
+        "先答作用：限定只读，通过该名字修改会被编译器拒绝。",
+        "纠正一个常见误解：C 的 const 变量不是编译期常量，不能用作数组长度或 case 标号。",
+        "分清 const int *p、int * const p、const int * const p 三种写法的保护对象。",
+        "补充用途：修饰形参表达不改实参；const 对象被强转后写入是未定义行为。"
+      ],
+      "takeaway": "const 管只读不管常量，位置不同保护的对象不同，靠近谁就限制谁。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "const 用于声明只读对象，可用于变量、指针和函数参数，防止通过该名字修改其值。",
+        "reason": "与资料答案一致，补充了 C 中 const 不是编译期常量以及三种指针写法的区别。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:55",
+      "sourceHash": "01910851f97dd0693889c5cea222fc94505d2d8f99e366613ad45c0443ab2651",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 分配：malloc(size) 申请 size 字节且内容未初始化；calloc(n, size) 申请并清零；realloc 调整已有块大小。\n2. 释放：free(p) 把这块堆内存还给分配器，只能释放一次，只能释放 malloc 系列返回的指针。\n3. 生存期由程序员控制，函数返回后依然有效，这是它和局部变量最大的差别。\n4. 必做两件事：检查返回值是否为 NULL；free 之后把指针置 NULL。\n展开：malloc 返回 void*，C 里不需要强制转换。常见错误是忘记判空就写入、free 之后继续用（释放后使用）、重复 free、去 free 栈上变量的地址，后三种都是未定义行为。数组习惯写法：int *a = malloc(n * sizeof *a); 用 sizeof *a 能随类型自动变化，改类型时不用改这句。",
+      "steps": [
+        "先答分配：malloc/calloc/realloc 在堆上按字节申请，生存期由程序员掌握。",
+        "再答释放：free 把内存交还分配器，防止泄漏，必须与申请一一配对。",
+        "补两个必做的检查：返回值判 NULL、free 后置 NULL。",
+        "点出常见错误：重复释放、释放后使用、free 非堆地址，都是未定义行为。"
+      ],
+      "takeaway": "malloc 申请、free 归还，一一配对并判空，堆内存的生死全由程序员管。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "动态内存分配是在运行时从堆上申请内存，动态内存释放是把不再需要的内存还给堆，避免内存泄漏。",
+        "reason": "资料答案正确，补充了 calloc/realloc、返回值检查和释放后使用的错误。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:56",
+      "sourceHash": "0028ccda8d41396ac701bffc5b0a92b80df8bf116b0bea23708034c4fc03a9e3",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 打开：fopen(path, rb) 用于二进制读，fopen(path, wb) 用于二进制写，b 表示二进制模式。\n2. 读写：用 fread/fwrite 按块搬运字节，而不是 fprintf/fscanf。\n3. 关闭：fclose；写模式下它还会把缓冲区刷到磁盘。\n4. 每步都判返回值：fopen 失败返回 NULL，fread 返回实际读到的元素个数。\n展开：b 的意义在 Windows 上最明显——文本模式会把 \\n 写成 \\r\\n，还会把 0x1A 当成文件结束符，二进制模式不做任何转换，字节原样进出。读写混合用 rb+（文件必须已存在），wb+ 会先清空文件。定位用 fseek/ftell，回到开头用 rewind。读结构体数组时，用 fread(arr, sizeof arr[0], n, fp) 并检查返回值是否等于 n。",
+      "steps": [
+        "答打开方式：用 rb 读、wb 写，b 就是关闭文本转换的二进制模式。",
+        "答读写函数：用 fread/fwrite 按块读写，而不是格式化的 fprintf/fscanf。",
+        "答收尾：fclose 关闭并刷新缓冲区。",
+        "补 Windows 上 b 的实际作用（换行与 0x1A），以及判空和检查 fread 返回值。"
+      ],
+      "takeaway": "二进制读写就一句：rb/wb 打开，fread/fwrite 搬字节，最后 fclose。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "用 fopen 以 rb 模式打开文件做二进制读取，以 wb 模式打开做二进制写入。",
+        "reason": "与资料答案一致，补充了 fread/fwrite 读写函数、fclose 关闭和 b 模式的实际作用。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:57",
+      "sourceHash": "c3360b536de198e4117f0c65b8c918a50dec63e67bf53f91958ecdd459e8f497",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 形式：返回类型 函数名(参数类型列表); 只有声明、没有函数体。\n2. 作用：让编译器在调用点检查参数个数、类型兼容性和返回值类型，并正确生成调用代码。\n3. 放置：写在头文件里，或者放在调用之前；函数定义可以放到别的源文件。\n4. 无参函数必须写 f(void)，写成 f() 在 C 里表示参数未指定，检查就失效了。\n展开：原型和定义的区别只在于有没有函数体；原型可以重复出现，定义在一个程序里只能有一份。没有原型时，老式 C 会按默认提升规则去猜参数类型，float 被当成 double、小整数被提升为 int 这类错误就出来了，所以现代 C 要求先声明后调用。",
+      "steps": [
+        "先答形式：返回类型、函数名、参数类型列表，以分号结尾，没有函数体。",
+        "答作用：把接口告诉编译器，实现调用前的类型检查和正确的参数传递。",
+        "答放置位置：头文件里声明，定义放源文件，实现跨文件使用。",
+        "补一条细节：无参要写 void，写空括号表示参数未指定。"
+      ],
+      "takeaway": "函数原型就是只声明不实现，让编译器在调用前就能检查接口。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "函数原型是函数的声明，包含返回类型、函数名和参数列表，用来告诉编译器函数的接口。",
+        "reason": "与资料答案一致，补充了声明与定义的区别以及无参要写 void 的细节。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:58",
+      "sourceHash": "b4cdc54baf165155dbcad1f31755539b4f742d2716a9d8aa095033ffc5939cae",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 定义：把函数指针作为参数传进另一个函数，由被调用方在合适时机回过头调用它。\n2. 价值：把「做什么」和「什么时候做」拆开，实现通用框架加定制行为。\n3. 典型例子：qsort 的比较函数、bsearch、signal 的信号处理、pthread_create 的线程入口。\n4. 硬约束：回调函数的签名必须和函数指针类型完全一致，否则是未定义行为。\n代码：\n```c\nint cmp(const void *a, const void *b) {\n    return *(const int *)a - *(const int *)b;\n}\nqsort(arr, n, sizeof arr[0], cmp);\n```\n展开：函数名在表达式里会自动退化成函数指针，所以传的是 cmp，不是 cmp(...)。比较函数要用负数/0/正数分别表示小于/等于/大于；两数相减在极值附近可能溢出，稳妥写法是先比较再返回。",
+      "steps": [
+        "先给定义：以函数指针形式传入、由别的函数在适当时机调用的函数。",
+        "答价值：解耦通用流程与具体行为，避免写重复的循环框架。",
+        "举标准库例子：qsort 的比较函数是最经典的用法。",
+        "强调签名必须完全匹配，否则是未定义行为。"
+      ],
+      "takeaway": "回调就是把函数当参数传进去，让别人在合适的时候替你调用。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "回调函数是作为参数传递给另一个函数、并在特定事件发生时被调用的函数，用于让调用方自定义行为。",
+        "reason": "与资料答案一致，补充了函数指针退化、签名匹配要求和 qsort 实例。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:59",
+      "sourceHash": "cb37d391f44754e69374bebe8f02f89ccb2a73f70b5da6fa9cf159804074c6cd",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 三个标准限定符：const 只读、volatile 易变、restrict 唯一访问路径（C99 起）。\n2. volatile 强制每次访问都真正读写内存，用于硬件寄存器、信号处理里被外部修改的变量。\n3. volatile 不提供原子性，也不建立线程间同步，不能当锁用。\n4. restrict 是对编译器的优化承诺：这个指针是访问那块内存的唯一途径，违反承诺即未定义行为。\n展开：最典型的原型是 void *memcpy(void *restrict dst, const void *restrict src, size_t n); 有了 restrict，编译器才敢做向量化展开。限定符可以叠加，const volatile 表示程序自己不写、但值可能被外部改变，常见于只读状态寄存器。C11 另有 _Atomic，那才是真正的原子类型，和 volatile 不是一回事。",
+      "steps": [
+        "先列全三个限定符：const、volatile、restrict，并各给一句解释。",
+        "重点讲 volatile：每次都真读内存，用于硬件和信号场景。",
+        "补充澄清：volatile 不等于原子操作，也不能替代互斥锁。",
+        "讲 restrict 是优化承诺，并举 memcpy 原型佐证。"
+      ],
+      "takeaway": "类型限定符就三个：const 只读、volatile 易变、restrict 独占访问。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "类型限定符是修饰类型属性的关键字，包括 const（常量）、volatile（易失性）和 restrict（限定）。",
+        "reason": "与资料答案一致，补充了 volatile 不具原子性、restrict 的语义与 memcpy 实例。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:60",
+      "sourceHash": "0cf11e83dec3592f2e23ee1bd9e6bc10e487bdbdba76aa0b54f9c40da4da8500",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 规则：p + n 前进 n 个元素，实际字节数是 n * sizeof(*p)，不是 n 字节。\n2. 减法：同一数组内两个指针相减得到相隔的元素个数，类型是 ptrdiff_t。\n3. 合法范围：只能在同一数组内移动，最多停在尾后一个位置，越界即未定义行为。\n4. 下标本质：a[i] 等价于 *(a + i)，所以 i[a] 同样合法。\n展开：数组名 a 是地址常量，不能 ++；指针变量 p 可以 ++。void* 在标准 C 里不能做算术（GNU 扩展按 char* 处理），要按字节移动就先转成 char*。指针相减和比较都要求指向同一数组，两个不同对象的地址相减没有意义。",
+      "steps": [
+        "先给定义：对指针做加减，按元素为单位移动，而不是按字节。",
+        "强调步长：p + 1 前进的是 sizeof(*p) 个字节，这是与整数加法最大的不同。",
+        "答指针相减得元素个数，类型 ptrdiff_t。",
+        "补约束：只能在同一个数组内移动，越界是未定义行为。"
+      ],
+      "takeaway": "指针加一不是加一字节，而是前进一个 sizeof(*p) 的元素。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "指针算术是对指针做加减运算，利用元素大小自动缩放，以便在数组里移动和访问元素。",
+        "reason": "与资料答案一致，补充了按元素缩放的步长、相减得元素个数和越界约束。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:61",
+      "sourceHash": "f9d43322dee0dfa81cc9dadb6a0b79b7b8277adbafa49aa35cb423e6d44480da",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 形式：双引号括起来的字符序列，末尾编译器自动补一个 '\\0'。\n2. 类型与大小：类型是 char[N]，N 等于字符数加一，所以 sizeof(abc) 是 4，strlen(abc) 是 3。\n3. 存储：静态存储期，程序整个生命周期都在，通常放在只读段。\n4. 修改字面值是未定义行为，所以指针要写 const char *s = ...。\n展开：相邻的字面值会自动拼接，ab cd 等价于 abcd。char s[] = abc; 是把内容复制到数组里，s 可以改；char *p = abc; 是让 p 指向只读区，p 本身可以改指向、*p 不能改。字面值本身不是指针，但在表达式里会退化为指向首字符的指针。",
+      "steps": [
+        "先答形式：双引号括起来的字符序列，末尾隐含 '\\0'。",
+        "答类型和大小：char[N]，长度是字符数加一，sizeof 比 strlen 多 1。",
+        "答存储期：静态存储、通常在只读段，所以内容不能改。",
+        "补两条实用点：相邻字面值自动拼接；指针应加 const。"
+      ],
+      "takeaway": "字符串字面值是带 '\\0' 的 char 数组，存在只读区，只能读不能改。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "字符串字面值是用双引号括起来的字符序列，例如 Hello，末尾隐含 '\\0'。",
+        "reason": "与资料答案一致，补充了隐含终止符、sizeof 与 strlen 的差值和只读性质。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:62",
+      "sourceHash": "e3f3e00fb5a164e7c2daba1d5509d1a92390df892c0ef9ff317354de8ae2832f",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 用法：strcmp(s1, s2) 返回 0 表示两个字符串内容完全相同。\n2. 返回值含义：负数表示 s1 小于 s2，正数表示大于，具体数值大小不要依赖。\n3. 不能用 == 比较：那比的是两个指针的地址，不是字符串内容。\n4. 比较规则：按 unsigned char 逐字符比较，遇到第一个不同字符或终止符就结束。\n代码：\n```c\n#include <string.h>\nif (strcmp(str1, str2) == 0) {\n    /* 内容相等 */\n}\n```\n展开：安全写法是先确认两个指针非 NULL；只比较前 n 个字符用 strncmp。忽略大小写没有标准函数，POSIX 是 strcasecmp，Windows 是 _stricmp。判断前缀用 strncmp(s, prefix, strlen(prefix)) == 0 更贴合语义。",
+      "steps": [
+        "先答函数：用 strcmp，返回 0 才是内容相等。",
+        "强调判断条件写 == 0，不要写 == 1 或 != 0。",
+        "指出不能用 == 直接比较两个 char*，那是比较地址。",
+        "补边界：判空指针、限长用 strncmp、忽略大小写没有标准函数。"
+      ],
+      "takeaway": "比字符串内容用 strcmp，返回 0 就是相等，== 比的是地址。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "用标准库函数 strcmp 比较两个字符串，返回值为 0 表示字符串相等。",
+        "reason": "与资料答案一致，补充了返回值语义、不能用 == 比较地址以及 strncmp 的用法。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:63",
+      "sourceHash": "14600a76bbc725721f697e9168e497e2e585bb44e50c42780657bbfa218a003f",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 含义：char *p 保存字符串首字符的地址，长度靠末尾的 '\\0' 确定。\n2. 两种写法差别很大：char *p = abc 指向只读字面值；char s[] = abc 是数组副本，内容可改。\n3. 传参：函数形参写 char * 或 const char *，就等于把整个字符串传了进去。\n4. 陷阱：sizeof(p) 得到的是指针大小，不是串长，取长度要用 strlen。\n展开：遍历字符串最地道的写法是 while (*p) { ... ++p; }，靠终止符停下来。指针可以改指向，例如 p = s + 3，但不能越过终止符继续读，那是越界。需要修改内容时，一定要用数组或 malloc 出来的可写内存，不能往字面值上写。",
+      "steps": [
+        "先答定义：存放字符串首字符地址的指针，长度由 '\\0' 界定。",
+        "对比两种初始化的差别：指向字面值只读 vs 数组副本可改。",
+        "说明传参：实参传 char* 就等于传整串，函数靠终止符知道有多长。",
+        "提醒 sizeof 得指针大小，串长要用 strlen。"
+      ],
+      "takeaway": "字符串指针只存首字符地址，长度全靠 '\\0'，sizeof 量不出串长。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "指向字符串的指针是存放字符串首字符地址的指针变量，通过字符指针可以访问整个字符串。",
+        "reason": "与资料答案一致，补充了字面值与数组副本的可写性差别以及 sizeof 的陷阱。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:64",
+      "sourceHash": "564f0997afa65994af72e35f947f35d804a1ad339c1babd2e473cae261c190fa",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 三步走：fopen 打开拿到 FILE*，用读写函数操作流，最后 fclose 关闭。\n2. 文本方式：fprintf/fscanf、fgets/fputs；二进制方式：fread/fwrite。\n3. 检查返回值：fopen 返回 NULL 就是失败，用 perror 打印原因；fscanf 返回成功转换的项数。\n4. 结束条件：fscanf 返回 EOF 表示读到文件尾，用它控制循环。\n展开：fgets 会把换行符一起读进来，需要时自己删掉；gets 因为无法限长已经被移出标准，不要用。写模式 w 会截断已有文件，追加要用 a；忘记 fclose 可能丢掉缓冲区里的数据。一个进程能同时打开的文件数有限，用完立刻关闭。",
+      "steps": [
+        "先答三个动作：fopen 打开、读写函数操作、fclose 关闭。",
+        "区分文本与二进制：格式化函数 vs fread/fwrite。",
+        "答错误处理：fopen 返回 NULL 要处理，用 perror 说明原因。",
+        "补 fscanf 返回项数、EOF 结束循环、fgets 保留换行这几个细节。"
+      ],
+      "takeaway": "文件 I/O 永远是 fopen 打开、读写、fclose 关闭，返回值必须判。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "用 fopen 打开文件，用 fprintf 或 fscanf 做读写，最后用 fclose 关闭文件。",
+        "reason": "与资料答案一致，补充了二进制函数、返回值检查、EOF 结束和 fgets 的换行问题。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:65",
+      "sourceHash": "327c46b2262f051330636ea2d39fd6d22e20354c427aa13c90e0d2a903c0732a",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 函数内 static 局部变量：静态存储期，只初始化一次，未显式初始化则清零，跨调用保值。\n2. 文件作用域的 static 变量或函数：内部链接，只能在本文件内访问。\n3. 它和 const 无关：static 管生存期和链接性，const 管能不能写。\n4. 代价：C11 之前没有线程局部存储，多线程共享同一个 static 局部变量必须加锁。\n代码：\n```c\nint next_id(void) {\n    static int id = 0;\n    return ++id;\n}\n```\n展开：每次调用 next_id 都接着上次的值累加，因为 id 存在静态区而不是栈帧里，函数返回时它不会消失。需要每个文件一份私有全局变量时，static 是 C 语言里唯一的做法。",
+      "steps": [
+        "先答定义：用 static 声明、与程序同生命周期、跨函数调用保值的变量。",
+        "补充第二含义：文件作用域的 static 表示内部链接，本文件私有。",
+        "澄清它不等于 const，一个管生存期一个管可写性。",
+        "用计数器示例说明只初始化一次、未初始化则为 0。"
+      ],
+      "takeaway": "static 管的是生存期和可见性：跨调用保值、文件内私有，与 const 无关。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "静态变量是用 static 声明的变量，在程序运行期间一直存在，其生存期跨越函数调用。",
+        "reason": "与资料答案一致，补充了文件作用域内部链接这一层含义以及与 const 的区别。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:66",
+      "sourceHash": "b02d1082523700216a9ac342d83d3ba53bd3c8926c08113b31482ba560459148",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 标准层面：C11 提供了 <threads.h>，thrd_create/thrd_join/mtx_t 是标准接口，但支持度不齐。\n2. 实践中最常用 pthread：pthread_create 建线程、pthread_join 等线程结束、pthread_mutex_* 做互斥。\n3. 编译要加链接选项 -pthread（GCC/Clang）；Windows 原生用 CreateThread 或 _beginthreadex。\n4. 共享数据必须同步，数据竞争在 C 里是未定义行为。\n代码：\n```c\n#include <pthread.h>\npthread_t t;\npthread_create(&t, NULL, worker, NULL);\npthread_join(t, NULL);\n```\n展开：资料答案把 pthread 归到 C 标准库名下并不准确，pthread 属于 POSIX 标准，Windows 原生不提供。线程函数签名固定为 void *(*)(void *)，返回值通过指针带回调用方。退出前要么 join 要么 detach，否则线程资源不回收。",
+      "steps": [
+        "先答标准接口：C11 的 <threads.h> 提供了 thrd_create 等函数。",
+        "答通用做法：POSIX 的 pthread，create 建线程、join 等待、mutex 同步。",
+        "补编译与平台差异：-pthread 链接选项，Windows 用 CreateThread 系列。",
+        "强调共享数据必须同步，否则数据竞争是未定义行为。"
+      ],
+      "takeaway": "多线程靠库：C11 threads 或 pthread，创建、同步、等待三件套，别忘加锁。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "通常用 POSIX 的 pthread 库（pthread_create/pthread_join/pthread_mutex_*）创建和管理线程，链接时加 -pthread；C11 另提供 <threads.h>，Windows 原生则用 CreateThread 系列。",
+        "reason": "可用 pthread 这一主结论正确，但资料答案称 pthread 属于 C 标准库并不准确：它是 POSIX 标准，标准库里的线程接口是 C11 的 <threads.h>，平台支持情况也不同。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:67",
+      "sourceHash": "167696f2fb5c6b061e1c181ca9726c604ccdb965a311f765141ecf5e40924523",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 写法：结构体成员后面加冒号和位数，如 unsigned flag : 1; 表示只占 1 位。\n2. 用途：压缩标志位，对应硬件寄存器或协议报文的位布局，节省内存。\n3. 限制：只能用于整数类型（int/unsigned int/_Bool 等），不能取地址，&s.flag 非法。\n4. 布局由实现定义：位序、跨存储单元的分配方式、结构体总大小都不可移植。\n展开：宽度不能超过底层类型的位数，在 32 位 unsigned 上写 a : 40 是错误。宽度为 0 的匿名位域用来强制下一个成员从新的存储单元开始。跨平台传数据时不要直接把位域结构体发出去，先手工打包成字节流更稳。",
+      "steps": [
+        "先答定义：在结构体成员后指定位数，按位存储成员。",
+        "答用途：压缩标志位、对应寄存器与协议位布局，省内存。",
+        "答限制：只能整数类型、不能取地址、不能超过类型位宽。",
+        "补可移植性：位序和分配方式由实现定义，跨平台传输不要直接发结构体。"
+      ],
+      "takeaway": "位域用冒号指定位数，省内存但布局由实现决定，别拿它做跨平台协议。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "位域是结构体成员的一种声明方式，用冒号指定该成员占用的位数，以节省内存。",
+        "reason": "与资料答案一致，补充了类型限制、不能取地址和布局由实现定义这几点。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:68",
+      "sourceHash": "4803f1c1b612e757f1c404598f6ff89f111b9e426aa8a1874752148aea8cdff1",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. int *a[10] 是指针数组：10 个元素，每个元素都是 int*。\n2. int (*a)[10] 是数组指针：一个指针，指向 int[10] 这样的整个数组。\n3. 读法：从标识符出发，先看右边有没有 [] 或 ()，[] 的优先级高于 *，括号能改变结合顺序。\n4. 用途：指针数组常做字符串表，数组指针常用来接收二维数组的行。\n代码：\n```c\nint *parr[3];    /* 指针数组：3 个 int* */\nint (*prow)[4];  /* 数组指针：prow + 1 跳过一整行 */\n```\n展开：sizeof(parr) 是 3 乘指针大小，sizeof(prow) 只是一个指针大小。把 int m[3][4] 传给函数时，形参要写 int (*p)[4]；写成 int **p 是错的，两者内存布局完全不同。",
+      "steps": [
+        "先分开定义：指针数组是数组，元素是指针；数组指针是指针，指向一个数组。",
+        "给读法：从标识符出发，[] 优先于 *，括号改变结合顺序。",
+        "用 sizeof 对比两者大小，帮助记忆。",
+        "举用途：字符串表用指针数组，二维数组传参用数组指针。"
+      ],
+      "takeaway": "指针数组是数组（装指针），数组指针是指针（指向整行），看括号定胜负。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "指针数组是元素为指针的数组；数组指针是指向整个数组的指针，指向的是数组整体而不是单个元素。",
+        "reason": "与资料答案一致，补充了声明写法、优先级读法和二维数组传参的实际用途。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:69",
+      "sourceHash": "8d82db0b9aa151cc1214715eece6f0fa26c730a69c5bdf55dc40342d5d41880c",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 定义：enum 名字 { 成员列表 }，成员是整型常量，默认从 0 开始依次加一。\n2. 可以显式赋值，后面的成员在它的基础上继续递增。\n3. 作用：用有意义的名字代替魔法数字，限定取值范围，调试器里能显示名字。\n4. 底层类型通常是 int，成员可直接当整数用；C 的 enum 不做严格的类型检查。\n代码：\n```c\nenum color { RED, GREEN = 5, BLUE };  /* RED=0, GREEN=5, BLUE=6 */\n```\n展开：枚举常量不能取地址，作用域和普通标识符一样，所以不同枚举的成员名不能重复。C23 才允许指定底层类型，之前的 C 版本由编译器自己挑一个能容纳所有值的整数类型。和 switch 搭配时，枚举还能提醒你漏了哪个分支。",
+      "steps": [
+        "先答定义：把一组命名整型常量打包成一个类型，默认从 0 递增。",
+        "答作用：替代魔法数字、限定取值范围、提升可读性和可调试性。",
+        "补显式赋值的规则和后续成员继续递增的行为。",
+        "说明它本质是整数、不参与严格类型检查，成员名共享普通标识符作用域。"
+      ],
+      "takeaway": "枚举就是一组有名字的整数常量，替代魔法数字，默认从 0 开始递增。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "枚举类型用于创建一组命名的整数常量，提高代码可读性，很多场合可以代替魔法数字。",
+        "reason": "与资料答案一致，补充了默认取值、显式赋值规则和底层类型是整数这几点。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:70",
+      "sourceHash": "5feca7f65847c21ab42c467e9c0b0faf83a397b9a56461ff453bd7264be98ff6",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 作用：给已有类型起一个别名，不创建新类型，由编译器处理。\n2. 语法：typedef 原类型 新名字; 例如 typedef unsigned long ulong;\n3. 与 #define 的差别：typedef 有作用域、遵守语法、能正确处理指针；宏只是文本替换。\n4. 最常见用途：结构体别名和函数指针别名，让声明变短变可读。\n代码：\n```c\ntypedef struct node { int val; struct node *next; } Node;\ntypedef int (*cmp_fn)(const void *, const void *);\n```\n展开：typedef int *P; 之后 P a, b; 两个都是指针；而 #define P int* 会让 b 变成 int，这是经典坑。结构体自引用成员必须写 struct node *next，因为那时别名还没生效。",
+      "steps": [
+        "先答定义：typedef 为现有类型建立别名，不产生新类型。",
+        "答好处：简化冗长声明，尤其是结构体和函数指针。",
+        "对比宏：typedef 有作用域、由编译器处理，宏是文本替换会踩指针坑。",
+        "举 typedef int *P 与 #define 的差异说明为什么选 typedef。"
+      ],
+      "takeaway": "typedef 只是给类型起别名，不造新类型，比 #define 安全因为有作用域。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "typedef 为已有的数据类型创建一个新的类型名，提高代码可读性和可维护性。",
+        "reason": "与资料答案一致，补充了它与宏替换的差异以及结构体、函数指针别名的典型用法。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:71",
+      "sourceHash": "03e77319b2be8fb51eb519ebc9cc9eeccee5ada7f3850a69c6c5c7d78caf58f3",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 形式：int **pp，pp 保存的是另一个指针变量的地址。\n2. 解引用层级：*pp 得到 int*，**pp 才得到 int 本身。\n3. 用途一：在函数里修改调用者的指针，比如申请内存后把地址写回去。\n4. 用途二：动态二维数组，或者遍历指针数组，例如 main 的 argv。\n代码：\n```c\nvoid alloc(int **p, int n) {\n    *p = malloc(n * sizeof **p);\n}\n```\n展开：多级指针每解引用一次都必须确认这一级有效，任何一层是 NULL 都会崩。main 的 char *argv[] 在形参位置等价于 char **argv。超过两级的指针通常说明数据结构或接口设计可以简化。",
+      "steps": [
+        "先答定义：存放另一个指针变量地址的指针，即二级指针。",
+        "讲清解引用层级：先取到一级指针，再取到目标对象。",
+        "举个真实用途：函数内用 int ** 把分配到的地址写回调用者。",
+        "补另一个用途：动态二维数组和 argv 的形参写法。"
+      ],
+      "takeaway": "二级指针存的是指针的地址，一次解引用得指针，两次才得数据。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "指向指针的指针存放另一个指针变量的地址，即二级指针，常用于多级间接访问。",
+        "reason": "与资料答案一致，补充了解引用层级、在函数中回写指针和 argv 的实际用例。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:72",
+      "sourceHash": "77acbb0e66262ea45516ae74fc673dbcb9c1967ef9e56e84fb5fd2e660d51ff1",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 形式：返回类型 f(固定参数, ...)，省略号前必须至少有一个具名参数。\n2. 实现靠 <stdarg.h>：va_list、va_start、va_arg、va_end 四件套。\n3. 编译器不检查可变部分的类型和个数，调用方与实现方必须自己约定。\n4. 典型例子：printf、scanf、execl；vprintf 系列接收已经打包好的 va_list。\n代码：\n```c\n#include <stdarg.h>\nint sum(int n, ...) {\n    va_list ap;\n    va_start(ap, n);\n    int s = 0;\n    for (int i = 0; i < n; ++i) s += va_arg(ap, int);\n    va_end(ap);\n    return s;\n}\n```\n展开：传参时 char 和 short 会提升为 int，float 提升为 double，所以 va_arg 里要写提升后的类型。printf 靠格式串判断下一个参数的类型，格式串与实参不匹配就是未定义行为。",
+      "steps": [
+        "先答定义：参数个数和类型不固定的函数，用省略号表示可变部分。",
+        "答实现要素：至少一个具名参数，配 <stdarg.h> 的 va_list 系列宏。",
+        "举标准库例子 printf，并说明它靠格式串推断类型。",
+        "补两个坑：默认参数提升导致 va_arg 类型要写对；格式串与实参不符是未定义行为。"
+      ],
+      "takeaway": "可变参数函数用省略号加 stdarg 宏，类型个数全靠调用双方自己约定。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "可变参数函数是能接受数量不定、类型不定的参数的函数，例如 printf，用省略号和 stdarg 宏实现。",
+        "reason": "与资料答案一致，补充了 stdarg 四件套、默认参数提升和格式串不匹配的风险。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:73",
+      "sourceHash": "ca7707655ebf731bc2f9865eb306a994e3235e514da974013749a349503c528a",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 用法：assert(cond)，条件为假时向 stderr 打印失败的表达式、文件名和行号，然后调用 abort。\n2. 定位：检查程序内部的不变量、前置条件和后置条件，属于开发期自检。\n3. 不要用于用户输入或可恢复错误，那种情况该用 if 加返回错误码。\n4. 定义 NDEBUG 后 assert 会被编译器去掉，所以断言里不能写有副作用的表达式。\n代码：\n```c\n#include <assert.h>\nassert(p != NULL);\n```\n展开：写成 assert(i++ < n) 放进发布版，i++ 会随着断言一起消失，逻辑就被悄悄改掉了。编译期能检查的条件用 C11 的 _Static_assert，不通过直接编译失败，比运行期断言更早暴露问题。",
+      "steps": [
+        "先答定义：检查程序假设是否成立的自检手段，标准库用 assert 宏实现。",
+        "答行为：条件为假时打印表达式、文件、行号并终止程序。",
+        "答适用边界：抓内部不变量，不处理用户输入等可恢复错误。",
+        "补 NDEBUG 的影响，提醒断言里不要写 i++ 这类副作用。"
+      ],
+      "takeaway": "断言是开发期自检，失败即终止；NDEBUG 会去掉它，别在里面写副作用。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "断言是检查程序假设是否成立的机制，C 语言里用 <assert.h> 的 assert 宏实现，条件不成立时打印信息并终止程序。",
+        "reason": "与资料答案一致，补充了失败时的具体行为、NDEBUG 的影响和断言里不能有副作用。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:74",
+      "sourceHash": "6641357a9d9ad86b08dd32c15faf219be5faf9f7e991bb52d2ff18c425e19dfc",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 头指针：保存第一个结点的地址，是访问整条链表的入口，链表为空时通常是 NULL。\n2. 尾指针：保存最后一个结点的地址，让尾部插入从 O(n) 降到 O(1)。\n3. 单链表只能单向走，有尾指针也不能从尾往前找，所以尾指针不等于双向链表。\n4. 维护成本：插入第一个结点、删除最后一个结点时，都要同步更新 head 和 tail。\n展开：没有尾指针时，尾插要先从头遍历到 next 为 NULL 的结点，代价是 O(n)。即使有尾指针，删除尾结点仍然要找它的前驱，还是 O(n)；要做到 O(1) 得用双向链表或者哨兵结点。带哨兵头结点能消掉空链表和删除首结点这两处特判。",
+      "steps": [
+        "先答两者指向哪里：头指针指向首结点、尾指针指向末结点。",
+        "答作用：头指针是遍历入口，尾指针让尾部插入变成常数时间。",
+        "补充维护规则：空表插入、删除末结点时 head 和 tail 都要改。",
+        "澄清一个误解：有尾指针也不等于双向链表，删除尾结点仍要找前驱。"
+      ],
+      "takeaway": "头指针是入口、尾指针省尾插；单链表靠尾指针也不能倒着走。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "头指针指向链表的第一个结点，尾指针指向最后一个结点，用来访问和管理链表，尾指针可让尾部插入达到 O(1)。",
+        "reason": "与资料答案一致，补充了尾插复杂度、维护规则以及尾指针不能反向前进这几点。"
+      }
+    },
+    {
+      "questionId": "self:n11:1:简答篇:简答题:75",
+      "sourceHash": "45a98615769d65d60e9a26dba84dde4b1df491362d04810144ccc50b157321b8",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要点（可直接背）：\n1. 规则：每个成员的偏移量必须是它自身对齐值的整数倍，结构体总大小补齐到最大成员对齐值的整数倍。\n2. 目的：CPU 按边界访问更快，某些架构上非对齐访问直接触发异常。\n3. 控制手段：C11 的 alignas（需 <stdalign.h>）指定对齐值；#pragma pack 降低对齐。\n4. 实用技巧：调整成员顺序，把对齐要求高的放前面，能减少填充字节。\n代码：\n```c\nstruct a { char c; int i; char d; };  /* 通常 12 字节，有填充 */\nstruct b { int i; char c; char d; };  /* 通常 8 字节 */\n```\n展开：用 offsetof(struct a, i) 可以查成员偏移，sizeof 查总大小。alignas 的参数必须是 2 的幂，而且不能小于类型本身的自然对齐。#pragma pack(1) 能压缩体积，但会带来非对齐访问，在 ARM 等平台上可能出错，也有性能损失。传输协议、文件格式这种要求精确布局的场合，宁可用手工序列化，也不要依赖结构体的内存布局。",
+      "steps": [
+        "先答规则：成员偏移按自身对齐值对齐，结构体总大小按最大对齐值补齐。",
+        "答原因：CPU 访问效率和部分架构的硬性要求。",
+        "答控制手段：alignas 指定对齐，pragma pack 打包降低对齐。",
+        "补优化技巧：重排成员顺序减少填充，用 offsetof 验证偏移。",
+        "提醒 packed 的代价：可移植性差、可能非对齐访问出错，协议数据应手工序列化。"
+      ],
+      "takeaway": "对齐就是让地址落在自身宽度的整数倍上，改成员顺序比强改对齐更安全。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "内存对齐是让数据按一定规则落在地址边界上，可用 alignas（C11）或 #pragma pack 控制，成员顺序和填充会影响结构体大小。",
+        "reason": "与资料答案一致，补充了对齐规则、填充、成员重排以及 #pragma pack 属于编译器扩展这几点。"
+      }
+    }
+  ]
+}
