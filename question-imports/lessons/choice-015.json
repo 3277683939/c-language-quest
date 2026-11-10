@@ -1,0 +1,486 @@
+{
+ "schemaVersion": 1,
+ "author": "DeepSeek",
+ "lessons": [
+  {
+   "questionId": "x-9-40",
+   "sourceHash": "a828017b84ce769f750ce12e831e67a67db429bbae69c2957b71e9c311dd6261",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ntypedef 的作用只是给「已存在的类型」起一个别名，编译器不会因此多出一个新类型，所以「用 typedef 可以增加新类型」这句是错的，选 A。\nB 说对了：typedef 的宾语只能是类型，不能是变量，想把一个变量名注册成类型是不行的。\nC 说对了：把 struct student 这种长名字缩成 STU，代码更短也更好读。\nD 说对了：typedef 不分配内存、不产生新类型，只在编译期建立「新名等于旧类型」的对应关系。\n顺便区分它和 #define：#define 是预处理阶段的文本替换，typedef 由编译器处理，受作用域和类型检查约束，这正是两者最本质的差别。\n待核对：A 项末尾多出一个 OCR 残留字符「1」，按原意忽略。",
+   "steps": [
+    "先定性质：typedef 是类型别名，不是新类型定义，A 的「增加新类型」直接违背这一点。",
+    "B、C、D 依次说的是「只别名类型不别名变量」「提升可读性」「只是换个名字代表已有类型」，都符合 typedef 语义。",
+    "顺带区分：#define 是文本替换，typedef 由编译器处理，作用域与类型检查都不一样。"
+   ],
+   "takeaway": "typedef 只给已有类型起别名，不产生新类型。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（用 typedef 可以增加新类型）",
+    "reason": "资料答案为 A；typedef 仅建立类型别名，不会新增类型，A 的表述错误，B、C、D 均符合 typedef 语义。"
+   }
+  },
+  {
+   "questionId": "x-9-41",
+   "sourceHash": "91dc5013e37ff215b166e48a8adbf66aed65115977383e659c2d29873c58043f",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nA 项先用 typedef 给一个匿名结构体起名 ABC，再用 ABC 定义 a1、a2，两步都合法：\n```c\ntypedef struct\n{ int n; char ch; } ABC;\nABC a1, a2;\n```\nB 项 `struct ABC;` 只是把 ABC 声明成不完整类型，后面那个 `{ int n;char ch; };` 既没有结构体名也不是合法语句；最后 `ABC a1,a2;` 里 ABC 从没被 typedef 成类型名，编译器不认识。\nC 项 `typedef struct ABC;` 本身写坏了，typedef 后面必须跟完整类型；而且 C 语言不允许在成员声明处写 `int n=0;` 这种初值。\nD 项 `}ABC a1,a2;` 把结构体变量名 ABC 和另外两个变量挤在一起，语法不成立；就算写成 `}ABC;` 也只是定义了变量 ABC，不是类型。\n待核对：题面被 OCR 压成无空格形式，这里按 C 语法补回空格讲解。",
+   "steps": [
+    "抓 typedef 句式：`typedef struct {...} 新类型名;` 之后才能用这个新类型名定义变量，A 完全符合。",
+    "B 的 `struct ABC;` 只声明不完整类型，且 ABC 没有 typedef，不能当类型名用。",
+    "C 的成员带初值、typedef 后直接跟分号都非法；D 把类型名和变量名混在一处，语法错。"
+   ],
+   "takeaway": "先 typedef 起名，再用名字定义变量；结构体成员不能带初值。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（typedef 匿名结构体为 ABC，再定义 a1、a2）",
+    "reason": "资料答案为 A；A 的 typedef 与变量定义两步都合法，B、C、D 分别错在不完整类型加非类型名、typedef 语法与成员初值、变量名与类型名混写。"
+   }
+  },
+  {
+   "questionId": "x-9-42",
+   "sourceHash": "db26f6db851a8ed7c28b8eec75a50a70f99f0781ac7d1266c6947ff8d6b399c0",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n先还原被 OCR 压扁的程序段：\n```c\ntypedef struct node { int data; struct node *next; } *NODE;\nNODE p;\n```\n关键在 typedef 名字前面那个星号：写成 `*NODE` 说明 NODE 是「struct node *」这个指针类型的别名。所以 `NODE p;` 展开就是 `struct node *p;`，p 是指向 struct node 结构变量的指针，选 C。\nA 错：`NODE p;` 是合法的定义语句，星号已经包含在类型里，不需要再写。\nB 错：p 只有指针那么大，不是结构变量；访问数据要写 p->data，写 p.data 才是错的。\nD 错：p 只有一层指针。若定义成 `typedef struct node {...} *NODE, **PNODE;` 再用 PNODE，那才是「指针的指针」。",
+   "steps": [
+    "先看 typedef 的声明符：写成 `*NODE` 就是把「struct node *」整体起名为 NODE。",
+    "`NODE p;` 等价于 `struct node *p;`，p 是一级指针。",
+    "据此排除：A 说语法错、B 说是结构变量、D 说是二级指针，都与展开后的类型不符。"
+   ],
+   "takeaway": "typedef 里星号写在哪，别名就自带几层指针。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（p 是指向 struct node 结构变量的指针）",
+    "reason": "资料答案为 C；NODE 是 struct node * 的别名，故 p 为一级结构指针，A、B、D 的语法或类型判断均不成立。"
+   }
+  },
+  {
+   "questionId": "x-9-43",
+   "sourceHash": "f24154dbf7d61cc1d92ae4aee7fabcaf88f43f417c3943e531032eec9951a9f0",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n枚举定义的标准形式是 `enum 标记 { 枚举常量表 };`：名字后面直接跟花括号，表内是逗号分隔的标识符，末尾一个分号。\nD 项 `enum a{one,two,three};` 完全符合这个形式，one、two、three 依次取 0、1、2，是正确的定义。\nA 项名字后多了等号：`enum a = {...}` 不是定义语法，等号只能出现在枚举常量后面给常量赋初值。\nB 项既保留了错误的等号，又在花括号内用分号结尾。括号内单独写 `one=9` 本来合法，但 `enum a=` 这个开头已经让整体不成立。\nC 项用字符串当枚举常量，枚举常量必须是整型常量标识符，字符串不行。\n待核对：四个选项都被 OCR 压成 `enuma={...}` 的形式，这里按标准语法还原。",
+   "steps": [
+    "背下模板：`enum 名 { 常量1, 常量2, ... };`，名字与花括号之间不能有等号。",
+    "A、B 都在名字后加了等号，B 的花括号内还多出分号，两处都违反模板。",
+    "C 拿字符串当枚举常量，类型不合法；只有 D 完全符合。"
+   ],
+   "takeaway": "enum 名后直接跟花括号，枚举常量只能是整型标识符。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "D（enum a{one,two,three};）",
+    "reason": "资料答案为 D；只有 D 符合 enum 标记加花括号的标准形式，A、B 多了等号，C 用字符串当枚举常量。"
+   }
+  },
+  {
+   "questionId": "x-9-44",
+   "sourceHash": "e007ace34c7ccd349d66f5522d7757a9a1c9634976e8ae85fc55dc7e7279c1af",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n还原题面定义：`typedef struct A{ int m; char n; }B;`\n这一行同时造出两个名字：`struct A` 是结构体标记，`B` 是 typedef 出来的类型名，二者指同一个结构体类型。\nB 正确：B 是类型名，`B x;` 可以直接定义结构体变量。\nA 错：A 只是标记，C 语言里标记必须带 struct 关键字使用，要写 `struct A x;`，单写 `A x;` 编译器不认。\nC 错：A 不占内存，它不是变量，只是类型名的一部分。\nD 错：B 是类型名不是变量，说「B 是 struct A 类型的变量」把类型和变量混为一谈。",
+   "steps": [
+    "拆开看：`struct A` 是标记，`B` 是 typedef 别名，两者都指同一个结构体。",
+    "标记 A 不能单独当类型名用（要写 struct A），所以 A 项错。",
+    "B 是类型名，用它定义变量合法；C、D 都把类型名说成了变量。"
+   ],
+   "takeaway": "struct 标记要带 struct 用，typedef 别名可以单用。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "B（可以用 B 定义结构体变量）",
+    "reason": "资料答案为 B；B 是 typedef 出的类型名可直接定义变量，A 只是标记且不能裸用，C、D 把名字误认成变量。"
+   }
+  },
+  {
+   "questionId": "x-9-45",
+   "sourceHash": "2bca9cca7850990b66246e810553d681c716ed8eeee2782ceaf5e28347502495",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n共用体的所有成员共用同一块存储区，整块区的大小取最长成员的长度，写一个成员就会覆盖同地址上的其他成员。\nC 正确：正因为地址重叠，各成员不可能「同时」都保存着自己那一份值。\nA 错：不能像普通变量那样给共用体变量直接赋一个值，比如 `u = 5;` 或 `u = {1,2.5}` 都不行，赋值只能落到某个成员上。C 标准允许同类型的两个共用体变量整体赋值 `u1 = u2;`，那是同类型对象之间的拷贝，不是「直接赋一个值」。\nB 错，与 C 正好相反。\nD 错：共用体的成员可以是任何类型，包括结构体，例如 `union u { struct {int x,y;} p; long n; }` 完全合法。\n待核对：B、C 两项的「存人」应为「存入」，系 OCR 形近字错误。",
+   "steps": [
+    "先想布局：所有成员从同一个起始地址开始，整块大小看最长成员。",
+    "地址重叠，后写的成员覆盖先写的，所以不可能同时保存全部成员，B 错 C 对。",
+    "A 的「直接赋值」指给整个共用体变量赋一个值，C 只允许赋给成员；D 错在结构体其实可以作共用体成员。"
+   ],
+   "takeaway": "共用体成员共享一块内存，同一时刻只留最后写入的那个成员。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（一个共用体变量中不能同时存入其所有成员）",
+    "reason": "资料答案为 C；共用体成员共享存储区故无法同时保存，A 的整值直接赋值不成立，D 的禁止结构体成员说法也错。"
+   }
+  },
+  {
+   "questionId": "x-9-46",
+   "sourceHash": "055d800f31c9aecd92a37b0489f1f4debe01f71d3e1cadbbbac2816cad4aa4b1",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n枚举常量的编号规则：第一个不写值就从 0 开始，后面每个不写值的等于前一个加 1。\n```c\nenum team{my,your=4,his,her=his+10};\n```\nmy 没写值，取 0；your 显式给 4；his 紧跟 your，取 4+1=5；her 用表达式 his+10，即 5+10=15。\n所以 printf 依次输出 0,4,5,15，选 C。\nA 当成全部连续递增，忽略了显式给的 4；B 以为 his 重置成 0、her 记成 10；D 以为 my 从 1 开始——枚举默认从 0 起，不是从 1 起。\n待核对：printf 里的换行符被 OCR 成了 'n（应为 \\n）。",
+   "steps": [
+    "先定 my：没有初值，枚举首项默认取 0。",
+    "your 显式写 4；his 没写值，取前一项加 1 得 5。",
+    "her=his+10 用当前 his 的值算，5+10=15，答案就是 0,4,5,15。"
+   ],
+   "takeaway": "枚举首项默认 0，后续不写值就前一项加 1。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（0,4,5,15）",
+    "reason": "资料答案为 C；my=0、your=4、his=5、her=15 逐项按枚举规则推得，与选项 C 完全一致。"
+   }
+  },
+  {
+   "questionId": "x-9-47",
+   "sourceHash": "3c40aefc4116c5d63f974d9c5eda265188fd9caa8f73392b81f72c7fe2c3da1f",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n题面被 OCR 压成一串，还原成正常写法是：\n```c\ntypedef int M[2][3];\nM a;\n```\ntypedef 在这里把「int [2][3]」这个数组类型整体命名为 M，所以 `M a;` 展开后就是 `int a[2][3];`，一个 2 行 3 列的整型二维数组，选 D。\nA 项 `int a;` 只是单个 int，把两个维度和 2×3 的大小全丢了。\nB 项连类型都没有，只是孤零零一个 a。\nC 项 `int M;` 把 M 当成变量名来定义，与题意的类型别名正好相反。\n记法：typedef 定义的是「类型的形状」，维度被别名一起打包带走，用别名定义变量时只写变量名。",
+   "steps": [
+    "先还原声明：`typedef int M[2][3];` 把二维数组类型起名为 M。",
+    "把 M 替换回原类型：`M a;` 就是 `int a[2][3];`。",
+    "对照选项，只有 D 的写法与展开结果一致。"
+   ],
+   "takeaway": "typedef 把数组维度和元素类型一起打包，用别名时不再写维度。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "D（int a[2][3];）",
+    "reason": "资料答案为 D；M 是 int[2][3] 的别名，M a 即 int a[2][3]，A、B、C 都丢掉维度或把 M 当变量名。"
+   }
+  },
+  {
+   "questionId": "x-9-48",
+   "sourceHash": "99b821e2950eeaed95a589e83d37c013bb76978906331f15f9389028b7def2bb",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n`typedef int *INTEGER;` 把「int *」这个指针类型命名为 INTEGER，注意星号属于类型的一部分。\n于是 `INTEGER p,*q;` 展开为：\n```c\nint *p, **q;\n```\np 是 int 型指针变量，q 是 int 型指针的指针。\nA 错：p 不是 int 变量，它存的是地址。\nB 对：p 的类型正是「指向 int 的指针」。\nC 错：q 比 p 多一层，是 int **，不能和 p 同类型。\nD 错：INTEGER 代表 int *，不能拿去顶替 int；写成 `INTEGER x;` 得到的是指针而不是整型变量。\n待核对：B 项末尾有 OCR 残留字符「1」。",
+   "steps": [
+    "先看别名本身：INTEGER 等于 int *，星号在 typedef 里属于类型。",
+    "代入声明：`INTEGER p,*q;` 变成 `int *p,**q;`，p 一级、q 二级。",
+    "因此 B 正确；A、C 错判类型，D 想用指针别名顶替 int，方向反了。"
+   ],
+   "takeaway": "typedef int *T 之后 T 就是指针类型，与 int 并不等价。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "B（p 是类型为 int 的指针变量）",
+    "reason": "资料答案为 B；INTEGER 为 int * 别名，p 展开为 int *，q 为 int **，D 用指针别名代替 int 的说法错误。"
+   }
+  },
+  {
+   "questionId": "x-9-49",
+   "sourceHash": "4de446ffcf7a7aad2460570308eb41e204c82a26a8eba0b40a686537d84a5b5d",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nSTD 是用 typedef 起的结构体类型名，含 int n、char ch、double x 三个成员。\nA 项：\n```c\nSTD a[2] = {{1,'A',56},{2,'B',63}};\n```\n外层花括号对应数组的两个元素，内层花括号对应每个结构体的三个成员，个数一一对上；56、63 是整型常量，赋给 double 成员会自动转换，合法，选 A。\nB 项 `STD a[2]={1,'A',56},{2,'B',63};` 少了一层外层花括号，整个数组的初始化必须包在一对花括号里。\nC、D 项用 `struct a[2]` 开头：struct 后面只能跟标记名，不能直接跟变量名 a，类型名本来应该写 STD。\nD 项即使把成员初值写全，`struct a[2]` 这个前缀依然非法。",
+   "steps": [
+    "认类型：STD 已经是完整类型名，定义数组写成 `STD a[2];`。",
+    "数花括号：数组一层、结构体一层，共两层，A 正好两层且每层成员个数匹配。",
+    "B 缺外层括号；C、D 用 `struct a[2]` 当类型，语法不成立。"
+   ],
+   "takeaway": "结构数组初始化要两层花括号：外层数组、内层各结构体成员。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（STD a[2]={{1,'A',56},{2,'B',63}};）",
+    "reason": "资料答案为 A；A 的双层花括号与三成员逐项对齐，B 缺外层括号，C、D 的 struct a[2] 类型写法本身错误。"
+   }
+  },
+  {
+   "questionId": "x-9-51",
+   "sourceHash": "47d0dd90bf4e0bc60db1fd92220fd78c106ff2a0d6b5883efc77f2690071ec55",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nD 项 `struct stu{char name[10];float score;}STU; STU student;` 的问题：花括号后面那个 STU 是变量名，不是类型名——前面没有 typedef，编译器只当它是 struct stu 类型的一个变量。紧接着 `STU student;` 却把 STU 当类型用，而 STU 已经是变量名，于是报「未知类型名」，所以 D 错。\nA 项用 typedef 把结构体命名为 STU，再 `STU student;`，正确。\nB 项靠宏替换：`#define STU struct student` 展开成 `struct student{...}student;`，一次把类型和变量都定义好，合法。\nC 项 `struct stu{...}student;` 直接由标记加变量名，也合法。\n待核对：题面的方括号、右花括号被 OCR 读成 C 与 )，这里按 [ ] 与 } 理解。",
+   "steps": [
+    "区分花括号后的名字：前面带 typedef 才是类型名，不带就是变量名。",
+    "D 里 STU 是变量，下一句却拿它当类型，编译器必然报错。",
+    "A 靠 typedef、B 靠宏替换、C 靠标记直接声明变量，三种写法都成立。"
+   ],
+   "takeaway": "struct{...} 后面的名字是变量名；要当类型用必须加 typedef。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "D（struct stu{...}STU; STU student;）",
+    "reason": "资料答案为 D；D 的 STU 是变量名却被当类型使用，A、B、C 三种声明方式均合法，结论一致。"
+   }
+  },
+  {
+   "questionId": "x-9-52",
+   "sourceHash": "67305c2b7bb4a001950661306f521ebbf0acf573fead38c30594a62f8e8cefe0",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n还原定义（方括号被 OCR 读成 C）：\n```c\ntypedef struct cc{int a; struct cc *b;} node;\nstatic node aa[3] = {5,&aa[1], 7,&aa[2], 9,'\\0'}, *p = &aa[0];\n```\n按成员顺序两两配对：aa[0]={5,&aa[1]}，aa[1]={7,&aa[2]}，aa[2]={9,空指针}，p 指向 aa[0]。\nA：aa[1].b 是 &aa[2]，aa[2].a 是 9，9-2=7，不是 5，选 A。\nB：p->b 是 &aa[1]，aa[1].a 是 7，7-2=5。\nC：p+1 指向 aa[1]，(p+1)->a 是 7，7-2=5。\nD：p->a 就是 aa[0].a，等于 5。\n四个式子里只有 A 得 7。\n待核对：题面 `aaC3]`、`9,''0''` 都是 OCR 产物，分别对应 aa[3] 与 9,'\\0'。",
+   "steps": [
+    "先按成员顺序把三个元素拆开：{5,&aa[1]}、{7,&aa[2]}、{9,空}。",
+    "再把每个选项的指针链走到底：aa[1].b→aa[2]、p->b→aa[1]、(p+1)→aa[1]、p→aa[0]。",
+    "代入 a 值算：A 得 9-2=7，其余三项都得 5。"
+   ],
+   "takeaway": "先按顺序拆初始化列表，再顺指针链走到具体的 a 值。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（aa[1].b->a-2 得 7）",
+    "reason": "资料答案为 A；aa[1].b 指向 aa[2] 其 a 为 9，9-2=7，B、C 均取到 7 再减 2 得 5，D 直接得 5。"
+   }
+  },
+  {
+   "questionId": "x-9-53",
+   "sourceHash": "213f8413b2687a24e6f52a02bf6af1172fed2f001e3107a79b2fcad4f010ffde",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n定义是 `typedef struct abc{int x,y[2];}ABC;`：`struct abc` 是标记，ABC 是 typedef 出来的别名，两者指同一个结构体类型。\nC 项 `struct abc x;` 用标记加 struct 关键字定义变量，标准合法，选 C。\nA 项 `abc x;` 少了 struct，abc 只是标记不是类型名，编译器不认识。\nB 项 `struct x;` 是声明一个叫 x 的不完整结构体类型，根本没定义变量。\nD 项 `struct ABC x;` 把 typedef 别名当成标记用：struct 后面只认标记 abc，不认别名 ABC，直接报错。\n待核对：题面 `yC2]` 是 OCR 把 y[2] 的方括号读成了 C。",
+   "steps": [
+    "把两个名字分清：标记 abc 必须带 struct 用，别名 ABC 不带 struct 用。",
+    "C 的 `struct abc x;` 正是标记的正确用法。",
+    "A 丢了 struct、B 是在声明新标记、D 拿别名冒充标记，三者都不成立。"
+   ],
+   "takeaway": "标记写成 struct 标记名，别名直接写别名，两条路不能混。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（struct abc x;）",
+    "reason": "资料答案为 C；abc 是结构体标记故须写 struct abc，A 缺关键字、B 只声明标记、D 用别名冒充标记均错。"
+   }
+  },
+  {
+   "questionId": "x-10-1",
+   "sourceHash": "3979f008ca845aa55b5900165447f9b68517b78baa7cfe7cb5a918ec85a29a89",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nC 语言按数据的存放形式把文件分成两类：文本文件（每个字节都是可显示的 ASCII 字符，例如数字 123 存成 '1''2''3' 三个字节）和二进制文件（按内存里的原始字节存，int 123 存成 4 个字节）。\n所以「文本文件和二进制文件」才是 C 能处理的两种文件类型，选 A。\nB、C 里的「数据文件」是按用途分的说法，不是按存放形式分的类别；把数据文件与文本、二进制并列，等于把两种分类标准混在一起。\nD 是「以上三个都不对」，与 A 成立直接冲突。",
+   "steps": [
+    "抓分类依据：按数据的存放形式分，只有文本与二进制两类。",
+    "举例对比：123 在文本文件里占 3 个字节，在二进制文件里占一个 int 的字节数。",
+    "B、C 混入了「数据文件」这种按用途的叫法，分类标准不统一。"
+   ],
+   "takeaway": "C 的文件按存放形式只分文本文件和二进制文件。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（文本文件和二进制文件）",
+    "reason": "资料答案为 A；C 按存放形式正是分为文本与二进制两类，数据文件是按用途的说法，不能与之并列。"
+   }
+  },
+  {
+   "questionId": "x-10-2",
+   "sourceHash": "a463431f6ec25e11379152d04a9f0e855aa1dec73b342e0015dd0d72714f8723",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nC 把文件看成字节流（流式文件），没有「记录」这个东西，所以「文件由数据流序列组成」这半句对；再按数据的存放形式分成文本文件和二进制文件，后半句也对，选 D。\nA 错在两处：说文件只由 ASCII 字符组成（二进制文件不是），又说 C 只能读写文本文件（fread、fwrite 就是干二进制的）。\nB 是反方向的错误：C 同样能读写文本文件，fprintf、fscanf 就是文本方式。\nC 错在「由记录序列组成」：记录是数据库或某些高级语言文件系统的概念，C 的文件是连续字节流，没有记录边界。",
+   "steps": [
+    "先定性质：C 的文件是字节流，不存在「记录」这种结构。",
+    "再看分类：按存放形式确实分文本与二进制两种，D 把这两点都说全了。",
+    "A、B 各说「只能」一种，C 用了「记录」一词，三处都与 C 的文件模型不符。"
+   ],
+   "takeaway": "C 的文件是字节流，按存放形式分文本与二进制两类。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "D（文件由数据流序列组成，可按数据的存放形式分为文本文件和二进制文件）",
+    "reason": "资料答案为 D；C 的文件是数据流而非记录序列，且文本与二进制两种均可读写，A、B、C 的表述都不成立。"
+   }
+  },
+  {
+   "questionId": "x-10-3",
+   "sourceHash": "380ff3900b0cc64bf421e776f7b6f1b87f7d35d9a0febeba9d1b4b82df92f4bd",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n流式文件不等于只能顺序读。标准库提供了 rewind、fseek、ftell 这些定位函数，可以把文件位置指针移到任意字节处再读写，所以既能顺序存取，也能随机存取，选 C。\nA 错：顺序存取只是默认行为（读写从当前位置往后走），不是唯一方式。\nB 错：反过来说只能随机也不对，绝大多数代码就是老老实实顺序读写。\nD 错：「只能从文件开头存取」把 fseek 的作用完全忽略了，而且顺序读完一段后位置指针本来就在中间。\n一句话：能不能随机，看有没有 fseek，而不是看文件是不是流式。",
+   "steps": [
+    "先想函数：fseek、ftell、rewind 就是为随机定位准备的。",
+    "有这些函数，位置指针可以跳到任意位置，顺序与随机都成立。",
+    "A、B、D 都用了「只能」，与 fseek 的存在直接矛盾。"
+   ],
+   "takeaway": "流式文件默认顺序读写，配合 fseek、rewind 就能随机存取。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（可以顺序存取，也可以随机存取）",
+    "reason": "资料答案为 C；fseek、ftell、rewind 支持任意定位，故顺序与随机均可，A、B、D 的「只能」都过窄。"
+   }
+  },
+  {
+   "questionId": "x-10-4",
+   "sourceHash": "74062c5215080b6166167bebd6abc76f0c4c524cf1f07b46a71c92929e6f4d9f",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nfclose 的原型是 `int fclose(FILE *stream);`，关闭成功返回 0，失败返回 EOF（即 -1）。题目问「正常关闭」，取成功值 0，选 C。\nA 的 -1 正是失败时的返回值，方向搞反了。\nB 的 true 是 C++ 的关键字，C 语言要靠 stdbool.h 才有 true 这个宏，而且 fclose 从不返回它。\nD 的 1 既不是成功值也不是失败值；很多人把「非零表示成功」的习惯带进来，但 C 标准库的这类函数统一用 0 表示成功、非零表示失败。\n记忆点：fclose 成功 0，失败 EOF(-1)，和 fopen 返回指针的套路不同。",
+   "steps": [
+    "记原型：`int fclose(FILE *)`，成功返回 0，失败返回 EOF 即 -1。",
+    "题目强调「正常关闭」，所以取成功值 0。",
+    "-1 留给失败情形，true 是 C++ 的，1 没有对应语义。"
+   ],
+   "takeaway": "fclose 成功返回 0，失败返回 EOF(-1)。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（0）",
+    "reason": "资料答案为 C；fclose 成功返回 0、失败返回 EOF，-1、true、1 都不符合成功关闭的返回值。"
+   }
+  },
+  {
+   "questionId": "x-10-5",
+   "sourceHash": "7ed65b5259e303f5b728ea82cdc74a6a867498387674482ba57dccef09fa53f4",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n模式串要同时满足三件事：加 b 表示二进制；要有 + 才具备读写两种能力；文件是「新建」的，所以必须能创建。\nA 的「wb+」：w 新建并清空、b 二进制、+ 可读可写，三项全中，选 A。\nB 的「ab+」：a 是追加，写永远发生在文件末尾，不满足「新建文件并可在任意位置写」的通常含义。\nC 的「rb+」：r 要求文件已存在，打不开就失败，不能用来建新文件。\nD 的「ab」：既没有 +（不能读），又是追加模式，两个条件都不满足。",
+   "steps": [
+    "拆模式串：主字符定打开方式（r/w/a），b 定二进制，+ 定可读可写。",
+    "「新建」只能用 w 或 a；「既能读也能写」必须有 +，交集指向 wb+ 或 ab+。",
+    "ab+ 的写只能追加到末尾，所以标准答案是 wb+。"
+   ],
+   "takeaway": "w 建新、b 二进制、+ 可读写，三样拼起来就是 wb+。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（\"wb+\"）",
+    "reason": "资料答案为 A；wb+ 同时满足新建、二进制、可读可写，rb+ 要求文件已存在，ab+ 只能追加，ab 不能读。"
+   }
+  },
+  {
+   "questionId": "x-10-6",
+   "sourceHash": "09ba2c6cb1e38b3edaa5a0d1c030361f3ede22243dca5059de4b3d4c278633bd",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nfwrite 的原型是 `size_t fwrite(const void *ptr, size_t size, size_t n, FILE *stream);`，它把内存里的一段字节原样搬到文件，不做任何格式转换，正好用来把 int 的若干字节按二进制写进去，选 B。\nA 的 fprintf 是格式化输出，写出来是人能看的字符，比如 123 变成 '1''2''3' 三个字节，属于文本方式。\nC 的 fread 方向反了，它是从文件读进内存。\nD 的 fputc 一次只写一个字符，粒度不够，写不了整型值。\n典型写法：`fwrite(&m, sizeof(int), 1, fp);`",
+   "steps": [
+    "先看方向：要写文件，排除读函数 fread（C 项）。",
+    "再看方式：要二进制原样搬字节，只有 fwrite 不做格式转换，fprintf 会把值转成字符。",
+    "fputc 一次一个字符，粒度不够；答案是 fwrite。"
+   ],
+   "takeaway": "二进制读写用 fwrite、fread，文本格式化用 fprintf、fscanf。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "B（fwrite()）",
+    "reason": "资料答案为 B；fwrite 按字节块原样写入，fprintf 走文本格式，fread 是读，fputc 只写单字符。"
+   }
+  },
+  {
+   "questionId": "x-10-7",
+   "sourceHash": "593636ac45dd3cff18210dfbfe95d78d386a9fe23189f84596f1eb43cca3c0b3",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n题目给了两个条件：打开后原有内容全部删除，说明必须用 w 系；写完不关闭就能读回来，说明必须带 +。合起来就是「w+」，选 B。\nA 的「w」：会清空文件，但只写不读，「再读出」这一步做不到。\nC 的「a+」：写只能追加到末尾，原有内容不会被删除，第一个条件先不满足。\nD 的「r」：只读，既不能清空也不能写。\n补充：从写切换到读之前要调用 fseek 或 fflush，否则位置指针还停在数据末尾，直接读会读到文件尾。\n待核对：题面里的 `\"d:''my.txt\"` 是 OCR 把反斜杠读坏了，原意应为：\n```c\nfp = fopen(\"d:\\\\my.txt\", \"w+\");\n```",
+   "steps": [
+    "两个条件拆开看：清空原文对应 w；不关闭就能读对应 +。",
+    "a+ 不删原内容、w 不能读、r 只读，只有 w+ 两条都满足。",
+    "从写切到读之前调 fseek(fp,0,SEEK_SET) 或 fflush(fp)，把位置指针拨回开头。"
+   ],
+   "takeaway": "w+ 清空并可读写；读写切换前先 fseek 或 fflush。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "B（\"w+\"）",
+    "reason": "资料答案为 B；w+ 打开即截断且具备读写能力，w 只写、a+ 不截断且只能追加、r 只读，均不满足题意。"
+   }
+  },
+  {
+   "questionId": "x-10-8",
+   "sourceHash": "a5efba4f9be20e664fcde14d0f889f3f1bc643f5670dc09cfe0cab3604aaef66",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nB 说「r」和「r+」都要求文件已存在，这完全正确：这两个模式只能打开已有文件，找不到就返回 NULL，选 B。\nA 错：流式文件同样支持 fseek 随机定位，不是只能顺序存取。\nC 错：写完不必关文件再重开，用 fflush 把缓冲区刷下去，再用 fseek 把位置指针拨回起点，就能读到刚写的内容。\nD 错：只有 w 系模式才会把原文件截断清零；r+、a+ 打开已有文件时原数据都还在，r+ 写入只覆盖被写的那几个字节。\n待核对：C 项文字被截断，「才能读到该文件中的第」后面应还有「……数据」，这里按「必须先关闭再重开」理解。",
+   "steps": [
+    "先啃 B：r 与 r+ 都是打开已有文件，文件不存在就失败，这条成立。",
+    "A 与 fseek 的存在矛盾；C 用 fflush 加 fseek 就能实现，不必重开文件。",
+    "D 的「必定被覆盖」只对 w、w+ 成立，r+ 与 a+ 不截断，故 D 错。"
+   ],
+   "takeaway": "r 系要求文件已存在；只有 w 系才会截断原文件。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "B（用 r 或 r+ 打开时文件必须已存在）",
+    "reason": "资料答案为 B；r、r+ 不能创建文件故要求目标已存在，A 忽略了 fseek，C 可用 fflush 加 fseek 替代，D 对 r+、a+ 不成立。"
+   }
+  },
+  {
+   "questionId": "x-10-9",
+   "sourceHash": "7d955d2c8c229bba6d8408b9e02e318963dff8d3bc815b59394f6629c4021e68",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n题目要求先读、再改、然后写回同一个文件：文件本来就存在，而且不能把原有内容清掉，这正好是「r+」的语义——以读写方式打开已有文件，位置指针在开头，原数据保留，读到的内容改完可以直接写回，选 C。\nA 的「rw」不是合法模式串：模式字符只能是 r、w、a 再可选 b 和 +，rw 这种组合编译器不认。\nB 的「w+」会先把文件截断成空文件，原数据全丢，也就读不到东西。\nD 的「r」只能读，写不回去。\n待核对：题干夹带了页码「1 60」与页眉「第I部分 习題及参考答案」，路径里的引号也被 OCR 读坏，原意应为：\n```c\nfp = fopen(\"e:\\\\data.txt\", \"r+\");\n```",
+   "steps": [
+    "按顺序走需求：先读要读权限，再写回要写权限，不改内容则不能截断。",
+    "四个模式里同时满足「文件已存在」「可读可写」「不截断」的只有 r+。",
+    "w+ 截断、r 只读、rw 非法，逐个排除。"
+   ],
+   "takeaway": "改已有文件用 r+，既保留原内容又能读能写。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（fp=fopen(\"e:\\\\data.txt\",\"r+\");）",
+    "reason": "资料答案为 C；r+ 打开已有文件且不截断，同时具备读写能力，w+ 会清空、r 只读、rw 不是合法模式。"
+   }
+  },
+  {
+   "questionId": "x-10-10",
+   "sourceHash": "54da515588041c022cbcf0934ac32818fc8b063fbddb88054c2940d7bcca6a1d",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n「只允许打开一次」意味着读和写必须在同一个文件流里完成：先以 r+ 打开，读到要改的数据，用 fseek 定位回原处再写，最后一次 fclose 收尾。所以模式是「r+」，选 B。\nA 的「w+」一打开就把文件截断，原数据没了，也就谈不上「修改其中的数据」。\nC 的「a+」写只能追加到末尾，无法在原地改数据。\nD 的「r」只有读权限，改不了。\n顺带记住：C 没有「rw」这种写法，别把它和 r+ 混为一谈。",
+   "steps": [
+    "题目两个关键词：只打开一次意味着读写同一个流；修改数据意味着不能截断。",
+    "r+ 满足不截断且可读可写，配合 fseek 就能原地改。",
+    "w+ 截断、a+ 只能追加、r 只读，都被排除。"
+   ],
+   "takeaway": "一次打开又要改数据就选 r+，用 fseek 定位后原地覆盖写。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "B（\"r+\"）",
+    "reason": "资料答案为 B；单次打开又要修改原数据，必须不截断且可读写，只有 r+ 符合，w+ 清空、a+ 追加、r 只读。"
+   }
+  },
+  {
+   "questionId": "x-10-11",
+   "sourceHash": "9064663a7d632d6ed89528d83e6905f0d81d4646b47163f8ecc350539af0a841",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ndata.dat 里已有 50 个 int，任务是「改其中一部分」，说明原文件必须保留，只能在不截断的前提下打开，同时要能读能写，所以是「r+」，选 A。\nB 的「w+」会把 50 个数据全部清掉，剩下的只有你新写的部分。\nC 的「a+」每次写都跑到文件末尾，改不了中间第 i 个数据。\nD 的「w」既截断又只写不读，两个条件都不满足。\n改第 i 个数据的标准做法：\n```c\nfseek(fp, i * sizeof(int), SEEK_SET);\nfread(&x, sizeof(int), 1, fp);\n/* 修改 x 之后 */\nfseek(fp, i * sizeof(int), SEEK_SET);\nfwrite(&x, sizeof(int), 1, fp);\n```",
+   "steps": [
+    "看清需求：原 50 个数据要保留，说明不能截断，排除 w 系。",
+    "要改中间某个值，必须能定位后写入，a+ 只能追加也不行。",
+    "剩下 r+：读写同一流，配合 fseek 精确覆盖第 i 个 int。"
+   ],
+   "takeaway": "改已有二进制数据的部分内容，用 r+ 加 fseek 定位后 fwrite。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（fp=fopen(\"d:\\\\data.dat\",\"r+\");）",
+    "reason": "资料答案为 A；只改部分数据要求不截断且可读写，r+ 唯一满足，w+ 与 w 会清空，a+ 只能末尾追加。"
+   }
+  },
+  {
+   "questionId": "x-10-12",
+   "sourceHash": "40297a16c7bce2561766ce585919cdd75a5a6d59ab4fde45bc520ea9d16e0b25",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nC 里「文件」指磁盘上的文件，「写」的方向是从内存到磁盘，所以写文件就是把内存中的数据输出到磁盘文件里，选 A。\nB 是把磁盘数据读到内存，那是「读文件」。\nC 说「将主机中的信息写入磁盘」——主机是硬件层面的笼统说法，参与写操作的数据来源是程序的内存缓冲区，「主机」这个提法过于含糊，教材把它当干扰项。\nD 是读文件方向的另一种说法。\n记法：读是磁盘到内存，写是内存到磁盘，方向别弄反。",
+   "steps": [
+    "先定方向：写文件的数据流向是内存到磁盘。",
+    "B、D 都是磁盘到内存，属于读文件。",
+    "C 的「主机」说法太笼统，标准定义取 A。"
+   ],
+   "takeaway": "读是磁盘到内存，写是内存到磁盘。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（将内存中的信息写入磁盘）",
+    "reason": "资料答案为 A；写文件是内存缓冲区内容输出到磁盘，B、D 属于读文件方向，C 用「主机」表述过于笼统。"
+   }
+  },
+  {
+   "questionId": "x-10-13",
+   "sourceHash": "a6eaa51ef7d6f2a9f26ba42809f228296d1b68b758f9ccc94094e08e3454e866",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nfprintf 的原型是 `int fprintf(FILE *stream, const char *format, ...);`，第一个实参必须是文件指针，第二个才是格式串。fp 已经用「w」打开 out.dat，所以正确写法是：\n```c\nfprintf(fp, \"%d\", m);\n```\n选 B。\nA 项 `fprintf(\"%d\",m);` 少了文件指针，第一个实参成了字符串，类型不匹配，编译就报错。\nC 项把 fp 放到最后，参数顺序错了，fprintf 不认这种顺序。\nD 项把文件名当第一实参：fprintf 要的是 FILE *，不是字符串，而且 out.dat 根本没有对应的文件流。\n对照记：printf 只往 stdout 写，fprintf 多一个「往哪写」的首参。",
+   "steps": [
+    "背原型：第一个参数是 FILE *，第二个是格式串，后面才是要输出的数据。",
+    "题目已有 fp，所以 fp 必须排第一，B 符合。",
+    "A 缺文件指针、C 顺序颠倒、D 拿文件名冒充 FILE *，全错。"
+   ],
+   "takeaway": "fprintf 首个参数永远是文件指针，printf 相当于省略了 stdout。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "B（fprintf(fp,\"%d\",m);）",
+    "reason": "资料答案为 B；fprintf 首参必须是文件指针，A 缺文件指针、C 参数顺序颠倒、D 用文件名字符串冒充 FILE *。"
+   }
+  },
+  {
+   "questionId": "x-10-14",
+   "sourceHash": "162db6f4de7bd29ed31d98a6c44a51a2d7c3680e7cc6ac6fff02823bfb477259",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n标准 C 在程序启动时预定义三个流：stdin 接键盘，stdout 接显示器，stderr 也接显示器（出错信息用）。题目问 stdout，缺省连的就是显示器，选 D。\nA、B 的软盘、硬盘是文件存储介质，stdout 不直接对应某个磁盘设备；要写到磁盘得用 fopen 打开文件流，或者靠 shell 重定向。\nC 的键盘是 stdin 的缺省设备。\n注意区别：`prog > out.txt` 能把 stdout 改到文件，但那是运行时由运行环境改的，题目问的是「缺省」情况。",
+   "steps": [
+    "记三个标准流：stdin 接键盘，stdout 接显示器，stderr 接显示器。",
+    "题目问 stdout，取显示器，选 D。",
+    "键盘属于 stdin；磁盘要靠 fopen 或重定向才能接上，不是缺省目标。"
+   ],
+   "takeaway": "stdin 连键盘，stdout 与 stderr 连显示器。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "D（显示器）",
+    "reason": "资料答案为 D；标准输出流缺省连接显示器，键盘是 stdin 的缺省设备，软盘硬盘要经 fopen 或重定向才涉及。"
+   }
+  },
+  {
+   "questionId": "x-10-15",
+   "sourceHash": "7bbfa987ce0cf641da3152c7f445715f5ea76282bd179570370dfe00aeb7d1df",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n空指针的本质是「值为 0 的指针」，C 只承认「值为 0 的整型常量表达式」能当空指针常量用。\nA 的 EOF 是标准库定义的整型常量，值为 -1。`p = EOF;` 是把 -1 转成指针，得到的是一个非零地址（具体值由实现决定），不是空指针，选 A。\nB 的 0 是最典型的空指针常量。\nC 的 '\\0' 是值为 0 的整型字符常量，同样属于「值为 0 的整型常量表达式」，可以当空指针常量用。\nD 的 NULL 就是标准库专门为此定义的宏，通常展开成 0 或 (void*)0。\n待核对：C 项的引号被 OCR 重复成 ''0'，实为 '\\0'。",
+   "steps": [
+    "先立判据：能赋给指针并成为空指针的，只有值为 0 的整型常量表达式。",
+    "EOF 的值是 -1，赋给指针得到非零地址，所以 A 不行。",
+    "0、'\\0'、NULL 的值都是 0，三项都能把 p 置空。"
+   ],
+   "takeaway": "空指针只认值为 0 的常量：0、'\\0'、NULL 行，EOF 不行。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（p=EOF）",
+    "reason": "资料答案为 A；EOF 值为 -1 属于非零常量，赋给指针不构成空指针，而 0、'\\0'、NULL 的值都是 0。"
+   }
+  },
+  {
+   "questionId": "x-10-16",
+   "sourceHash": "b92617bd9d944a161ef1396f24ed6f81395c369cd31ff9eb84ccda9fc2f6510b",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nA 的 `0 ? 0 : 1`：条件 0 为假，取冒号后面的 1，值就是 1。\nB 的 `5 % 4`：5 除以 4 商 1 余 1，值是 1。\nC 的 `!EOF`：EOF 是 -1，非零即真，取非后得 0，不是 1，选 C。\nD 的 `!NULL`：NULL 的值是 0，假取非得 1。\n规律一句话：逻辑非只把 0 变 1、把非零变 0；EOF 是非零，所以 !EOF 是 0。\n待核对：题面里的全角感叹号与题干中的空格是 OCR 产物，四个选项按顺序对应四个表达式。",
+   "steps": [
+    "先算三个确定的：0?0:1 得 1，5%4 得 1，!NULL 得 1。",
+    "再看 EOF：它是 -1，逻辑非把非零变 0，所以 !EOF 等于 0。",
+    "只有 C 的值不是 1。"
+   ],
+   "takeaway": "EOF 是 -1，!EOF 等于 0，别当成 1。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "C（!EOF）",
+    "reason": "资料答案为 C；EOF 为 -1 故 !EOF 得 0，其余三项分别得 1、1、1，只有 C 的值不是 1。"
+   }
+  },
+  {
+   "questionId": "x-10-17",
+   "sourceHash": "b269b6c3529131ad1c0354cab4a743f5051b26449cb0721d2b11c8130970bbba",
+   "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ngetchar 的等价写法是 `getchar()` 等于 `getc(stdin)`，它只从标准输入读一个字符，不是从磁盘文件读，所以 A 的说法错，选 A。\nB 对：gets 从标准输入读一行字符串（遇换行结束），终端正是标准输入的缺省来源。\nC 对：fputs 把字符串写到指定文件流，原型 `int fputs(const char *s, FILE *stream);`。\nD 对：fwrite 按字节原样输出，正是二进制写数据的方式。\n想从文件读字符应该用 `fgetc(fp)` 或 `getc(fp)`，那才是带文件指针的文件版读字符函数。",
+   "steps": [
+    "先查 getchar 的归属：它读的是 stdin，不是任意文件。",
+    "要把字符从文件读出来，得用 fgetc 或 getc 并给出 FILE *。",
+    "B、C、D 分别对应 gets、fputs、fwrite 的标准语义，都成立。"
+   ],
+   "takeaway": "getchar 只读标准输入；读文件字符用 fgetc 或 getc。",
+   "answerReview": {
+    "status": "consistent",
+    "answer": "A（getchar 函数用于从磁盘文件读入字符）",
+    "reason": "资料答案为 A；getchar 等价于 getc(stdin) 只读标准输入，gets、fputs、fwrite 的叙述均正确，故 A 是错误项。"
+   }
+  }
+ ]
+}

@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "author": "DeepSeek",
+  "lessons": [
+    {
+      "questionId": "x-9-10",
+      "sourceHash": "d5aef5351783c5a787195b6f97e630b39c67e373bfbe573ac84cf696a79141d2",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n题干定义 struct node{float x,y;} point,*p=&point;，p 指向 point 本身，两个成员都是 float。\nA 的 p->x：p 是结构指针，-> 取到成员后可以直接赋值，合法。\nB 的 (*p).y：先解引用得到结构体对象，再用 . 取成员，*p 与 point 等价，合法。\nC 的 point.x：普通结构变量用 . 访问成员，合法。\nD 的 *p->y：-> 的优先级高于一元 *，被解析成 *(p->y)；p->y 是 float 数值，对 float 用 * 等于“间接寻址需要指针”，编译直接报错。\n所以错误的是 D。想取 y 再解引用必须先加括号写成 (*p).y，而那正是 B 的写法；可见错在结合顺序，不在成员名。",
+      "steps": [
+        "先确认 p 的类型是 struct node*，point 是结构体对象，成员 x、y 都是 float。",
+        "-> 优先级高于 *，所以 *p->y 实际是 *(p->y)，对一个 float 值解引用必错。",
+        "A、B、C 分别是 -> 访问、解引用后 . 访问、结构变量直接 . 访问，三条路径都合法。"
+      ],
+      "takeaway": "-> 比 * 先算，*p->y 是 *(p->y)，对 float 解引用必错。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D（*p->y=3.0 是错误表达式）",
+        "reason": "资料答案为 D。-> 优先级高于一元 *，*p->y 被解析为 *(p->y)，对 float 型成员无法解引用，属语法错误；A、B、C 分别是合法的指针取成员、解引用再取成员、变量直接取成员。"
+      }
+    },
+    {
+      "questionId": "x-9-11",
+      "sourceHash": "4a6f1707e93e0d351095a209de683a02b52976dfda0a1221899e173d3d15742c",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nx 是结构数组 struct test x[2]，x[0].ch 指向 \"China\"，x[1].ch 指向 \"England\"，p 初值等于 x。\nA 的 puts(x[1].ch); 直接输出第二个元素的字符串，得 England。\nB 的 puts((x+1)->ch);：数组名加 1 相当于 &x[1]，-> 取 ch，还是 England。\nC 的 puts((++x)->ch);：x 是数组名，是常量地址而不是可修改的左值，++x 直接语法错误，程序编不过，自然输出不了。\nD 的 puts((++p)->ch);：p 是指针变量，前置自增后指向 x[1]，ch 为 England。\n区别点就在这里：数组名不能自增，指针变量可以。所以不能输出 England 的是 C。\n（原题中 [ ] 被 OCR 成 C ]，s1C] 即 s1[]，按数组理解。）",
+      "steps": [
+        "先定位元素：x[1].ch 指向 \"England\"，指针 p 的初值也是 x。",
+        "B、D 分别用 x+1 和 ++p 到达第二个元素，都能输出 England。",
+        "C 对数组名 x 做 ++，左值不合法，属语法错误，故选 C。"
+      ],
+      "takeaway": "数组名不能自增；要移动就另设指针变量做 ++p。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（puts((++x)->ch); 不能输出 England）",
+        "reason": "资料答案为 C。x 是数组名，不能作为 ++ 的操作数，该语句无法通过编译；A、B、D 分别通过下标、x+1、++p 访问到第二个元素的 ch，都能输出 England。"
+      }
+    },
+    {
+      "questionId": "x-9-12",
+      "sourceHash": "9d0817c7c97ec76b4739d3db789d7543d663f221c2dcda646532c3be83b4ac17",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\na 是结构变量，p=&a 指向它。注意 in 是“匿名结构类型”的成员变量，不是指针；prof 是它内部的字符数组。\nA 的 a->name：a 不是指针，-> 左边必须是结构指针，错误。\nB 的 p->in.prof：p->in 先得到内层结构体对象，再用 . 取 prof 数组，数组名退化为 char*，正好配 %s，正确，输出 english。\nC 的 *p.name：. 的优先级高于 *，实际算的是 *(p.name)；p 是指针，不能写 p.name，错误。正确写法是 (*p).name。\nD 的 p->in->prof：in 是结构体变量而不是指针，-> 用错对象；另外 %c 只输出一个字符，prof 是数组，也不匹配。\n所以只有 B 同时满足成员访问链的语法和 %s 对字符指针的要求。",
+      "steps": [
+        "记住 in 是结构体变量：访问它的成员用 .，不能用 ->。",
+        "先把 B 展开：p->in 得内层结构，(.prof) 得 char 数组，%s 合法。",
+        "A 用 a->、C 用 p.name、D 用 in->，三处都把对象和指针搞混，全部错误。"
+      ],
+      "takeaway": "成员是结构体变量用 .，是指针才用 ->；*p.name 要写成 (*p).name。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（printf(\"%s\", p->in.prof); 正确）",
+        "reason": "资料答案为 B。p->in 是内层结构体，再用 . 取数组成员 prof，%s 匹配字符指针；A 对非指针用 ->，C 把 (*p).name 误写成 *p.name，D 对内层结构体变量用 -> 且格式符与数组不匹配。"
+      }
+    },
+    {
+      "questionId": "x-9-13",
+      "sourceHash": "6f2b98ba29d21f9a0249e839122fa3cab95a6e4345be8df55330b623e703ebfc",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ndata 是结构数组 struct mn data[2]，p=data 即 p=&data[0]。本题要找对 data[0].a 的错误引用。\nA 的 data[0]->a：data[0] 已经是结构体对象而不是指针，-> 左边必须是指针，语法错误，正是答案。\nB 的 data->a：数组名 data 在表达式里退化为 &data[0]，是指针，-> 合法，等价于 data[0].a。\nC 的 p->a：p 正指向 data[0]，合法。\nD 的 (*p).a：先解引用再 .，与 p->a 完全等价，合法。\n关键区别：带下标的 data[0] 是对象，要配 .；不带下标的 data 才是指针，可以配 ->。\n（原题 [ ] 被 OCR 成 C ]，页码 1 29 和书名也混进了题干，按数组下标理解即可。）",
+      "steps": [
+        "确认 p=data 表示 p 指向 data[0]。",
+        "带下标的 data[0] 是结构体对象，用 -> 必错，A 就是这一种。",
+        "B 的 data 已退化为指针，C 的 p、D 的 *p 用法都合法。"
+      ],
+      "takeaway": "data[i] 是对象要配 .；data（或 data+i）是指针才配 ->。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A（data[0]->a 是错误的引用）",
+        "reason": "资料答案为 A。data[0] 是结构体对象而非指针，-> 只能作用于指针；data->a、p->a、(*p).a 三者都等价且合法。"
+      }
+    },
+    {
+      "questionId": "x-9-14",
+      "sourceHash": "93d97e8018284e70b9d5f9434c55f62b4610bd3359ba051389f896428349fdb2",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ns 是结构变量、p=&s，num 是 int 成员，用 %d 输出很自然。\nA 的 s.num：结构变量直接取成员，合法。\nB 的 (&s)->num：&s 是 struct student*，用 -> 取成员，等价于 s.num，合法。\nC 的 &s->num：-> 优先级高于 &，等价于 &(s->num)，可 s 不是指针，s->num 本身就非法，整条语句连带非法；就算写成 &(p->num) 拿到的是 int* 地址，用 %d 打地址也是格式不匹配。\nD 的 p->num：p 是结构指针，标准用法，合法。\n所以错误的是 C。判断技巧：& 只能作用在合法表达式上，救不回一个本来就非法的主表达式。",
+      "steps": [
+        "先统一看 num 的类型是 int，printf 的 %d 要的是值。",
+        "B 是 (&s)->num，&s 为指针再取成员，等价 s.num，正确。",
+        "C 的 &s->num 解析为 &(s->num)，s 不是指针所以非法，选 C。"
+      ],
+      "takeaway": "& 与 -> 相遇时 -> 先算：&s->num 等于 &(s->num)。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（printf(\"%d\",&s->num); 错误）",
+        "reason": "资料答案为 C。s->num 里 s 是结构变量而非指针，语法不成立；A、B、D 都是合法的成员引用，其中 B 的 (&s)->num 与 s.num 等价。"
+      }
+    },
+    {
+      "questionId": "x-9-15",
+      "sourceHash": "6f9af9c19676e8c75504e397c8aab3c2c96d9dcd9b92bcb2c470419ff30a9cc2",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nx++ 要求 x 是可修改的左值，而且它的类型要支持自增运算：整型、浮点、指针都可以，结构体不行。\nA 的 float x：浮点变量可以 ++，语法合法（教材一般不建议对浮点自增，但编译器接受）。\nB 的 long x：整型，合法。\nC 的 int *x：指针 ++ 表示指向下一个元素，合法。\nD 的 struct{int y;} x：结构体类型没有定义自增运算，x++ 无意义，语法错误，所以不能这样声明。\n因此选 D。另外题干写“变量 a”，四个选项声明的都是 x，属题面笔误，按 x 理解，不影响判断。\n待核对：原题文字疑似 OCR/排版笔误，a 与 x 名称不一致。",
+      "steps": [
+        "先把问题翻译成：哪种类型不能做 ++ 运算。",
+        "算术类型（float、long）和指针类型都支持自增。",
+        "结构体不支持 ++，D 的声明会让 x++ 无法编译，故选 D。"
+      ],
+      "takeaway": "++ 只能用于算术类型和指针，结构体不能自增。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D（struct{int y;} x; 时 x++ 无定义）",
+        "reason": "资料答案为 D。C 语言对结构体没有定义 ++ 运算，只有算术类型和指针能自增；题干写“变量 a”而选项声明 x，属题面笔误，不影响答案。"
+      }
+    },
+    {
+      "questionId": "x-9-16",
+      "sourceHash": "acd38e16ce840539b34b2123789c86142a935d7a967b027cb4f89ee94cdc3ff4",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n按初值展开：a[0]={5,&a[1]}，a[1]={7,&a[2]}，a[2]={9,0}，ptr=&a[0]。本题问“值不为 7”的，是选不同项。\nA 的 ptr->n 就是 a[0].n = 5，确实不为 7，正确选项。\nB 的 (++ptr)->n：ptr 先自增指向 a[1]，再取 n，得 7。\nC 的 a[1].n 直接就是 7。\nD 的 a[0].b->n：a[0].b 是 &a[1]，再取 n 得 7。\nB、C、D 全是 7，只有 A 得 5。注意 B 有副作用（ptr 被改成 &a[1]），但本题只看表达式值。",
+      "steps": [
+        "先把三个元素和 b 指针画出来：0 指向 a[1]，1 指向 a[2]，2 为 0。",
+        "B、C、D 都把 a[1].n 取出来，值是 7。",
+        "A 取的是 a[0].n = 5，选它。"
+      ],
+      "takeaway": "ptr->n 取的是 ptr 当前指向元素的 n，初值在 a[0] 上所以是 5。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A（ptr->n 的值为 5，不是 7）",
+        "reason": "资料答案为 A。ptr 初值为 &a[0]，ptr->n=5；(++ptr)->n、a[1].n、a[0].b->n 都指向 a[1].n，值为 7。"
+      }
+    },
+    {
+      "questionId": "x-9-17",
+      "sourceHash": "7b05c0a3cbc0c091db60a6ebe28780737b8c107a991ffa9fd4c18498911852a7",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\na 是匿名结构类型的数组，每个元素只含一个 int n；b 是同类结构变量。C 语言里结构体可以整体赋值、可以取地址、可以传参，但不能用 ==、!=、- 整体比较或相减，只能逐成员比。\nA 的 a[0]==a[1]：对两个结构体用 ==，标准不允许，错误。\nB 的 if(a[0].n==a[1].n) b=a[0];：比较的是 int 成员，赋值是同类型结构整体赋值，完全合法。\nC 的 a[0]->n：a[0] 是对象不是指针，错误。\nD 的 !(a[0]-a[1])：结构体不能相减，也不能隐式变成逻辑值，错误（选项里的！是中文感叹号，属 OCR）。\n所以语法正确的只有 B。",
+      "steps": [
+        "记住规则：结构体可整体赋值，不可整体比较、不可相减。",
+        "A、D 都试图对结构体整体做比较或运算，排除。",
+        "C 把数组元素当指针用，排除；只有 B 逐成员比较再加整体赋值，合法。"
+      ],
+      "takeaway": "结构体可整体赋值，但不能用 == 比较，也不能相减。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（if(a[0].n==a[1].n) b=a[0];）",
+        "reason": "资料答案为 B。C 不允许对结构体整体使用 == 或 -，A、D 因此非法；C 把 a[0] 当指针用也非法；B 用成员比较、再整体赋值，完全合法。"
+      }
+    },
+    {
+      "questionId": "x-9-18",
+      "sourceHash": "9f238221646e6c17a6e0258f749010c383e1d543fec422975cdc7c1467f21b18",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ns 是 struct student 变量，p 是同类型指针，q 是 int*，结构内有 char 数组 name、int 成员 score、自引用指针 h。\nA 的 p=&s：p 是 struct student*，&s 同类型，合法。\nB 的 q=&s.score：score 是 int，取地址得 int*，赋给 q 正好，合法。\nC 的 scanf(\"%s%d\",&s);：&s 是 struct student*，既不匹配 %s 要的 char*，也不匹配 %d 要的 int*；而且格式串有两个转换符，后面只给了一个实参，运行时会把结构体开头当成字符数组往里写，属严重错误。\nD 的 s.h=p：h 和 p 都是 struct student*，合法。\n正确写法应是 scanf(\"%s%d\", s.name, &s.score);。所以错误的是 C。",
+      "steps": [
+        "逐个核对“实参类型是否等于转换符要求的指针类型”。",
+        "A、B、D 的类型都严格匹配：结构指针、int 指针、自引用指针。",
+        "C 用 &s 同时去顶 %s 和 %d，还少给一个实参，属错误语句。"
+      ],
+      "takeaway": "scanf 的每个转换符都要一个对应类型的地址，&s 不能顶替成员地址。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（scanf(\"%s%d\",&s); 错误）",
+        "reason": "资料答案为 C。&s 的类型是 struct student*，与 %s、%d 要求的地址类型都不符，且格式串有两个转换符却只给一个实参；A、B、D 的类型均严格匹配。"
+      }
+    },
+    {
+      "questionId": "x-9-19",
+      "sourceHash": "4af386b4963f4007092384c35c847c3d8908ecfb69ca4a26d019aa6c7491e499",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n四条声明按语义还原（原题序号①②③④被 OCR 成 0/O，标识符中间的空格也被吞掉了）：\nint _f(int n){} —— 函数定义，函数体为空、没有 return，语法合法，只是调用时返回值不确定。\nint f(int f){} —— 形参名与函数名相同，形参作用域在函数体内会遮蔽外层的函数名，C 允许，语法合法。\nint 2n=1; —— 标识符不能以数字开头，非法。\nstruct for {int n}; —— for 是关键字，不能当结构体标记（tag），非法。\n所以“语法均有错”的是③④，选 B。①②只是写得不严谨（缺 return、同名遮蔽），不属于语法错误。\n待核对：原题编号与空格在 OCR 中丢失，①按 int _f(int n) 理解。",
+      "steps": [
+        "先还原四条：带下划线函数名、同名形参、数字开头的标识符、关键字当结构标记。",
+        "标识符不能以数字开头，③必错；关键字不能当 tag，④必错。",
+        "①②只是不严谨但仍合法，因此“均有错”的组合是③④，选 B。"
+      ],
+      "takeaway": "标识符不能数字开头，关键字不能当结构体标记；空函数体不算语法错。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（③④语法有错）",
+        "reason": "资料答案为 B。③ int 2n 违反标识符命名规则，④ struct for 把关键字当结构标记，二者必错；① 空函数体、② 形参与函数同名在 C 中都合法。"
+      }
+    },
+    {
+      "questionId": "x-9-20",
+      "sourceHash": "e6d4e6c9446ccbe2afd72dbba2fd395a7c2aadacef7f426c5ffa6eba60053e24",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nm 是结构数组 struct product m[4]，初值 {\"110\",80} 填给 m[0]：bh 存 \"110\"，price 存 80。\nA 的 (*m).bh[0]='2'：*m 就是 m[0]，再取 bh 首字符赋值，合法。\nB 的 m[0].bh[0]='2'：标准写法，合法（选项末尾少个分号，作表达式看没问题）。\nC 的 m->price=10：数组名 m 退化为 &m[0]，用 -> 取成员合法，等价于 m[0].price=10。\nD 的 (*m)->price=10：*m 已是结构体对象而不是指针，-> 左边必须是指针，语法错误。\n所以错误的是 D。规律很清楚：m->price 对，(*m).price 对，(*m)->price 错——数组名本身能当指针，解引用之后就不能再配 ->。",
+      "steps": [
+        "先确认 m 是数组：m 作指针用，*m 就是 m[0] 这个对象。",
+        "A、B、C 分别走 (*m).成员、m[0].成员、m->成员三条合法路径。",
+        "D 在 *m 之后还用 ->，对象当指针用，故选 D。"
+      ],
+      "takeaway": "数组名可直接配 ->，解引用出对象后只能用 . 。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D（(*m)->price=10; 错误）",
+        "reason": "资料答案为 D。*m 是结构体对象，-> 只能作用于指针；(*m).bh[0]、m[0].bh[0]、m->price 都是合法的成员访问。"
+      }
+    },
+    {
+      "questionId": "x-9-21",
+      "sourceHash": "ca7970c1973b5e7ea1178b1f377fb9a0e28c0c152f586253699abe0715ac5826",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n结构体指针声明时，变量名左边要写完整的“struct 标记名”。\nA 的 List *p：List 只是 tag，不是独立类型名，单独使用它会被当作未声明的标识符，错误（除非另外 typedef 过）。\nB 的 struct *p：struct 后面必须跟标记名或 {…}，只写 struct 不完整，错误。\nC 的 struct List *p：struct List 才是完整类型，*p 表示指针变量，正确。\nD 的 static List *p：static 只是存储类说明符，List 仍然不是类型名，错误。\n所以选 C。若要省掉 struct 关键字，应先 typedef struct List List; 或 typedef struct List{…} List; 造出别名。",
+      "steps": [
+        "记住 tag 名不等于类型名：单独写 List 不构成类型。",
+        "B 的 struct 缺少标记名，D 只是多了 static，两者都不完整。",
+        "只有 struct List *p 是完整类型加指针声明，选 C。"
+      ],
+      "takeaway": "声明结构指针写全 struct 标记名，tag 名单独用不算类型。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（struct List *p;）",
+        "reason": "资料答案为 C。struct List 是完整类型，加 *p 即为结构指针；A、D 把 tag 名当类型名，B 的 struct 后缺标记名，都不合法。"
+      }
+    },
+    {
+      "questionId": "x-9-22",
+      "sourceHash": "e0627cb5963751274a30a0cf1203c2f9584ef66493fad07bd8cc16c60b88a526",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\na 是 struct List 变量，p 是 struct List*。要让 p 指向 a，就得把 a 的地址交给 p。\nA 的 p=a：把结构体对象直接赋给指针，类型不匹配，编译器会报错，错误。\nB 的 p=&a：&a 的类型正是 struct List*，与 p 完全一致，正确。\nC 的 p=*a：a 不是指针，*a 根本无法求值，错误。\nD 的 *p=*a：p 尚未初始化就解引用，*a 也非法，错误。\n所以选 B。初始化之后就可以用 p->成员 或 (*p).成员 读写 a，两种写法等价。",
+      "steps": [
+        "指针存的是地址，所以要取 a 的地址，而不是 a 本身。",
+        "A 少写 &、C 多写 *、D 两边都错，全部排除。",
+        "p=&a 类型严格匹配，选 B。"
+      ],
+      "takeaway": "指针指向变量靠 &：p=&a，别写成 p=a。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（p=&a）",
+        "reason": "资料答案为 B。&a 是 struct List*，与 p 类型一致；p=a 是对象赋给指针，p=*a 与 *p=*a 都因 a 不是指针而非法。"
+      }
+    },
+    {
+      "questionId": "x-9-23",
+      "sourceHash": "3aded4b1d2f1bd1a9c7ce19f08528bfd8d52564230139170dc5af7af3ecc902b",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n按教材里那张运算符优先级表，从高到低数：\n->（成员选择，与 . 同级）排第一；\n++、--（自增自减，属单目）排第二；\n&&（逻辑与）在关系、相等运算之后；\n=（赋值）几乎最低，只比逗号高。\n所以“->”优先级最高，选 A。举例：*p->x 里先算 p->x 再算 *；a=b&&c 里先算 && 再赋值。\n补充一点：ISO C 语法中后缀 x++ 与 -> 同属最高一级，前缀 ++x 才落在单目那一级；本题按教材口径把 ++ 记作单目运算符，故答案为 A。",
+      "steps": [
+        "把四个运算符按教材表定位：-> 最高、++ 次之、&& 再次、= 最低。",
+        "举例验证：*p->x 先算 ->，说明 -> 比 * 甚至更高。",
+        "&& 与 = 明显在下方，故选 A。"
+      ],
+      "takeaway": "运算符优先级：-> 最高，其次 ++，再 &&，= 最低。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A（-> 优先级最高）",
+        "reason": "资料答案为 A。按教材运算符优先级表，成员选择运算符 -> 位于最高级，++ 属单目级，&& 属逻辑级，= 属赋值级；注意 ISO C 中后缀 ++ 与 -> 同级，本题按教材口径计。"
+      }
+    },
+    {
+      "questionId": "x-9-24",
+      "sourceHash": "803604d258c3192adcbe189441becc1c0b2127c0a6b0be89bc34a4ba5695155f",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n定义结构类型时，右花括号后面可以直接跟变量名，也可以什么都不跟（只声明类型），两种都行。\nA 的 struct test{…}; 只定义类型，下一句 struct test y; 再定义变量，正确。\nB 的 struct test{…} struct test y;：右花括号后应接变量名或分号，却又冒出 struct test，语法错乱。\nC 的 struct test{…} y;：定义类型的同时定义变量 y，正确。\nD 的 struct{…} y;：匿名结构类型直接定义变量 y，正确。\n所以错误的是 B。记分号位置就够：} 后接变量名再接 ;，或者 } 后直接 ;。",
+      "steps": [
+        "看右花括号后面跟了什么：变量名、分号，还是又冒出一个 struct。",
+        "A、C、D 分别对应“只定义类型”“类型加变量”“匿名类型加变量”，都合法。",
+        "B 在 } 后重复写 struct test y，语法不通，选 B。"
+      ],
+      "takeaway": "} 之后只能接变量名加 ; 或直接 ;，不能再来一个 struct。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（struct test{…} struct test y; 错误）",
+        "reason": "资料答案为 B。结构定义右花括号后应接变量名或分号，B 又重复写了 struct test，语法错误；A、C、D 三种定义形式都合法。"
+      }
+    },
+    {
+      "questionId": "x-9-25",
+      "sourceHash": "2aa1eb6081061ef5ca02ae97ee781ec16360af4742e40bf42e67e3c33b4a9e04",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nc[2] 的初值 {10,a,20,b} 分别填给 c[0].x=10、c[0].y=a、c[1].x=20、c[1].y=b，其中 a、b 是 int 数组名，赋值时退化为指针。pt=c 指向 c[0]。\nA 的 *pt->y：-> 先算，pt->y 得 a，*a 即 a[0] = 1。\nB 的 pt->x 是 10。\nC 的 ++pt->x：先算 pt->x（即 c[0].x），再前置自增，值变成 11，整个表达式的值也是 11。\nD 的 (pt++)->x：先取 c[0].x 得 10，随后把 pt 挪到 c[1]，表达式的值仍是 10。\n所以值为 11 的是 C。注意 A 是按 *(pt->y) 算的，别误解成 (*pt)->y。",
+      "steps": [
+        "先把初始化列表与成员对齐：c[0]={10,a}，c[1]={20,b}。",
+        "C 的 ++ 作用在 pt->x 这个 int 成员上，10 变 11。",
+        "D 的 pt++ 是后缀，取的是旧值 10；A 得 a[0]=1，B 得 10。"
+      ],
+      "takeaway": "++pt->x 改的是成员，值 11；(pt++)->x 取旧值 10 再挪指针。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（++pt->x 的值为 11）",
+        "reason": "资料答案为 C。-> 优先于 ++，++pt->x 等于 ++(pt->x)，把 c[0].x 由 10 变 11；A 得 1，B 得 10，D 得 10。"
+      }
+    },
+    {
+      "questionId": "x-9-26",
+      "sourceHash": "5f6582923571669ae537cf6c2da16edb8bef521dfaad27d455df1f8103b9e63a",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nclass 数组按顺序初始化：class[0]={\"John\",17}，class[1]={\"Paul\",19}，class[2]={\"Mary\",18}，class[3]={\"Adam\",16}。要输出字母 M，就要取 class[2].name 的第 0 个字符。\nA 的 class[3].name 是字符串 \"Adam\"，用 %c 输出字符串属类型不匹配，得不到 M。\nB 的 class[3].name[1] 是 'd'。\nC 的 class[2].name[1] 是 'a'。\nD 的 class[2].name[0] 是 'M'，正确。\n所以选 D。要点：%s 配数组名（字符指针），%c 配具体某个字符，必须写下标。\n（原题里 [ ] 被 OCR 成 C ]，选项中的 'n 实为换行转义符。）",
+      "steps": [
+        "数下标：Mary 是第三个元素，即 class[2]。",
+        "M 是 \"Mary\" 的首字符，要写 class[2].name[0]。",
+        "A、B 取到 Adam 那组，C 取到 'a'，只有 D 得 'M'。"
+      ],
+      "takeaway": "%c 要写到字符级下标，%s 才用数组名。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D（printf(\"%c\", class[2].name[0]);）",
+        "reason": "资料答案为 D。class[2] 是 {\"Mary\",18}，name[0] 即 'M'；A 用 %c 打整个字符串，B 取 class[3] 的 'd'，C 取 class[2].name[1] 的 'a'。"
+      }
+    },
+    {
+      "questionId": "x-9-27",
+      "sourceHash": "039dff37f080410f12dedf3d1fe78e96a9e8cb46e090a4c114c64a603f501dff",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nstudents 三个元素依次是 {9801,\"Zhang\",20}、{9802,\"Wang\",19}、{9803,\"Zhao\",18}。数组名 students 等于 &students[0]，所以 students+2 就是 &students[2]，即第三个元素的地址。\n调用 fun(students+2) 后，形参 p 指向 students[2]；函数体里 (*p).name 就是 students[2].name，也就是字符串 \"Zhao\"，用 %s 打印出来。\n所以输出 Zhao，选 A。偏移量就是下标：传 students 得 Zhang，传 students+1 得 Wang，传 students+2 才是 Zhao。",
+      "steps": [
+        "确认 students+2 指向下标为 2 的元素，即 {9803,\"Zhao\",18}。",
+        "fun 里用 (*p).name 取名字段，等价于 p->name，得到 \"Zhao\"。",
+        "按 %s 打印，输出 Zhao，选 A。"
+      ],
+      "takeaway": "数组名加 n 就是第 n 个元素的地址，students+2 指向第三个元素。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A（Zhao）",
+        "reason": "资料答案为 A。students+2 指向 students[2]，其 name 为 \"Zhao\"，fun 内用 (*p).name 以 %s 输出，得到 Zhao。"
+      }
+    },
+    {
+      "questionId": "x-9-28",
+      "sourceHash": "20fd3fb1f69a3de3393e480a043c331368acc0a65c3474823c50cceda8884608",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nstu 只有 3 个元素 stu[0]~stu[2]，p=stu 指向 stu[0]，合法下标最大是 2。\nA 的 (p++)->num：先取 p 当前指向元素的 num（也就是字符串首地址 200401），表达式结束后 p 后移，语法合法。\nB 的 p->num 合法。\nC 的 (*p).num 与 p->num 等价，合法。\nD 的 stu[3].age：下标 3 已越过 [0,2] 范围，读到的是数组后面的越界内存，stu[3] 这个对象根本不存在，属错误引用。\n所以错误的是 D。这是典型的“编译能过、语义越界”陷阱，判断时先数数组长度再看下标。",
+      "steps": [
+        "先数数组长度：stu[3] 声明只到下标 2。",
+        "A、B、C 都是通过 p 或 *p 访问有效元素，语法语义都没问题。",
+        "D 的 stu[3] 越界，对象不存在，选 D。"
+      ],
+      "takeaway": "数组下标先看长度：stu[3] 元素只有 0~2，下标 3 就是越界。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D（stu[3].age 是错误的引用）",
+        "reason": "资料答案为 D。stu 只有 3 个元素，合法下标 0~2，stu[3] 越界；A、B、C 均通过 p 访问有效元素，合法。"
+      }
+    },
+    {
+      "questionId": "x-9-29",
+      "sourceHash": "2a34482c083960828671bfbe239685847330d6307546f3ca594fa43684c9e827",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\naa[4] 依次为 {50,&dt[0]}、{60,&dt[1]}、{70,&dt[2]}、{80,&dt[3]}，p=aa 指向 aa[0]。三句的输出靠 ++ 与 -> 的优先级区分：\n```c\n++p->x      // 等于 ++(p->x)：aa[0].x 由 50 变 51\n(++p)->x    // ++p 先移指针，取 aa[1].x = 60\n++(*p->y)   // p->y 是 &dt[1]，dt[1]=20 变 21\n```\n第一句改的是成员，51；第二句括号决定先移指针，60；第三句把 p->y 指向的 dt[1] 自增，21。\n输出为 51,60,21，选 C。记住分界：++p->x 换值，(++p)->x 换指针。",
+      "steps": [
+        "先把 aa 四个元素和各自的 y 指针对齐。",
+        "++p->x 中 -> 先算，自增的是 aa[0].x，得到 51。",
+        "(++p)->x 的括号让 p 先到 aa[1]，取 60；++(*p->y) 改的是 dt[1]，得到 21。"
+      ],
+      "takeaway": "++p->x 自增成员，(++p)->x 移动指针，括号决定改谁。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（51,60,21）",
+        "reason": "资料答案为 C。++p->x 等价于 ++(p->x)，aa[0].x 由 50 变 51；(++p)->x 先移动指针取 60；++(*p->y) 对 dt[1]=20 自增得 21。"
+      }
+    },
+    {
+      "questionId": "x-9-30",
+      "sourceHash": "4c3cbfebd6d922200aee76c9ad7ea266a0c76dfc0dc0aad41969754e42dc7fe1",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n链表不带头结点，s 是头指针。逐句跟踪（q 用来暂存原首结点）：\n```c\nq=s; s=s->next; p=s;      // q 记住原首结点，头指针后移一位\nwhile(p->next) p=p->next; // p 走到最后一个结点\np->next=q; q->next=NULL;  // 原首结点挂到表尾，并置为新的尾结点\n```\n结果：头指针指向原第二个结点，链表中除原首结点外的结点整体前移一位，原首结点变成尾结点。没有任何结点被删除，也没有结点丢失，只是顺序轮转了一次。\n所以选 A。若把 p->next=q 写成 q->next=p，那才是断链；本题两句的方向是对的。",
+      "steps": [
+        "先用 q 存住原首结点，再用 s=s->next 把头指针交给第二个结点。",
+        "while 循环把 p 推到尾结点，此时尾结点还是原来的尾。",
+        "p->next=q 把原首结点接到尾部，q->next=NULL 收尾，首结点变尾结点，选 A。"
+      ],
+      "takeaway": "头指针后移一位、原首结点挂到表尾，就是“首结点成为尾结点”。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A（首结点成为尾结点）",
+        "reason": "资料答案为 A。程序把原首结点存到 q，头指针后移到第二个结点，再把 q 接到尾结点之后并置空，结果是首结点变成新的尾结点，链表整体前移一位。"
+      }
+    },
+    {
+      "questionId": "x-9-31",
+      "sourceHash": "c74c0db57496df546862949fa6b31e8b1a9dc9724a0329d87c17a7086d4d887f",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n交换前三个指针是 p->next=q、q->next=r、r->next=X（X 是 r 后面的结点）。目标状态是 p->next=r、r->next=q、q->next=X。\nA 先存 q->next=r->next（即 X），再 p->next=r，最后 r->next=q；三步都没覆盖后面还要用的值，成功。\nB 先 p->next=r（此时 r->next 仍是 X），再 q->next=r->next=X，最后 r->next=q，成功。\nC 先 q->next=r->next=X，再 r->next=q，最后 p->next=r，顺序变了但保存及时，成功。\nD 先 r->next=q，接着 p->next=r，最后 q->next=r->next——可 r->next 此时已经等于 q，于是 q->next=q 自己指向自己，X 之后的整条链全部丢失，失败。\n所以不能完成的是 D。要点：改指针前先把还要用的 next 备份。",
+      "steps": [
+        "先写出目标链接：p→r→q→X，标出哪三个 next 要改。",
+        "A、B、C 都先保住 r->next 或 q->next，再改指向，互不覆盖。",
+        "D 最后一步读到的 r->next 已被改成 q，导致 q 自指成环，故选 D。"
+      ],
+      "takeaway": "交换相邻结点要先备份 next，顺序错了 q->next 会指回自己。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D（先 r->next=q 的那条语句不能完成交换）",
+        "reason": "资料答案为 D。r->next 先被改成 q，再执行 q->next=r->next 就得到 q->next=q，形成自环并丢失 r 后面的链；A、B、C 都先保存了还要用的 next，能正确交换。"
+      }
+    },
+    {
+      "questionId": "x-9-32",
+      "sourceHash": "d5cd1962b96261200e1f376489d7e0d63061b71b058bf5c5c231e38b55f1f912",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ndt 是结构数组 struct st dt[2]，p=dt 即 p=&dt[0]。本题与前面 data/p 那题同型，问对 dt[0].x 的错误引用。\nA 的 dt[0]->x：dt[0] 是结构体对象而不是指针，-> 左边必须是指针，语法错误，正是答案。\nB 的 dt->x：数组名退化为 &dt[0]，是指针，合法。\nC 的 p->x：p 指向 dt[0]，合法。\nD 的 (*p).x：解引用后取成员，与 p->x 等价，合法。\n所以选 A。区分口诀：dt[i] 是对象配 .，dt 或 dt+i 是指针才配 ->。",
+      "steps": [
+        "确认 p=dt 之后 p 指向 dt[0]。",
+        "dt[0] 是结构体对象，用 -> 必然报错，A 中招。",
+        "B 的 dt 已退化为指针，C、D 用的是合法指针形式。"
+      ],
+      "takeaway": "dt[0]->x 把对象当指针用，必错；dt->x 才对。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "A（dt[0]->x 是错误的引用）",
+        "reason": "资料答案为 A。dt[0] 是结构体对象，-> 只能用于指针；dt->x、p->x、(*p).x 三者等价且合法。"
+      }
+    },
+    {
+      "questionId": "x-9-33",
+      "sourceHash": "219e9e5ef8aa7542e53c5fbe222d7fed8504320bc59e2f3caaab7982db0acfa1",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nd 是 union data 变量，初值 {12} 只初始化第一个成员 t，所以 d.t = 12。共用体只能与同类型共用体整体赋值，不能用花括号列表或普通数值赋值。\nA 的 d=5;：整型不能隐式转换成 union data，错误。\nB 的 d={2,1.2,'a'};：花括号列表只能用于初始化，不能给已有变量这样赋值；而且共用体只有一个成员能同时有效，错误。\nC 的 printf(\"%d\", d);：教材把它当作“输出共用体首成员 12”，是资料给出的答案。\nD 的 n=d;：共用体不能整体赋给 int，错误。\n需要补充：严格按标准，C 把 union data 传给 %d 也是类型不匹配（未定义行为），常见实现上按首成员那 4 字节传参才恰好得到 12。真实代码里应写 printf(\"%d\", d.t);。\n（题干中 int n; 与页码、书名混排，属 OCR。）",
+      "steps": [
+        "先确认 union 初值只作用于第一个成员，d.t=12。",
+        "A、B、D 分别是“给共用体赋 int”“给变量用初始化列表”“共用体赋给 int”，都不合法。",
+        "四个选项里只剩 C，按教材口径选 C，但要注明它本身是类型不匹配。"
+      ],
+      "takeaway": "共用体只能整体赋同类型值；打印成员要写 d.t 而不是 d。",
+      "answerReview": {
+        "status": "ambiguous",
+        "answer": "C（printf(\"%d\", d); 按教材为答案）",
+        "reason": "资料答案为 C，但四个选项严格来说都有问题：C 把 union data 实参传给 %d，参数类型与 int 不匹配，属未定义行为，只是常见实现上按首成员那 4 字节传参才输出 12。考试按教材选 C，真实代码应写 d.t。"
+      }
+    },
+    {
+      "questionId": "x-9-34",
+      "sourceHash": "91690697be3b41060ad51d21833d70d5a48bb8a2c9e5357828ec75dd40cc9f8a",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ntypedef enum{green,red,yellow,blue,black} color; 给枚举类型起了别名 color，color flower; 才是定义变量 flower。green、red 这些枚举常量本身是右值，不是变量。\nA 的 green=red;：给枚举常量赋值，它不可修改，错误。\nB 的 flower=red;：flower 是 color 类型变量，red 是同类型枚举常量，合法，正确。\nC 的 color=red;：color 是类型名，类型名不能出现在赋值号左边，错误。\nD 的 enum=red;：enum 是关键字，不能当变量名，错误。\n所以选 B。核心是分清 typedef 造出来的类型名和真正的变量。\n（选项里 black 被 OCR 成 b1ack，按字母 l 理解。）",
+      "steps": [
+        "先找变量：只有 flower 是变量，其余是类型名或常量。",
+        "枚举常量在等号左边非法，A 排除；类型名和关键字在左边，C、D 排除。",
+        "只有 flower=red 是“变量赋同类型常量”，选 B。"
+      ],
+      "takeaway": "typedef 造的是类型名；枚举常量不是变量，不能被赋值。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（flower=red;）",
+        "reason": "资料答案为 B。flower 是 color 类型变量，red 是同类型枚举常量；A 给常量赋值，C 给类型名赋值，D 用关键字当标识符，均非法。"
+      }
+    },
+    {
+      "questionId": "x-9-35",
+      "sourceHash": "a2354038f2c61cb2ef63f0ac497f78b3a71d0a0fbe6f8b39beeb2cd30edee722",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\ntypedef struct ex{long int num; char sex; struct ex *next;} student; 里出现了两个名字：struct ex 是结构体标记，student 是 typedef 起的别名，两者都是类型名，没有变量。\nA 的“struct ex 是结构类型”——对，标记名与 struct 合起来构成完整的结构类型。\nB 的“student 是结构类型的变量名”——错，student 是类型别名，定义变量要写 student x;。\nC 的“ex 可缺省”——对，写成 typedef struct{…} student; 只留别名也合法。\nD 的“student 不可缺省”——对，typedef 必须给出别名，否则这条语句没有意义。\n所以错误的叙述是 B。要点：typedef 只造类型名，不分配存储、不产生变量。",
+      "steps": [
+        "先数实体：struct ex 是标记，student 是别名，没有变量。",
+        "B 说 student 是变量名，与 typedef 的定义直接矛盾。",
+        "A、C、D 分别说标记是类型、标记可省、别名必需，都成立。"
+      ],
+      "takeaway": "typedef 只产生类型名，student 是类型而不是变量。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（student 是结构类型的变量名）",
+        "reason": "资料答案为 B。student 是 typedef 生成的类型别名，不是变量；struct ex 是结构类型，标记 ex 可缺省，而 typedef 别名不可缺省，故 A、C、D 的叙述都正确。"
+      }
+    },
+    {
+      "questionId": "x-9-36",
+      "sourceHash": "3bc48536ef91c72246cab8e4f3c1bb2dac43c2af52756395aa29ddd49278980b",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nfun 每调用一次都重新 malloc 一块 int，把形参 n 存进去再返回 *p，所以 fun(10) 恒等于 10，两次调用互不影响。\n```c\na = fun(10);               // a 得 10\nprintf(\"%d\\n\", a + fun(10)); // 10 + 10 = 20\n```\n两个加数之间没有副作用依赖，谁先算都是 20，输出 20，选 C。\n顺带两点：函数返回前没有 free，每调用一次漏一块内存；main 省略返回类型是旧式写法——都不影响本题结果。",
+      "steps": [
+        "看 fun 的返回值：只取决于形参 n，与外部状态无关。",
+        "第一次调用给 a 赋值 10，第二次调用又返回 10。",
+        "a + fun(10) = 20，输出 20，选 C。"
+      ],
+      "takeaway": "fun(10) 每次返回 10，10+10=20；漏 free 不影响结果。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（20）",
+        "reason": "资料答案为 C。fun 每次调用都申请新内存并返回 *p，即返回 10；a=10，a+fun(10)=20，输出 20。"
+      }
+    },
+    {
+      "questionId": "x-9-37",
+      "sourceHash": "8198c74901bc404f1f3117c04fae048f6f9596f585727d20d1259a302a732a62",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\nenum letter{E,F,G=7,H,I}; 的值依次是 E=0、F=1、G=7（显式指定）、H=8、I=9，显式值之后的常量接着往上加 1。\nA 的 '\\xb'-1：'\\xb' 是十六进制字符常量，值 11，减 1 得 10。\nB 的 F+I：1+9 = 10。\nC 的 010+2：010 是八进制，等于 8，加 2 得 10。\nD 的 0xf-3：0xf 是十六进制 15，减 3 得 12，不等于 10，正是要选的“除外”项。\n所以选 D。三个易错点：'\\xb' 是数值 11 而不是字符 b，010 是八进制 8，0xf 是十六进制 15。",
+      "steps": [
+        "先算枚举值：E=0、F=1、G=7、H=8、I=9。",
+        "A 是 11-1=10，B 是 1+9=10，C 是八进制 8+2=10。",
+        "D 是 15-3=12，不等于 10，选 D。"
+      ],
+      "takeaway": "010 是八进制 8，0xf 是 15，'\\xb' 是 11，别按十进制读。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "D（0xf-3 的值是 12，不是 10）",
+        "reason": "资料答案为 D。枚举中 F=1、I=9，'\\xb'=11，010 为八进制 8，三项都等于 10；0xf-3 = 15-3 = 12，是唯一不等于 10 的表达式。"
+      }
+    },
+    {
+      "questionId": "x-9-38",
+      "sourceHash": "68908463de2b21edabb8fa060b6166f0551d146e8c8389d00020de3ff7698891",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n要定义结构变量 xy，必须先有可用的类型名。\nA 的 typedef struct aa{…} BB; 造出别名 BB，再用 BB xy; 定义变量，正确。\nB 的 #define BB struct aa 是宏替换，BB{int n;float m;} xy; 展开成 struct aa{…} xy;，既定义标记 aa 又定义变量 xy，正确。\nC 的 struct{int n;float m;} aa; 定义的是“匿名结构类型的变量 aa”，并没有引入标记 aa；下一句 struct aa xy; 引用一个不存在的标记，错误。\nD 的 struct{…} xy; 用匿名结构类型直接定义变量 xy，正确。\n所以错误的是 C。关键区别：花括号后面的 aa 是变量名，不是 tag，不能拿去配 struct。",
+      "steps": [
+        "先判断每种写法有没有真正可用的类型名。",
+        "C 里的 aa 是变量名，struct aa 这个标记从未声明，故 xy 定义失败。",
+        "A、B、D 分别靠 typedef、宏替换、匿名类型成功声明 xy。"
+      ],
+      "takeaway": "花括号后的名字是变量名不是 tag，struct aa 不能凭空造出来。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "C（struct{…}aa; 之后再 struct aa xy; 错误）",
+        "reason": "资料答案为 C。C 中的 aa 是匿名结构类型的变量名，没有引入标记 aa，故 struct aa xy; 引用未声明的标记；A 用 typedef、B 用宏替换、D 用匿名类型都能正确声明 xy。"
+      }
+    },
+    {
+      "questionId": "x-9-39",
+      "sourceHash": "b1086fc1aadda3acb43c9ddb6072b5ba4cdb5d8902a39407b8a28021a5e4949d",
+      "explanation": "核验方式：资料答案核对 + AI推导（未运行程序）\n枚举常量默认从 0 起，遇到显式赋值就从那个值重新计数，后面的依次加 1。\nenum vari{A1,A2,A3,A4=6,A5,A6}; 的取值：A1=0，A2=1，A3=2；A4 被显式指定为 6，于是 A5=7，A6=8。\n所以 A2=1、A6=8，选 B。注意显式值只影响它自己和它后面的常量，不影响前面的 A1~A3。",
+      "steps": [
+        "从头数：A1=0、A2=1、A3=2。",
+        "遇到 A4=6 重新起算，A5=7、A6=8。",
+        "合起来 A2=1、A6=8，选 B。"
+      ],
+      "takeaway": "枚举默认从 0 递增，遇到显式值就从此值重新往后数。",
+      "answerReview": {
+        "status": "consistent",
+        "answer": "B（A2=1，A6=8）",
+        "reason": "资料答案为 B。A1=0、A2=1、A3=2，A4 显式赋 6 后 A5=7、A6=8，故 A2=1、A6=8。"
+      }
+    }
+  ]
+}
