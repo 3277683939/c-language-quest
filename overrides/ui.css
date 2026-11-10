@@ -1280,6 +1280,37 @@ main {
 .static-lesson-review { padding: 12px; background: #fff4e8; border-radius: 8px; margin: 12px 0; font-size: 13px; line-height: 1.8; }
 .static-lesson-review p { white-space: pre-wrap; overflow-wrap: anywhere; }
 .static-lesson .takeaway { margin-top: 12px; line-height: 1.7; }
+.static-lesson-code {
+  margin: 10px 0;
+  padding: 12px 14px;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #d6e2da;
+  border-radius: 8px;
+  background: #f8faf7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7);
+}
+.static-lesson-code code {
+  display: block;
+  font-family: var(--mono, Consolas, 'Courier New', 'Microsoft YaHei', monospace);
+  font-size: 12.5px;
+  line-height: 1.7;
+  white-space: pre;
+  tab-size: 4;
+  color: #23342b;
+}
+.static-lesson-code .tok-kw { color: #9a3b8f; }
+.static-lesson-code .tok-str { color: #1f7a4d; }
+.static-lesson-code .tok-com { color: #7c8b7f; font-style: italic; }
+.static-lesson-code .tok-num { color: #b05a13; }
+.static-lesson-code .tok-pp { color: #6b5aa8; }
+.static-lesson-steps li .static-lesson-code { margin: 8px 0; }
+@media (max-width: 760px) {
+  .static-lesson { padding: 13px; }
+  .static-lesson-code { padding: 10px 11px; }
+  .static-lesson-code code { font-size: 12px; }
+}
 body[data-view="coach"] #streak, body[data-view="teach"] #streak { display: none; }
 .coach-layout {
   display: grid;

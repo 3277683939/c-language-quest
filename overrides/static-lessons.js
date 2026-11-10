@@ -31,6 +31,78 @@
     if (cls) el.className = cls;
     return el;
   }
+  // 讲解里的 C 代码按代码块排版：保留换行/缩进/等宽字体，关键字轻微着色，窄屏内部横向滚动。
+  const KEYWORDS = new Set('auto break case char const continue default do double else enum extern float for goto if inline int long register restrict return short signed sizeof static struct switch typedef union unsigned void volatile while _Bool bool true false NULL'.split(' '));
+  const TOKEN = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|^[ \t]*#[ \t]*[A-Za-z_]+|\b(?:0[xX][0-9a-fA-F]+|\d+\.?\d*(?:[eE][+-]?\d+)?[fFuUlL]*)\b|\b[A-Za-z_]\w*\b)/gm;
+  function codeNode(text) {
+    const pre = node('pre', '', 'static-lesson-code');
+    const code = document.createElement('code');
+    let last = 0;
+    TOKEN.lastIndex = 0;
+    let match;
+    while ((match = TOKEN.exec(text))) {
+      if (match.index > last) code.append(document.createTextNode(text.slice(last, match.index)));
+      const token = match[0];
+      const span = document.createElement('span');
+      span.textContent = token;
+      if (token.startsWith('//') || token.startsWith('/*')) span.className = 'tok-com';
+      else if (token.startsWith('"') || token.startsWith("'")) span.className = 'tok-str';
+      else if (/^[ \t]*#/.test(token)) span.className = 'tok-pp';
+      else if (/^\d|^0[xX]/.test(token)) span.className = 'tok-num';
+      else if (KEYWORDS.has(token)) span.className = 'tok-kw';
+      code.append(span);
+      last = match.index + token.length;
+    }
+    if (last < text.length) code.append(document.createTextNode(text.slice(last)));
+    pre.append(code);
+    return pre;
+  }
+  const CODE_LINE = /^(?:\s*(?:#[ \t]*(?:include|define|if|ifdef|ifndef|else|elif|endif|pragma|undef)\b|(?:int|void|char|float|double|long|short|unsigned|signed|const|static|struct|typedef|union|enum|register|volatile)\s+[A-Za-z_]|int\s+main|void\s+main|main\s*\(|for\s*\(|while\s*\(|do\s*\{|if\s*\(|else\b|switch\s*\(|case\s|default\s*:|break\s*;|continue\s*;|return\b|printf\s*\(|scanf\s*\(|puts\s*\(|gets\s*\(|putchar\s*\(|getchar\s*\(|\}|\{|[A-Za-z_]\w*(?:\[[^\]]*\])*\s*=[^=]|[A-Za-z_]\w*\+\+|--[A-Za-z_]))/;
+  function appendMixed(parent, text) {
+    const lines = text.split('\n');
+    let buffer = [];
+    const flush = () => {
+      if (!buffer.length) return;
+      const body = buffer.join('\n').replace(/\n{3,}/g, '\n\n').replace(/^\n+|\n+$/g, '');
+      if (body.trim()) parent.append(node('div', body, 'static-lesson-prose'));
+      buffer = [];
+    };
+    let index = 0;
+    while (index < lines.length) {
+      if (CODE_LINE.test(lines[index])) {
+        let end = index;
+        let blanks = 0;
+        while (end < lines.length) {
+          if (CODE_LINE.test(lines[end])) { blanks = 0; end++; continue; }
+          if (!lines[end].trim() && blanks < 1) { blanks++; end++; continue; }
+          break;
+        }
+        while (end > index && !lines[end - 1].trim()) end--;
+        if (end - index >= 3) {
+          flush();
+          parent.append(codeNode(lines.slice(index, end).join('\n')));
+          index = end;
+          continue;
+        }
+      }
+      buffer.push(lines[index]);
+      index++;
+    }
+    flush();
+  }
+  function appendRich(parent, text) {
+    const value = String(text || '');
+    const fence = /```([^\n`]*)\n?([\s\S]*?)```/g;
+    let last = 0;
+    let match;
+    while ((match = fence.exec(value))) {
+      if (match.index > last) appendMixed(parent, value.slice(last, match.index));
+      const code = match[2].replace(/\n$/, '');
+      if (code.trim()) parent.append(codeNode(code));
+      last = match.index + match[0].length;
+    }
+    if (last < value.length) appendMixed(parent, value.slice(last));
+  }
   async function load(el) {
     if (el.dataset.lessonState) return;
     el.dataset.lessonState = 'loading';
@@ -44,11 +116,15 @@
         return;
       }
       el.replaceChildren(node('h3', '逐题讲解'));
-      el.append(node('p', lesson.origin + (lesson.answerReview ? ' · 尚未执行程序验证' : ''), 'save-note'));
-      el.append(node('div', lesson.explanation, 'static-lesson-prose'));
+      el.append(node('p', lesson.origin + (lesson.answerReview ? ' · 讲解内注明核验方式' : ''), 'save-note'));
+      appendRich(el, lesson.explanation);
       if (lesson.steps?.length) {
         const list = node('ol', '', 'static-lesson-steps');
-        lesson.steps.forEach(step => list.append(node('li', step)));
+        lesson.steps.forEach(step => {
+          const item = document.createElement('li');
+          appendRich(item, step);
+          list.append(item);
+        });
         el.append(list);
       }
       if (lesson.answerReview && lesson.answerReview.status !== 'consistent') {
