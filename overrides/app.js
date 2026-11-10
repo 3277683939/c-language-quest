@@ -5,7 +5,11 @@
 'use strict';
 
 const BANK = window.QUESTION_BANK;
-const Q = BANK.questions;
+// Legacy batches use zero-based option indexes; the quiz runner uses letters.
+// Normalize a runtime copy so raw source records and lesson hashes stay intact.
+const Q = BANK.questions.map(q => Number.isInteger(q.answer)
+  && q.answer >= 0 && q.answer < q.options.length
+  ? { ...q, answer: String.fromCharCode(65 + q.answer) } : q);
 const PU = () => (window.PRACTICE_UNITS ? (Array.isArray(window.PRACTICE_UNITS) ? window.PRACTICE_UNITS : (window.PRACTICE_UNITS.units || [])) : []);
 const $ = s => document.querySelector(s);
 const KEY = 'c-quest-progress-v1';
